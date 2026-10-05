@@ -86,8 +86,8 @@ Use new output directories outside an installed skill. The receipt binds
 config/source/geometry/output hashes, resolved style and dependency/font
 versions. In a fixed environment Python files must repeat byte-for-byte;
 SVG Date is omitted and IDs have a fixed salt. Cross-version pixel identity
-is untested. Font fallback is explicit in receipts; missing requested glyphs
-fail. Preparation alone does not test installed Origin or rendered glyphs.
+is untested. Requested and actual installed font names are recorded; missing
+families or glyphs fail. Preparation alone does not test installed Origin or rendered glyphs.
 
 For native output, use references/origin2021.md and then:
 

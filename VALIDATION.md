@@ -85,12 +85,12 @@ Sparse 4.5/5.5/6 pt override trials retain exactly
 identical worksheets, change visible marker pixels, repeat and retain SVG
 text. The new invented CV also passes table-to-figure repetition from an
 external caller through Chinese/space paths. Native acceptance of new battery,
-intake or marker combinations remains HOLD; no Origin session ran this turn.
+intake or marker combinations remains HOLD; no Origin session ran in that review.
 
 Runtime: Python 3.11.15, NumPy 2.4.3, Matplotlib 3.10.9, Pillow 12.2.0,
 FreeType 2.14.3. Actual Arial SHA256:
 b3658eadae55e682b5f69eb64c439c1ecc8f196c0bb8d4756d145d13bc86476a.
-Default style and native runner remain byte-identical. No font is bundled.
+At that review, the default style and native runner were unchanged. No font is bundled.
 Dependency ranges do not constitute a tested version matrix.
 
 The compact bundle has explicit SHA256SUMS selection; local owner instructions,
@@ -113,7 +113,7 @@ essential question for consequential ambiguity; this is agent guidance,
 not a new automatic classification API or independent behavioral acceptance.
 Clean-machine dependency installation is not performed.
 
-## Inherited native generation: 0.1.3
+## Current stack and font update
 
 Current spectral stack: Y ticks/numbers are hidden and the lower display
 limit is -0.3. The three 201-point raw spectra and offsets are unchanged.
@@ -123,6 +123,8 @@ Palette aliases purplegreen/violetgold preserve the old colors at every
 2–256-level setting. Current regressions: 100, including strict font selection;
 font files are never part of the package. Other native images retain their
 historical evidence below.
+
+## Inherited native generation: 0.1.3
 
 Origin 2021 previously saved/reopened 48 graphs in two independent
 runs. Each read back 176404 worksheet cells (167126 nonmissing numbers).
