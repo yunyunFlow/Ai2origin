@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "style_file": "samples/project.style.json",
+  "plots": [{
+    "id": "xy", "kind": "line", "csv": "samples/xy.csv", "x": "x",
+    "synthetic": true, "title": "",
+    "labels": {"x": "Coordinate (a.u.)", "y": "Response (a.u.)"},
+    "series": [{"id": "a", "column": "a", "label": "Condition A"},
+               {"id": "b", "column": "b", "label": "Condition B"}]
+  }]
+}

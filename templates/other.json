@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "style": {
+    "marker": {
+      "size_pt": 2.5
+    }
+  },
+  "plots": [
+    {
+      "id": "stress-strain",
+      "kind": "line_symbol",
+      "csv": "mechanics.csv",
+      "x": "strain",
+      "series": [
+        {
+          "column": "stress_a",
+          "label": "A"
+        },
+        {
+          "column": "stress_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "strain (percent)",
+        "y": "stress (MPa)"
+      },
+      "caption": "Invented polynomial A/B stress-strain curves, 161 samples, percent and MPa. No specimen, modulus fit, fracture or toughness measurement."
+    },
+    {
+      "id": "tga",
+      "kind": "line",
+      "csv": "thermal.csv",
+      "x": "temperature",
+      "series": [
+        {
+          "column": "mass_a",
+          "label": "A"
+        },
+        {
+          "column": "mass_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "temperature (°C)",
+        "y": "mass remaining (percent)"
+      },
+      "caption": "Invented logistic A/B mass-loss curves, 181 temperatures in Celsius. No specimen, heating rate, atmosphere or decomposition assignment."
+    },
+    {
+      "id": "dsc",
+      "kind": "line",
+      "csv": "thermal.csv",
+      "x": "temperature",
+      "series": [
+        {
+          "column": "flow_a",
+          "label": "A"
+        },
+        {
+          "column": "flow_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "temperature (°C)",
+        "y": "heat flow (mW)"
+      },
+      "caption": "Invented signed Gaussian A/B heat-flow features, 181 temperatures in Celsius and mW. Negative down, positive up; no experimental endotherm convention, mass normalization or enthalpy integration."
+    },
+    {
+      "id": "kinetics",
+      "kind": "line_symbol",
+      "csv": "kinetics.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "time (min)",
+        "y": "conversion (percent)"
+      },
+      "caption": "Invented exponential A/B conversion-time curves, 101 points in minutes and percent. No experimental reaction, rate fit or mechanism."
+    },
+    {
+      "id": "learning",
+      "kind": "line_symbol",
+      "csv": "learning.csv",
+      "x": "epoch",
+      "series": [
+        {
+          "column": "train",
+          "label": "Train"
+        },
+        {
+          "column": "validation",
+          "label": "Validation"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "epoch",
+        "y": "loss (a.u.)"
+      },
+      "caption": "Invented training/validation loss functions over 101 epochs. No trained model, dataset split, predictive performance or run is claimed."
+    }
+  ]
+}

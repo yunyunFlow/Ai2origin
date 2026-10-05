@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "style": {
+    "figure": {
+      "width_mm": 110,
+      "height_mm": 80
+    },
+    "series_overrides": {}
+  },
+  "plots": [
+    {
+      "id": "battery-time",
+      "kind": "line",
+      "csv": "battery-time.csv",
+      "x": "time_s",
+      "series": [
+        {
+          "column": "voltage_V",
+          "label": "Cycle 1"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "connect_order": "acquisition",
+      "labels": {
+        "x": "Time (s)",
+        "y": "Voltage (V)"
+      },
+      "caption": "Entirely invented 101-node battery time trace. t=0:10:1000 s; charge t<=500: V=0.9+0.9*t/500, I=+0.72 mA; discharge t>500: V=1.7-0.8*(t-500)/500, I=-0.72 mA. Branch capacity=0.72*branch elapsed/3600 mAh with explicit reset. Pure straight line; assigned voltage step, no fitted iR correction. Optional time-domain example, not a mass-specific GCD profile."
+    },
+    {
+      "id": "battery-capacity",
+      "kind": "line",
+      "csv": "battery-capacity.csv",
+      "x": "c1_charge_mAh_g",
+      "series": [
+        {
+          "x": "c1_charge_mAh_g",
+          "column": "c1_charge_V",
+          "id": "c1_charge",
+          "label": "1st cycle",
+          "color": "#B2182B"
+        },
+        {
+          "x": "c1_discharge_mAh_g",
+          "column": "c1_discharge_V",
+          "id": "c1_discharge",
+          "label": "1st cycle discharge",
+          "color": "#B2182B",
+          "legend": false
+        },
+        {
+          "x": "c50_charge_mAh_g",
+          "column": "c50_charge_V",
+          "id": "c50_charge",
+          "label": "50th cycle",
+          "color": "#2166AC"
+        },
+        {
+          "x": "c50_discharge_mAh_g",
+          "column": "c50_discharge_V",
+          "id": "c50_discharge",
+          "label": "50th cycle discharge",
+          "color": "#2166AC",
+          "legend": false
+        },
+        {
+          "x": "c100_charge_mAh_g",
+          "column": "c100_charge_V",
+          "id": "c100_charge",
+          "label": "100th cycle",
+          "color": "#1B9E77"
+        },
+        {
+          "x": "c100_discharge_mAh_g",
+          "column": "c100_discharge_V",
+          "id": "c100_discharge",
+          "label": "100th cycle discharge",
+          "color": "#1B9E77",
+          "legend": false
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "connect_order": "acquisition",
+      "x_range": [
+        0,
+        250
+      ],
+      "x_tick_step": 50,
+      "y_range": [
+        0.8,
+        2.25
+      ],
+      "y_tick_step": 0.2,
+      "labels": {
+        "x": "Specific capacity (mAh g^-1)",
+        "y": "Voltage (V)"
+      },
+      "caption": "Entirely invented independent branch grids, 101 nodes each, u=i/100. Cycle comparison; assigned Qmax = 220/205/190 mAh g^-1, polarization = 0/0.025/0.05 V. Each branch capacity starts at zero: Q_charge=Qmax*u, Q_discharge=0.96*Qmax*u. V_charge=1.52+p+0.08*u+0.30*u^8-0.28*exp(-u/0.03); V_discharge=1.38-p-0.08*u-0.30*u^8+0.28*exp(-u/0.03). Solid charge and solid discharge share a group color; one legend entry per group. Straight acquisition-order links only, no markers, smoothing, joining branches, interpolation, copied measurements or inferred active mass. The specific capacity basis is assigned synthetically, not converted from the optional time trace. For real inputs preserve recorded branch direction and declare the exact mass basis and full-cell/reference voltage convention; no CE, retention or mechanism claim."
+    },
+    {
+      "id": "battery-rate",
+      "kind": "line",
+      "csv": "battery-rate.csv",
+      "x": "r02_charge_mAh_g",
+      "series": [
+        {
+          "x": "r02_charge_mAh_g",
+          "column": "r02_charge_V",
+          "id": "r02_charge",
+          "label": "0.2 A g^-1",
+          "color": "#B2182B"
+        },
+        {
+          "x": "r02_discharge_mAh_g",
+          "column": "r02_discharge_V",
+          "id": "r02_discharge",
+          "label": "0.2 A g^-1 discharge",
+          "color": "#B2182B",
+          "legend": false
+        },
+        {
+          "x": "r05_charge_mAh_g",
+          "column": "r05_charge_V",
+          "id": "r05_charge",
+          "label": "0.5 A g^-1",
+          "color": "#2166AC"
+        },
+        {
+          "x": "r05_discharge_mAh_g",
+          "column": "r05_discharge_V",
+          "id": "r05_discharge",
+          "label": "0.5 A g^-1 discharge",
+          "color": "#2166AC",
+          "legend": false
+        },
+        {
+          "x": "r1_charge_mAh_g",
+          "column": "r1_charge_V",
+          "id": "r1_charge",
+          "label": "1 A g^-1",
+          "color": "#1B9E77"
+        },
+        {
+          "x": "r1_discharge_mAh_g",
+          "column": "r1_discharge_V",
+          "id": "r1_discharge",
+          "label": "1 A g^-1 discharge",
+          "color": "#1B9E77",
+          "legend": false
+        },
+        {
+          "x": "r2_charge_mAh_g",
+          "column": "r2_charge_V",
+          "id": "r2_charge",
+          "label": "2 A g^-1",
+          "color": "#7560A8"
+        },
+        {
+          "x": "r2_discharge_mAh_g",
+          "column": "r2_discharge_V",
+          "id": "r2_discharge",
+          "label": "2 A g^-1 discharge",
+          "color": "#7560A8",
+          "legend": false
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "connect_order": "acquisition",
+      "x_range": [
+        0,
+        270
+      ],
+      "x_tick_step": 50,
+      "y_range": [
+        0.8,
+        2.55
+      ],
+      "y_tick_step": 0.2,
+      "labels": {
+        "x": "Specific capacity (mAh g^-1)",
+        "y": "Voltage (V)"
+      },
+      "caption": "Entirely invented independent branch grids, 101 nodes each, u=i/100. Rate comparison; illustrative current labels only, Qmax = 240/205/170/135 mAh g^-1, polarization = 0/0.025/0.05/0.075 V. Each branch capacity starts at zero: Q_charge=Qmax*u, Q_discharge=0.96*Qmax*u. V_charge=1.52+p+0.08*u+0.30*u^8-0.28*exp(-u/0.03); V_discharge=1.38-p-0.08*u-0.30*u^8+0.28*exp(-u/0.03). Solid charge and solid discharge share a group color; one legend entry per group. Straight acquisition-order links only, no markers, smoothing, joining branches, interpolation, copied measurements or inferred active mass. The specific capacity basis is assigned synthetically, not converted from the optional time trace. For real inputs preserve recorded branch direction and declare the exact mass basis and full-cell/reference voltage convention; no CE, retention or mechanism claim."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "style": {
+    "marker": {
+      "size_pt": 2.5
+    }
+  },
+  "plots": [
+    {
+      "id": "association",
+      "kind": "scatter",
+      "csv": "analysis.csv",
+      "x": "x",
+      "series": [
+        {
+          "column": "y",
+          "label": "Observations"
+        },
+        {
+          "column": "fitted",
+          "label": "OLS",
+          "kind": "line"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Descriptor (a.u.)",
+        "y": "Response (a.u.)"
+      },
+      "caption": "Synthetic descriptor-response scatter, 36 assigned observations in arbitrary units, RNG seed 1729. Displayed OLS values are stored predictions from an unweighted line with intercept. No causal or out-of-sample claim."
+    },
+    {
+      "id": "residual",
+      "kind": "scatter",
+      "csv": "analysis.csv",
+      "x": "x",
+      "series": [
+        {
+          "column": "residual",
+          "label": "Residuals"
+        },
+        {
+          "column": "zero",
+          "label": "Zero",
+          "kind": "line"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Descriptor (a.u.)",
+        "y": "OLS residual (a.u.)"
+      },
+      "caption": "Residuals for the same 36 synthetic OLS observations, observed minus stored fitted response in arbitrary units, with explicit zero line. No independence, homoscedasticity or model adequacy claim."
+    }
+  ]
+}

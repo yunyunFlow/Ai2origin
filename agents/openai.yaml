@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ai2origin"
+  short_description: "Origin 2021 plots, heatmaps and rainclouds"
+  default_prompt: "Use $ai2origin to inspect the supplied data, choose or adapt a scientifically appropriate plot, preserve source values, and verify the actual output. Default Python delivery to PNG; add SVG only when requested."

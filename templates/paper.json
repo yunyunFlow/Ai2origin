@@ -1,0 +1,900 @@
+{
+  "schema_version": 1,
+  "style": {
+    "marker": {
+      "size_pt": 2.5
+    }
+  },
+  "plots": [
+    {
+      "id": "cv",
+      "kind": "line",
+      "csv": "electrochem.csv",
+      "x": "potential",
+      "series": [
+        {
+          "column": "current_a",
+          "label": "A"
+        },
+        {
+          "column": "current_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Potential (V)",
+        "y": "Current (mA)"
+      },
+      "connect_order": "acquisition",
+      "caption": "Synthetic A/B current-potential loops, 129 ordered samples each, V and mA. Acquisition order and turning points retained; voltage reference is arbitrary. No scan-rate, kinetic or capacitance inference."
+    },
+    {
+      "id": "gcd",
+      "kind": "line",
+      "csv": "electrochem.csv",
+      "x": "capacity",
+      "series": [
+        {
+          "column": "voltage",
+          "label": "cycle"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Capacity (mAh g^-1)",
+        "y": "Voltage (V)"
+      },
+      "connect_order": "acquisition",
+      "caption": "Synthetic charge/discharge display loop, 129 ordered samples, capacity in mAh/g and voltage in V. Capacity is a toy mass-specific quantity; no experimental active mass, current or efficiency is implied."
+    },
+    {
+      "id": "cycling",
+      "kind": "line_symbol",
+      "csv": "electrochem.csv",
+      "x": "cycle",
+      "series": [
+        {
+          "column": "retention",
+          "label": "retention"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Cycle",
+        "y": "Retention (percent)"
+      },
+      "caption": "Synthetic retention for cycles 1-129, in percent. One assigned curve, no replicate uncertainty or lifetime extrapolation."
+    },
+    {
+      "id": "nyquist",
+      "kind": "line_symbol",
+      "csv": "electrochem.csv",
+      "x": "zreal",
+      "series": [
+        {
+          "column": "znegimag",
+          "label": "arc"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Z′ (Ω)",
+        "y": "−Z″ (Ω)"
+      },
+      "connect_order": "acquisition",
+      "x_range": [
+        0,
+        30
+      ],
+      "y_range": [
+        0,
+        30
+      ],
+      "x_tick_step": 5,
+      "y_tick_step": 5,
+      "equal_xy": true,
+      "caption": "Invented 129-point impedance arc. Both axes span 0–30 Ω, major ticks 5 Ω and equal physical scale; square frame. No circuit fit or charge-transfer interpretation."
+    },
+    {
+      "id": "gcd-time",
+      "kind": "line",
+      "csv": "gcd-time.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "voltage_a",
+          "label": "A"
+        },
+        {
+          "column": "voltage_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "time (s)",
+        "y": "voltage (V)"
+      },
+      "caption": "Invented triangular charge/discharge-time profiles A/B, 201 samples in seconds and volts. Arbitrary voltage reference; no measured capacity or cycling efficiency."
+    },
+    {
+      "id": "gitt",
+      "kind": "line",
+      "csv": "pulses.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "voltage",
+          "label": "pulses"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "time (s)",
+        "y": "voltage (V)"
+      },
+      "caption": "Invented pulse/rest voltage trace, 241 samples, 30-second toy pulses within 200-second periods; current stored separately. No experimental GITT, iR correction, diffusion fit or diffusion coefficient."
+    },
+    {
+      "id": "cycle-capacity",
+      "kind": "line_symbol",
+      "csv": "performance.csv",
+      "x": "cycle",
+      "series": [
+        {
+          "column": "capacity_a",
+          "label": "A"
+        },
+        {
+          "column": "capacity_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "cycle",
+        "y": "capacity (mAh g^-1)"
+      },
+      "y_tick_step": 5,
+      "caption": "Invented A/B mass-specific capacity histories over 129 toy cycles. No experiment, active-mass measurement, error estimate or extrapolation."
+    },
+    {
+      "id": "coulombic",
+      "kind": "line_symbol",
+      "csv": "performance.csv",
+      "x": "cycle",
+      "series": [
+        {
+          "column": "ce_a",
+          "label": "A"
+        },
+        {
+          "column": "ce_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "cycle",
+        "y": "CE (percent)"
+      },
+      "caption": "Invented A/B CE-shaped curves over 129 toy cycles, percent. Values assigned directly, not calculated from measured charge/discharge integrals."
+    },
+    {
+      "id": "rate",
+      "kind": "line_symbol",
+      "csv": "rate.csv",
+      "x": "cycle",
+      "series": [
+        {
+          "column": "capacity",
+          "label": "steps"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "cycle",
+        "y": "capacity (mAh g^-1)"
+      },
+      "x_tick_step": 5,
+      "caption": "Invented four-cycle blocks with assigned capacity steps 150/136/110/85/108/134 mAh/g. Toy rate schedule 1/2/5/10/5/2; no experimental rate-performance conclusion."
+    },
+    {
+      "id": "bode-magnitude",
+      "kind": "line",
+      "csv": "bode.csv",
+      "x": "frequency",
+      "series": [
+        {
+          "column": "magnitude",
+          "label": "magnitude"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Frequency (Hz)",
+        "y": "|Z| (Ω)"
+      },
+      "y_tick_step": 5,
+      "x_scale": "log10",
+      "x_range": [
+        0.01,
+        100000.0
+      ],
+      "caption": "Invented complex-impedance function at 121 actual positive frequency nodes; true log10 frequency axis, not a fit. Independent of toy Nyquist/DRT."
+    },
+    {
+      "id": "bode-phase",
+      "kind": "line",
+      "csv": "bode.csv",
+      "x": "frequency",
+      "series": [
+        {
+          "column": "phase",
+          "label": "phase"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Frequency (Hz)",
+        "y": "phase (°)"
+      },
+      "x_scale": "log10",
+      "x_range": [
+        0.01,
+        100000.0
+      ],
+      "caption": "Invented complex-impedance function at 121 actual positive frequency nodes; true log10 frequency axis, not a fit. Independent of toy Nyquist/DRT."
+    },
+    {
+      "id": "spectra",
+      "kind": "line",
+      "csv": "characterization.csv",
+      "x": "wavenumber",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Wavenumber (cm^-1)",
+        "y": "Intensity (a.u.)"
+      },
+      "x_tick_step": 500,
+      "caption": "Synthetic A/B spectra, 201 samples from 500 to 1800 inverse cm, arbitrary intensity. Assigned peak shapes; no baseline correction, normalization, deconvolution or chemical assignment."
+    },
+    {
+      "id": "stack",
+      "kind": "line",
+      "csv": "characterization.csv",
+      "x": "wavenumber",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B",
+          "offset": 1.3
+        },
+        {
+          "column": "c",
+          "label": "C",
+          "offset": 2.6
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Wavenumber (cm^-1)",
+        "y": "Intensity + offset (a.u.)"
+      },
+      "x_tick_step": 500,
+      "y_range": [
+        0,
+        5
+      ],
+      "caption": "Synthetic A/B/C spectra, 201 samples each. Display offsets 0, 1.3 and 2.6 arbitrary intensity units; raw values retained separately. No normalization or chemical assignment."
+    },
+    {
+      "id": "diffraction",
+      "kind": "line",
+      "csv": "characterization.csv",
+      "x": "angle",
+      "series": [
+        {
+          "column": "intensity",
+          "label": "pattern"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "2θ (°)",
+        "y": "Intensity (a.u.)"
+      },
+      "caption": "Synthetic diffraction-like profile, 201 samples from 10 to 80 degrees in 2 theta, arbitrary intensity. Assigned peaks; no phase identification or instrument broadening model."
+    },
+    {
+      "id": "migration",
+      "kind": "line_symbol",
+      "csv": "path.csv",
+      "x": "coordinate",
+      "series": [
+        {
+          "column": "energy_a",
+          "label": "A"
+        },
+        {
+          "column": "energy_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Path coordinate",
+        "y": "Relative energy (eV)"
+      },
+      "connection": "pchip",
+      "connection_factor": 16,
+      "caption": "Two synthetic seven-point energy paths in eV, relative to each path's first point. Lines connect stored images without fitting. Endpoint tilt retained; no converged NEB or barrier prediction. Seven original nodes shown as points; shape-preserving PCHIP (factor 16) is display-only, not extra images, fits or stationary points. Barriers use source nodes."
+    },
+    {
+      "id": "dos",
+      "kind": "line",
+      "csv": "dft-md.csv",
+      "x": "energy",
+      "series": [
+        {
+          "column": "dos",
+          "label": "DOS"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Energy - reference (eV)",
+        "y": "DOS (states/eV)"
+      },
+      "caption": "Synthetic DOS-shaped function, 121 samples, energy relative to an arbitrary reference in eV and toy states/eV. No electronic structure calculation, occupation or integrated state-count validation."
+    },
+    {
+      "id": "rdf",
+      "kind": "line",
+      "csv": "dft-md.csv",
+      "x": "radius",
+      "series": [
+        {
+          "column": "rdf",
+          "label": "RDF"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "r (Å)",
+        "y": "g(r)"
+      },
+      "caption": "Synthetic g(r)-shaped function, 121 samples, r in angstrom and dimensionless g(r). No trajectory, atom selection, coordination-number or normalization validation."
+    },
+    {
+      "id": "msd",
+      "kind": "line_symbol",
+      "csv": "dft-md.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "msd",
+          "label": "MSD"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Time (ps)",
+        "y": "MSD (Å²)"
+      },
+      "caption": "Synthetic MSD-shaped curve, 121 samples from 0 to 10 ps, angstrom squared. No trajectory, PBC unwrapping, statistical blocks or diffusion fit."
+    },
+    {
+      "id": "association",
+      "kind": "scatter",
+      "csv": "analysis.csv",
+      "x": "x",
+      "series": [
+        {
+          "column": "y",
+          "label": "Observations"
+        },
+        {
+          "column": "fitted",
+          "label": "OLS",
+          "kind": "line"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Descriptor (a.u.)",
+        "y": "Response (a.u.)"
+      },
+      "caption": "Synthetic descriptor-response scatter, 36 assigned observations in arbitrary units, RNG seed 1729. Displayed OLS values are stored predictions from an unweighted line with intercept. No causal or out-of-sample claim."
+    },
+    {
+      "id": "residual",
+      "kind": "scatter",
+      "csv": "analysis.csv",
+      "x": "x",
+      "series": [
+        {
+          "column": "residual",
+          "label": "Residuals"
+        },
+        {
+          "column": "zero",
+          "label": "Zero",
+          "kind": "line"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Descriptor (a.u.)",
+        "y": "OLS residual (a.u.)"
+      },
+      "caption": "Residuals for the same 36 synthetic OLS observations, observed minus stored fitted response in arbitrary units, with explicit zero line. No independence, homoscedasticity or model adequacy claim."
+    },
+    {
+      "id": "drt",
+      "kind": "line_symbol",
+      "csv": "drt.csv",
+      "x": "tau",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Relaxation time, τ (s)",
+        "y": "γ(τ) (a.u.)"
+      },
+      "x_scale": "log10",
+      "x_range": [
+        0.001,
+        100000.0
+      ],
+      "caption": "Invented A/B gamma curves: 81 positive τ nodes from 10^-3 to 10^5 s, true log10 X axis. No EIS inversion, regularization or process assignment."
+    },
+    {
+      "id": "drt-stack",
+      "kind": "line_symbol",
+      "csv": "drt.csv",
+      "x": "tau",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B",
+          "offset": 1
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Relaxation time, τ (s)",
+        "y": "γ(τ) + offset (a.u.)"
+      },
+      "x_scale": "log10",
+      "x_range": [
+        0.001,
+        100000.0
+      ],
+      "caption": "Invented A/B gamma curves: 81 positive τ nodes from 10^-3 to 10^5 s, true log10 X axis. No EIS inversion, regularization or process assignment. Display offsets 0/1 a.u.; raw values retained."
+    },
+    {
+      "id": "drt-map",
+      "kind": "heatmap",
+      "csv": "drt-map.csv",
+      "x": "toy_tau",
+      "y": "toy_condition",
+      "z": "toy_gamma",
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Relaxation time, τ (s)",
+        "y": "Condition index (synthetic)",
+        "color": "γ(τ) (a.u.)"
+      },
+      "color_range": [
+        0,
+        1
+      ],
+      "center": 0.5,
+      "color_levels": 256,
+      "cmap": [
+        "#2166AC",
+        "#F7F7F7",
+        "#B2182B"
+      ],
+      "interpolation": {
+        "method": "bilinear",
+        "factor": 8
+      },
+      "x_scale": "log10",
+      "x_range": [
+        0.001,
+        100000.0
+      ],
+      "caption": "Invented 9x81 condition/τ nodes. Display-only bilinear interpolation in log10(τ),condition, factor 8: 65x641 display nodes, 256 blue-white-red levels, [0,1], white=0.5. Raw nodes retained; no new observations, denoising, physical resolution or EIS inversion."
+    },
+    {
+      "id": "stress-strain",
+      "kind": "line_symbol",
+      "csv": "mechanics.csv",
+      "x": "strain",
+      "series": [
+        {
+          "column": "stress_a",
+          "label": "A"
+        },
+        {
+          "column": "stress_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "strain (percent)",
+        "y": "stress (MPa)"
+      },
+      "caption": "Invented polynomial A/B stress-strain curves, 161 samples, percent and MPa. No specimen, modulus fit, fracture or toughness measurement."
+    },
+    {
+      "id": "tga",
+      "kind": "line",
+      "csv": "thermal.csv",
+      "x": "temperature",
+      "series": [
+        {
+          "column": "mass_a",
+          "label": "A"
+        },
+        {
+          "column": "mass_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "temperature (°C)",
+        "y": "mass remaining (percent)"
+      },
+      "caption": "Invented logistic A/B mass-loss curves, 181 temperatures in Celsius. No specimen, heating rate, atmosphere or decomposition assignment."
+    },
+    {
+      "id": "dsc",
+      "kind": "line",
+      "csv": "thermal.csv",
+      "x": "temperature",
+      "series": [
+        {
+          "column": "flow_a",
+          "label": "A"
+        },
+        {
+          "column": "flow_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "temperature (°C)",
+        "y": "heat flow (mW)"
+      },
+      "caption": "Invented signed Gaussian A/B heat-flow features, 181 temperatures in Celsius and mW. Negative down, positive up; no experimental endotherm convention, mass normalization or enthalpy integration."
+    },
+    {
+      "id": "kinetics",
+      "kind": "line_symbol",
+      "csv": "kinetics.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "time (min)",
+        "y": "conversion (percent)"
+      },
+      "caption": "Invented exponential A/B conversion-time curves, 101 points in minutes and percent. No experimental reaction, rate fit or mechanism."
+    },
+    {
+      "id": "learning",
+      "kind": "line_symbol",
+      "csv": "learning.csv",
+      "x": "epoch",
+      "series": [
+        {
+          "column": "train",
+          "label": "Train"
+        },
+        {
+          "column": "validation",
+          "label": "Validation"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "epoch",
+        "y": "loss (a.u.)"
+      },
+      "caption": "Invented training/validation loss functions over 101 epochs. No trained model, dataset split, predictive performance or run is claimed."
+    },
+    {
+      "id": "hysteresis",
+      "kind": "line",
+      "csv": "magnetism.csv",
+      "x": "field",
+      "series": [
+        {
+          "column": "magnetization_a",
+          "label": "A"
+        },
+        {
+          "column": "magnetization_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "μ0H (T)",
+        "y": "Magnetization (emu g^-1)"
+      },
+      "connect_order": "acquisition",
+      "x_range": [
+        -2,
+        2
+      ],
+      "y_range": [
+        -1.5,
+        1.5
+      ],
+      "x_tick_step": 1,
+      "y_tick_step": 0.5,
+      "caption": "Invented A/B hysteresis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "susceptibility",
+      "kind": "line_symbol",
+      "csv": "susceptibility.csv",
+      "x": "temperature",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Temperature (K)",
+        "y": "Susceptibility (a.u.)"
+      },
+      "caption": "Invented A/B susceptibility demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "uvvis",
+      "kind": "line",
+      "csv": "optics.csv",
+      "x": "wavelength",
+      "series": [
+        {
+          "column": "absorbance_a",
+          "label": "A"
+        },
+        {
+          "column": "absorbance_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Wavelength (nm)",
+        "y": "Absorbance (a.u.)"
+      },
+      "x_tick_step": 100,
+      "y_range": [
+        0,
+        1.6
+      ],
+      "caption": "Invented A/B uvvis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "photoluminescence",
+      "kind": "line",
+      "csv": "optics.csv",
+      "x": "wavelength",
+      "series": [
+        {
+          "column": "pl_a",
+          "label": "A"
+        },
+        {
+          "column": "pl_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Wavelength (nm)",
+        "y": "PL intensity (a.u.)"
+      },
+      "x_tick_step": 100,
+      "y_range": [
+        0,
+        1.4
+      ],
+      "caption": "Invented A/B photoluminescence demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "fluorescence-decay",
+      "kind": "line_symbol",
+      "csv": "decay.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Time (ns)",
+        "y": "Intensity (a.u.)"
+      },
+      "caption": "Invented A/B fluorescence-decay demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "dose-response",
+      "kind": "line_symbol",
+      "csv": "dose.csv",
+      "x": "concentration",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Concentration (μM)",
+        "y": "Viability (percent)"
+      },
+      "x_scale": "log10",
+      "x_range": [
+        0.001,
+        1000.0
+      ],
+      "y_range": [
+        0,
+        130
+      ],
+      "caption": "Invented A/B dose-response demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "growth",
+      "kind": "line_symbol",
+      "csv": "growth.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Time (h)",
+        "y": "OD600 (a.u.)"
+      },
+      "y_range": [
+        0,
+        2
+      ],
+      "x_tick_step": 5,
+      "caption": "Invented A/B growth demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "enzyme-kinetics",
+      "kind": "line_symbol",
+      "csv": "enzyme.csv",
+      "x": "substrate",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Substrate (mM)",
+        "y": "Initial rate (μmol/min)"
+      },
+      "y_range": [
+        0,
+        1.8
+      ],
+      "caption": "Invented A/B enzyme-kinetics demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "style": {
+    "marker": {
+      "size_pt": 2.5
+    }
+  },
+  "plots": [
+    {
+      "id": "hysteresis",
+      "kind": "line",
+      "csv": "magnetism.csv",
+      "x": "field",
+      "series": [
+        {
+          "column": "magnetization_a",
+          "label": "A"
+        },
+        {
+          "column": "magnetization_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "μ0H (T)",
+        "y": "Magnetization (emu g^-1)"
+      },
+      "connect_order": "acquisition",
+      "x_range": [
+        -2,
+        2
+      ],
+      "y_range": [
+        -1.5,
+        1.5
+      ],
+      "x_tick_step": 1,
+      "y_tick_step": 0.5,
+      "caption": "Invented A/B hysteresis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "susceptibility",
+      "kind": "line_symbol",
+      "csv": "susceptibility.csv",
+      "x": "temperature",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Temperature (K)",
+        "y": "Susceptibility (a.u.)"
+      },
+      "caption": "Invented A/B susceptibility demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "uvvis",
+      "kind": "line",
+      "csv": "optics.csv",
+      "x": "wavelength",
+      "series": [
+        {
+          "column": "absorbance_a",
+          "label": "A"
+        },
+        {
+          "column": "absorbance_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Wavelength (nm)",
+        "y": "Absorbance (a.u.)"
+      },
+      "x_tick_step": 100,
+      "y_range": [
+        0,
+        1.6
+      ],
+      "caption": "Invented A/B uvvis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "photoluminescence",
+      "kind": "line",
+      "csv": "optics.csv",
+      "x": "wavelength",
+      "series": [
+        {
+          "column": "pl_a",
+          "label": "A"
+        },
+        {
+          "column": "pl_b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Wavelength (nm)",
+        "y": "PL intensity (a.u.)"
+      },
+      "x_tick_step": 100,
+      "y_range": [
+        0,
+        1.4
+      ],
+      "caption": "Invented A/B photoluminescence demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "fluorescence-decay",
+      "kind": "line_symbol",
+      "csv": "decay.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Time (ns)",
+        "y": "Intensity (a.u.)"
+      },
+      "caption": "Invented A/B fluorescence-decay demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "dose-response",
+      "kind": "line_symbol",
+      "csv": "dose.csv",
+      "x": "concentration",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Concentration (μM)",
+        "y": "Viability (percent)"
+      },
+      "x_scale": "log10",
+      "x_range": [
+        0.001,
+        1000.0
+      ],
+      "y_range": [
+        0,
+        130
+      ],
+      "caption": "Invented A/B dose-response demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "growth",
+      "kind": "line_symbol",
+      "csv": "growth.csv",
+      "x": "time",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Time (h)",
+        "y": "OD600 (a.u.)"
+      },
+      "y_range": [
+        0,
+        2
+      ],
+      "x_tick_step": 5,
+      "caption": "Invented A/B growth demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    },
+    {
+      "id": "enzyme-kinetics",
+      "kind": "line_symbol",
+      "csv": "enzyme.csv",
+      "x": "substrate",
+      "series": [
+        {
+          "column": "a",
+          "label": "A"
+        },
+        {
+          "column": "b",
+          "label": "B"
+        }
+      ],
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Substrate (mM)",
+        "y": "Initial rate (μmol/min)"
+      },
+      "y_range": [
+        0,
+        1.8
+      ],
+      "caption": "Invented A/B enzyme-kinetics demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred."
+    }
+  ]
+}

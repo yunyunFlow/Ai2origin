@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "style": {
+    "marker": {
+      "size_pt": 2.5
+    }
+  },
+  "plots": [
+    {
+      "id": "walkthrough",
+      "kind": "line_symbol",
+      "csv": "walkthrough.csv",
+      "x": "cycle",
+      "synthetic": true,
+      "title": "",
+      "x_range": [
+        0,
+        125
+      ],
+      "y_range": [
+        80,
+        180
+      ],
+      "x_tick_step": 25,
+      "y_tick_step": 20,
+      "labels": {
+        "x": "Cycle number",
+        "y": "Specific capacity (mAh g^-1)"
+      },
+      "series": [
+        {
+          "column": "capacity_a",
+          "label": "Demo A"
+        },
+        {
+          "column": "capacity_b",
+          "label": "Demo B"
+        },
+        {
+          "column": "capacity_c",
+          "label": "Demo C"
+        }
+      ],
+      "caption": "Entirely invented 120-cycle capacity series A/B/C (360 raw plotted points). Seed 20261004; capacity=start*(1-decay*cycle)+1.2*sin(cycle/8+phase)+Gaussian noise (mean=0, SD=0.45 mAh g^-1), with (start,decay,phase)=(160,0.0014,0)/(148,0.002,1)/(155,0.0006,2). Assigned mass-specific capacity unit mAh g^-1; no active-mass, cell, current, voltage or measured cycling evidence. Raw acquisition order and every value retained; straight connections only, no smoothing, filtering, normalization, interpolation, fit or statistical inference."
+    }
+  ]
+}

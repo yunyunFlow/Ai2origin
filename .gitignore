@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+/work/
+/qa/
+*.opj
+*.opju
+*.zip
+.env
+.env.*

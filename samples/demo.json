@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "style": {
+    "series_overrides": {
+      "Group A": {
+        "marker_size_pt": 2.0
+      },
+      "Group B": {
+        "marker_size_pt": 2.0
+      },
+      "Group C": {
+        "marker_size_pt": 2.0
+      }
+    }
+  },
+  "plots": [
+    {
+      "id": "xy",
+      "kind": "line",
+      "csv": "xy.csv",
+      "x": "x",
+      "synthetic": true,
+      "title": "",
+      "labels": {
+        "x": "Coordinate (a.u.)",
+        "y": "Response (a.u.)"
+      },
+      "series": [
+        {
+          "column": "a",
+          "label": "A",
+          "lower": "a_lower",
+          "upper": "a_upper",
+          "uncertainty_definition": "Assigned synthetic ±0.12 display band; not a CI"
+        },
+        {
+          "column": "b",
+          "label": "B",
+          "lower": "b_lower",
+          "upper": "b_upper",
+          "uncertainty_definition": "Assigned synthetic ±0.10 display band; not a CI"
+        }
+      ]
+    },
+    {
+      "id": "heatmap",
+      "kind": "heatmap",
+      "csv": "heatmap.csv",
+      "x": "x",
+      "y": "y",
+      "z": "z",
+      "synthetic": true,
+      "title": "",
+      "color_range": [
+        -1,
+        1
+      ],
+      "center": 0,
+      "cmap": [
+        "#2166AC",
+        "#F7F7F7",
+        "#B2182B"
+      ],
+      "labels": {
+        "x": "Toy x (a.u.)",
+        "y": "Toy y (a.u.)",
+        "color": "Toy field (a.u.)"
+      }
+    },
+    {
+      "id": "raincloud",
+      "kind": "raincloud",
+      "csv": "raincloud.csv",
+      "group": "group",
+      "value": "value",
+      "order": [
+        "Group A",
+        "Group B",
+        "Group C"
+      ],
+      "synthetic": true,
+      "title": "",
+      "bandwidth": "scott",
+      "seed": 1729,
+      "labels": {
+        "x": "Observable (a.u.)",
+        "y": "Group"
+      },
+      "summary": false,
+      "cloud_support": "observed",
+      "density_scale": "width",
+      "cloud_fill": true,
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference."
+    },
+    {
+      "id": "smooth",
+      "kind": "heatmap",
+      "csv": "xrd.csv",
+      "x": "toy_angle",
+      "y": "toy_scan",
+      "z": "toy_intensity",
+      "synthetic": true,
+      "title": "",
+      "color_range": [
+        0,
+        1
+      ],
+      "center": 0.5,
+      "caption": "Invented diffraction-like peaks on invented axes. 9x141 raw nodes retained; display-only bilinear factor 8 gives 65x1121 nodes, 256 levels, no new observations or higher scientific resolution. White=0.5, not zero. No measured diffraction or phase claim.",
+      "color_levels": 256,
+      "interpolation": {
+        "method": "bilinear",
+        "factor": 8
+      },
+      "cmap": [
+        "#2166AC",
+        "#F7F7F7",
+        "#B2182B"
+      ],
+      "labels": {
+        "x": "2θ (°)",
+        "y": "Scan index (synthetic)",
+        "color": "Intensity (a.u.)"
+      }
+    },
+    {
+      "id": "violin",
+      "kind": "raincloud",
+      "csv": "raincloud.csv",
+      "group": "group",
+      "value": "value",
+      "order": [
+        "Group A",
+        "Group B",
+        "Group C"
+      ],
+      "synthetic": true,
+      "title": "",
+      "bandwidth": "scott",
+      "seed": 1729,
+      "cloud_shape": "full",
+      "orientation": "vertical",
+      "group_labels": {
+        "Group A": "A",
+        "Group B": "B",
+        "Group C": "C"
+      },
+      "labels": {
+        "x": "Group",
+        "y": "Observable (a.u.)"
+      },
+      "summary": false,
+      "cloud_support": "observed",
+      "density_scale": "width",
+      "cloud_fill": true,
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference."
+    }
+  ]
+}

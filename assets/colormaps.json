@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "default": "redwhiteblue",
+  "maps": {
+    "redwhiteblue": {"colors": ["#2166AC", "#F7F7F7", "#B2182B"], "neutral": "#F7F7F7", "meaning": "Range midpoint is neutral; zero only when the range is symmetric."},
+    "reimu26": {"colors": ["#440154", "#31688E", "#35B779", "#90D743", "#FDE725"], "meaning": "Five-stop purple-green-yellow ramp; ascending scalar values."},
+    "reimu27": {"colors": ["#0D0887", "#7E03A8", "#CC4778", "#F89441", "#F0F921"], "meaning": "Five-stop purple-pink-orange-yellow ramp; ascending scalar values."},
+    "rainbow": {"matplotlib": "rainbow", "meaning": "Matplotlib rainbow, violet to red; explicit optional display choice."},
+    "rainbow_r": {"reverse_of": "rainbow", "meaning": "Exact reversed discrete rainbow palette."}
+  },
+  "source": {"reference": "Author color board, SVG gradients 26 and 27", "source_sha256": "f4b2fae8fe0d6792a6c6f12185ae43cb3b5f271ae52421c2265171149cc8c480", "stop_offsets": [0, 0.25, 0.5, 0.75, 1], "method": "Piecewise linear interpolation of the supplied RGB stops; no scientific values copied."}
+}

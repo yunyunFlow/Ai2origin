@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "plots": [
+    {
+      "id": "palette-lines",
+      "kind": "line",
+      "csv": "colors-lines.csv",
+      "x": "x",
+      "synthetic": true,
+      "title": "",
+      "x_range": [
+        0,
+        10
+      ],
+      "y_range": [
+        -0.5,
+        7.5
+      ],
+      "labels": {
+        "x": "Toy x (a.u.)",
+        "y": "Toy response (a.u.)"
+      },
+      "series": [
+        {
+          "column": "v1",
+          "label": "Red"
+        },
+        {
+          "column": "v2",
+          "label": "Blue"
+        },
+        {
+          "column": "v3",
+          "label": "Green"
+        },
+        {
+          "column": "v4",
+          "label": "Purple"
+        },
+        {
+          "column": "v5",
+          "label": "Orange"
+        },
+        {
+          "column": "v6",
+          "label": "Gray"
+        },
+        {
+          "column": "v7",
+          "label": "Pink"
+        }
+      ],
+      "caption": "Seven entirely invented curves; default red/blue/green/purple/orange/gray/pink identities. No measured observable or scientific inference."
+    },
+    {
+      "id": "palette-redwhiteblue",
+      "kind": "heatmap",
+      "csv": "colors-map.csv",
+      "x": "x",
+      "y": "y",
+      "z": "z",
+      "synthetic": true,
+      "title": "",
+      "cmap": "redwhiteblue",
+      "color_range": [
+        0,
+        1
+      ],
+      "color_levels": 256,
+      "interpolation": {
+        "method": "bilinear",
+        "factor": 4
+      },
+      "labels": {
+        "x": "Toy x (a.u.)",
+        "y": "Toy y (a.u.)",
+        "color": "Toy field (a.u.)"
+      },
+      "caption": "Identical invented 9x13 grid for palette comparison; redwhiteblue; white=0.5, not zero. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+    },
+    {
+      "id": "palette-reimu26",
+      "kind": "heatmap",
+      "csv": "colors-map.csv",
+      "x": "x",
+      "y": "y",
+      "z": "z",
+      "synthetic": true,
+      "title": "",
+      "cmap": "reimu26",
+      "color_range": [
+        0,
+        1
+      ],
+      "color_levels": 256,
+      "interpolation": {
+        "method": "bilinear",
+        "factor": 4
+      },
+      "labels": {
+        "x": "Toy x (a.u.)",
+        "y": "Toy y (a.u.)",
+        "color": "Toy field (a.u.)"
+      },
+      "caption": "Identical invented 9x13 grid for palette comparison; reimu26; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+    },
+    {
+      "id": "palette-reimu27",
+      "kind": "heatmap",
+      "csv": "colors-map.csv",
+      "x": "x",
+      "y": "y",
+      "z": "z",
+      "synthetic": true,
+      "title": "",
+      "cmap": "reimu27",
+      "color_range": [
+        0,
+        1
+      ],
+      "color_levels": 256,
+      "interpolation": {
+        "method": "bilinear",
+        "factor": 4
+      },
+      "labels": {
+        "x": "Toy x (a.u.)",
+        "y": "Toy y (a.u.)",
+        "color": "Toy field (a.u.)"
+      },
+      "caption": "Identical invented 9x13 grid for palette comparison; reimu27; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+    },
+    {
+      "id": "palette-rainbow",
+      "kind": "heatmap",
+      "csv": "colors-map.csv",
+      "x": "x",
+      "y": "y",
+      "z": "z",
+      "synthetic": true,
+      "title": "",
+      "cmap": "rainbow",
+      "color_range": [
+        0,
+        1
+      ],
+      "color_levels": 256,
+      "interpolation": {
+        "method": "bilinear",
+        "factor": 4
+      },
+      "labels": {
+        "x": "Toy x (a.u.)",
+        "y": "Toy y (a.u.)",
+        "color": "Toy field (a.u.)"
+      },
+      "caption": "Identical invented 9x13 grid for palette comparison; rainbow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+    },
+    {
+      "id": "palette-rainbow_r",
+      "kind": "heatmap",
+      "csv": "colors-map.csv",
+      "x": "x",
+      "y": "y",
+      "z": "z",
+      "synthetic": true,
+      "title": "",
+      "cmap": "rainbow_r",
+      "color_range": [
+        0,
+        1
+      ],
+      "color_levels": 256,
+      "interpolation": {
+        "method": "bilinear",
+        "factor": 4
+      },
+      "labels": {
+        "x": "Toy x (a.u.)",
+        "y": "Toy y (a.u.)",
+        "color": "Toy field (a.u.)"
+      },
+      "caption": "Identical invented 9x13 grid for palette comparison; rainbow_r; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "profile": "generic",
+  "columns": {
+    "voltage": {"source": "Potential/V", "type": "numeric", "unit": "V"},
+    "current": {"source": "Current/mA", "type": "numeric", "unit": "mA"}
+  },
+  "metadata": {"processing": "Invented 11-node loop: V=0,0.2,...,1,...,0; I=+2 mA forward, 0 at turn, -2 mA reverse. Assigned units and scan rate; no measured capacitor or cell."},
+  "plot": {"x": "voltage", "y": ["current"], "kind": "line_symbol", "marker_size_pt": 5.5, "x_label": "Potential (V)", "y_label": "Current (mA)"},
+  "analysis": {"kind": "cv_loop_capacitance", "scan_rate_V_s": 0.1}
+}
