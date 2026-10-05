@@ -133,5 +133,4 @@ blue-white-red palette, [0,1] range and white=0.5. DRT binds positive tau (s)
 to a native log10 axis over 10^-3–10^5. Factor-8 bilinear display interpolation
 in log10(tau),y retains all raw nodes. NEB uses a disclosed PCHIP display guide
 and original markers, with node-based barriers. GITT stores toy pulse current
-but does not extract diffusion; DRT does not invert EIS. See the bounded
-local/online figure survey in ../references/articles.md.
+but does not extract diffusion; DRT does not invert EIS.

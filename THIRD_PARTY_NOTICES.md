@@ -10,7 +10,5 @@ NumPy, Matplotlib and Pillow are installed separately under their own licenses.
 Arial or another selected font must already be legally installed on the user's
 system. No font files are bundled, copied or downloaded.
 
-Article links in references/articles.md provide context for display choices.
-The short notes are paraphrases; synthetic curves do not reproduce paper data.
 Any future third-party code/assets require exact provenance, license and notices
 before inclusion. Public visibility alone is not permission to redistribute.
