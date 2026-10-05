@@ -72,11 +72,12 @@ editable vector copy; PNG is still exported. The receipt records actual formats.
 receipts without this field retain their old PNG-plus-SVG requirement.
 
 Use an existing Python environment; do not install as an implied drawing step.
-For Arial-specific output, supply your own installed font file:
+For Arial output, use its installed family name. If unavailable, choose a local
+name with --list-fonts and --font; the receipt records the actual name:
 
 ~~~sh
-python scripts/ai2origin.py samples/demo.json --out work/repeat-a --backend python --font-file /path/to/arial.ttf
-python scripts/ai2origin.py samples/demo.json --out work/repeat-b --backend python --font-file /path/to/arial.ttf
+python scripts/ai2origin.py samples/demo.json --out work/repeat-a --backend python --font "Arial"
+python scripts/ai2origin.py samples/demo.json --out work/repeat-b --backend python --font "Arial"
 python scripts/check_reproducibility.py work/repeat-a work/repeat-b --config samples/demo.json
 python -m unittest discover -s tests -v
 ~~~

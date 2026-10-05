@@ -35,7 +35,7 @@ interpolation stay declared. Redwhiteblue needs >=3 bins to retain its neutral.
 Run samples/colors.json for seven curves and five identical-grid map comparisons:
 
 ~~~sh
-python scripts/ai2origin.py samples/colors.json --out /path/to/task/colors --backend python --font-file /path/to/arial.ttf
+python scripts/ai2origin.py samples/colors.json --out /path/to/task/colors --backend python --font "Arial"
 ~~~
 
 Use the native runner on the resulting plan for Origin output. Invented
