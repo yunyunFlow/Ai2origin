@@ -250,7 +250,7 @@ if ($OriginExe -and [IO.Path]::GetFullPath($OriginExe) -ine $selectedExe) {
 }
 $version = (Get-Item -LiteralPath $selectedExe).VersionInfo.FileVersion
 if (-not $AllowOtherVersion -and $version -notmatch '^(9\.8|2021)(\.|$)') {
-    throw "Expected Origin 2021/2021b (9.8). Other versions require -AllowOtherVersion and their own acceptance."
+    throw "Expected Origin 2021. Other versions require -AllowOtherVersion and their own checks."
 }
 $executableHash = (Get-FileHash -LiteralPath $selectedExe -Algorithm SHA256).Hash.ToLowerInvariant()
 Add-Type -AssemblyName System.Drawing

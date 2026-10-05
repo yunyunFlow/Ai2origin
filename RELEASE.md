@@ -8,4 +8,4 @@ Keep private QA, working outputs, measured data, OPJU projects, fonts,
 commercial software and old ZIPs outside the repository. Preserve original
 and frozen delivery files locally.
 
-The repository uses MIT with attribution to Ai2origin contributors.
+The repository uses MIT with attribution to yunyun.

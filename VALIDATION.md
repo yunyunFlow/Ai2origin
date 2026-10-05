@@ -115,18 +115,19 @@ Clean-machine dependency installation is not performed.
 
 ## Inherited native generation: 0.1.3
 
-Origin 2021 build 9.8.0 previously saved/reopened 48 graphs in two independent
+Origin 2021 previously saved/reopened 48 graphs in two independent
 runs. Each read back 176404 worksheet cells (167126 nonmissing numbers).
 Original/reopened and independent-repeat PNGs have identical RGB pixels;
 numerical/style read-back passed before and after reopen. The unchanged checker
 was verified in 0.2.1 against the actual 48-graph archived receipts and native
 metadata. This is historical evidence, not a new native run or scientific validation.
 
-Unchanged per-image evidence is retained in samples/validation.json,
+Per-image evidence is retained in samples/validation.json,
 templates/validation.json, samples/colors.validation.json and
 samples/walkthrough.validation.json. These records bind the 0.1.3 gallery;
 the three current battery previews have separate Python-only evidence.
 Private source QA retains original receipts and method/numerical audits.
+Public records use the product name Origin 2021.
 
 Inherited display: 90×70 mm, 600 DPI, Arial 10 pt ticks/legends, 12 pt axes,
 8 pt auxiliary text; full black 1 pt frame with bottom/left ticks only,

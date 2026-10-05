@@ -56,7 +56,7 @@ values and layer order are saved as style.resolved.json in the output folder.
 | font family / sizes in pt | Real font lookup and actual fallback record in Python; exact installed family and native fsize in Origin |
 | line.width_pt / default_style | Python linewidth/linestyle; Origin -w = pt×500 and -d = 0/1/2/3 |
 | marker.size_pt | Python scatter area=pt²; Origin -z in points |
-| axes color / width_pt / tick_direction / frame | Frame, tick and label styles; actual exported tick length checked on the tested 2021 build |
+| axes color / width_pt / tick_direction / frame | Frame, tick and label styles; exported tick length checked in Origin 2021 |
 | colors.palette | Explicit series colors, no automatic palette inference |
 | series_overrides | Stable ID → color, width_pt, line_style, marker_size_pt |
 | export.raster_dpi | Python PNG DPI; Origin tr2.PNG.dotsperinch and explicit physical width |

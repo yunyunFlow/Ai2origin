@@ -27,7 +27,7 @@ class ReceiptTests(unittest.TestCase):
             receipt=dict(status='NATIVE_EXPORTED',reopened_graph_count=1,project_reopen='PASS',
                          numeric_readback='PASS',style_readback='PASS_BEFORE_AND_AFTER_REOPEN',
                          numeric_readback_cells=4,reopened_readback_cells=4,plan_sha256='plan',
-                         runner_sha256='runner',origin_version='9.8.0')
+                         runner_sha256='runner',origin_version='Origin 2021')
         else:
             (folder/'origin-plan.json').write_text(json.dumps({'plots':[{'id':'curve','books':[{'name':'Data1'}]}]}))
             (folder/'curve-Data1.csv').write_text('x,y\n0,1\n1,2\n')

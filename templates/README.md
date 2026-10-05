@@ -53,7 +53,7 @@ by voltage or deduplicate its turning points. Stack offsets are declared per
 series; the native prepared workbook retains raw and shifted values separately.
 The generator also stores the exact toy OLS fit and residual columns.
 
-All 36 templates have individual Origin 2021 build 9.8.0 native export,
+All 36 templates have individual Origin 2021 native export,
 saved-project numerical read-back/reopen, reopened export and visual acceptance.
 Every original/reopened pair has identical pixels. The final native images are
 origin-*.png; Python PNG/SVG are separate Arial previews, separately reviewed.

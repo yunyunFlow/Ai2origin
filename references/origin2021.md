@@ -1,6 +1,6 @@
 # Origin 2021 native route
 
-Baseline: Origin 2021/2021b, numeric version 9.8, licensed Windows installation.
+Baseline: Origin 2021, licensed Windows installation.
 Other versions are opt-in trials, not implicitly certified.
 The shipped runner uses built-in COM/LabTalk; it does not require originpro,
 OriginExt, a cloud model or a downloaded graph template.
@@ -102,7 +102,7 @@ labels is explicitly recorded as not applicable to the numeric-gap comparison.
 
 | Version | Stance |
 | --- | --- |
-| 2021 / 2021b | Target version; verify the exact installed build and actual samples |
+| Origin 2021 | Target version; check the actual exports |
 | 2022+ | Try -AllowOtherVersion; repeat numerical, export and visual acceptance |
 | 2020 and earlier | No blanket promise; verify COM/virtual-matrix/plot commands individually |
 | macOS / Linux only | Python workflow works; Windows Origin native route is unavailable |
@@ -113,7 +113,7 @@ Modern documentation may show features absent in 2021. Do not assume a
 instead of using its mere installation as evidence.
 
 PNG/OPJU are the baseline native deliverables. If editable SVG is needed,
-verify actual export capability/text behavior on that edition/build. A
+verify actual export capability and text behavior in your installation. A
 PDF-to-SVG bridge may outline text; retain its source and label editability
 accurately. Do not silently substitute Python SVG for requested Origin SVG.
 The runner reopens its saved OPJU, rechecks numerical sheets and expected
