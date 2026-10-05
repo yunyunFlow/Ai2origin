@@ -736,7 +736,7 @@
     },
     {
       "id": "stack",
-      "graph_id": "Plot18",
+      "graph_id": "Plot1",
       "metadata": {
         "kind": "line",
         "row_count": 201,
@@ -745,9 +745,9 @@
           "corner": "upper right",
           "overlap_scores": {
             "upper right": 0,
-            "upper left": 0,
-            "lower right": 478,
-            "lower left": 589
+            "upper left": 3,
+            "lower right": 940,
+            "lower left": 897
           }
         },
         "connect_order": "increasing",
@@ -781,31 +781,66 @@
             "offset": 2.6
           }
         ],
+        "y_ticks": false,
         "source_name": "characterization.csv",
         "source_sha256": "bd392917ec2b071399027e15e405246eddf27b533397fdfaaeaaba0f3e85e442",
         "synthetic": true
       },
-      "prepared_books_sha256": "849b2fb975b39b36ea7e3dc2bdb5d96ef1ad0589ab9f01b17c469d96456521b8",
+      "prepared_books_sha256": "8d1d70e247af6098bfd87d29b127b24ca92c0173554600442449c7347d161972",
       "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
       "outputs": [
         {
-          "name": "templates/python-stack.png",
-          "bytes": 146132,
-          "sha256": "cb0f99ecb9e8d4eba0c54a1a58959dce1959ef52a9ef9c8ccceff767ce2caf39"
-        },
-        {
-          "name": "templates/python-stack.svg",
-          "bytes": 14375,
-          "sha256": "40c2930b89b7dea34926ff5f44fb4b1b092267ce1c0c4c6cbdcab6141f01f5a2"
-        },
-        {
           "name": "templates/origin-stack.png",
-          "bytes": 63300,
-          "sha256": "46f30facc5d398716a8f02cff2e80a2dcda65e11e58a518951de33179f06b881"
+          "bytes": 47571,
+          "sha256": "d9e66de5fb9b299d1d33e8afe1a122595c7369217fb66a2a217c9a203ce1b489"
         }
       ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "native_visual": "PASS_DIRECT_CURRENT_EXPORT",
+      "python_visual": "PASS_DIRECT_CURRENT_EXPORT",
+      "superseded_generation": {
+        "graph_id": "Plot18",
+        "prepared_books_sha256": "849b2fb975b39b36ea7e3dc2bdb5d96ef1ad0589ab9f01b17c469d96456521b8",
+        "outputs": [
+          {
+            "name": "templates/python-stack.png",
+            "bytes": 146132,
+            "sha256": "cb0f99ecb9e8d4eba0c54a1a58959dce1959ef52a9ef9c8ccceff767ce2caf39"
+          },
+          {
+            "name": "templates/python-stack.svg",
+            "bytes": 14375,
+            "sha256": "40c2930b89b7dea34926ff5f44fb4b1b092267ce1c0c4c6cbdcab6141f01f5a2"
+          },
+          {
+            "name": "templates/origin-stack.png",
+            "bytes": 63300,
+            "sha256": "46f30facc5d398716a8f02cff2e80a2dcda65e11e58a518951de33179f06b881"
+          }
+        ]
+      },
+      "current_acceptance": {
+        "date": "2026-10-05",
+        "native": "Origin 2021",
+        "actual_font": "Arial",
+        "y_ticks": false,
+        "y_range": [
+          -0.3,
+          5
+        ],
+        "source_rows": 201,
+        "raw_source_unchanged": true,
+        "numeric_readback": "PASS",
+        "style_readback": "PASS_BEFORE_AND_AFTER_REOPEN",
+        "project_reopen": "PASS",
+        "reopened_export_pixels": "IDENTICAL",
+        "python_PNG_SVG_repeat": "BYTE_IDENTICAL",
+        "visual_review": "PASS",
+        "generator_sha256": "892447e46fe3b38e76da07c2c4fda26f24fa8d669c4c19e10e40def4d46e01a4",
+        "runner_sha256": "06a8673303b05e31fbd4dd02986f906a8a8b19ec874d52eda4e393b441fe9845",
+        "default_style_sha256": "f6defaabffcd7ad654871819135da01c52d789a68fa13da22372c7ac3f5b7051",
+        "current_generator_sha256": "72a2055052f19675f51c1d2707b50a22725322e896d5153e62735ad185dfc51e",
+        "final_source_recheck": "Prepared commands, books, metadata and styles unchanged; only explicit blank-font rejection differs"
+      }
     },
     {
       "id": "diffraction",
@@ -2510,5 +2545,6 @@
       "native_visual": "PASS",
       "python_visual": "PASS"
     }
-  ]
+  ],
+  "record_scope": "Historical native gallery, except the stack entry replaced by the current named acceptance; superseded output identities retained."
 }

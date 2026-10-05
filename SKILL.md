@@ -65,7 +65,8 @@ owned-session runner. Do not overwrite originals, install software or publish
 as a side effect of plotting.
 
 Python defaults to PNG; add --svg for requested vector editing. Mention this
-briefly when useful. Use installed Arial with --font-file; fonts are not bundled.
+briefly when useful. Use installed Arial by name; --font selects another installed
+family and records its actual name. No fonts are bundled, copied or downloaded.
 Sparse line-symbol curves may use 5–6 pt markers; dense data may need smaller
 ones. Apply a task style override and inspect the final size. Keep defaults
 unchanged and top titles empty unless requested.

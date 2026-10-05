@@ -25,6 +25,20 @@ class ColorTests(unittest.TestCase):
             reverse=a.color_map({'cmap':'rainbow_r','color_levels':levels})
             np.testing.assert_array_equal(np.array(reverse.colors),np.array(forward.colors)[::-1])
 
+    def test_descriptive_aliases_emit_identical_palettes_and_data(self):
+        config=a.load_json(ROOT/'samples/colors.json');style,_=a.STYLE.resolve(a.load_json)
+        for old,new in [('reimu26','purplegreen'),('reimu27','violetgold')]:
+            for levels in range(2,257):
+                before=np.asarray(a.color_map({'cmap':old,'color_levels':levels}).colors)
+                after=np.asarray(a.color_map({'cmap':new,'color_levels':levels}).colors)
+                self.assertEqual(before.tobytes(),after.tobytes())
+            plot=next(p for p in config['plots'] if p.get('cmap')==new)
+            rows=a.read_csv(ROOT/'samples'/plot['csv'])
+            before=a.prepare_plot(dict(plot,cmap=old),rows,1,style)
+            after=a.prepare_plot(plot,rows,1,style)
+            self.assertEqual(before['metadata']['colorbar_palette'],after['metadata']['colorbar_palette'])
+            self.assertEqual(before['books'],after['books'])
+
     def test_seven_default_identities_and_neutral_default_map(self):
         style,_=a.STYLE.resolve(a.load_json)
         self.assertEqual(style['colors']['palette'],['#B2182B','#2166AC','#1B9E77','#7560A8','#E4872A','#737373','#CC79A7'])

@@ -102,13 +102,17 @@ def make_samples(target):
         'labels':{'x':'Toy x (a.u.)','y':'Toy response (a.u.)'},
         'series':[{'column':'v'+str(i),'label':name} for i,name in enumerate(['Red','Blue','Green','Purple','Orange','Gray','Pink'],1)],
         'caption':'Seven entirely invented curves; default red/blue/green/purple/orange/gray/pink identities. No measured observable or scientific inference.'}]}
-    for name in ('redwhiteblue','reimu26','reimu27','rainbow','rainbow_r'):
+    for name,cmap,label in (('redwhiteblue','redwhiteblue','Blue–white–red'),
+                           ('reimu26','purplegreen','Purple–green–yellow'),
+                           ('reimu27','violetgold','Violet–orange–yellow'),
+                           ('rainbow','rainbow','Rainbow'),
+                           ('rainbow_r','rainbow_r','Reversed rainbow')):
         meaning='white=0.5, not zero' if name=='redwhiteblue' else 'no white/zero threshold is implied'
         colors['plots'].append({'id':'palette-'+name,'kind':'heatmap','csv':'colors-map.csv','x':'x','y':'y','z':'z',
-            'synthetic':True,'title':'','cmap':name,'color_range':[0,1],'color_levels':256,
+            'synthetic':True,'title':'','cmap':cmap,'color_range':[0,1],'color_levels':256,
             'interpolation':{'method':'bilinear','factor':4},
             'labels':{'x':'Toy x (a.u.)','y':'Toy y (a.u.)','color':'Toy field (a.u.)'},
-            'caption':'Identical invented 9x13 grid for palette comparison; '+name+'; '+meaning+'. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.'})
+            'caption':'Identical invented 9x13 grid for palette comparison; '+label+'; '+meaning+'. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.'})
     (target/'colors.json').write_text(json.dumps(colors,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     cycles=np.arange(1,121);toy_rng=np.random.default_rng(20261004)
     capacities=[start*(1-decay*cycles)+1.2*np.sin(cycles/8+phase)+toy_rng.normal(0,.45,len(cycles))

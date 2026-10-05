@@ -115,6 +115,15 @@ Clean-machine dependency installation is not performed.
 
 ## Inherited native generation: 0.1.3
 
+Current spectral stack: Y ticks/numbers are hidden and the lower display
+limit is -0.3. The three 201-point raw spectra and offsets are unchanged.
+A fresh Origin 2021 export passed numerical/style read-back, save/reopen and
+identical reopened pixels. Python PNG/SVG repeat exactly with installed Arial.
+Palette aliases purplegreen/violetgold preserve the old colors at every
+2–256-level setting. Current regressions: 100, including strict font selection;
+font files are never part of the package. Other native images retain their
+historical evidence below.
+
 Origin 2021 previously saved/reopened 48 graphs in two independent
 runs. Each read back 176404 worksheet cells (167126 nonmissing numbers).
 Original/reopened and independent-repeat PNGs have identical RGB pixels;

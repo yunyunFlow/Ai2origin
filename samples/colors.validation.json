@@ -133,7 +133,7 @@
       "metadata": {
         "kind": "heatmap",
         "row_count": 117,
-        "caption": "Identical invented 9x13 grid for palette comparison; redwhiteblue; white=0.5, not zero. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
+        "caption": "Identical invented 9x13 grid for palette comparison; Blue–white–red; white=0.5, not zero. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
         "grid_shape": [
           33,
           49
@@ -454,7 +454,7 @@
       "metadata": {
         "kind": "heatmap",
         "row_count": 117,
-        "caption": "Identical invented 9x13 grid for palette comparison; reimu26; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
+        "caption": "Identical invented 9x13 grid for palette comparison; Purple–green–yellow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
         "grid_shape": [
           33,
           49
@@ -775,7 +775,7 @@
       "metadata": {
         "kind": "heatmap",
         "row_count": 117,
-        "caption": "Identical invented 9x13 grid for palette comparison; reimu27; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
+        "caption": "Identical invented 9x13 grid for palette comparison; Violet–orange–yellow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
         "grid_shape": [
           33,
           49
@@ -1096,7 +1096,7 @@
       "metadata": {
         "kind": "heatmap",
         "row_count": 117,
-        "caption": "Identical invented 9x13 grid for palette comparison; rainbow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
+        "caption": "Identical invented 9x13 grid for palette comparison; Rainbow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
         "grid_shape": [
           33,
           49
@@ -1417,7 +1417,7 @@
       "metadata": {
         "kind": "heatmap",
         "row_count": 117,
-        "caption": "Identical invented 9x13 grid for palette comparison; rainbow_r; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
+        "caption": "Identical invented 9x13 grid for palette comparison; Reversed rainbow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.",
         "grid_shape": [
           33,
           49
@@ -1732,5 +1732,14 @@
       "native_visual": "PASS",
       "python_visual": "PASS"
     }
-  ]
+  ],
+  "label_update": {
+    "date": "2026-10-05",
+    "scope": "Human display names/captions and aliases only; native image values and colors unchanged",
+    "aliases": {
+      "purplegreen": "reimu26",
+      "violetgold": "reimu27"
+    },
+    "acceptance": "All2–256palettelevels equal; same rendered native plan palette and numerical books"
+  }
 }

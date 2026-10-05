@@ -7,7 +7,8 @@ DLL, logo, font, paper PDF, publisher figure or measured data is redistributed.
 OriginLab documentation is linked in SOURCES.md for interface interoperability.
 Origin and OriginPro require separate licenses; product marks belong to their owners.
 NumPy, Matplotlib and Pillow are installed separately under their own licenses.
-Arial or another selected font must be supplied under its own terms.
+Arial or another selected font must already be legally installed on the user's
+system. No font files are bundled, copied or downloaded.
 
 Article links in references/articles.md provide context for display choices.
 The short notes are paraphrases; synthetic curves do not reproduce paper data.

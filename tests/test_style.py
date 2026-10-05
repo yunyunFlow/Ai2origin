@@ -10,6 +10,29 @@ spec.loader.exec_module(module)
 
 
 class StyleTests(unittest.TestCase):
+    def test_stacked_spectra_hide_ticks_without_editing_values(self):
+        import copy
+        config = module.load_json(ROOT / 'templates/characterization.json')
+        stack = next(p for p in config['plots'] if p['id'] == 'stack')
+        rows = module.read_csv(ROOT / 'templates/characterization.csv')
+        style, _ = module.STYLE.resolve(module.load_json, project=config['style'])
+        old = copy.deepcopy(stack)
+        old.pop('y_ticks')
+        old['y_range'] = [0, 5]
+        before = module.prepare_plot(old, rows, 1, style)
+        after = module.prepare_plot(stack, rows, 1, style)
+        self.assertEqual(before['books'], after['books'])
+        self.assertFalse(after['metadata']['y_ticks'])
+        self.assertGreater((min(float(r['a']) for r in rows) - stack['y_range'][0]) /
+                           (stack['y_range'][1] - stack['y_range'][0]), .06)
+        self.assertIn('layer.y.showLabels=0', after['commands'])
+        self.assertIn('layer.y.ticks=0', after['commands'])
+        for invalid in (None, 0, 1, 'false'):
+            with self.subTest(value=invalid), self.assertRaisesRegex(ValueError, 'boolean'):
+                module.prepare_plot(dict(stack, y_ticks=invalid), rows, 1, style)
+        with self.assertRaisesRegex(ValueError, 'visible Y ticks'):
+            module.prepare_plot(dict(stack, y_tick_step=1), rows, 1, style)
+
     def test_precedence_recursive_merge_and_array_replacement(self):
         original = module.STYLE.DEFAULT_PATH.read_bytes()
         with tempfile.TemporaryDirectory() as tmp:

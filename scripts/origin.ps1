@@ -151,6 +151,11 @@ function Assert-GraphStyle($App, $Plot, $Style) {
         if ([double]$App.LTVar('layer.'+$axis+'.label.fsize') -ne [double]$Style.font.tick_size_pt) { throw 'Tick font size drift' }
         if ([double]$App.LTVar('layer.'+$axis+'.label.font') -ne $expectedFont) { throw 'Tick font family drift' }
     }
+    if ($Plot.metadata.y_ticks -eq $false) {
+        if ([double]$App.LTVar('layer.y.ticks') -ne 0 -or
+            [double]$App.LTVar('layer.y.showLabels') -ne 0 -or
+            [double]$App.LTVar('layer.y2.showLabels') -ne 0) { throw 'Hidden Y-axis ticks or labels drifted' }
+    }
     $axisTitles=@('xb','AxisTitleY')
     if ($Plot.metadata.kind -eq 'raincloud' -and $Plot.metadata.orientation -eq 'vertical') { $axisTitles=@('AxisTitleX','AxisTitleY') }
     foreach ($name in $axisTitles) {

@@ -21,6 +21,8 @@ caption records provenance and processing; it is metadata, not a top title.
 | raincloud | group/value; bandwidth positive number or "scott" | order contains every group once; integer seed; bounds; orientation horizontal/vertical; cloud_shape half/full; summary boolean; cloud_support kde/observed; density_scale shared/width; cloud_fill boolean; group_labels |
 
 Ranges are increasing finite JSON-number pairs; tick steps are positive numbers.
+XY plots can set y_ticks:false to hide Y ticks and numbers while retaining
+the axis title/frame and unchanged data. Omit y_tick_step in that case.
 Booleans are not numbers. x_scale linear/log10 applies to XY/maps; log10 needs
 positive source X and explicit positive decade-endpoint x_range, and does not
 accept linear x_tick_step. equal_xy requires XY, linear axes, both explicit
@@ -45,8 +47,9 @@ Both backends use the declared discrete palette. A declared center requires
 at least three levels; even palettes use two adjacent neutral bins so the
 midpoint color is exact. Adaptive colorbar precision keeps ticks distinct and
 rounding error <=1% of tick spacing.
-Without cmap, redwhiteblue is the packaged default. See colors.md for Reimu26,
-Reimu27 and forward/reverse rainbow, and seven default series identities.
+Without cmap, redwhiteblue is the packaged default. See colors.md for
+Purple–green–yellow, Violet–orange–yellow, Rainbow and Reversed rainbow,
+and seven default series identities.
 Preset/catalog SHA is bound to the plan; custom stops are sampled directly.
 
 Clouds retain every value and only jitter the group coordinate. Scott uses

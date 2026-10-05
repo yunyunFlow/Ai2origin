@@ -214,7 +214,9 @@ def make_templates(target):
     for name, plots in (("electrochem", electrochem+extra_echem), ("characterization", characterization), ("dft-md", methods), ("analysis", analysis), ("drt",drt), ("other",other),('domains',domains)):
         for spec in plots:
             spec['title']=''
-            if spec['id']=='stack': spec['y_range']=[0,5]
+            if spec['id']=='stack':
+                spec['y_range']=[-.3,5]
+                spec['y_ticks']=False
             if spec['id']=='rate': spec['x_tick_step']=5
             if spec['id'] in ('cycle-capacity','bode-magnitude'): spec['y_tick_step']=5
             spec['labels']={k:v.replace('Toy ','').replace('toy ','').replace('mAh/g','mAh g^-1').replace('1/cm','cm^-1').replace('degree','°').replace('ohm','Ω').replace('Z real','Z′').replace('-Z imaginary','−Z″') for k,v in spec['labels'].items()}

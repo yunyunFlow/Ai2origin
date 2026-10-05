@@ -76,7 +76,7 @@
         "y": "Toy y (a.u.)",
         "color": "Toy field (a.u.)"
       },
-      "caption": "Identical invented 9x13 grid for palette comparison; redwhiteblue; white=0.5, not zero. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+      "caption": "Identical invented 9x13 grid for palette comparison; Blue–white–red; white=0.5, not zero. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
     },
     {
       "id": "palette-reimu26",
@@ -87,7 +87,7 @@
       "z": "z",
       "synthetic": true,
       "title": "",
-      "cmap": "reimu26",
+      "cmap": "purplegreen",
       "color_range": [
         0,
         1
@@ -102,7 +102,7 @@
         "y": "Toy y (a.u.)",
         "color": "Toy field (a.u.)"
       },
-      "caption": "Identical invented 9x13 grid for palette comparison; reimu26; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+      "caption": "Identical invented 9x13 grid for palette comparison; Purple–green–yellow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
     },
     {
       "id": "palette-reimu27",
@@ -113,7 +113,7 @@
       "z": "z",
       "synthetic": true,
       "title": "",
-      "cmap": "reimu27",
+      "cmap": "violetgold",
       "color_range": [
         0,
         1
@@ -128,7 +128,7 @@
         "y": "Toy y (a.u.)",
         "color": "Toy field (a.u.)"
       },
-      "caption": "Identical invented 9x13 grid for palette comparison; reimu27; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+      "caption": "Identical invented 9x13 grid for palette comparison; Violet–orange–yellow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
     },
     {
       "id": "palette-rainbow",
@@ -154,7 +154,7 @@
         "y": "Toy y (a.u.)",
         "color": "Toy field (a.u.)"
       },
-      "caption": "Identical invented 9x13 grid for palette comparison; rainbow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+      "caption": "Identical invented 9x13 grid for palette comparison; Rainbow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
     },
     {
       "id": "palette-rainbow_r",
@@ -180,7 +180,7 @@
         "y": "Toy y (a.u.)",
         "color": "Toy field (a.u.)"
       },
-      "caption": "Identical invented 9x13 grid for palette comparison; rainbow_r; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+      "caption": "Identical invented 9x13 grid for palette comparison; Reversed rainbow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
     }
   ]
 }

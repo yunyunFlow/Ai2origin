@@ -17,8 +17,10 @@ python -m pip install -r requirements.txt
 python scripts/ai2origin.py samples/demo.json --out work/demo --backend python
 ~~~
 
-Use a new output directory. Add --svg for an editable vector copy, or
---font-file /path/to/arial.ttf for your installed Arial font.
+Use a new output directory. Add --svg for an editable vector copy.
+Arial must be installed on your system. If missing, run --list-fonts and choose
+--font "Installed name". No fonts are bundled, copied or downloaded;
+the receipt records the actual font. [Font policy](references/fonts.md).
 
 For Codex, put this repository's contents in a skill folder named ai2origin
 and invoke $ai2origin. You can also ask your agent to read [SKILL.md](SKILL.md).
@@ -68,9 +70,9 @@ are labeled separately as Python outputs.
 | --- | --- | --- |
 | ![RDF](templates/origin-rdf.png) | ![MSD](templates/origin-msd.png) | ![Cloud](samples/origin-violin.png) |
 
-| Red–white–blue | Ramp 26 | Rainbow |
+| Red–white–blue | Purple–green–yellow | Rainbow |
 | --- | --- | --- |
-| ![Red–white–blue](samples/origin-palette-redwhiteblue.png) | ![Ramp 26](samples/origin-palette-reimu26.png) | ![Rainbow](samples/origin-palette-rainbow.png) |
+| ![Red–white–blue](samples/origin-palette-redwhiteblue.png) | ![Purple–green–yellow](samples/origin-palette-reimu26.png) | ![Rainbow](samples/origin-palette-rainbow.png) |
 
 Battery overlays — **Python**:
 
@@ -105,7 +107,7 @@ Every entry should report OK. Run the regressions next:
 python -m unittest discover -s tests
 ~~~
 
-The tested version runs **90 tests**. Missing values, invalid settings, source
+The tested version runs **100 tests**. Missing values, invalid settings, source
 changes, missing glyphs and incomplete outputs are among the checked cases.
 
 ### Repeat a plot

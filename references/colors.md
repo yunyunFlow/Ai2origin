@@ -8,15 +8,16 @@ remain available. Seven colors are a display baseline, not a significance code.
 Heatmap presets are packaged in assets/colormaps.json; no workspace dependency.
 Set a plot's cmap to one of these names:
 
-| Name | Low → high | Meaning |
+| Display name | Config name | Low → high |
 | --- | --- | --- |
-| redwhiteblue | Blue → white → red | Default; neutral is the range midpoint, zero only for a symmetric range |
-| reimu26 | Purple → blue → green → yellow-green → yellow | Exact five stops from author color-board ramp 26 |
-| reimu27 | Deep violet → purple → pink → orange → yellow | Exact five stops from author color-board ramp 27 |
-| rainbow | Violet → blue → green → yellow/orange → red | Matplotlib rainbow; explicit optional choice |
-| rainbow_r | Red → yellow/orange → green → blue → violet | Exact reversed sampled rainbow |
+| Blue–white–red | redwhiteblue | Blue → white → red; neutral is the range midpoint |
+| Purple–green–yellow | purplegreen | Purple → blue → green → yellow-green → yellow |
+| Violet–orange–yellow | violetgold | Deep violet → purple → pink → orange → yellow |
+| Rainbow | rainbow | Violet → blue → green → yellow/orange → red |
+| Reversed rainbow | rainbow_r | Red → yellow/orange → green → blue → violet |
 
-26/27 preserve the supplied SVG stop hex values at 0/25/50/75/100%.
+The two five-color presets preserve the supplied SVG stops at 0/25/50/75/100%.
+Legacy keys reimu26/reimu27 remain exact aliases for purplegreen/violetgold.
 Piecewise linear RGB interpolation is sampled directly at declared levels.
 They are five-stop ramps; they are not aliases for the full viridis/plasma
 tables. The color-board SHA is bound in the registry; no original board,

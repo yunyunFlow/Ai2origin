@@ -8,7 +8,7 @@ workbook, sample identity, numerical result or private provenance is shipped.
 
 - White background, black axes, a clean four-sided frame, no default grid.
 - Readable axis titles/ticks; Arial for the Windows Origin examples.
-  Python checks explicit fallback fonts and records the actual font; a real
+  Python requires the selected installed font and records its actual name; a real
   local font can also be supplied without distributing it.
 - Red/blue/green/purple/orange/gray/pink identities; the same group keeps the same hue in
   its curve, cloud, box and observations. Colors remain editable.
@@ -53,7 +53,7 @@ values and layer order are saved as style.resolved.json in the output folder.
 | Settings | Mapping |
 | --- | --- |
 | figure.width_mm / height_mm | Python inches=mm/25.4; Origin page.resx/resy × inches |
-| font family / sizes in pt | Real font lookup and actual fallback record in Python; exact installed family and native fsize in Origin |
+| font family / sizes in pt | Exact installed family in both backends; actual font name is recorded |
 | line.width_pt / default_style | Python linewidth/linestyle; Origin -w = pt×500 and -d = 0/1/2/3 |
 | marker.size_pt | Python scatter area=pt²; Origin -z in points |
 | axes color / width_pt / tick_direction / frame | Frame, tick and label styles; exported tick length checked in Origin 2021 |

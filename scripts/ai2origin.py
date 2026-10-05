@@ -19,6 +19,7 @@ _style_spec = importlib.util.spec_from_file_location("ai2origin_style", Path(__f
 STYLE = importlib.util.module_from_spec(_style_spec)
 _style_spec.loader.exec_module(STYLE)
 COLORMAP_PATH=Path(__file__).resolve().parents[1]/'assets/colormaps.json'
+_SYSTEM_FONTS_LOADED = False
 
 
 def sha256(path):
@@ -422,9 +423,9 @@ def add_series(commands, book, graph_id, pair, *, first=False, scatter=False, co
 def prepare_plot(spec, rows, index, style):
     common = {"id", "kind", "csv", "synthetic", "title", "labels", "caption", "x_range", "y_range", "x_tick_step", "y_tick_step", "equal_xy", "x_scale"}
     options = {
-        "line": {"x", "series", "connect_order", "connection", "connection_factor"},
-        "line_symbol": {"x", "series", "connect_order", "connection", "connection_factor"},
-        "scatter": {"x", "series", "connect_order", "connection", "connection_factor"},
+        "line": {"x", "series", "connect_order", "connection", "connection_factor", "y_ticks"},
+        "line_symbol": {"x", "series", "connect_order", "connection", "connection_factor", "y_ticks"},
+        "scatter": {"x", "series", "connect_order", "connection", "connection_factor", "y_ticks"},
         "heatmap": {"x", "y", "z", "color_range", "center", "cmap", "color_levels", "interpolation"},
         "raincloud": {"group", "value", "order", "bandwidth", "seed", "bounds", "cloud_shape", "orientation", "group_labels", "summary", "cloud_support", "density_scale", "cloud_fill"},
     }
@@ -443,6 +444,11 @@ def prepare_plot(spec, rows, index, style):
             raise ValueError('At least one visible series legend is required')
     if 'synthetic' in spec and type(spec['synthetic']) is not bool:
         raise ValueError('synthetic must be boolean')
+    if 'y_ticks' in spec:
+        if type(spec['y_ticks']) is not bool:
+            raise ValueError('y_ticks must be boolean')
+        if not spec['y_ticks'] and 'y_tick_step' in spec:
+            raise ValueError('y_tick_step requires visible Y ticks')
     if 'connection_factor' in spec and spec.get('connection')!='pchip':
         raise ValueError('connection_factor requires pchip')
     if spec['kind']=='raincloud' and spec.get('x_scale','linear')!='linear':
@@ -777,23 +783,47 @@ def prepare_plot(spec, rows, index, style):
                      'AxisTitleY.font=font(%s)'%lt_string(font),'AxisTitleY.fsize='+num(fonts['axis_title_size_pt']),
                      'AxisTitleY.x='+(xat(-.23) if scale=='log10' else 'layer.x.from-.23*(layer.x.to-layer.x.from)'),
                      'AxisTitleY.y=layer.y.from+.5*(layer.y.to-layer.y.from)'])
+    if 'y_ticks' in spec:
+        metadata['y_ticks'] = spec['y_ticks']
+        if not spec['y_ticks']:
+            commands.extend(['layer.y.showLabels=0', 'layer.y2.showLabels=0',
+                             'layer.y.ticks=0', 'layer.y2.ticks=0'])
     return {"id": spec["id"], "graph_id": graph_id, "books": books, "commands": commands, "metadata": metadata}
 
 
-def preview_font(spec, rows, style):
+def ensure_system_fonts():
+    global _SYSTEM_FONTS_LOADED
     from matplotlib import font_manager
-    font = None
-    for candidate in [style["font"]["family"]] + style["font"]["fallback_families"]:
-        try:
-            font_manager.findfont(font_manager.FontProperties(family=candidate), fallback_to_default=False)
-            font = candidate
-            break
-        except ValueError:
-            pass
-    if font is None:
-        raise ValueError("None of the configured fonts is installed")
+    if _SYSTEM_FONTS_LOADED:
+        return
+    windows_fonts = Path('/mnt/c/Windows/Fonts')
+    if windows_fonts.is_dir():
+        for path in sorted(font_manager.findSystemFonts(fontpaths=[str(windows_fonts)])):
+            try:
+                font_manager.fontManager.addfont(path)
+            except (OSError, RuntimeError):
+                continue
+    _SYSTEM_FONTS_LOADED = True
+
+
+def installed_font_names():
+    ensure_system_fonts()
+    from matplotlib import font_manager
+    return sorted({font.name for font in font_manager.fontManager.ttflist})
+
+
+def preview_font(spec, rows, style):
+    ensure_system_fonts()
+    from matplotlib import font_manager
+    requested = style["font"]["family"]
+    try:
+        font_path = font_manager.findfont(font_manager.FontProperties(family=requested), fallback_to_default=False)
+    except ValueError as exc:
+        raise ValueError('Font "' + requested + '" is not installed. Use --list-fonts and choose --font "Installed name"; no font is downloaded or substituted.') from exc
+    font = font_manager.FontProperties(fname=font_path).get_name()
+    if font.casefold() != requested.casefold():
+        raise ValueError('Choose the actual installed font name: ' + font)
     from matplotlib.ft2font import FT2Font
-    font_path = font_manager.findfont(font_manager.FontProperties(family=font), fallback_to_default=False)
     charmap = FT2Font(font_path).get_charmap()
     strings = list(spec["labels"].values()) + [spec.get("title", "")]
     strings += [s["label"] for s in spec.get("series", [])]
@@ -821,7 +851,8 @@ def render(spec, rows, style, target, export_svg=False):
                                "savefig.facecolor": figure["background_color"],
                                "mathtext.fontset": "custom", "mathtext.rm": font,
                                "mathtext.it": font + ":italic", "mathtext.bf": font + ":bold",
-                               "mathtext.cal": font, "mathtext.sf": font, "mathtext.tt": font})
+                               "mathtext.cal": font, "mathtext.sf": font, "mathtext.tt": font,
+                               "mathtext.fallback": None})
     fig, ax = plt.subplots(figsize=(figure["width_mm"] / 25.4, figure["height_mm"] / 25.4), layout="constrained")
     ax.set_facecolor(figure["background_color"])
     colors = style["colors"]["palette"]
@@ -900,6 +931,8 @@ def render(spec, rows, style, target, export_svg=False):
         ax.set_aspect("equal", adjustable="box")
     ax.spines[["top", "right"]].set_visible(axes["frame"] == "full")
     ax.tick_params(direction=axes["tick_direction"], colors=axes["color"], top=False, right=False)
+    if not spec.get('y_ticks', True):
+        ax.tick_params(axis='y', which='both', left=False, right=False, labelleft=False, labelright=False)
     ax.grid(axes["major_grid"], alpha=0.2) if axes["major_grid"] else ax.grid(False)
     fig.savefig(target.with_suffix(".png"), dpi=style["export"]["raster_dpi"], metadata={"Software": "Ai2origin synthetic demo" if spec.get("synthetic") else "Ai2origin"})
     if export_svg:
@@ -910,14 +943,20 @@ def render(spec, rows, style, target, export_svg=False):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("config", type=Path)
-    parser.add_argument("--out", required=True, type=Path, help="A new, nonexistent output directory")
+    parser.add_argument("config", type=Path, nargs='?')
+    parser.add_argument("--out", type=Path, help="A new, nonexistent output directory")
     parser.add_argument("--backend", choices=("prepare", "python"), default="prepare")
     parser.add_argument("--svg", action="store_true", help="Also export editable Python SVG when requested; default is PNG only")
-    parser.add_argument("--font-file", type=Path, help="Optional local font; never copied into the package")
+    parser.add_argument("--font", help="Exact name of an installed system font; default Arial")
+    parser.add_argument("--list-fonts", action='store_true', help="List available font names and exit")
     parser.add_argument("--user-style", type=Path, help="User display overrides")
     parser.add_argument("--style", type=Path, help="Task display overrides; highest JSON priority")
     args = parser.parse_args(argv)
+    if args.list_fonts:
+        print(json.dumps(installed_font_names(), ensure_ascii=False))
+        return
+    if args.config is None or args.out is None:
+        parser.error('config and --out are required when plotting')
     if args.svg and args.backend != "python":
         parser.error("--svg requires --backend python; native SVG is not certified")
     config_path = args.config.resolve()
@@ -943,14 +982,11 @@ def main(argv=None):
     style_inputs = [('user', args.user_style), ('project-file', project_style), ('task', args.style)]
     for path in [STYLE.DEFAULT_PATH, COLORMAP_PATH] + [p for _, p in style_inputs if p is not None]:
         capture(path)
-    if args.font_file:
-        capture(args.font_file)
     style, style_layers = STYLE.resolve(load_json, args.user_style, project_style, config.get("style"), args.style)
-    if args.font_file:
-        from matplotlib import font_manager
-        font_manager.fontManager.addfont(str(args.font_file))
-        style["font"]["family"] = font_manager.FontProperties(fname=str(args.font_file)).get_name()
-        style_layers.append("local-font-file")
+    if args.font is not None:
+        style["font"]["family"] = args.font
+        STYLE.validate(style)
+        style_layers.append("named-system-font")
     plots, inputs, datasets, ids = [], [], [], set()
     # Complete validation before creating outputs or drawing.
     for index, raw in enumerate(config["plots"], 1):
@@ -1027,7 +1063,6 @@ def main(argv=None):
     receipt['environment']={'python':sys.version.split()[0],'numpy':np.__version__,
                             'matplotlib':matplotlib.__version__,'freetype':matplotlib.ft2font.__freetype_version__ if args.backend=='python' else None}
     receipt['font_provenance']=[]
-    if args.font_file:receipt['provided_font']={'file_name':args.font_file.name,'sha256':sha256(args.font_file)}
     for family in sorted(actual_fonts):
         from matplotlib import font_manager
         font_path=Path(font_manager.findfont(font_manager.FontProperties(family=family),fallback_to_default=False))

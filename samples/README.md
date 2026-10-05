@@ -37,8 +37,9 @@ other Python gallery files named here or in historical receipts stay local.
 The included configs reproduce them with --backend python and optional --svg.
 
 colors.json adds six palette comparisons: seven invented curves and the same
-invented 9×13 positive field under redwhiteblue, reimu26, reimu27, rainbow and
-rainbow_r. Only colors differ between the five maps; their raw/derived grids
+invented 9×13 positive field under Blue–white–red, Purple–green–yellow,
+Violet–orange–yellow, Rainbow and Reversed rainbow. Only colors differ
+between the five maps; their raw/derived grids
 are identical. Factor-4 bilinear display interpolation is disclosed. Color
 registry provenance and range/midpoint meaning are in ../references/colors.md.
 
