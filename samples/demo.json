@@ -1,18 +1,6 @@
 {
   "schema_version": 1,
-  "style": {
-    "series_overrides": {
-      "Group A": {
-        "marker_size_pt": 2.0
-      },
-      "Group B": {
-        "marker_size_pt": 2.0
-      },
-      "Group C": {
-        "marker_size_pt": 2.0
-      }
-    }
-  },
+  "style": {},
   "plots": [
     {
       "id": "xy",
@@ -68,31 +56,6 @@
       }
     },
     {
-      "id": "raincloud",
-      "kind": "raincloud",
-      "csv": "raincloud.csv",
-      "group": "group",
-      "value": "value",
-      "order": [
-        "Group A",
-        "Group B",
-        "Group C"
-      ],
-      "synthetic": true,
-      "title": "",
-      "bandwidth": "scott",
-      "seed": 1729,
-      "labels": {
-        "x": "Observable (a.u.)",
-        "y": "Group"
-      },
-      "summary": false,
-      "cloud_support": "observed",
-      "density_scale": "width",
-      "cloud_fill": true,
-      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference."
-    },
-    {
       "id": "smooth",
       "kind": "heatmap",
       "csv": "xrd.csv",
@@ -122,38 +85,6 @@
         "y": "Scan index (synthetic)",
         "color": "Intensity (a.u.)"
       }
-    },
-    {
-      "id": "violin",
-      "kind": "raincloud",
-      "csv": "raincloud.csv",
-      "group": "group",
-      "value": "value",
-      "order": [
-        "Group A",
-        "Group B",
-        "Group C"
-      ],
-      "synthetic": true,
-      "title": "",
-      "bandwidth": "scott",
-      "seed": 1729,
-      "cloud_shape": "full",
-      "orientation": "vertical",
-      "group_labels": {
-        "Group A": "A",
-        "Group B": "B",
-        "Group C": "C"
-      },
-      "labels": {
-        "x": "Group",
-        "y": "Observable (a.u.)"
-      },
-      "summary": false,
-      "cloud_support": "observed",
-      "density_scale": "width",
-      "cloud_fill": true,
-      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference."
     }
   ]
 }

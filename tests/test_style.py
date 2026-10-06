@@ -12,7 +12,7 @@ spec.loader.exec_module(module)
 class StyleTests(unittest.TestCase):
     def test_stacked_spectra_hide_ticks_without_editing_values(self):
         import copy
-        config = module.load_json(ROOT / 'templates/characterization.json')
+        config = module.load_json(ROOT / 'templates/paper.json')
         stack = next(p for p in config['plots'] if p['id'] == 'stack')
         rows = module.read_csv(ROOT / 'templates/characterization.csv')
         style, _ = module.STYLE.resolve(module.load_json, project=config['style'])

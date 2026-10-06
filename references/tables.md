@@ -15,6 +15,9 @@ missing/invalid values, exact duplicates, finite ranges/means and adjacent
 sampling steps (pooled across rows, including group boundaries). Counts mean
 observations, not independent replicates. CSV quoting/line endings may change;
 source SHA and cell lexemes stay bound. Originals are never rewritten.
+Excel numeric cells with date/time or elapsed-time styles are refused; stored
+serial numbers are not automatically seconds or a physical coordinate. Ordinary
+scientific numeric formats remain accepted without changing the stored lexeme.
 intake-receipt.json binds source/processor/output hashes. --check rejects
 unlisted, missing or altered outputs; --repeat checks exact repetition.
 These checks cannot prove permissions, physical units or scientific validity.
@@ -35,6 +38,8 @@ CSV defaults to comma, TSV to tab. TXT/DPT require table.delimiter (one
 character or whitespace). table.encoding defaults to strict utf-8-sig.
 Explicit skip_rows excludes declared leading records; header=false requires
 unique names. CSV indices refer to logical records, not physical lines.
+Missing/invalid record indices refer to the original source records (or XLSX
+row numbers), including the offset of headers and explicitly skipped records.
 Unequal widths/duplicate headers are refused.
 
 XLSX reads stored OOXML values without executing Excel. Multi-sheet files need

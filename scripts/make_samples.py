@@ -51,7 +51,7 @@ def make_samples(target):
     write_csv(target / "raincloud.csv", ["sample_id", "group", "value"], rows)
     config = {
         "schema_version": 1,
-        "style": {"series_overrides": {g: {"marker_size_pt": 2.0} for g in ("Group A", "Group B", "Group C")}},
+        "style": {},
         "plots": [
             {"id": "xy", "kind": "line", "csv": "xy.csv", "x": "x", "synthetic": True,
              "title": "Synthetic curves",
@@ -64,36 +64,17 @@ def make_samples(target):
             {"id": "heatmap", "kind": "heatmap", "csv": "heatmap.csv", "x": "x", "y": "y", "z": "z",
              "synthetic": True, "title": "Synthetic signed field", "color_range": [-1, 1], "center": 0,
              "cmap": ["#2166AC", "#F7F7F7", "#B2182B"], "labels": {"x": "Toy x (a.u.)", "y": "Toy y (a.u.)", "color": "Toy field (a.u.)"}},
-            {"id": "raincloud", "kind": "raincloud", "csv": "raincloud.csv", "group": "group", "value": "value",
-             "order": ["Group A", "Group B", "Group C"], "synthetic": True,
-             "title": "Synthetic raincloud",
-             "bandwidth": 0.20, "seed": 1729, "labels": {"x": "Observable (a.u.)", "y": "Group"}},
             {"id": "smooth", "kind": "heatmap", "csv": "xrd.csv", "x": "toy_angle", "y": "toy_scan", "z": "toy_intensity",
              "synthetic": True, "title": "Synthetic XRD scans", "color_range": [0, 1], "center": 0.5,
              "caption": "Invented diffraction-like peaks on invented axes. 9x141 raw nodes retained; display-only bilinear factor 8 gives 65x1121 nodes, 256 levels, no new observations or higher scientific resolution. White=0.5, not zero. No measured diffraction or phase claim.",
              "color_levels": 256, "interpolation": {"method": "bilinear", "factor": 8},
              "cmap": ["#2166AC", "#F7F7F7", "#B2182B"],
              "labels": {"x": "2θ (°)", "y": "Scan index (synthetic)", "color": "Intensity (a.u.)"}},
-            {"id": "violin", "kind": "raincloud", "csv": "raincloud.csv", "group": "group", "value": "value",
-             "order": ["Group A", "Group B", "Group C"], "synthetic": True, "title": "Full violin + rain",
-             "bandwidth": 0.20, "seed": 1729, "cloud_shape": "full", "orientation": "vertical",
-             "group_labels": {"Group A": "A", "Group B": "B", "Group C": "C"},
-             "labels": {"x": "Group", "y": "Observable (a.u.)"}}
         ]}
     for plot in config['plots']:
         plot['title']=''
-        if plot['kind']=='raincloud':
-            plot.update(summary=False,cloud_support='observed',density_scale='width',cloud_fill=True)
-            plot['bandwidth']='scott'
-            plot['caption']='All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference.'
     (target / "demo.json").write_text(json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    # Color comparisons share identical invented values, never project input.
-    rows=[]
-    for y in np.linspace(-1.5,1.5,9):
-        for xv in np.linspace(-2,2,13):
-            value=(np.sin(1.5*(xv+1))+np.cos(2*y)+2)/4
-            rows.append([format(float(v),'.17g') for v in (xv,y,value)])
-    write_csv(target/'colors-map.csv',['x','y','z'],rows)
+    # One seven-color display; heatmap palettes are options in assets/colormaps.json.
     x=np.linspace(0,5,41)
     write_csv(target/'colors-lines.csv',['x']+['v'+str(i) for i in range(1,8)],
               [[format(float(v),'.17g') for v in row] for row in zip(x,*[i+.3*np.sin(x+i*.4) for i in range(7)])])
@@ -102,30 +83,7 @@ def make_samples(target):
         'labels':{'x':'Toy x (a.u.)','y':'Toy response (a.u.)'},
         'series':[{'column':'v'+str(i),'label':name} for i,name in enumerate(['Red','Blue','Green','Purple','Orange','Gray','Pink'],1)],
         'caption':'Seven entirely invented curves; default red/blue/green/purple/orange/gray/pink identities. No measured observable or scientific inference.'}]}
-    for name,cmap,label in (('redwhiteblue','redwhiteblue','Blue–white–red'),
-                           ('reimu26','purplegreen','Purple–green–yellow'),
-                           ('reimu27','violetgold','Violet–orange–yellow'),
-                           ('rainbow','rainbow','Rainbow'),
-                           ('rainbow_r','rainbow_r','Reversed rainbow')):
-        meaning='white=0.5, not zero' if name=='redwhiteblue' else 'no white/zero threshold is implied'
-        colors['plots'].append({'id':'palette-'+name,'kind':'heatmap','csv':'colors-map.csv','x':'x','y':'y','z':'z',
-            'synthetic':True,'title':'','cmap':cmap,'color_range':[0,1],'color_levels':256,
-            'interpolation':{'method':'bilinear','factor':4},
-            'labels':{'x':'Toy x (a.u.)','y':'Toy y (a.u.)','color':'Toy field (a.u.)'},
-            'caption':'Identical invented 9x13 grid for palette comparison; '+label+'; '+meaning+'. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution.'})
     (target/'colors.json').write_text(json.dumps(colors,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    cycles=np.arange(1,121);toy_rng=np.random.default_rng(20261004)
-    capacities=[start*(1-decay*cycles)+1.2*np.sin(cycles/8+phase)+toy_rng.normal(0,.45,len(cycles))
-                for start,decay,phase in [(160,.0014,0),(148,.002,1),(155,.0006,2)]]
-    write_csv(target/'walkthrough.csv',['cycle','capacity_a','capacity_b','capacity_c'],
-              [[format(float(v),'.17g') for v in row] for row in zip(cycles,*capacities)])
-    walkthrough={'schema_version':1,'style':{'marker':{'size_pt':2.5}},'plots':[
-        {'id':'walkthrough','kind':'line_symbol','csv':'walkthrough.csv','x':'cycle','synthetic':True,'title':'',
-         'x_range':[0,125],'y_range':[80,180],'x_tick_step':25,'y_tick_step':20,
-         'labels':{'x':'Cycle number','y':'Specific capacity (mAh g^-1)'},
-         'series':[{'column':'capacity_'+letter,'label':'Demo '+letter.upper()} for letter in 'abc'],
-         'caption':'Entirely invented 120-cycle capacity series A/B/C (360 raw plotted points). Seed 20261004; capacity=start*(1-decay*cycle)+1.2*sin(cycle/8+phase)+Gaussian noise (mean=0, SD=0.45 mAh g^-1), with (start,decay,phase)=(160,0.0014,0)/(148,0.002,1)/(155,0.0006,2). Assigned mass-specific capacity unit mAh g^-1; no active-mass, cell, current, voltage or measured cycling evidence. Raw acquisition order and every value retained; straight connections only, no smoothing, filtering, normalization, interpolation, fit or statistical inference.'}]}
-    (target/'walkthrough.json').write_text(json.dumps(walkthrough,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
 
 if __name__ == "__main__":

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "style": {
+    "marker": {
+      "size_pt": 2.5
+    }
+  },
+  "plots": [
+    {
+      "id": "cloud-horizontal",
+      "kind": "raincloud",
+      "csv": "../samples/raincloud.csv",
+      "group": "group",
+      "value": "value",
+      "order": [
+        "Group A",
+        "Group B",
+        "Group C"
+      ],
+      "synthetic": true,
+      "title": "",
+      "bandwidth": "scott",
+      "seed": 1729,
+      "labels": {
+        "x": "Observable (a.u.)",
+        "y": "Group"
+      },
+      "summary": false,
+      "cloud_support": "observed",
+      "density_scale": "width",
+      "cloud_fill": true,
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference. Point-center to cloud-edge gap0.24 group units; only display translation.",
+      "orientation": "horizontal",
+      "cloud_shape": "half",
+      "point_cloud_gap": 0.24
+    },
+    {
+      "id": "cloud-vertical",
+      "kind": "raincloud",
+      "csv": "../samples/raincloud.csv",
+      "group": "group",
+      "value": "value",
+      "order": [
+        "Group A",
+        "Group B",
+        "Group C"
+      ],
+      "synthetic": true,
+      "title": "",
+      "bandwidth": "scott",
+      "seed": 1729,
+      "cloud_shape": "half",
+      "orientation": "vertical",
+      "group_labels": {
+        "Group A": "A",
+        "Group B": "B",
+        "Group C": "C"
+      },
+      "labels": {
+        "x": "Group",
+        "y": "Observable (a.u.)"
+      },
+      "summary": false,
+      "cloud_support": "observed",
+      "density_scale": "width",
+      "cloud_fill": true,
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference. Point-center to cloud-edge gap0.24 group units; only display translation.",
+      "point_cloud_gap": 0.24
+    },
+    {
+      "id": "violin-vertical",
+      "kind": "raincloud",
+      "csv": "../samples/raincloud.csv",
+      "group": "group",
+      "value": "value",
+      "order": [
+        "Group A",
+        "Group B",
+        "Group C"
+      ],
+      "synthetic": true,
+      "title": "",
+      "bandwidth": "scott",
+      "seed": 1729,
+      "cloud_shape": "full",
+      "orientation": "vertical",
+      "group_labels": {
+        "Group A": "A",
+        "Group B": "B",
+        "Group C": "C"
+      },
+      "labels": {
+        "x": "Group",
+        "y": "Observable (a.u.)"
+      },
+      "summary": false,
+      "cloud_support": "observed",
+      "density_scale": "width",
+      "cloud_fill": true,
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference."
+    }
+  ]
+}

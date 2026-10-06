@@ -15,32 +15,46 @@ a=importlib.util.module_from_spec(loader);loader.loader.exec_module(a)
 
 
 class ReliabilityTests(unittest.TestCase):
-    def test_numeric_source_underflow_is_refused(self):
-        with self.assertRaisesRegex(ValueError,'Underflow'):
-            a.column([{'x':'1e-400'}],'x')
-        np.testing.assert_array_equal(a.column([{'x':'0e-999'},{'x':'-0'},{'x':'5e-324'}],'x'),[0,-0.,5e-324])
-
+    def test_half_cloud_gap_translates_only_group_coordinate(self):
+        rows=[{'g':'A','v':v} for v in [-2.,-.3,.4,.4,1.8]]
+        spec={'group':'g','value':'v','bandwidth':'scott','cloud_shape':'half','cloud_support':'observed','seed':77}
+        old=a.raincloud_geometry(rows,spec)[0]
+        for orientation in ('horizontal','vertical'):
+            new=a.raincloud_geometry(rows,dict(spec,point_cloud_gap=.24,orientation=orientation))[0]
+            repeat=a.raincloud_geometry(rows,dict(spec,point_cloud_gap=.24,orientation=orientation))[0]
+            for key in ('values','grid','density','cloud_top','cloud_bottom'):
+                np.testing.assert_array_equal(new[key],old[key])
+            np.testing.assert_allclose(new['jitter_y']-old['jitter_y'],.08,rtol=0,atol=3e-16)
+            np.testing.assert_array_equal(new['jitter_y'],repeat['jitter_y'])
+            self.assertTrue(np.all(new['jitter_y'] < 1.10))
+        style,_=a.STYLE.resolve(a.load_json)
+        prepared=a.prepare_plot(dict(spec,id='cloud',kind='raincloud',labels={'x':'Value','y':'Group'},point_cloud_gap=.24),rows,1,style)
+        self.assertEqual(prepared['metadata']['point_cloud_gap'],.24)
+    def test_half_cloud_gap_refuses_invalid_or_inert_settings(self):
+        rows=[{'g':'A','v':v} for v in [1.,2.,3.]]
+        spec={'group':'g','value':'v','bandwidth':'scott'}
+        for gap in [True,False,-.2,0,.05,.46,float('nan'),float('inf')]:
+            with self.subTest(gap=gap),self.assertRaises(ValueError):a.raincloud_geometry(rows,dict(spec,point_cloud_gap=gap))
+        with self.assertRaises(ValueError):a.raincloud_geometry(rows,dict(spec,cloud_shape='full',point_cloud_gap=.24))
     def test_heatmap_center_refused_before_output(self):
-        from unittest.mock import patch
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root/'map.csv').write_text('x,y,z\n0,0,1\n0,1,1\n1,0,1\n1,1,1\n')
             plot = {'id':'map','kind':'heatmap','csv':'map.csv','x':'x','y':'y','z':'z',
                     'labels':{'x':'x','y':'y','color':'z'}}
             for bounds, center in [([0,2],True),([0,2],'1'),([0,2],None),
-                                   ([1,1.0000000001],1),([1,1.0000000001],1.0000000001)]:
+                                   ([0,2],float('inf')),([1,1.0000000001],1),
+                                   ([1,1.0000000001],1.0000000001)]:
                 (root/'config.json').write_text(json.dumps({'schema_version':1,
                     'plots':[dict(plot,color_range=bounds,center=center)]}))
-                with self.subTest(center=center), patch('sys.argv',['ai2origin',str(root/'config.json'),
-                        '--out',str(root/'out'),'--backend','prepare']), self.assertRaises(ValueError):
-                    a.main()
+                with self.subTest(center=center), self.assertRaises(ValueError):
+                    a.main([str(root/'config.json'),'--out',str(root/'out'),'--backend','prepare'])
                 self.assertFalse((root/'out').exists())
             rows = a.read_csv(root/'map.csv')
-            valid = a.prepare_plot(dict(plot,color_range=[0,2],center=1),rows,1,self.style)
-            self.assertEqual(valid['metadata']['color_range'],[0,2])
+            self.assertEqual(a.prepare_plot(dict(plot,color_range=[0,2],center=1),rows,1,self.style)
+                             ['metadata']['color_range'],[0,2])
 
     def test_implicit_cloud_labels_checked_before_output(self):
-        from unittest.mock import patch
         style = {'font':{'family':'DejaVu Sans','fallback_families':[]}}
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -48,12 +62,16 @@ class ReliabilityTests(unittest.TestCase):
                 (root/'cloud.csv').write_text('g,v\n'+''.join(f'{observed},{v}\n' for v in [1,2,3]))
                 plot = dict(self.cloud,csv='cloud.csv',group_labels=labels)
                 (root/'config.json').write_text(json.dumps({'schema_version':1,'style':style,'plots':[plot]}))
-                with self.subTest(labels=labels), patch('sys.argv',['ai2origin',str(root/'config.json'),
-                        '--out',str(root/'out'),'--backend','python']), self.assertRaisesRegex(ValueError,'glyph'):
-                    a.main()
+                with self.subTest(labels=labels), self.assertRaisesRegex(ValueError,'glyph'):
+                    a.main([str(root/'config.json'),'--out',str(root/'out'),'--backend','python'])
                 self.assertFalse((root/'out').exists())
             resolved,_=a.STYLE.resolve(a.load_json,project=style)
             self.assertEqual(a.preview_font(self.cloud,[{'g':'A','v':v} for v in [1,2,3]],resolved),'DejaVu Sans')
+
+    def test_numeric_source_underflow_is_refused(self):
+        with self.assertRaisesRegex(ValueError,'Underflow'):
+            a.column([{'x':'1e-400'}],'x')
+        np.testing.assert_array_equal(a.column([{'x':'0e-999'},{'x':'-0'},{'x':'5e-324'}],'x'),[0,-0.,5e-324])
 
     def setUp(self):
         self.style,_=a.STYLE.resolve(a.load_json)

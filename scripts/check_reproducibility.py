@@ -1,13 +1,27 @@
 #!/usr/bin/env python3
 """Read-only receipt/hash, source, SVG-text and repeat-output verification."""
 import argparse
+import base64
+import csv
 import hashlib
 import json
+import struct
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
 
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def load_json(path):
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result: raise ValueError('Duplicate receipt/plan key: ' + key)
+            result[key] = value
+        return result
+    def bad(value): raise ValueError('Non-finite JSON constant: ' + value)
+    return json.loads(Path(path).read_text(encoding='utf-8-sig'), object_pairs_hook=unique, parse_constant=bad)
 
 
 def inspect(folder,config=None):
@@ -16,7 +30,7 @@ def inspect(folder,config=None):
         raise ValueError('Generation has a failure marker: '+str(folder))
     native=(folder/'native-receipt.json').is_file()
     receipt_path=folder/('native-receipt.json' if native else 'receipt.json')
-    receipt=json.loads(receipt_path.read_text(encoding='utf-8-sig'))
+    receipt=load_json(receipt_path)
     if receipt['status'] not in ('NATIVE_EXPORTED','PREPARED','PYTHON_RENDERED'):
         raise ValueError('Unaccepted generation status')
     if native!=(receipt['status']=='NATIVE_EXPORTED'):
@@ -27,7 +41,7 @@ def inspect(folder,config=None):
     if not receipt['outputs']:raise ValueError('Empty output receipt')
     for entry in receipt['outputs']:
         name=entry['name']
-        if Path(name).name!=name or name in files:raise ValueError('Unsafe or duplicate receipt output')
+        if not isinstance(name,str) or not name or '/' in name or '\\' in name or ':' in name or Path(name).name!=name or name.casefold() in {n.casefold() for n in files}:raise ValueError('Unsafe or duplicate receipt output')
         path=folder/name
         if not path.is_file() or path.is_symlink() or sha(path)!=entry['sha256'] or path.stat().st_size!=entry['bytes']:
             raise ValueError('Output hash/size mismatch: '+name)
@@ -65,19 +79,32 @@ def inspect(folder,config=None):
             raise ValueError('Saved worksheet cell counts differ')
     else:
         if 'origin-plan.json' not in files:raise ValueError('Prepared plan is not hash-bound')
-        plan=json.loads((folder/'origin-plan.json').read_text())
+        plan=load_json(folder/'origin-plan.json')
         ids=[plot['id'] for plot in plan['plots']]
         if not ids or len(set(ids))!=len(ids):raise ValueError('Empty or duplicate prepared plot inventory')
+        selected=plan.get('selected_plot_ids')
+        if selected is not None and (not isinstance(selected,list) or selected!=ids):
+            raise ValueError('Declared recipe selection differs from prepared inventory')
         for plot in plan['plots']:
             if not plot.get('books'):raise ValueError('Prepared plot has no worksheets')
             for book in plot['books']:
                 if plot['id']+'-'+book['name']+'.csv' not in files:
                     raise ValueError('Prepared worksheet CSV missing: '+book['name'])
+                if 'data_f64le' in book:
+                    raw = base64.b64decode(book['data_f64le'], validate=True)
+                    values = [0.0 if v is None else float(v) for row in book['rows'] for v in row]
+                    if raw != struct.pack('<' + 'd'*len(values), *values):
+                        raise ValueError('Exact worksheet payload differs from JSON geometry')
+                    with (folder/(plot['id']+'-'+book['name']+'.csv')).open(encoding='utf-8',newline='') as handle:
+                        table = list(csv.reader(handle, strict=True))
+                    expected = [[ '' if v is None else format(float(v),'.17g') for v in row] for row in book['rows']]
+                    if table != [book['headers']] + expected:
+                        raise ValueError('Prepared worksheet CSV differs from bound geometry')
             asset=plot.get('metadata',{}).get('colorbar_asset')
             if asset is not None and files.get(asset['name'])!=asset['sha256']:
                 raise ValueError('Prepared colorbar asset missing or changed')
         if config is not None:
-            config=Path(config).resolve();source=json.loads(config.read_text(encoding='utf-8-sig'))
+            config=Path(config).resolve();source=load_json(config)
             if sha(config)!=plan['config_sha256']:raise ValueError('Config hash mismatch')
             project_style=[v for v in plan.get('style_inputs',[]) if v['layer']=='project-file']
             if source.get('style_file'):
@@ -85,7 +112,12 @@ def inspect(folder,config=None):
                 if len(project_style)!=1 or path.name!=project_style[0]['file_name'] or sha(path)!=project_style[0]['sha256']:
                     raise ValueError('Project style-file hash mismatch')
             mapped={q['id']:q for q in source['plots']}
-            if len(mapped)!=len(source['plots']) or set(mapped)!=set(ids):
+            if len(mapped)!=len(source['plots']):raise ValueError('Duplicate source recipe IDs')
+            if selected is not None:
+                if not set(selected).issubset(mapped) or selected != [p['id'] for p in source['plots'] if p['id'] in selected]:
+                    raise ValueError('Selected recipes differ from catalog order/inventory')
+                mapped={key:mapped[key] for key in selected}
+            if set(mapped)!=set(ids):
                 raise ValueError('Config/plan plot inventory mismatch')
             for plot in plan['plots']:
                 path=config.parent/mapped[plot['id']]['csv']
@@ -105,6 +137,12 @@ def inspect(folder,config=None):
 
 
 def check(first,second=None,config=None):
+    if (Path(first)/'analysis-receipt.json').is_file():
+        import importlib.util
+        source=Path(__file__).with_name('analyze.py')
+        spec=importlib.util.spec_from_file_location('ai2origin_analysis_check',source)
+        value=importlib.util.module_from_spec(spec);spec.loader.exec_module(value)
+        return value.verify(first,second,config)
     receipt,files=inspect(first,config)
     result={'status':'PASS','files_verified':len(files),'backend':receipt['status'],
             'visual_review':'REQUIRED','scientific_validation':'NOT_CLAIMED'}

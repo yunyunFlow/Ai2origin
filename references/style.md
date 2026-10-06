@@ -8,8 +8,8 @@ workbook, sample identity, numerical result or private provenance is shipped.
 
 - White background, black axes, a clean four-sided frame, no default grid.
 - Readable axis titles/ticks; Arial for the Windows Origin examples.
-  Python requires the selected installed font and records its actual name; a real
-  local font can also be supplied without distributing it.
+  Python requires the selected installed family and records its actual file
+  hash. Missing families or glyphs fail; --font-file is also supported.
 - Red/blue/green/purple/orange/gray/pink identities; the same group keeps the same hue in
   its curve, cloud, box and observations. Colors remain editable.
 - Real observations remain visible over a transparent density/interval
@@ -36,8 +36,8 @@ native estimator and this disclosed Gaussian estimator are distinct.
 
 ## Configurable, not a universal house style
 
-Edit assets/default.json in a maintained source checkout, or preferably
-provide an override file. Do not force these defaults over an accepted template, journal
+Keep assets/default.json unchanged and provide an override file.
+Do not force these defaults over an accepted template, journal
 requirements or a scientifically meaningful color encoding. Sequential,
 diverging and cyclic color maps have different meanings; don't inherit a
 field-specific colormap into an unrelated heatmap.
@@ -49,14 +49,17 @@ file (--user-style) < project style_file (relative to config) < inline style
 < task file (--style). JSON dictionaries merge recursively, palettes replace
 as a whole, and null/unknown/unsupported settings fail explicitly. Resolved
 values and layer order are saved as style.resolved.json in the output folder.
+The legacy `fallback_families` field is retained for configuration compatibility;
+it no longer enables substitution. Select an installed family with --font or
+font.family. The immutable built-in style file is preserved.
 
 | Settings | Mapping |
 | --- | --- |
 | figure.width_mm / height_mm | Python inches=mm/25.4; Origin page.resx/resy × inches |
-| font family / sizes in pt | Exact installed family in both backends; actual font name is recorded |
+| font family / sizes in pt | Exact installed font and file hash in Python; installed family and native fsize in Origin |
 | line.width_pt / default_style | Python linewidth/linestyle; Origin -w = pt×500 and -d = 0/1/2/3 |
 | marker.size_pt | Python scatter area=pt²; Origin -z in points |
-| axes color / width_pt / tick_direction / frame | Frame, tick and label styles; exported tick length checked in Origin 2021 |
+| axes color / width_pt / tick_direction / frame | Frame, tick and label styles; actual exported tick length checked on the tested 2021 build |
 | colors.palette | Explicit series colors, no automatic palette inference |
 | series_overrides | Stable ID → color, width_pt, line_style, marker_size_pt |
 | export.raster_dpi | Python PNG DPI; Origin tr2.PNG.dotsperinch and explicit physical width |

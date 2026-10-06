@@ -1,0 +1,5 @@
+# Preserve reviewed bytes for SHA256SUMS on all platforms.
+* -text
+*.png binary
+*.opju binary
+*.opj binary

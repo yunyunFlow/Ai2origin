@@ -1,0 +1,41 @@
+name: Portable QA
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  portable:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.12']
+        profile: [core, analysis]
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      MPLBACKEND: Agg
+    steps:
+      # Official usage: github.com/actions/checkout and actions/setup-python.
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r requirements.txt
+      - name: Install optional analysis dependencies
+        if: matrix.profile == 'analysis'
+        run: python -m pip install -r requirements-analysis.txt
+      - name: Verify dependency profile
+        run: |
+          python -I -B -c "import importlib.util; present = importlib.util.find_spec('scipy') is not None; assert present == ('${{ matrix.profile }}' == 'analysis'), 'Unexpected SciPy dependency profile'"
+      - name: Discover all regressions
+        run: python -I -B -m unittest discover -s tests -p 'test_*.py'
+      - name: Core drawing and strict checker repeats
+        run: |
+          python -I -B scripts/ai2origin.py samples/demo.json --out work/ci-core-a --backend python --font "DejaVu Sans" --svg
+          python -I -B scripts/ai2origin.py samples/demo.json --out work/ci-core-b --backend python --font "DejaVu Sans" --svg
+          python -I -B scripts/check_reproducibility.py work/ci-core-a work/ci-core-b --config samples/demo.json
+      - name: Optional methods and analysis repeats
+        if: matrix.profile == 'analysis'
+        run: |
+          python -I -B scripts/analyze.py samples/analysis.json --out work/ci-analysis-a
+          python -I -B scripts/analyze.py samples/analysis.json --out work/ci-analysis-b
+          python -I -B scripts/analyze.py samples/analysis.json --check work/ci-analysis-a --repeat work/ci-analysis-b

@@ -8,16 +8,15 @@ remain available. Seven colors are a display baseline, not a significance code.
 Heatmap presets are packaged in assets/colormaps.json; no workspace dependency.
 Set a plot's cmap to one of these names:
 
-| Display name | Config name | Low → high |
+| Name | Low → high | Meaning |
 | --- | --- | --- |
-| Blue–white–red | redwhiteblue | Blue → white → red; neutral is the range midpoint |
-| Purple–green–yellow | purplegreen | Purple → blue → green → yellow-green → yellow |
-| Violet–orange–yellow | violetgold | Deep violet → purple → pink → orange → yellow |
-| Rainbow | rainbow | Violet → blue → green → yellow/orange → red |
-| Reversed rainbow | rainbow_r | Red → yellow/orange → green → blue → violet |
+| redwhiteblue | Blue → white → red | Default; neutral is the range midpoint, zero only for a symmetric range |
+| purplegreen (legacy: reimu26) | Purple → blue → green → yellow-green → yellow | Exact five stops from author color-board ramp 26 |
+| violetgold (legacy: reimu27) | Deep violet → purple → pink → orange → yellow | Exact five stops from author color-board ramp 27 |
+| rainbow | Violet → blue → green → yellow/orange → red | Matplotlib rainbow; explicit optional choice |
+| rainbow_r | Red → yellow/orange → green → blue → violet | Exact reversed sampled rainbow |
 
-The two five-color presets preserve the supplied SVG stops at 0/25/50/75/100%.
-Legacy keys reimu26/reimu27 remain exact aliases for purplegreen/violetgold.
+26/27 preserve the supplied SVG stop hex values at 0/25/50/75/100%.
 Piecewise linear RGB interpolation is sampled directly at declared levels.
 They are five-stop ramps; they are not aliases for the full viridis/plasma
 tables. The color-board SHA is bound in the registry; no original board,
@@ -32,10 +31,11 @@ Changing a palette changes the displayed colors and requires regeneration;
 it never normalizes or changes Z. Range, midpoint meaning, source nodes and
 interpolation stay declared. Redwhiteblue needs >=3 bins to retain its neutral.
 
-Run samples/colors.json for seven curves and five identical-grid map comparisons:
+Run samples/colors.json for one seven-curve color display. Heatmap palettes are
+options on the same map recipe; do not copy its data/config into five templates:
 
 ~~~sh
-python scripts/ai2origin.py samples/colors.json --out /path/to/task/colors --backend python --font "Arial"
+python scripts/ai2origin.py samples/colors.json --out /path/to/task/colors --backend python --font-file /path/to/arial.ttf
 ~~~
 
 Use the native runner on the resulting plan for Origin output. Invented

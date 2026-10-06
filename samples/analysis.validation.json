@@ -1,0 +1,3184 @@
+{
+  "version": "0.3.5",
+  "date": "2026-10-06",
+  "synthetic": true,
+  "jobs": 15,
+  "figures": 46,
+  "data_generation": "Independent assigned forward equations;return CV grid reverses the same assigned potential nodes;no measured data",
+  "analysis_config_sha256": "4df804b94938a5adb58108304210aa1c22d3104f2f00e955dc2b90039f7eca0e",
+  "analysis_script_sha256": "5239c23093610806658531f1e7be2ecc26f3122205791004e5b13b0aeedff82d",
+  "method_modules": {
+    "scripts/methods_cv.py": "d509a9d6d3aba67c02534d2af7ccf6fe53ca525c07f7259c166a5f269431c208",
+    "scripts/methods_cv_corrected.py": "f77959732bb6c263f1ee24f3b2a4503464f28c1b9704c1708c11cb52bca82c16",
+    "scripts/methods_impedance.py": "21db1c5f0299651b1bc6b1056450493f48fe5da997c168755a5aa5d6c585ba6a",
+    "scripts/methods_spectra.py": "4e633ca99a616a87f32129c0f7ca58e951645fd4e799f7a61981088cbcb9fc3d",
+    "scripts/methods_tafel.py": "19dcf147b7023914a18dc761ba0a6e295ab651351c1c28bd162d2907f2e10511"
+  },
+  "native_generation": "0.3.5",
+  "native_accepted_preparer_sha256": "bcbc357ad112328016f4c37c573ca0bc456cd3e16d7b7b9318e5dd5c121087d9",
+  "native_accepted_plan_sha256": "7ceb8b8045b210143687d0a78bc23c56cfe72a7a668e4e8f10803034d1e94a88",
+  "native_runner_sha256": "288514595c252c0fa6969f25e8e73c67c4b692dd61121f10d3cd897a3ded6942",
+  "native_project_sha256": "be2de539521cffb3e8caca9c1f0a7330ed5f98e95f478ceedc955cddbfd4155f",
+  "origin_version": "9.8.0",
+  "font": {
+    "family": "Arial",
+    "fallback_families": [
+      "Liberation Sans",
+      "DejaVu Sans"
+    ],
+    "tick_size_pt": 10.0,
+    "axis_title_size_pt": 12.0,
+    "legend_size_pt": 8,
+    "title_size_pt": 12.0,
+    "annotation_size_pt": 8.0
+  },
+  "installed_dependency_versions": {
+    "python": "3.11.15",
+    "numpy": "2.4.3",
+    "scipy": "1.17.1"
+  },
+  "exact_numeric_readback_cells": 58364,
+  "saved_project_reopen": "PASS_ALL46",
+  "per_graph_independent_repeat": "TWO_FULL46_SESSIONS_RGB_IDENTICAL",
+  "python46_png_svg_repeat": "BYTE_IDENTICAL",
+  "source_analysis_repeat": "BYTE_IDENTICAL",
+  "visual_review": "PASS_ALL46_COMPLETE_SHEETS_AND_ORIGINAL_CV_MAP",
+  "scientific_applicability": "NOT_CLAIMED_SYNTHETIC",
+  "cv_map_layout": "F upper,R lower;categorical positive rates;shared symmetric signed range;no cross-category interpolation;exact nodes retained",
+  "plots": [
+    {
+      "id": "cv-cv",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 402,
+        "display_text": [
+          "Potential (V)",
+          "Current (mA)",
+          "",
+          "0.2 mV s^-1",
+          "0.4 mV s^-1",
+          "0.6 mV s^-1",
+          "0.8 mV s^-1",
+          "1 mV s^-1",
+          "2 mV s^-1"
+        ],
+        "caption": "Source branches concatenated in declared order, including shared endpoint observations. No closure forced. Conditional empirical linear/sqrt scan-rate fractions; not mechanism or Cdl proof. Plot-unit conversion only; SI arrays retained in results.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 17343,
+            "lower left": 17367
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          },
+          {
+            "column": "y4",
+            "offset": 0.0
+          },
+          {
+            "column": "y5",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "0.2 mV s^-1",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "0.4 mV s^-1",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "0.6 mV s^-1",
+            "color": "#1B9E77",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "0.8 mV s^-1",
+            "color": "#7560A8",
+            "kind": "line"
+          },
+          {
+            "x": "x4",
+            "column": "y4",
+            "label": "1 mV s^-1",
+            "color": "#E4872A",
+            "kind": "line"
+          },
+          {
+            "x": "x5",
+            "column": "y5",
+            "label": "2 mV s^-1",
+            "color": "#737373",
+            "kind": "line"
+          }
+        ],
+        "source_name": "cv-cv.csv",
+        "source_sha256": "26cba4abc1d755dbf21385fac32f803757dec8c613f20793a0c9d135ac96c06d",
+        "synthetic": true
+      },
+      "plot_sha256": "6f8b7221be6c9e9dfe1ca418c32b91cb29dcd9a0986dbdb1c7f8f9e88b0c4c65",
+      "native_png_sha256": "534213b7089fdb69357b022590d0151cb1dfb9311f7fc2d9dc6c35d8f98a96d9"
+    },
+    {
+      "id": "cv-map",
+      "kind": "heatmap",
+      "synthetic": true,
+      "metadata": {
+        "kind": "heatmap",
+        "row_count": 2412,
+        "display_text": [
+          "Potential (V)",
+          "Branch / scan rate (mV s^-1)",
+          "Current (mA)",
+          "",
+          "R:2",
+          "R:1",
+          "R:0.8",
+          "R:0.6",
+          "R:0.4",
+          "R:0.2",
+          "F:0.2",
+          "F:0.4",
+          "F:0.6",
+          "F:0.8",
+          "F:1",
+          "F:2"
+        ],
+        "caption": "Upper block F=first declared sweep; lower block R=return sweep. F potential increases. Rows are categorical, labeled with actual positive scan rates. Return coordinates are reversed only for display alignment; acquisition arrays remain untouched. No interpolation across branches or rate categories; shared signed color range centered at zero. Source branches concatenated in declared order, including shared endpoint observations. No closure forced. Conditional empirical linear/sqrt scan-rate fractions; not mechanism or Cdl proof.",
+        "category_y_labels": [
+          "R:2",
+          "R:1",
+          "R:0.8",
+          "R:0.6",
+          "R:0.4",
+          "R:0.2",
+          "F:0.2",
+          "F:0.4",
+          "F:0.6",
+          "F:0.8",
+          "F:1",
+          "F:2"
+        ],
+        "category_y_positions": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0,
+          9.0,
+          10.0,
+          11.0
+        ],
+        "grid_shape": [
+          12,
+          201
+        ],
+        "matrix_orientation": "rows=Y, columns=X",
+        "source_grid_shape": [
+          12,
+          201
+        ],
+        "color_levels": 256,
+        "aggregation": "none",
+        "interpolation": "none",
+        "color_range": [
+          -0.05372298397744374,
+          0.05372298397744374
+        ],
+        "cmap": "redwhiteblue",
+        "colormaps_sha256": "4cb8235cd38eb4475ed69f6537585609b093646fd0d69ddba8d4c5b109bde3c8",
+        "colorbar_labels": [
+          "-0.0537",
+          "-0.0269",
+          "0",
+          "0.0269",
+          "0.0537"
+        ],
+        "colorbar": "embedded palette bitmap + editable labels",
+        "source_name": "cv-map.csv",
+        "source_sha256": "a178191b27191fea62bdfec8859973345cae2eed997c987e687ef66b4a7c1eab",
+        "synthetic": true,
+        "colorbar_asset": {
+          "name": "cv-map-colorbar.png",
+          "sha256": "14ad0ff1bf71907a845676f2821d1442de2f4ddd706ac4c3344ea6f22ab36105"
+        }
+      },
+      "plot_sha256": "ef955573d450f20722f94182a1989c6c21efa2e1afa30d9b73e819f7f2139d13",
+      "native_png_sha256": "6dc6478224300a0f02bb432489390cfa6859dab4956c90937257d55aafd36fee"
+    },
+    {
+      "id": "cv-components-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 402,
+        "display_text": [
+          "Potential (V)",
+          "Current (mA)",
+          "",
+          "Observed",
+          "ν term",
+          "√ν term",
+          "Reconstructed"
+        ],
+        "caption": "Signed empirical components; no clipping or component sign inversion. Source branches concatenated in declared order, including shared endpoint observations. No closure forced. Conditional empirical linear/sqrt scan-rate fractions; not mechanism or Cdl proof.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 2202,
+            "lower left": 2202
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed",
+            "color": "#737373",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "ν term",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "√ν term",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "Reconstructed",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "source_name": "cv-components-0.csv",
+        "source_sha256": "51990460b4cfd7f915bb2aa18951b26568bf5e3bec944465b493d3ccd533d82b",
+        "synthetic": true
+      },
+      "plot_sha256": "68348e8cf68d87d6eeb7273e64e158d680a0e5591a49c9fca728ef04dccfdd94",
+      "native_png_sha256": "88616d3cfefea130db3132aa7375b6c2688bf5e610f19a92e648fb51a883ccfa"
+    },
+    {
+      "id": "cv-residual-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 402,
+        "display_text": [
+          "Potential (V)",
+          "Residual (mA)",
+          "",
+          "Observed - model"
+        ],
+        "caption": "Source branches concatenated in declared order, including shared endpoint observations. No closure forced. Conditional empirical linear/sqrt scan-rate fractions; not mechanism or Cdl proof.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 34,
+            "lower left": 34
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed - model",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "cv-residual-0.csv",
+        "source_sha256": "8c453c07cecbd4ad66a685241e86d4aded371c4403dd067d3d3a270f302b1745",
+        "synthetic": true
+      },
+      "plot_sha256": "1f1483ea08434bc3ef6627904be4c177dfce540970f90bddb3083dd230b3f5ec",
+      "native_png_sha256": "b48c4a29de9f96f5599e1202d1317ee7cf399b00e6261389ec1b9eb69b86f335"
+    },
+    {
+      "id": "cv-components-4",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 402,
+        "display_text": [
+          "Potential (V)",
+          "Current (mA)",
+          "",
+          "Observed",
+          "ν term",
+          "√ν term",
+          "Reconstructed"
+        ],
+        "caption": "Signed empirical components; no clipping or component sign inversion. Source branches concatenated in declared order, including shared endpoint observations. No closure forced. Conditional empirical linear/sqrt scan-rate fractions; not mechanism or Cdl proof.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 2802,
+            "lower left": 2802
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed",
+            "color": "#737373",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "ν term",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "√ν term",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "Reconstructed",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "source_name": "cv-components-4.csv",
+        "source_sha256": "879da44dbdfefd78029b57eb0da6f0f4bb0beaba63ba20888938ef6f318e5637",
+        "synthetic": true
+      },
+      "plot_sha256": "2114132bb8dea8c58a371c27cd53ae797482e4c4482c7c34dd112c03b57a5443",
+      "native_png_sha256": "7638f830b8672cada92be4ce37b5873003df9ce7b7475e9c24390bae99be9372"
+    },
+    {
+      "id": "cv-residual-4",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 402,
+        "display_text": [
+          "Potential (V)",
+          "Residual (mA)",
+          "",
+          "Observed - model"
+        ],
+        "caption": "Source branches concatenated in declared order, including shared endpoint observations. No closure forced. Conditional empirical linear/sqrt scan-rate fractions; not mechanism or Cdl proof.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 31,
+            "lower left": 31
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed - model",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "cv-residual-4.csv",
+        "source_sha256": "6e965f39396c7a0ae5f8a0aa040e5bf92ef2372c8936621f38ad71f30cb09c5e",
+        "synthetic": true
+      },
+      "plot_sha256": "621ab59209b208270925640e4e2fbf25b3baba3be017e331f7a28e17469e51d3",
+      "native_png_sha256": "fb39905cc6018415b30a4531d1aff31bc65909902672a56db69fed55466c3d72"
+    },
+    {
+      "id": "cv-fractions",
+      "kind": "bar",
+      "synthetic": true,
+      "metadata": {
+        "kind": "bar",
+        "row_count": 6,
+        "display_text": [
+          "Scan rate (mV s^-1)",
+          "Model fraction (percent)",
+          "",
+          "ν term",
+          "√ν term",
+          "0.2",
+          "0.4",
+          "0.6",
+          "0.8",
+          "1",
+          "2"
+        ],
+        "caption": "100*integral(abs(component) dt)/integral(abs(reconstructed) dt), after residual/opposition QC; actual labelled categories, conditional empirical shares, not identified mechanisms.",
+        "series": [
+          {
+            "column": "linear",
+            "label": "ν term",
+            "color": "#B2182B"
+          },
+          {
+            "column": "sqrt",
+            "label": "√ν term",
+            "color": "#2166AC"
+          }
+        ],
+        "category_labels": [
+          "0.2",
+          "0.4",
+          "0.6",
+          "0.8",
+          "1",
+          "2"
+        ],
+        "category_positions": [
+          0.0,
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "stacked": true,
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 0
+          }
+        },
+        "source_name": "cv-fractions.csv",
+        "source_sha256": "ed2a90a4f5f937d1d55fb7dc9d42cd2e3fb4ac390287b0974da243b3e18fec23",
+        "synthetic": true
+      },
+      "plot_sha256": "60c4da1628e6f50f63ad1107d0d356ccc82026f18a36a96c92e990a3a277f1fd",
+      "native_png_sha256": "87afce0848968a0213e462ec4f25bc82ed6bc7f6791206a183cb58baa0b37778"
+    },
+    {
+      "id": "peaks-sqrt-rate",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 6,
+        "display_text": [
+          "√ν (V^0.5 s^-0.5)",
+          "|Peak current| (A)",
+          "",
+          "Raw peaks",
+          "OLS"
+        ],
+        "caption": "Descriptive peak-magnitude fit with free intercept; no solid-electrode diffusivity inference.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 41
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Raw peaks",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "OLS",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "peaks-sqrt-rate.csv",
+        "source_sha256": "e57fb2556315071cccde6e88abe8bfac4e9f77ab249c215048524fa0dfcacb47",
+        "synthetic": true
+      },
+      "plot_sha256": "3d015756e158db2d54b015b6c840c78d44cf153c44503678cf873fcecebf19c4",
+      "native_png_sha256": "5294728f94affcf7a4b81cdc1831199978984dd1b8a2bf62ab008c4dd6b19279"
+    },
+    {
+      "id": "peaks-b-value",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 6,
+        "display_text": [
+          "log10[ν/(V s^-1)]",
+          "log10[|I_p|/A]",
+          "",
+          "Raw peaks",
+          "OLS"
+        ],
+        "caption": "Descriptive b exponent; logarithms use explicit reference units.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 23
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Raw peaks",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "OLS",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "peaks-b-value.csv",
+        "source_sha256": "33a0423aa8243af72109f9edaf87a23c685a4217062e074847a110329e3c6fcc",
+        "synthetic": true
+      },
+      "plot_sha256": "e8ddf3e08d0b6986df96238ea0e0f49ddab64ad28631bcb76a9bdd5df985c85b",
+      "native_png_sha256": "2d9c04bd13993d109fff5047435cfb07e5f650132000f48d0336b42f71d9240a"
+    },
+    {
+      "id": "cdl-cdl",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 6,
+        "display_text": [
+          "Scan rate (mV s^-1)",
+          "Half current difference (mA)",
+          "",
+          "(I_a - I_c)/2",
+          "OLS"
+        ],
+        "caption": "Plot converts V/s and A to mV/s and mA only; fit retains SI. Explicit nonfaradaic node/window and condition declarations; conditional apparent capacitance; no automatic ECSA.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 54
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "(I_a - I_c)/2",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "OLS",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "cdl-cdl.csv",
+        "source_sha256": "3d00134c4ae0c918f34a2c1aa22a126541f293a801c093e2344da49625464553",
+        "synthetic": true
+      },
+      "plot_sha256": "b341190da61160d22bd99c18df47d1b6d3c8de779cb3c7fe04310e513429e086",
+      "native_png_sha256": "164a23989296898ecc09b15670b48ed51f02d0b6a6665423a9fae7ae557d8a7a"
+    },
+    {
+      "id": "gitt-pulse-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 121,
+        "display_text": [
+          "Time (s)",
+          "Potential (V)",
+          "",
+          "Recorded pulse"
+        ],
+        "caption": "Every recorded pulse node; no iR subtraction or smoothing.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 6
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded pulse",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "gitt-pulse-0.csv",
+        "source_sha256": "8c028e3210f59ec1951922d3beb56e19739c523fd84555bc8bf7bdfe264a4604",
+        "synthetic": true
+      },
+      "plot_sha256": "25ba368b952e988153620c89d221e27bd73603ec02da8c36f64f9bf8c1a7e3a6",
+      "native_png_sha256": "5e157fda9657759badde4091112060a85a04810faa2bf956ea75d98a42f093fc"
+    },
+    {
+      "id": "gitt-window-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 31,
+        "display_text": [
+          "√t (s^0.5)",
+          "E - E_first selected (mV)",
+          "",
+          "Selected observations",
+          "OLS"
+        ],
+        "caption": "Display subtracts the first selected potential and converts V to mV. E vs sqrt(t) slope fit uses original V; intercept excluded from delta E_tau; all raw nodes retained separately.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 74,
+            "lower left": 146
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Selected observations",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "OLS",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "gitt-window-0.csv",
+        "source_sha256": "357b027b19f3349f929570a5438947a8bdd2f5055fc3f45ec9bf1b1e59f9b2c9",
+        "synthetic": true
+      },
+      "plot_sha256": "8d6474804c5445f790fe97e87260ab26b7a544c1c7ba06ba81a1b448d6e6f7e9",
+      "native_png_sha256": "3a1e60b57f20a5e11f3e249a9eea992b99288c1efec4a75cec8f89600709c893"
+    },
+    {
+      "id": "gitt-pulse-1",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 121,
+        "display_text": [
+          "Time (s)",
+          "Potential (V)",
+          "",
+          "Recorded pulse"
+        ],
+        "caption": "Every recorded pulse node; no iR subtraction or smoothing.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 6
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded pulse",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "gitt-pulse-1.csv",
+        "source_sha256": "4b0497cfeb0972fc4fc7aa26a4c73d88a81fa8319de617dde2f77c266b4460df",
+        "synthetic": true
+      },
+      "plot_sha256": "e120d49bec9e9631c22e94b9a6b951a2febc687cc3a90c4f7fd8ca7bebdf0815",
+      "native_png_sha256": "698797e2ebc375a98640e84fd60b0df1649a5d6fc00ade6a46f500205aa4b8ad"
+    },
+    {
+      "id": "gitt-window-1",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 31,
+        "display_text": [
+          "√t (s^0.5)",
+          "E - E_first selected (mV)",
+          "",
+          "Selected observations",
+          "OLS"
+        ],
+        "caption": "Display subtracts the first selected potential and converts V to mV. E vs sqrt(t) slope fit uses original V; intercept excluded from delta E_tau; all raw nodes retained separately.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 74,
+            "lower left": 146
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Selected observations",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "OLS",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "gitt-window-1.csv",
+        "source_sha256": "8cccaeedfc73671824734774c541ce9d876e6c99f57b468dd5e652a47bad7a07",
+        "synthetic": true
+      },
+      "plot_sha256": "c0d10975d6fd500a44a263708ac81e8c9845bd83436b3a69f6dca4992d8191b1",
+      "native_png_sha256": "6ca2b8ff45c2e1b6f0ac36e242229b0ded0dd9aa543cb792cdbc01a897332343"
+    },
+    {
+      "id": "gitt-pulse-2",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 121,
+        "display_text": [
+          "Time (s)",
+          "Potential (V)",
+          "",
+          "Recorded pulse"
+        ],
+        "caption": "Every recorded pulse node; no iR subtraction or smoothing.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 6
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded pulse",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "gitt-pulse-2.csv",
+        "source_sha256": "c92193f828d63eb25c2dada3b085ff11659f1f658359510d7fdc437743544505",
+        "synthetic": true
+      },
+      "plot_sha256": "23bc4328d3f524fa72f6aaf09ec96a023c259eb0deff0302513dc7b04427d39b",
+      "native_png_sha256": "a13c69901bedde86490e50e6fe19468ce2cd215dc399d56db6041ebbdae53341"
+    },
+    {
+      "id": "gitt-window-2",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 31,
+        "display_text": [
+          "√t (s^0.5)",
+          "E - E_first selected (mV)",
+          "",
+          "Selected observations",
+          "OLS"
+        ],
+        "caption": "Display subtracts the first selected potential and converts V to mV. E vs sqrt(t) slope fit uses original V; intercept excluded from delta E_tau; all raw nodes retained separately.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 74,
+            "lower left": 146
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Selected observations",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "OLS",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "gitt-window-2.csv",
+        "source_sha256": "900f3e5ebf3bed93e1b67c4fab4a8b47047fa806c4a7be5bf83b422762c656a7",
+        "synthetic": true
+      },
+      "plot_sha256": "98a808d56bc56b77058ac31ce11be91273c9e329394c1484d146c6b89a62584b",
+      "native_png_sha256": "c12ca4e54ec9c5ee1fbf419f179ac471572174fa6fb5e8533e4019f505095c0c"
+    },
+    {
+      "id": "gitt-diffusivity",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 3,
+        "display_text": [
+          "Assigned SOC (percent)",
+          "D (m^2 s^-1)",
+          "",
+          "Conditional D"
+        ],
+        "caption": "Only explicitly accepted short-time model diagnostics shown; held pulse IDs and all candidates remain in results.json.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 0
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Conditional D",
+            "color": "#B2182B",
+            "kind": "line_symbol"
+          }
+        ],
+        "y_scale": "log10",
+        "y_range": [
+          1e-15,
+          1e-13
+        ],
+        "source_name": "gitt-diffusivity.csv",
+        "source_sha256": "26c941293af6c07feeadfe09fbd0179caf3636fc98dd9f78501df7ffbdea7f0d",
+        "synthetic": true
+      },
+      "plot_sha256": "83069f03a5f935f30082669262f5df0b8af6be26f59cc53f7e0ae5f0a63d4c68",
+      "native_png_sha256": "836cbb27ab6cb2aee6d9376841162df01dbe9909fa4b75e4c13da599da29d416"
+    },
+    {
+      "id": "ica-ica",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 100,
+        "display_text": [
+          "Potential (V)",
+          "dQ/dV (mAh V^-1)",
+          "",
+          "Finite-volume ICA"
+        ],
+        "caption": "Adjacent-node finite-volume derivative; signed supplied capacity convention, no smoothing. Integral closes to original capacity change.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 389,
+            "lower left": 389
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Finite-volume ICA",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "ica-ica.csv",
+        "source_sha256": "c89f5d277ce2355402142ac51ae9b342f89d0ce4a3efe04c39e3cc2f89ffe875",
+        "synthetic": true
+      },
+      "plot_sha256": "d01c4235e083087e7cf3d094e276d09fb2da04c1cc329375bbec3d40f6cdb029",
+      "native_png_sha256": "63241359a4e2a54f7859a37e6a7e89efc78c59edeb8a6c48307e6004bb2e7055"
+    },
+    {
+      "id": "ica-dva",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 100,
+        "display_text": [
+          "Capacity (mAh)",
+          "dV/dQ (V mAh^-1)",
+          "",
+          "Finite-volume DVA"
+        ],
+        "caption": "Reciprocal interval derivative; repeats/turns refused, no averaging or deleted observations.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 93,
+            "lower left": 93
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Finite-volume DVA",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "ica-dva.csv",
+        "source_sha256": "b67f6655556242a0ba2703d431d1cb9d2fa4adc977c40223f813e80df9f9d417",
+        "synthetic": true
+      },
+      "plot_sha256": "f652437b6d7a7324e3295a38a28a38f3dd5f1d7ba76147982d4ab5b3b7596b10",
+      "native_png_sha256": "8d539e2563b0f610e1acdbadb45d68e8fcb3cca486249f209fd512ef8fb58c86"
+    },
+    {
+      "id": "tafel-lsv",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 61,
+        "display_text": [
+          "Supplied potential (V)",
+          "Current (A cm^-2)",
+          "",
+          "Recorded LSV"
+        ],
+        "caption": "Raw supplied reference/current units and every node retained.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 160,
+            "lower left": 322
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded LSV",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "tafel-lsv.csv",
+        "source_sha256": "acaeb74530f34ab6df64884c88b990582c210443544c2e7b998e780d2bc64b55",
+        "synthetic": true
+      },
+      "plot_sha256": "1f440f2c57bc6df1233309a9f48520eaf2afeb45f9d00be3c5bf719c4198310f",
+      "native_png_sha256": "e167e7c213f7b7aa5ad9c26948f82c279d6cce7ad745694fc0785148db913779"
+    },
+    {
+      "id": "tafel-tafel",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 61,
+        "display_text": [
+          "log10[|j| / (1.0 A cm^-2)]",
+          "Overpotential (V)",
+          "",
+          "Selected observations",
+          "OLS"
+        ],
+        "caption": "Apparent selected-window Tafel slope; Apparent slope of an explicitly selected branch/window only. R2, local linearity and declared assumptions do not prove steady-state charge-transfer kinetics or identify an elementary step.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 176,
+            "lower left": 368
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Selected observations",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "OLS",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "tafel-tafel.csv",
+        "source_sha256": "93fcd1a3fdee986af14b7f4a39f9fa0e94e29500a5aad09971571d712ececd03",
+        "synthetic": true
+      },
+      "plot_sha256": "ddb2e754e50b08cdd5c3f0520f84a3c8cc26bf52e0578714094c0065688f8102",
+      "native_png_sha256": "321ff091bf48c5b51425d97dc988839390e2a3d4cbd9d2699898ebfb9c60171c"
+    },
+    {
+      "id": "eis-nyquist-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Re(Z) (Ω)",
+          "-Im(Z) (Ω)",
+          "",
+          "Recorded",
+          "Model"
+        ],
+        "caption": "Equal physical axes; model elements/relaxations unassigned; KK validation not performed.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 362,
+            "lower left": 802
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Model",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "eis-nyquist-0.csv",
+        "source_sha256": "e4f29b9fb400484edfeeef4fb89778d4b70ea158e16fce7817085648d36bd775",
+        "synthetic": true
+      },
+      "plot_sha256": "1eba89d4bfc730293ac45c8b2999e1df48e9ca6e3fce748a5e845314d91888ac",
+      "native_png_sha256": "65cf181bff1b04ac1dcf9ee679bd3ecce225f29646318b0312993f20ff8750e6"
+    },
+    {
+      "id": "eis-residual-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Frequency (Hz)",
+          "Model - recorded (Ω)",
+          "",
+          "Real residual",
+          "Imaginary residual"
+        ],
+        "caption": "Signed residuals of every supplied frequency; no point removal.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 269,
+            "lower left": 353
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Real residual",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Imaginary residual",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "x_scale": "log10",
+        "x_range": [
+          1e-06,
+          1000.0
+        ],
+        "source_name": "eis-residual-0.csv",
+        "source_sha256": "4bdcedf3b55706ba0dc10da4654bda3b8e878a523633dd05c4ba5c02c7979a2a",
+        "synthetic": true
+      },
+      "plot_sha256": "d73b3abecb495002970fdd83a720b83d831ac9aeb2d4c12288d7dbadb2d3f973",
+      "native_png_sha256": "ae455c1b9acbf73a543cdfced016c20011a07572ffa6b00d8004fdbb3c8e0bd4"
+    },
+    {
+      "id": "drt-nyquist-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Re(Z) (Ω)",
+          "-Im(Z) (Ω)",
+          "",
+          "Recorded",
+          "Model"
+        ],
+        "caption": "Equal physical axes; model elements/relaxations unassigned; KK validation not performed.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 367,
+            "lower left": 799
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Model",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "drt-nyquist-0.csv",
+        "source_sha256": "3c60fc66eb083b6ee6f73c75c9db98d0bf3d30246df5141c5aac378bc0277eba",
+        "synthetic": true
+      },
+      "plot_sha256": "0c1f32e4d129ffdf1f440b2b429feb1115b6d8a7eee2e7688b65d576d7fde8f0",
+      "native_png_sha256": "7c09214e85b3990b0e68ca0bd292ffe503ad0c3738b607ddd60dd15e32fb67e4"
+    },
+    {
+      "id": "drt-residual-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Frequency (Hz)",
+          "Model - recorded (Ω)",
+          "",
+          "Real residual",
+          "Imaginary residual"
+        ],
+        "caption": "Signed residuals of every supplied frequency; no point removal.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 58,
+            "lower left": 114
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Real residual",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Imaginary residual",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "x_scale": "log10",
+        "x_range": [
+          1e-06,
+          1000.0
+        ],
+        "source_name": "drt-residual-0.csv",
+        "source_sha256": "f2dabde7a780b49decd046e83e4f43db4b760c37698a4cfd70c7601f62a8944f",
+        "synthetic": true
+      },
+      "plot_sha256": "ae736f82c4f7b0ac58c6cdb02e13058e35b425e1f9e985f0d7d4ff2d88fbb225",
+      "native_png_sha256": "5ab57c34e5633fa2ebff97835253b5c8561387dddc32f191f91f37ece15fdce8"
+    },
+    {
+      "id": "drt-drt-0",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 65,
+        "display_text": [
+          "Relaxation time, τ (s)",
+          "γ(ln τ) (Ω)",
+          "",
+          "λ = 1e-05",
+          "λ = 0.0001",
+          "λ = 0.001"
+        ],
+        "caption": "Nonnegative RC-kernel DRT per natural-log time; all explicitly supplied lambdas retained; no automatic selection or chemical assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 761,
+            "lower left": 831
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "λ = 1e-05",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "λ = 0.0001",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "λ = 0.001",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "x_scale": "log10",
+        "x_range": [
+          0.001,
+          100000.0
+        ],
+        "source_name": "drt-drt-0.csv",
+        "source_sha256": "1b378a216e32bd34ef316ab29488aadba63874b1f7f4052548d7ed0dedc25143",
+        "synthetic": true
+      },
+      "plot_sha256": "6e8a12e40c50593018050897086d2422f51416087cb733a7cfe064e8ec8deb2d",
+      "native_png_sha256": "bb5c669e1b3328d30fd32d0a4728fee7f733442d812413323aa194b7a85924bc"
+    },
+    {
+      "id": "drt-nyquist-1",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Re(Z) (Ω)",
+          "-Im(Z) (Ω)",
+          "",
+          "Recorded",
+          "Model"
+        ],
+        "caption": "Equal physical axes; model elements/relaxations unassigned; KK validation not performed.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 413,
+            "lower left": 735
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Model",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "drt-nyquist-1.csv",
+        "source_sha256": "b8f191bc9704b55fe94c0d8567852384d185a64fbcaed57e07ad0781b7f56801",
+        "synthetic": true
+      },
+      "plot_sha256": "d78eefddfc4a85e7f36be7d67c6ae036b926cfc1f227c022fedbc06ebaa0c8d0",
+      "native_png_sha256": "ed56e35327197f38b02b66b4c00fb8d8eb3b5454505c41c80d9c85a25e89cc10"
+    },
+    {
+      "id": "drt-residual-1",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Frequency (Hz)",
+          "Model - recorded (Ω)",
+          "",
+          "Real residual",
+          "Imaginary residual"
+        ],
+        "caption": "Signed residuals of every supplied frequency; no point removal.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 89,
+            "lower left": 136
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Real residual",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Imaginary residual",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "x_scale": "log10",
+        "x_range": [
+          1e-06,
+          1000.0
+        ],
+        "source_name": "drt-residual-1.csv",
+        "source_sha256": "4ae19aec5cc1c4f31be0fbbe8de0f18ae53d08d35c99300e41a767b332e10ac0",
+        "synthetic": true
+      },
+      "plot_sha256": "465ea27434549ae582d6efe4c039b887f2d12d4c37bec39ff18a492261a0dd52",
+      "native_png_sha256": "7d67cf5db0515abbe6aa6e8e5d185508d6ccb078af8754c484dc65e97d87a8af"
+    },
+    {
+      "id": "drt-drt-1",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 65,
+        "display_text": [
+          "Relaxation time, τ (s)",
+          "γ(ln τ) (Ω)",
+          "",
+          "λ = 1e-05",
+          "λ = 0.0001",
+          "λ = 0.001"
+        ],
+        "caption": "Nonnegative RC-kernel DRT per natural-log time; all explicitly supplied lambdas retained; no automatic selection or chemical assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 764,
+            "lower left": 793
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "λ = 1e-05",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "λ = 0.0001",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "λ = 0.001",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "x_scale": "log10",
+        "x_range": [
+          0.001,
+          100000.0
+        ],
+        "source_name": "drt-drt-1.csv",
+        "source_sha256": "3375caee26a6fa2582a23c49a6a321a34534064c813e5c89f4e3cb7ffd3073a3",
+        "synthetic": true
+      },
+      "plot_sha256": "856f831d0f29f0cebf02f23fb96ab1b7c6c0733098b503a779d1b35b163cba68",
+      "native_png_sha256": "1065bb7059e280d9eacdca260dbe50d8a9fc346cc00298efea22dcd1b04a0bcd"
+    },
+    {
+      "id": "drt-nyquist-2",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Re(Z) (Ω)",
+          "-Im(Z) (Ω)",
+          "",
+          "Recorded",
+          "Model"
+        ],
+        "caption": "Equal physical axes; model elements/relaxations unassigned; KK validation not performed.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 471,
+            "lower left": 355
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded",
+            "color": "#B2182B",
+            "kind": "scatter"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Model",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "source_name": "drt-nyquist-2.csv",
+        "source_sha256": "edbc8abb9bce437a1575117fb4650c17754e0c6070dbb7d2272c9c872f49d600",
+        "synthetic": true
+      },
+      "plot_sha256": "4efb9fb7caa38aa06a9b3a5d0429f51ba312cdcdead1161bb22869a5de35932e",
+      "native_png_sha256": "a22583638daa0eed8bd1f21102cbe30f8d4db180c30d0b7a8486d517090d80d7"
+    },
+    {
+      "id": "drt-residual-2",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 71,
+        "display_text": [
+          "Frequency (Hz)",
+          "Model - recorded (Ω)",
+          "",
+          "Real residual",
+          "Imaginary residual"
+        ],
+        "caption": "Signed residuals of every supplied frequency; no point removal.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 152,
+            "lower left": 194
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Real residual",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Imaginary residual",
+            "color": "#2166AC",
+            "kind": "line"
+          }
+        ],
+        "x_scale": "log10",
+        "x_range": [
+          1e-06,
+          1000.0
+        ],
+        "source_name": "drt-residual-2.csv",
+        "source_sha256": "c7c449d781ff9d15fc7f5cacb2d380cb3f318f1920ca1848926ce85b336ffa46",
+        "synthetic": true
+      },
+      "plot_sha256": "fc9c7d5b42be07c12a93a192c2f62d85e3f699fe81f90ed5c42c5363eacbabfd",
+      "native_png_sha256": "9f318944b47d1b09888eece964bada2fb9a2379850623e33631e37ccb68b73fa"
+    },
+    {
+      "id": "drt-drt-2",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 65,
+        "display_text": [
+          "Relaxation time, τ (s)",
+          "γ(ln τ) (Ω)",
+          "",
+          "λ = 1e-05",
+          "λ = 0.0001",
+          "λ = 0.001"
+        ],
+        "caption": "Nonnegative RC-kernel DRT per natural-log time; all explicitly supplied lambdas retained; no automatic selection or chemical assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 804,
+            "lower left": 776
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "λ = 1e-05",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "λ = 0.0001",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "λ = 0.001",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "x_scale": "log10",
+        "x_range": [
+          0.001,
+          100000.0
+        ],
+        "source_name": "drt-drt-2.csv",
+        "source_sha256": "8dfb31df1d0500c2d7acb4d04a559e316b1fe64b3770c30e59141d5f5f2b8d0f",
+        "synthetic": true
+      },
+      "plot_sha256": "f4962fa261dc28df86434551f3c607cfa149a13d7fb4e1c5528c98e9339e5e93",
+      "native_png_sha256": "79441e1fbccc5122287d2ba91c4110508bc10fa5ca03cd35b5cd5fc165eefeca"
+    },
+    {
+      "id": "drt-map",
+      "kind": "heatmap",
+      "synthetic": true,
+      "metadata": {
+        "kind": "heatmap",
+        "row_count": 195,
+        "display_text": [
+          "Relaxation time, τ (s)",
+          "Assigned condition (a.u.)",
+          "γ(ln τ) (Ω)",
+          ""
+        ],
+        "caption": "Same kernel/grid/weighting/lambda across supplied conditions. Display-only factor-8 bilinear interpolation in log10(tau), condition; raw nodes unchanged. White is the intensity-range midpoint.",
+        "grid_shape": [
+          17,
+          513
+        ],
+        "matrix_orientation": "rows=Y, columns=X",
+        "source_grid_shape": [
+          3,
+          65
+        ],
+        "color_levels": 256,
+        "aggregation": "none",
+        "interpolation": "bilinear factor=8 in log10(x),y",
+        "color_range": [
+          0.0,
+          20.87505839571248
+        ],
+        "cmap": "redwhiteblue",
+        "colormaps_sha256": "4cb8235cd38eb4475ed69f6537585609b093646fd0d69ddba8d4c5b109bde3c8",
+        "colorbar_labels": [
+          "0",
+          "5.22",
+          "10.4",
+          "15.7",
+          "20.9"
+        ],
+        "colorbar": "embedded palette bitmap + editable labels",
+        "x_scale": "log10",
+        "x_range": [
+          0.001,
+          100000.0
+        ],
+        "source_name": "drt-map.csv",
+        "source_sha256": "54ec4dc83c31964eb9643f82c29659e359bbed90a0e0186c21df6ffc4ccde88d",
+        "synthetic": true,
+        "colorbar_asset": {
+          "name": "drt-map-colorbar.png",
+          "sha256": "14ad0ff1bf71907a845676f2821d1442de2f4ddd706ac4c3344ea6f22ab36105"
+        }
+      },
+      "plot_sha256": "05f5b77fccc617349fb6caea4864edb8d65786ea051f856ad9d6746d5539485e",
+      "native_png_sha256": "0b17426740abe06fbe579a05b67097734fa39c80e0a1fd7f746a0db01fdbcad4"
+    },
+    {
+      "id": "raman-fit",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 351,
+        "display_text": [
+          "Raman shift (cm^-1)",
+          "Intensity (a.u.)",
+          "",
+          "Observed",
+          "Total model",
+          "Declared baseline",
+          "Component 1",
+          "Component 2"
+        ],
+        "caption": "Explicit spectral region/model/centers/width bounds/background; no chemical identity or area-to-population assignment. Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 14157,
+            "lower left": 14167
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          },
+          {
+            "column": "y4",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed",
+            "color": "#737373",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Total model",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "Declared baseline",
+            "color": "#E4872A",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "Component 1",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x4",
+            "column": "y4",
+            "label": "Component 2",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "source_name": "raman-fit.csv",
+        "source_sha256": "34747ae4613c1d9c75523dc5200f7d67a38c7ee8a05ad6366273090fe132805d",
+        "synthetic": true
+      },
+      "plot_sha256": "d3abafdfe5ff4db09d398c8491445b3c319fe8992a206ec06d8b1daf9115f545",
+      "native_png_sha256": "3e1c2b21f7083ac7c7c7749dd71a0db5645b76aeaf0aef79d9ae8dc09e11bcf8"
+    },
+    {
+      "id": "raman-residual",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 351,
+        "display_text": [
+          "Raman shift (cm^-1)",
+          "Residual (a.u.)",
+          "",
+          "Observed - model"
+        ],
+        "caption": "Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 16,
+            "lower left": 11
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed - model",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "raman-residual.csv",
+        "source_sha256": "2876e45888b25dda1a5fd081815f58aeb75711c5e95fed87f682cc76cb242a84",
+        "synthetic": true
+      },
+      "plot_sha256": "9d54b2d0039a2a0a4a706aea761315fc21d40c782b780d4eef7b601e5bfe1bcb",
+      "native_png_sha256": "72ae8350195926ebab842cdc50da09889442af34cbc525a019a9dc13717d3b0d"
+    },
+    {
+      "id": "ftir-fit",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 301,
+        "display_text": [
+          "Wavenumber (cm^-1)",
+          "Intensity (absorbance)",
+          "",
+          "Observed",
+          "Total model",
+          "Declared baseline",
+          "Component 1",
+          "Component 2"
+        ],
+        "caption": "Explicit spectral region/model/centers/width bounds/background; no chemical identity or area-to-population assignment. Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 11968,
+            "lower left": 11978
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          },
+          {
+            "column": "y4",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed",
+            "color": "#737373",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Total model",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "Declared baseline",
+            "color": "#E4872A",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "Component 1",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x4",
+            "column": "y4",
+            "label": "Component 2",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "source_name": "ftir-fit.csv",
+        "source_sha256": "bbbcab46b7b98f5f7119f4e46d7fa83a3f59049272eb465c974c2be2534605dc",
+        "synthetic": true
+      },
+      "plot_sha256": "f29789e26680ddd947c08f5c0c0b42d9d45c09e9efc88277cba9f90e54e84638",
+      "native_png_sha256": "6015b1e7725113a6e052f29d0a44d946ead80ce3ec3551e37aa353d9393b4ebe"
+    },
+    {
+      "id": "ftir-residual",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 301,
+        "display_text": [
+          "Wavenumber (cm^-1)",
+          "Residual (absorbance)",
+          "",
+          "Observed - model"
+        ],
+        "caption": "Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 30,
+            "lower left": 45
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed - model",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "ftir-residual.csv",
+        "source_sha256": "6d07b017ec8c943a92fa832dd3ed9bcbd6675a8076120be9c0660dd5df3bb947",
+        "synthetic": true
+      },
+      "plot_sha256": "10909fa7a66fe6f5a2059e90f736befcb3de1de99e69f20100de7a1fca40d015",
+      "native_png_sha256": "86a39c7436a2b5a1db3365890bfbcbbc933a31dc3e52d87e5d95302ac8b3c252"
+    },
+    {
+      "id": "xps-fit",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 321,
+        "display_text": [
+          "Binding energy (eV)",
+          "Intensity (counts)",
+          "",
+          "Observed",
+          "Total model",
+          "Declared baseline",
+          "Component 1",
+          "Component 2",
+          "Component 3"
+        ],
+        "caption": "Explicit spectral region/model/centers/width bounds/background; no chemical identity or area-to-population assignment. Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 15848,
+            "lower left": 15848
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          },
+          {
+            "column": "y4",
+            "offset": 0.0
+          },
+          {
+            "column": "y5",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed",
+            "color": "#737373",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Total model",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "Declared baseline",
+            "color": "#E4872A",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "Component 1",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x4",
+            "column": "y4",
+            "label": "Component 2",
+            "color": "#1B9E77",
+            "kind": "line"
+          },
+          {
+            "x": "x5",
+            "column": "y5",
+            "label": "Component 3",
+            "color": "#7560A8",
+            "kind": "line"
+          }
+        ],
+        "source_name": "xps-fit.csv",
+        "source_sha256": "032d8655978899286b5f0faab8642306e1d523bfd2c29ccf12db26749e3957db",
+        "synthetic": true
+      },
+      "plot_sha256": "a847fdf273eb6d54089714a0d3999f1d4e8daf7ca6ae586d8b53c4f4bc57a090",
+      "native_png_sha256": "d0a3e7f829d01f3aa7a61c8ef9cbe4681f3c05a40afcfb5ca996398ae2fb495e"
+    },
+    {
+      "id": "xps-residual",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 321,
+        "display_text": [
+          "Binding energy (eV)",
+          "Residual (counts)",
+          "",
+          "Observed - model"
+        ],
+        "caption": "Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 13,
+            "lower left": 13
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed - model",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "xps-residual.csv",
+        "source_sha256": "e75e4dfbe41ea45a7f7b6a2758c1733b39d30ff018ae4bfccbfa255ba013c1b7",
+        "synthetic": true
+      },
+      "plot_sha256": "4a6ea7dad0e9f517284701148b27e049891392dd2e21f690a046187098572d79",
+      "native_png_sha256": "680d9901378860d1f48b3a72f74becc4f93c55b726683b180ffd04f6a0608842"
+    },
+    {
+      "id": "correction-raw",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 201,
+        "display_text": [
+          "Supplied potential (V)",
+          "Current (A)",
+          "",
+          "Recorded"
+        ],
+        "caption": "Every original node/order retained before explicit processing.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 310,
+            "lower left": 301
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Recorded",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "correction-raw.csv",
+        "source_sha256": "75e7a9aefa97f6e35cc234ae136b1a839ba8959cedee90fdb49aead3b010e859",
+        "synthetic": true
+      },
+      "plot_sha256": "f22762ce5ac924088ee60f669ad00ec03378479b02ef00eff9db6c00c82baba6",
+      "native_png_sha256": "0470ad2f337f4d8fcdce5e9689666330bf95427cb9ebc6a1cef6a0dff8a8f749"
+    },
+    {
+      "id": "correction-corrected",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 201,
+        "display_text": [
+          "Corrected potential (V)",
+          "Current (A)",
+          "",
+          "Explicit corrected branch"
+        ],
+        "caption": "Declared signed iR/tail/background operations only; no inferred resistance or capacitance. Folds retained.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 742,
+            "lower left": 983
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Explicit corrected branch",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "correction-corrected.csv",
+        "source_sha256": "472da096d5c17fcd102f804a5b9edd7838337171b5ca9ea0acda78465d1d2e58",
+        "synthetic": true
+      },
+      "plot_sha256": "9816fa5bae01aaa3ec3fc08c358dbefcf7e104a489b35a33586f4dc952f30fb9",
+      "native_png_sha256": "35205c51cc9a2d8ed7a0bc1e4eca91b0758f5494ab7000e0d92fd0da723727e1"
+    },
+    {
+      "id": "cycle-capacity",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 101,
+        "display_text": [
+          "Branch capacity (mAh)",
+          "Cell voltage (V)",
+          "",
+          "Selected cycle",
+          "Discharge"
+        ],
+        "caption": "Supplied full-cell terminal voltage and branch capacity; pure solid branches, raw nodes retained. CE/EE require complete branch attestation.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 217,
+            "lower left": 0
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Selected cycle",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Discharge",
+            "color": "#B2182B",
+            "kind": "line",
+            "legend": false
+          }
+        ],
+        "source_name": "cycle-capacity.csv",
+        "source_sha256": "33890d2122b1a2327a8bc7cf04de3d058a58a67a1d84e7524eeced3c0d9c30a0",
+        "synthetic": true
+      },
+      "plot_sha256": "80439228c943b43ac393bce379f871978334640d210be5e3ff503060c65a3d21",
+      "native_png_sha256": "790f980202b0e10fc7639caaabca14eb20271a414fe58f2c1671edb10264fc2e"
+    },
+    {
+      "id": "doublet-fit",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 401,
+        "display_text": [
+          "Binding energy (eV)",
+          "Intensity (counts)",
+          "",
+          "Observed",
+          "Total model",
+          "Declared baseline",
+          "Component 1",
+          "Component 2"
+        ],
+        "caption": "Explicit spectral region/model/centers/width bounds/background; no chemical identity or area-to-population assignment. Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 16398,
+            "lower left": 16398
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          },
+          {
+            "column": "y4",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed",
+            "color": "#737373",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Total model",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "Declared baseline",
+            "color": "#E4872A",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "Component 1",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x4",
+            "column": "y4",
+            "label": "Component 2",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "source_name": "doublet-fit.csv",
+        "source_sha256": "6e64d4dc2d9eb3ee49b3b4f5a4c61a206fdfb5ca5925842e46be7d3898a299d3",
+        "synthetic": true
+      },
+      "plot_sha256": "283c3bcf5629ed521592213e4c0fdcf2a530268106d13fe811d4f9a9372ddf8f",
+      "native_png_sha256": "700a5a69d655ee9de10f67626492da83ce64d046fb249083a9e6144e0b0a2796"
+    },
+    {
+      "id": "doublet-residual",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 401,
+        "display_text": [
+          "Binding energy (eV)",
+          "Residual (counts)",
+          "",
+          "Observed - model"
+        ],
+        "caption": "Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 0,
+            "lower left": 29
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed - model",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "doublet-residual.csv",
+        "source_sha256": "3e9311d77bda2e9d84c680cdf4f13dae214f55ffe73261d7eb98802fb45e2d30",
+        "synthetic": true
+      },
+      "plot_sha256": "c9d1aff5ad2d4288998a8f252288933e00789eee939ec56c49a549862e44c34b",
+      "native_png_sha256": "e59f4191a8ad03b53761653b54a1c84d808267238beb40675ff2f8f6c11375d3"
+    },
+    {
+      "id": "shirley-fit",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 801,
+        "display_text": [
+          "Binding energy (eV)",
+          "Intensity (counts)",
+          "",
+          "Observed",
+          "Total model",
+          "Declared baseline",
+          "Component 1",
+          "Component 2"
+        ],
+        "caption": "Explicit spectral region/model/centers/width bounds/background; no chemical identity or area-to-population assignment. Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 32962,
+            "lower left": 32962
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          },
+          {
+            "column": "y1",
+            "offset": 0.0
+          },
+          {
+            "column": "y2",
+            "offset": 0.0
+          },
+          {
+            "column": "y3",
+            "offset": 0.0
+          },
+          {
+            "column": "y4",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed",
+            "color": "#737373",
+            "kind": "line"
+          },
+          {
+            "x": "x1",
+            "column": "y1",
+            "label": "Total model",
+            "color": "#B2182B",
+            "kind": "line"
+          },
+          {
+            "x": "x2",
+            "column": "y2",
+            "label": "Declared baseline",
+            "color": "#E4872A",
+            "kind": "line"
+          },
+          {
+            "x": "x3",
+            "column": "y3",
+            "label": "Component 1",
+            "color": "#2166AC",
+            "kind": "line"
+          },
+          {
+            "x": "x4",
+            "column": "y4",
+            "label": "Component 2",
+            "color": "#1B9E77",
+            "kind": "line"
+          }
+        ],
+        "source_name": "shirley-fit.csv",
+        "source_sha256": "c638f31fbfaf3547412a364ede11cbc63f19605766633405487267712c2ba0e0",
+        "synthetic": true
+      },
+      "plot_sha256": "f39453e8507aa8810d7d6f125a60adb268ee0c86e6d9ec7902ae770207290c8f",
+      "native_png_sha256": "5333e6e06f100883f05e14b0df0355802507b7c6a264ea5ff096a5ab7cf6ff86"
+    },
+    {
+      "id": "shirley-residual",
+      "kind": "line",
+      "synthetic": true,
+      "metadata": {
+        "kind": "line",
+        "row_count": 801,
+        "display_text": [
+          "Binding energy (eV)",
+          "Residual (counts)",
+          "",
+          "Observed - model"
+        ],
+        "caption": "Declared peak/linear-baseline model only; no chemical-state or population assignment.",
+        "legend": {
+          "corner": "upper right",
+          "overlap_scores": {
+            "upper right": 0,
+            "upper left": 0,
+            "lower right": 145,
+            "lower left": 186
+          }
+        },
+        "connect_order": "acquisition",
+        "display_offsets": [
+          {
+            "column": "y0",
+            "offset": 0.0
+          }
+        ],
+        "series": [
+          {
+            "x": "x0",
+            "column": "y0",
+            "label": "Observed - model",
+            "color": "#B2182B",
+            "kind": "line"
+          }
+        ],
+        "source_name": "shirley-residual.csv",
+        "source_sha256": "3381e5716e95a5bc69d38c6c3592ef2ce4b740ed363995f0e75d2b93f17e5c9b",
+        "synthetic": true
+      },
+      "plot_sha256": "dfa879caae1f04d4bba2757307c7201bb1237c8804b21d4db343a1e1f44520ae",
+      "native_png_sha256": "e02025d2ce90baaabd8a5bc071d99155aafd91868bf9cae9b96d63e735a8cdb0"
+    }
+  ],
+  "included_previews": [
+    {
+      "file": "origin-analysis-cv.png",
+      "sha256": "534213b7089fdb69357b022590d0151cb1dfb9311f7fc2d9dc6c35d8f98a96d9",
+      "plot_id": "cv-cv"
+    },
+    {
+      "file": "origin-analysis-fractions.png",
+      "sha256": "87afce0848968a0213e462ec4f25bc82ed6bc7f6791206a183cb58baa0b37778",
+      "plot_id": "cv-fractions"
+    },
+    {
+      "file": "origin-analysis-gitt.png",
+      "sha256": "836cbb27ab6cb2aee6d9376841162df01dbe9909fa4b75e4c13da599da29d416",
+      "plot_id": "gitt-diffusivity"
+    },
+    {
+      "file": "origin-analysis-drt-map.png",
+      "sha256": "0b17426740abe06fbe579a05b67097734fa39c80e0a1fd7f746a0db01fdbcad4",
+      "plot_id": "drt-map"
+    },
+    {
+      "file": "origin-analysis-tafel.png",
+      "sha256": "321ff091bf48c5b51425d97dc988839390e2a3d4cbd9d2699898ebfb9c60171c",
+      "plot_id": "tafel-tafel"
+    },
+    {
+      "file": "origin-analysis-spectra.png",
+      "sha256": "d0a3e7f829d01f3aa7a61c8ef9cbe4681f3c05a40afcfb5ca996398ae2fb495e",
+      "plot_id": "xps-fit"
+    }
+  ],
+  "palette_record": "Registry/renderer/runner hashes and exact accepted plan bind native color palettes;repeated256-stop lists omitted from this gallery summary",
+  "native_accepted_analysis_script_sha256": "5dc4a1a7ad52a61d68d4cb357b1cdea9116c5667c145d73e6c2817ad5bacf06c",
+  "parse_cache_equivalence": "EXACT_RESULTS_PLOT_JSON_AND_BOUND_SOURCES;SOURCE_HASH_CHANGE_REFUSAL_TESTED",
+  "optional_contact_sheets": [
+    {
+      "file": "origin-analysis-cv-methods.png",
+      "sha256": "e418d75095826593759994c613c7de3597b7bcb70e45b562a95df879e8be3d7d",
+      "role": "BROWSING_COMPOSITE_NOT_NATIVE_MULTIPANEL",
+      "native_generation": "0.3.5",
+      "plots": [
+        {
+          "id": "cv-cv",
+          "native_png_sha256": "534213b7089fdb69357b022590d0151cb1dfb9311f7fc2d9dc6c35d8f98a96d9"
+        },
+        {
+          "id": "cv-map",
+          "native_png_sha256": "6dc6478224300a0f02bb432489390cfa6859dab4956c90937257d55aafd36fee"
+        },
+        {
+          "id": "cv-components-0",
+          "native_png_sha256": "88616d3cfefea130db3132aa7375b6c2688bf5e610f19a92e648fb51a883ccfa"
+        },
+        {
+          "id": "cv-residual-0",
+          "native_png_sha256": "b48c4a29de9f96f5599e1202d1317ee7cf399b00e6261389ec1b9eb69b86f335"
+        },
+        {
+          "id": "cv-components-4",
+          "native_png_sha256": "7638f830b8672cada92be4ce37b5873003df9ce7b7475e9c24390bae99be9372"
+        },
+        {
+          "id": "cv-residual-4",
+          "native_png_sha256": "fb39905cc6018415b30a4531d1aff31bc65909902672a56db69fed55466c3d72"
+        },
+        {
+          "id": "cv-fractions",
+          "native_png_sha256": "87afce0848968a0213e462ec4f25bc82ed6bc7f6791206a183cb58baa0b37778"
+        },
+        {
+          "id": "peaks-sqrt-rate",
+          "native_png_sha256": "5294728f94affcf7a4b81cdc1831199978984dd1b8a2bf62ab008c4dd6b19279"
+        },
+        {
+          "id": "peaks-b-value",
+          "native_png_sha256": "2d9c04bd13993d109fff5047435cfb07e5f650132000f48d0336b42f71d9240a"
+        },
+        {
+          "id": "cdl-cdl",
+          "native_png_sha256": "164a23989296898ecc09b15670b48ed51f02d0b6a6665423a9fae7ae557d8a7a"
+        },
+        {
+          "id": "correction-raw",
+          "native_png_sha256": "0470ad2f337f4d8fcdce5e9689666330bf95427cb9ebc6a1cef6a0dff8a8f749"
+        },
+        {
+          "id": "correction-corrected",
+          "native_png_sha256": "35205c51cc9a2d8ed7a0bc1e4eca91b0758f5494ab7000e0d92fd0da723727e1"
+        }
+      ]
+    },
+    {
+      "file": "origin-analysis-battery-methods.png",
+      "sha256": "e5890d04055c0472e9694abdcb26153a4d061f5d7c1a0fd27151afc4070d1c63",
+      "role": "BROWSING_COMPOSITE_NOT_NATIVE_MULTIPANEL",
+      "native_generation": "0.3.5",
+      "plots": [
+        {
+          "id": "gitt-pulse-0",
+          "native_png_sha256": "5e157fda9657759badde4091112060a85a04810faa2bf956ea75d98a42f093fc"
+        },
+        {
+          "id": "gitt-window-0",
+          "native_png_sha256": "3a1e60b57f20a5e11f3e249a9eea992b99288c1efec4a75cec8f89600709c893"
+        },
+        {
+          "id": "gitt-pulse-1",
+          "native_png_sha256": "698797e2ebc375a98640e84fd60b0df1649a5d6fc00ade6a46f500205aa4b8ad"
+        },
+        {
+          "id": "gitt-window-1",
+          "native_png_sha256": "6ca2b8ff45c2e1b6f0ac36e242229b0ded0dd9aa543cb792cdbc01a897332343"
+        },
+        {
+          "id": "gitt-pulse-2",
+          "native_png_sha256": "a13c69901bedde86490e50e6fe19468ce2cd215dc399d56db6041ebbdae53341"
+        },
+        {
+          "id": "gitt-window-2",
+          "native_png_sha256": "c12ca4e54ec9c5ee1fbf419f179ac471572174fa6fb5e8533e4019f505095c0c"
+        },
+        {
+          "id": "gitt-diffusivity",
+          "native_png_sha256": "836cbb27ab6cb2aee6d9376841162df01dbe9909fa4b75e4c13da599da29d416"
+        },
+        {
+          "id": "ica-ica",
+          "native_png_sha256": "63241359a4e2a54f7859a37e6a7e89efc78c59edeb8a6c48307e6004bb2e7055"
+        },
+        {
+          "id": "ica-dva",
+          "native_png_sha256": "8d539e2563b0f610e1acdbadb45d68e8fcb3cca486249f209fd512ef8fb58c86"
+        },
+        {
+          "id": "cycle-capacity",
+          "native_png_sha256": "790f980202b0e10fc7639caaabca14eb20271a414fe58f2c1671edb10264fc2e"
+        }
+      ]
+    },
+    {
+      "file": "origin-analysis-impedance-methods.png",
+      "sha256": "c11de3c740cbf8da247ae8519f9f726c34908369b8b1c71fcf818a1e9468d382",
+      "role": "BROWSING_COMPOSITE_NOT_NATIVE_MULTIPANEL",
+      "native_generation": "0.3.5",
+      "plots": [
+        {
+          "id": "eis-nyquist-0",
+          "native_png_sha256": "65cf181bff1b04ac1dcf9ee679bd3ecce225f29646318b0312993f20ff8750e6"
+        },
+        {
+          "id": "eis-residual-0",
+          "native_png_sha256": "ae455c1b9acbf73a543cdfced016c20011a07572ffa6b00d8004fdbb3c8e0bd4"
+        },
+        {
+          "id": "drt-nyquist-0",
+          "native_png_sha256": "7c09214e85b3990b0e68ca0bd292ffe503ad0c3738b607ddd60dd15e32fb67e4"
+        },
+        {
+          "id": "drt-residual-0",
+          "native_png_sha256": "5ab57c34e5633fa2ebff97835253b5c8561387dddc32f191f91f37ece15fdce8"
+        },
+        {
+          "id": "drt-drt-0",
+          "native_png_sha256": "bb5c669e1b3328d30fd32d0a4728fee7f733442d812413323aa194b7a85924bc"
+        },
+        {
+          "id": "drt-nyquist-1",
+          "native_png_sha256": "ed56e35327197f38b02b66b4c00fb8d8eb3b5454505c41c80d9c85a25e89cc10"
+        },
+        {
+          "id": "drt-residual-1",
+          "native_png_sha256": "7d67cf5db0515abbe6aa6e8e5d185508d6ccb078af8754c484dc65e97d87a8af"
+        },
+        {
+          "id": "drt-drt-1",
+          "native_png_sha256": "1065bb7059e280d9eacdca260dbe50d8a9fc346cc00298efea22dcd1b04a0bcd"
+        },
+        {
+          "id": "drt-nyquist-2",
+          "native_png_sha256": "a22583638daa0eed8bd1f21102cbe30f8d4db180c30d0b7a8486d517090d80d7"
+        },
+        {
+          "id": "drt-residual-2",
+          "native_png_sha256": "9f318944b47d1b09888eece964bada2fb9a2379850623e33631e37ccb68b73fa"
+        },
+        {
+          "id": "drt-drt-2",
+          "native_png_sha256": "79441e1fbccc5122287d2ba91c4110508bc10fa5ca03cd35b5cd5fc165eefeca"
+        },
+        {
+          "id": "drt-map",
+          "native_png_sha256": "0b17426740abe06fbe579a05b67097734fa39c80e0a1fd7f746a0db01fdbcad4"
+        }
+      ]
+    },
+    {
+      "file": "origin-analysis-spectra-methods.png",
+      "sha256": "1133e6516d6837d2307e0abd2426b2e62a2a0bd8ec51c6c674770bab406747d1",
+      "role": "BROWSING_COMPOSITE_NOT_NATIVE_MULTIPANEL",
+      "native_generation": "0.3.5",
+      "plots": [
+        {
+          "id": "tafel-lsv",
+          "native_png_sha256": "e167e7c213f7b7aa5ad9c26948f82c279d6cce7ad745694fc0785148db913779"
+        },
+        {
+          "id": "tafel-tafel",
+          "native_png_sha256": "321ff091bf48c5b51425d97dc988839390e2a3d4cbd9d2699898ebfb9c60171c"
+        },
+        {
+          "id": "raman-fit",
+          "native_png_sha256": "3e1c2b21f7083ac7c7c7749dd71a0db5645b76aeaf0aef79d9ae8dc09e11bcf8"
+        },
+        {
+          "id": "raman-residual",
+          "native_png_sha256": "72ae8350195926ebab842cdc50da09889442af34cbc525a019a9dc13717d3b0d"
+        },
+        {
+          "id": "ftir-fit",
+          "native_png_sha256": "6015b1e7725113a6e052f29d0a44d946ead80ce3ec3551e37aa353d9393b4ebe"
+        },
+        {
+          "id": "ftir-residual",
+          "native_png_sha256": "86a39c7436a2b5a1db3365890bfbcbbc933a31dc3e52d87e5d95302ac8b3c252"
+        },
+        {
+          "id": "xps-fit",
+          "native_png_sha256": "d0a3e7f829d01f3aa7a61c8ef9cbe4681f3c05a40afcfb5ca996398ae2fb495e"
+        },
+        {
+          "id": "xps-residual",
+          "native_png_sha256": "680d9901378860d1f48b3a72f74becc4f93c55b726683b180ffd04f6a0608842"
+        },
+        {
+          "id": "doublet-fit",
+          "native_png_sha256": "700a5a69d655ee9de10f67626492da83ce64d046fb249083a9e6144e0b0a2796"
+        },
+        {
+          "id": "doublet-residual",
+          "native_png_sha256": "e59f4191a8ad03b53761653b54a1c84d808267238beb40675ff2f8f6c11375d3"
+        },
+        {
+          "id": "shirley-fit",
+          "native_png_sha256": "5333e6e06f100883f05e14b0df0355802507b7c6a264ea5ff096a5ab7cf6ff86"
+        },
+        {
+          "id": "shirley-residual",
+          "native_png_sha256": "e02025d2ce90baaabd8a5bc071d99155aafd91868bf9cae9b96d63e735a8cdb0"
+        }
+      ]
+    }
+  ],
+  "optional_gallery_archive": "Ai2origin-v0.3.5-gallery.zip"
+}

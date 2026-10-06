@@ -31,26 +31,6 @@
       "caption": "Synthetic A/B current-potential loops, 129 ordered samples each, V and mA. Acquisition order and turning points retained; voltage reference is arbitrary. No scan-rate, kinetic or capacitance inference."
     },
     {
-      "id": "gcd",
-      "kind": "line",
-      "csv": "electrochem.csv",
-      "x": "capacity",
-      "series": [
-        {
-          "column": "voltage",
-          "label": "cycle"
-        }
-      ],
-      "synthetic": true,
-      "title": "",
-      "labels": {
-        "x": "Capacity (mAh g^-1)",
-        "y": "Voltage (V)"
-      },
-      "connect_order": "acquisition",
-      "caption": "Synthetic charge/discharge display loop, 129 ordered samples, capacity in mAh/g and voltage in V. Capacity is a toy mass-specific quantity; no experimental active mass, current or efficiency is implied."
-    },
-    {
       "id": "cycling",
       "kind": "line_symbol",
       "csv": "electrochem.csv",
@@ -99,29 +79,6 @@
       "y_tick_step": 5,
       "equal_xy": true,
       "caption": "Invented 129-point impedance arc. Both axes span 0–30 Ω, major ticks 5 Ω and equal physical scale; square frame. No circuit fit or charge-transfer interpretation."
-    },
-    {
-      "id": "gcd-time",
-      "kind": "line",
-      "csv": "gcd-time.csv",
-      "x": "time",
-      "series": [
-        {
-          "column": "voltage_a",
-          "label": "A"
-        },
-        {
-          "column": "voltage_b",
-          "label": "B"
-        }
-      ],
-      "synthetic": true,
-      "title": "",
-      "labels": {
-        "x": "time (s)",
-        "y": "voltage (V)"
-      },
-      "caption": "Invented triangular charge/discharge-time profiles A/B, 201 samples in seconds and volts. Arbitrary voltage reference; no measured capacity or cycling efficiency."
     },
     {
       "id": "gitt",
@@ -495,35 +452,6 @@
       "caption": "Invented A/B gamma curves: 81 positive τ nodes from 10^-3 to 10^5 s, true log10 X axis. No EIS inversion, regularization or process assignment."
     },
     {
-      "id": "drt-stack",
-      "kind": "line_symbol",
-      "csv": "drt.csv",
-      "x": "tau",
-      "series": [
-        {
-          "column": "a",
-          "label": "A"
-        },
-        {
-          "column": "b",
-          "label": "B",
-          "offset": 1
-        }
-      ],
-      "synthetic": true,
-      "title": "",
-      "labels": {
-        "x": "Relaxation time, τ (s)",
-        "y": "γ(τ) + offset (a.u.)"
-      },
-      "x_scale": "log10",
-      "x_range": [
-        0.001,
-        100000.0
-      ],
-      "caption": "Invented A/B gamma curves: 81 positive τ nodes from 10^-3 to 10^5 s, true log10 X axis. No EIS inversion, regularization or process assignment. Display offsets 0/1 a.u.; raw values retained."
-    },
-    {
       "id": "drt-map",
       "kind": "heatmap",
       "csv": "drt-map.csv",
@@ -650,29 +578,6 @@
         "y": "conversion (percent)"
       },
       "caption": "Invented exponential A/B conversion-time curves, 101 points in minutes and percent. No experimental reaction, rate fit or mechanism."
-    },
-    {
-      "id": "learning",
-      "kind": "line_symbol",
-      "csv": "learning.csv",
-      "x": "epoch",
-      "series": [
-        {
-          "column": "train",
-          "label": "Train"
-        },
-        {
-          "column": "validation",
-          "label": "Validation"
-        }
-      ],
-      "synthetic": true,
-      "title": "",
-      "labels": {
-        "x": "epoch",
-        "y": "loss (a.u.)"
-      },
-      "caption": "Invented training/validation loss functions over 101 epochs. No trained model, dataset split, predictive performance or run is claimed."
     },
     {
       "id": "hysteresis",

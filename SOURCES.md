@@ -2,6 +2,9 @@
 
 Checked 2026-10-04. These primary sources support interface choices and known
 version boundaries; they do not certify this package's runtime.
+Font/Excel contract references were checked 2026-10-06:
+[Windows glyph coverage](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-getglyphindicesw)
+and [OOXML number formats](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.numberingformat).
 
 - [Origin 2021 external Python support](https://blog.originlab.com/accessing-origins-graphing-power-from-python):
   historical context; the article itself notes a newer successor.

@@ -26,13 +26,13 @@ class ColorTests(unittest.TestCase):
             np.testing.assert_array_equal(np.array(reverse.colors),np.array(forward.colors)[::-1])
 
     def test_descriptive_aliases_emit_identical_palettes_and_data(self):
-        config=a.load_json(ROOT/'samples/colors.json');style,_=a.STYLE.resolve(a.load_json)
+        config=a.load_json(ROOT/'samples/demo.json');style,_=a.STYLE.resolve(a.load_json)
         for old,new in [('reimu26','purplegreen'),('reimu27','violetgold')]:
             for levels in range(2,257):
                 before=np.asarray(a.color_map({'cmap':old,'color_levels':levels}).colors)
                 after=np.asarray(a.color_map({'cmap':new,'color_levels':levels}).colors)
                 self.assertEqual(before.tobytes(),after.tobytes())
-            plot=next(p for p in config['plots'] if p.get('cmap')==new)
+            plot=dict(next(p for p in config['plots'] if p['id']=='smooth'),cmap=new)
             rows=a.read_csv(ROOT/'samples'/plot['csv'])
             before=a.prepare_plot(dict(plot,cmap=old),rows,1,style)
             after=a.prepare_plot(plot,rows,1,style)
@@ -46,9 +46,11 @@ class ColorTests(unittest.TestCase):
         self.assertEqual(to_hex(a.color_map({})(.5)).upper(),'#F7F7F7')
 
     def test_palette_changes_no_data_or_display_grid(self):
-        config=a.load_json(ROOT/'samples/colors.json');style,_=a.STYLE.resolve(a.load_json)
+        config=a.load_json(ROOT/'samples/demo.json');style,_=a.STYLE.resolve(a.load_json)
         values=[]
-        for plot in config['plots'][1:]:
+        base=next(p for p in config['plots'] if p['id']=='smooth')
+        for cmap in ('redwhiteblue','purplegreen','violetgold','rainbow','rainbow_r'):
+            plot=dict(base,cmap=cmap)
             rows=a.read_csv(ROOT/'samples'/plot['csv']);result=a.prepare_plot(plot,rows,1,style)
             values.append(result['books'])
             self.assertEqual(len(result['metadata']['colorbar_palette']),256)
@@ -57,21 +59,18 @@ class ColorTests(unittest.TestCase):
     def test_color_examples_regenerate_from_toy_formulas(self):
         with tempfile.TemporaryDirectory() as tmp:
             target=Path(tmp)/'new';g.make_samples(target)
-            for name in ['colors.json','colors-map.csv','colors-lines.csv']:
+            for name in ['colors.json','colors-lines.csv']:
                 self.assertEqual((target/name).read_bytes(),(ROOT/'samples'/name).read_bytes())
 
-    def test_walkthrough_retains_all_360_points_and_regenerates(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            target=Path(tmp)/'new';g.make_samples(target)
-            for name in ['walkthrough.json','walkthrough.csv']:
-                self.assertEqual((target/name).read_bytes(),(ROOT/'samples'/name).read_bytes())
-        config=a.load_json(ROOT/'samples/walkthrough.json');style,_=a.STYLE.resolve(a.load_json,project=config['style'])
-        plot=config['plots'][0];rows=a.read_csv(ROOT/'samples/walkthrough.csv');prepared=a.prepare_plot(plot,rows,1,style)
+    def test_canonical_capacity_recipe_retains_all_cycle_points(self):
+        config=a.load_json(ROOT/'templates/paper.json');style,_=a.STYLE.resolve(a.load_json,project=config['style'])
+        plot=next(p for p in config['plots'] if p['id']=='cycle-capacity')
+        rows=a.read_csv(ROOT/'templates'/plot['csv']);prepared=a.prepare_plot(plot,rows,1,style)
         matrix=np.array(prepared['books'][0]['rows'])
-        self.assertEqual(matrix.shape,(120,12))
-        for i,letter in enumerate('abc'):
-            np.testing.assert_array_equal(matrix[:,4*i],np.arange(1,121))
-            np.testing.assert_array_equal(matrix[:,4*i+1],[float(r['capacity_'+letter]) for r in rows])
+        self.assertGreaterEqual(len(rows),100)
+        for i,trace in enumerate(plot['series']):
+            np.testing.assert_array_equal(matrix[:,4*i],[float(r[plot['x']]) for r in rows])
+            np.testing.assert_array_equal(matrix[:,4*i+1],[float(r[trace['column']]) for r in rows])
             np.testing.assert_array_equal(matrix[:,4*i:4*i+2],matrix[:,4*i+2:4*i+4])
 
 if __name__=='__main__':unittest.main()

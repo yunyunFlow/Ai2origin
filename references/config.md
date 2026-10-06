@@ -1,7 +1,10 @@
 # Config and reproducibility
 
-Use samples/demo.json for five small baseline examples or templates/paper.json
-for the 36 article recipes. These are invented numbers, not scientific evidence.
+Use samples/demo.json for three baseline examples or templates/paper.json
+for the 32 article recipes. These are invented numbers, not scientific evidence.
+Use --select ID [ID ...] for an explicit task subset in catalog order; selection
+is hash-bound in the plan and verified against the original config. No row-level
+filtering is performed.
 CSV files are UTF-8/UTF-8 BOM, with nonempty unique headers, fixed row width and
 finite numeric observables. Missing values, duplicate heatmap cells and implicit
 aggregation are refused. CSV/style_file paths resolve from the config; CLI
@@ -17,12 +20,16 @@ caption records provenance and processing; it is metadata, not a top title.
 | Kind | Required mappings | Implemented options |
 | --- | --- | --- |
 | line / line_symbol / scatter | x; nonempty series list with column and label | Per-series x/id/color/offset/kind/legend; lower+upper with uncertainty_definition; connect_order increasing or acquisition; connection pchip for increasing line_symbol without bands |
-| heatmap | x/y/z; labels.color; color_range [low,high] | Complete unique grid; packaged/Matplotlib cmap name or hex list; color_levels 2..256; center at range midpoint; interpolation method none or bilinear with integer factor 2..12 |
-| raincloud | group/value; bandwidth positive number or "scott" | order contains every group once; integer seed; bounds; orientation horizontal/vertical; cloud_shape half/full; summary boolean; cloud_support kde/observed; density_scale shared/width; cloud_fill boolean; group_labels |
+| heatmap | x/y/z; labels.color; color_range [low,high] | Complete unique grid; packaged/Matplotlib cmap name or hex list; color_levels 2..256; center at range midpoint; interpolation method none or bilinear with integer factor 2..12; optional y_tick_labels for consecutive categorical row indices0..N-1, unique safe tokens, no cross-row interpolation or Y geometry overrides |
+| raincloud | group/value; bandwidth positive number or "scott" | order contains every group once; integer seed; bounds; orientation horizontal/vertical; cloud_shape half/full; summary boolean; cloud_support kde/observed; density_scale shared/width; cloud_fill boolean; group_labels; half-only point_cloud_gap |
 
 Ranges are increasing finite JSON-number pairs; tick steps are positive numbers.
-XY plots can set y_ticks:false to hide Y ticks and numbers while retaining
-the axis title/frame and unchanged data. Omit y_tick_step in that case.
+Plot IDs must be safe Windows file stems, cannot end in -reopened, and cannot
+collide with another plot's generated asset/export names. Collisions fail before
+output creation. This also applies when names differ only by letter case.
+XY plots accept `y_ticks:false` for explicitly offset spectra. This hides only
+Y ticks and their numbers, preserving the Y title, black frame, raw values and
+declared offsets. It cannot be combined with `y_tick_step`.
 Booleans are not numbers. x_scale linear/log10 applies to XY/maps; log10 needs
 positive source X and explicit positive decade-endpoint x_range, and does not
 accept linear x_tick_step. equal_xy requires XY, linear axes, both explicit
@@ -47,12 +54,17 @@ Both backends use the declared discrete palette. A declared center requires
 at least three levels; even palettes use two adjacent neutral bins so the
 midpoint color is exact. Adaptive colorbar precision keeps ticks distinct and
 rounding error <=1% of tick spacing.
-Without cmap, redwhiteblue is the packaged default. See colors.md for
-Purple–green–yellow, Violet–orange–yellow, Rainbow and Reversed rainbow,
-and seven default series identities.
+Without cmap, redwhiteblue is the packaged default. The descriptive keys
+purplegreen and violetgold retain the exact original reimu26/reimu27 palettes;
+legacy keys remain valid. See colors.md for ramps and seven series identities.
 Preset/catalog SHA is bound to the plan; custom stops are sampled directly.
 
-Clouds retain every value and only jitter the group coordinate. Scott uses
+Clouds retain every value and only jitter the group coordinate.
+For half clouds, `point_cloud_gap` is the
+distance from the unjittered point center to the flat cloud edge in group-axis
+units: 0.06..0.45, default0.32. The compact style uses0.24. It translates only
+the group coordinate; the fixed jitter, raw values and KDE stay unchanged.
+The setting is refused for full clouds. Scott uses
 sample SD*n^(-1/5). Each drawn group grid resolves its own density; narrow fixed
 kernels add evaluated grid points, not observations. Physical-bound reflection
 is normalized by analytic Gaussian mass. Groups with <3 observations or
@@ -66,28 +78,36 @@ original CSV; they are not inferred from native numerical geometry columns.
 
 ## Repeat and inspect
 
+XY figures additionally allow positive `y_scale:"log10"` with explicit decade
+range endpoints; no zero/negative observations or linear Y tick increments.
+`legend_columns:2` places compact keys in two columns (default remains1).
+`kind:"bar"` currently supports explicitly stacked nonnegative components,
+2..7 series, consecutive category positions0..N-1 and matching safe
+`x_tick_labels`. It preserves the numeric component worksheet, rather than
+simulating columns with filled line bands. General grouped/negative bars remain
+outside this adapter. Analysis-generated figures use explicit display ranges
+and tick spacing; raw numeric arrays remain unchanged.
+
 --backend python exports PNG only by default. Add --svg for an author-requested
 editable vector copy; PNG is still exported. The receipt records actual formats.
 --svg with --backend prepare is refused before output creation. Historical
 receipts without this field retain their old PNG-plus-SVG requirement.
 
 Use an existing Python environment; do not install as an implied drawing step.
-For Arial output, use its installed family name. If unavailable, choose a local
-name with --list-fonts and --font; the receipt records the actual name:
+For Arial-specific output, supply your own installed font file:
 
 ~~~sh
-python scripts/ai2origin.py samples/demo.json --out work/repeat-a --backend python --font "Arial"
-python scripts/ai2origin.py samples/demo.json --out work/repeat-b --backend python --font "Arial"
+python scripts/ai2origin.py samples/demo.json --out work/repeat-a --backend python --font-file /path/to/arial.ttf
+python scripts/ai2origin.py samples/demo.json --out work/repeat-b --backend python --font-file /path/to/arial.ttf
 python scripts/check_reproducibility.py work/repeat-a work/repeat-b --config samples/demo.json
-python -m unittest discover -s tests -v
 ~~~
 
 Use new output directories outside an installed skill. The receipt binds
 config/source/geometry/output hashes, resolved style and dependency/font
 versions. In a fixed environment Python files must repeat byte-for-byte;
 SVG Date is omitted and IDs have a fixed salt. Cross-version pixel identity
-is untested. Requested and actual installed font names are recorded; missing
-families or glyphs fail. Preparation alone does not test installed Origin or rendered glyphs.
+is untested. The selected installed font and its hash are recorded; missing
+fonts/glyphs fail. Preparation alone does not test Origin or rendered glyphs.
 
 For native output, use references/origin2021.md and then:
 

@@ -4,7 +4,7 @@ Give your agent scientific data and a plotting goal. Ai2origin helps it inspect
 the files, choose a suitable plot and keep the result reproducible.
 
 **Origin 2021:** PNG and editable OPJU. **Python:** PNG, with optional SVG.
-Version **0.2.4**. All examples are synthetic.
+Version **0.3.6**. All examples are synthetic.
 
 Created by [yunyun](https://github.com/yunyunFlow).
 
@@ -17,10 +17,10 @@ python -m pip install -r requirements.txt
 python scripts/ai2origin.py samples/demo.json --out work/demo --backend python
 ~~~
 
-Use a new output directory. Add --svg for an editable vector copy.
+Use a new output directory outside the installed skill. Add --svg for an editable vector copy.
 Arial must be installed on your system. If missing, run --list-fonts and choose
 --font "Installed name". No fonts are bundled, copied or downloaded;
-the receipt records the actual font. [Font policy](references/fonts.md).
+the receipt records the actual font. [Font policy](references/style.md).
 
 For Codex, put this repository's contents in a skill folder named ai2origin
 and invoke $ai2origin. You can also ask your agent to read [SKILL.md](SKILL.md).
@@ -28,7 +28,9 @@ and invoke $ai2origin. You can also ask your agent to read [SKILL.md](SKILL.md).
 > Plot these battery tables as voltage–specific-capacity curves, compare the
 > selected cycles, and keep all measured points.
 
-The agent handles routine configuration. The [table adapter](references/tables.md)
+The agent handles routine configuration. Templates are starting points; your AI
+can adapt the plot to other data and check your local tools and output.
+The [table adapter](references/tables.md)
 supports explicit flat CSV/TSV/TXT/XLSX mappings; instrument binaries and arbitrary
 existing Origin projects need a separate adapter.
 
@@ -51,34 +53,15 @@ saves/reopens the project and exports its graphs. [Native details](references/or
 
 ### Gallery
 
-All values are invented. These are Origin exports; the three battery overlays
-are labeled separately as Python outputs.
+All values are invented. These six figures are Origin exports.
 
-| XY bands | Heatmap | Raincloud |
+| XY bands | Battery curves | Raincloud |
 | --- | --- | --- |
-| ![XY](samples/origin-xy.png) | ![Heatmap](samples/origin-heatmap.png) | ![Raincloud](samples/origin-raincloud.png) |
+| ![XY](samples/origin-xy.png) | ![Battery curves](templates/origin-battery-rate.png) | ![Raincloud](templates/origin-cloud-horizontal.png) |
 
-| CV loop | Capacity cycling | Nyquist |
+| Spectral stack | Heatmap | Energy-path guide |
 | --- | --- | --- |
-| ![CV](templates/origin-cv.png) | ![Capacity cycling](templates/origin-cycle-capacity.png) | ![Nyquist](templates/origin-nyquist.png) |
-
-| Spectral stack | DRT map | Energy-path guide |
-| --- | --- | --- |
-| ![Stack](templates/origin-stack.png) | ![DRT map](templates/origin-drt-map.png) | ![Energy path](templates/origin-migration.png) |
-
-| RDF-shaped curve | MSD-shaped curve | Bilateral cloud |
-| --- | --- | --- |
-| ![RDF](templates/origin-rdf.png) | ![MSD](templates/origin-msd.png) | ![Cloud](samples/origin-violin.png) |
-
-| Red–white–blue | Purple–green–yellow | Rainbow |
-| --- | --- | --- |
-| ![Red–white–blue](samples/origin-palette-redwhiteblue.png) | ![Purple–green–yellow](samples/origin-palette-reimu26.png) | ![Rainbow](samples/origin-palette-rainbow.png) |
-
-Battery overlays — **Python**:
-
-| Selected cycles | Current-density comparison | Voltage–time |
-| --- | --- | --- |
-| ![Cycles](templates/python-battery-capacity.png) | ![Rates](templates/python-battery-rate.png) | ![Voltage–time](templates/python-battery-time.png) |
+| ![Stack](templates/origin-stack.png) | ![Heatmap](samples/origin-smooth.png) | ![Energy path](templates/origin-migration.png) |
 
 Browse [samples](samples/README.md) and [templates](templates/README.md).
 Sparse line-symbol curves can use 5–6 pt markers through a
@@ -88,9 +71,9 @@ Try a family with Python:
 
 ~~~sh
 python scripts/ai2origin.py templates/battery.json --out work/battery --backend python
-python scripts/ai2origin.py templates/electrochem.json --out work/echem --backend python
-python scripts/ai2origin.py templates/drt.json --out work/drt --backend python
-python scripts/ai2origin.py templates/dft-md.json --out work/atomistic --backend python
+python scripts/ai2origin.py templates/paper.json --select cv nyquist --out work/echem --backend python
+python scripts/ai2origin.py templates/paper.json --select drt drt-map --out work/drt --backend python
+python scripts/ai2origin.py templates/paper.json --select migration dos rdf msd --out work/atomistic --backend python
 ~~~
 
 ### Check the download
@@ -107,7 +90,7 @@ Every entry should report OK. Run the regressions next:
 python -m unittest discover -s tests
 ~~~
 
-The tested version runs **100 tests**. Missing values, invalid settings, source
+The full local run passed **261 tests**; the count depends on installed optional tools. Missing values, invalid settings, source
 changes, missing glyphs and incomplete outputs are among the checked cases.
 
 ### Repeat a plot
@@ -144,10 +127,9 @@ explain the optional summary. Use your own verified mapping for real data.
 - Keep the config and receipt with the figure; state requested processing.
 - For Origin delivery, check the saved project's read-back and reopen results.
 
-See [tested scope and remaining limits](VALIDATION.md): the current flat-table
-and Python routes are tested; new native combinations and other versions need
-their own checks. EIS fitting, DRT inversion and general statistical analysis
-are not included.
+See [tested scope and remaining limits](VALIDATION.md): the local run used Python 3.11
+and Origin 2021. Your AI can adapt the workflow to another setup and verify
+the actual results.
 
 [MIT license](LICENSE) · [Dependencies and sources](THIRD_PARTY_NOTICES.md) ·
 [Use notice](DISCLAIMER.md). Fonts, commercial software and real research data

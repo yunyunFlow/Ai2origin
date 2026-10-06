@@ -7,6 +7,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
+from matplotlib import font_manager
 
 ROOT=Path(__file__).resolve().parents[1]
 def module(name,path):
@@ -42,10 +43,11 @@ class ExportTests(unittest.TestCase):
             config.write_text(json.dumps({'schema_version':1,'style':{'export':{'raster_dpi':72}},
                 'plots':[{'id':'curve','kind':'line_symbol','csv':'input.csv','x':'x','synthetic':True,
                           'labels':{'x':'Coordinate','y':'Value'},'series':[{'column':'y','label':'Demo'}]}]}))
+            font=font_manager.findfont(font_manager.FontProperties(family='DejaVu Sans'),fallback_to_default=False)
             for name,extra,formats in [('png',[],['png']),('vector',['--svg'],['png','svg'])]:
                 folder=root/name
                 with contextlib.redirect_stdout(io.StringIO()):
-                    DRAW.main([str(config),'--out',str(folder),'--backend','python','--font','DejaVu Sans']+extra)
+                    DRAW.main([str(config),'--out',str(folder),'--backend','python','--font-file',font]+extra)
                 self.assertEqual(CHECK.check(folder,config=config)['status'],'PASS')
                 self.assertEqual(json.loads((folder/'receipt.json').read_text())['python_export_formats'],formats)
                 self.assertEqual((folder/'curve.svg').exists(),name=='vector')

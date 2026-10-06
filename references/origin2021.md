@@ -1,9 +1,20 @@
 # Origin 2021 native route
 
-Baseline: Origin 2021, licensed Windows installation.
+Baseline: Origin 2021/2021b, numeric version 9.8, licensed Windows installation.
 Other versions are opt-in trials, not implicitly certified.
 The shipped runner uses built-in COM/LabTalk; it does not require originpro,
 OriginExt, a cloud model or a downloaded graph template.
+
+Prepare configurations again after upgrading to 0.3.4. The current runner
+requires an exact IEEE-754 worksheet payload; old plans are refused before
+starting Origin. This avoids PowerShell 5 decimal re-rounding. Source CSV,
+JSON geometry and binary payload are checked for consistency; native numeric
+readback requires exact equality, including very small nonzero values. Null
+padding is restored as Origin missing values, never fabricated observations.
+The selected Windows font is checked for actual glyph coverage before Origin
+starts. Supplementary-plane characters and complex native shaping require a
+separate adapter; family lookup alone is not glyph acceptance. Plan identity
+is captured before validation, passed to the worker, and checked before receipt.
 
 ## Existing projects as input
 
@@ -95,14 +106,16 @@ Origin 2021 auto-repositions its reserved YL label during export. The runner
 uses an ordinary editable AxisTitleY object, measures actual black text bounds
 in a first export, and matches its gap to the X title/number gap within 3 px.
 The final position is saved and must survive reopened export. This is layout
-calibration only; it never edits data or axes. An axis without numeric group
-labels is explicitly recorded as not applicable to the numeric-gap comparison.
+calibration only; it never edits observations or axis ranges. Categorical or
+hidden Y labels use the title-to-frame gap, matched to the X title/label gap.
+Y titles stay at the frame midpoint, using geometric centers on log axes;
+the native style check allows0.5% frame-height rounding before/after reopen.
 
 ## Version/feature acceptance
 
 | Version | Stance |
 | --- | --- |
-| Origin 2021 | Target version; check the actual exports |
+| 2021 / 2021b | Target version; verify the exact installed build and actual samples |
 | 2022+ | Try -AllowOtherVersion; repeat numerical, export and visual acceptance |
 | 2020 and earlier | No blanket promise; verify COM/virtual-matrix/plot commands individually |
 | macOS / Linux only | Python workflow works; Windows Origin native route is unavailable |
@@ -113,7 +126,7 @@ Modern documentation may show features absent in 2021. Do not assume a
 instead of using its mere installation as evidence.
 
 PNG/OPJU are the baseline native deliverables. If editable SVG is needed,
-verify actual export capability and text behavior in your installation. A
+verify actual export capability/text behavior on that edition/build. A
 PDF-to-SVG bridge may outline text; retain its source and label editability
 accurately. Do not silently substitute Python SVG for requested Origin SVG.
 The runner reopens its saved OPJU, rechecks numerical sheets and expected

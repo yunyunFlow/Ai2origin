@@ -14,8 +14,8 @@ spec.loader.exec_module(module)
 
 class DataTests(unittest.TestCase):
     def test_scott_cloud_fill_preserves_geometry_and_observations(self):
-        config=module.load_json(ROOT/'samples/demo.json')
-        plot=config['plots'][4]
+        config=module.load_json(ROOT/'templates/clouds.json')
+        plot=next(p for p in config['plots'] if p['id']=='violin-vertical')
         rows=module.read_csv(ROOT/'samples/raincloud.csv')
         groups=module.raincloud_geometry(rows,plot)
         for group in groups:
@@ -141,7 +141,7 @@ class DataTests(unittest.TestCase):
                 broken = dict(spec, series=[dict(spec["series"][0], kind="line")])
                 with self.assertRaisesRegex(ValueError, "increasing"):
                     module.prepare_plot(broken, list(reversed(rows)), index, style)
-        bad = dict(config["plots"][3], x_tick_step=0)
+        bad = dict(next(p for p in config['plots'] if p['id']=='cv'), x_tick_step=0)
         with self.assertRaisesRegex(ValueError, "Tick step"):
             module.prepare_plot(bad, module.read_csv(ROOT / "templates/electrochem.csv"), 1, style)
 
@@ -185,8 +185,8 @@ class DataTests(unittest.TestCase):
             module.heatmap_display(rows[:-1], spec)
 
     def test_full_vertical_cloud_is_symmetric_and_preserves_rain_values(self):
-        config = module.load_json(ROOT / "samples/demo.json")
-        spec = config["plots"][4]
+        config = module.load_json(ROOT / "templates/clouds.json")
+        spec = next(p for p in config['plots'] if p['id']=='violin-vertical')
         rows = module.read_csv(ROOT / "samples/raincloud.csv")
         geometry = module.raincloud_geometry(rows, spec)
         for g in geometry:
@@ -284,8 +284,8 @@ class DataTests(unittest.TestCase):
             module.lt_string('Axis";run')
 
     def test_native_rain_coordinates_preserve_actual_sample_count(self):
-        config = module.load_json(ROOT / "samples" / "demo.json")
-        spec = config["plots"][2]
+        config = module.load_json(ROOT / "templates/clouds.json")
+        spec = next(p for p in config['plots'] if p['id']=='cloud-horizontal')
         rows = module.read_csv(ROOT / "samples" / "raincloud.csv")
         style, _ = module.STYLE.resolve(module.load_json, project=config["style"])
         plot = module.prepare_plot(spec, rows, 3, style)

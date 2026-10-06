@@ -92,7 +92,7 @@ put chat reminders above the plotted frame.
 | Display interpolation/KDE/NEB guide | "这是显示插值／密度估计，原始点都保留了；方法也写进图注。" |
 | Changed raw source | "原始表改了的话，要重新生成 KDE／插值；在 Origin 里改点不会自动重算。" |
 | Requested inference | "图可以画；拟合／反演还需要先确定模型和判据。" |
-| Existing Origin session | "先保存并关闭正在编辑的工程，脚本再开自己的会话，避免打扰你的工作～" |
+| Existing Origin session | "脚本会开独立会话，你正在编辑的工程保持原样～" |
 | Toy demo | "这组是演示数据，不能当实验结果哦 (•̀ᴗ•́)و" |
 | Sharing | "发出去前只选获准分享的图／源码，原始数据和私有回执留本地。" |
 

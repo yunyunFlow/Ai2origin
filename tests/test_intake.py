@@ -1,7 +1,10 @@
 """Synthetic flat-export fixtures; source lexemes and order must survive."""
 import csv
+from fractions import Fraction
 import importlib.util
 import json
+import math
+import subprocess
 import sys
 from pathlib import Path
 import tempfile
@@ -14,6 +17,47 @@ INTAKE = importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(INTAKE)
 
 
 class IntakeTests(unittest.TestCase):
+    def test_cv_representable_subnormal_trapezoids_match_exact_reference(self):
+        columns = {'voltage': {'source': 'X', 'type': 'numeric', 'unit': 'V'},
+                   'current': {'source': 'Y', 'type': 'numeric', 'unit': 'A'}}
+        currents = [5e-324, 1e-323, -1e-323]
+        for width in (1., 2., 4.):
+            rows = [{'voltage': str(x), 'current': str(y)}
+                    for x, y in zip((0., width, 0.), currents)]
+            result = INTAKE.cv_summary(rows, columns,
+                {'kind': 'cv_loop_capacitance', 'scan_rate_V_s': .1})
+            exact_terms = [float((Fraction(a) + Fraction(b)) * Fraction(dx) / 2)
+                           for a, b, dx in zip(currents, currents[1:], (width, -width))]
+            self.assertEqual(result['signed_loop_integral_A_V'], math.fsum(exact_terms))
+            self.assertEqual(result['apparent_capacitance_F'], abs(math.fsum(exact_terms)) / (.2 * width))
+
+    def test_cv_huge_integer_rate_is_contextual_failure_before_output(self):
+        columns = {'voltage': {'source': 'X', 'type': 'numeric', 'unit': 'V'},
+                   'current': {'source': 'Y', 'type': 'numeric', 'unit': 'A'}}
+        source = self.source('X,Y\n0,1\n1,0\n0,-1\n')
+        mapping = self.mapping(columns=columns, analysis={
+            'kind': 'cv_loop_capacitance', 'scan_rate_V_s': 10**308})
+        out = self.root / 'huge-integer'
+        run = subprocess.run([sys.executable, '-I', '-B', str(ROOT / 'scripts/intake.py'),
+                              str(source), '--map', str(mapping), '--out', str(out)],
+                             capture_output=True, text=True, cwd=self.root)
+        self.assertEqual(run.returncode, 1)
+        self.assertIn('FAIL: CV analysis scale overflow/underflow', run.stderr)
+        self.assertNotIn('Traceback', run.stderr)
+        self.assertFalse(out.exists())
+
+    def test_missing_invalid_indices_follow_original_records_after_header_skip(self):
+        source = self.source('instrument metadata\nX,Y\n1,2\n2,\n3,broken\n')
+        mapping = self.mapping(table={'skip_rows': 1})
+        out = self.root / 'record-indices'
+        INTAKE.convert(source, mapping, out)
+        result = json.loads((out / 'summary.json').read_text())
+        self.assertEqual(result['source_provenance']['source_records'], [3, 4, 5])
+        self.assertEqual(result['columns']['y']['missing_record_indices'], [4])
+        self.assertEqual(result['columns']['y']['invalid_record_indices'], [5])
+        self.assertEqual(result['columns']['y']['record_index_space'], 'source_records')
+        self.assertIn('4,2,', (out / 'mapped.csv').read_text())
+
     def test_mean_extremes_remain_within_observed_range(self):
         for values,expected in [(['5e-324']*2,5e-324),([str(sys.float_info.max)]*3,sys.float_info.max),
                                 (['1e308','1e-100','-1e308'],1e-100/3)]:

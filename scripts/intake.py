@@ -14,7 +14,7 @@ import re
 import zipfile
 from xml.etree import ElementTree as ET
 
-VERSION = '0.2.4'
+VERSION = '0.3.5'
 NS = {'s': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
 REL = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
 
@@ -31,7 +31,8 @@ def load_json(path):
                 raise ValueError('Duplicate mapping key: ' + key)
             result[key] = value
         return result
-    return json.loads(Path(path).read_text(encoding='utf-8-sig'), object_pairs_hook=unique)
+    def bad(value): raise ValueError('Non-finite mapping constant: ' + value)
+    return json.loads(Path(path).read_text(encoding='utf-8-sig'), object_pairs_hook=unique, parse_constant=bad)
 
 
 def keys(value, allowed, label):
@@ -72,6 +73,28 @@ def xlsx_rows(path, sheet=None):
         if any(n.get('hidden') in ('1', 'true') for n in ws.findall('s:cols/s:col', NS)):
             raise ValueError('Hidden Excel columns require explicit handling')
         shared = []
+        styles = []
+        if 'xl/styles.xml' in archive.namelist():
+            style_root = ET.fromstring(archive.read('xl/styles.xml'))
+            formats = {int(n.get('numFmtId')):n.get('formatCode','') for n in style_root.findall('s:numFmts/s:numFmt',NS)}
+            if len(formats) != len(style_root.findall('s:numFmts/s:numFmt',NS)):
+                raise ValueError('Duplicate Excel number-format definitions')
+            for xf in style_root.findall('s:cellXfs/s:xf',NS):
+                identifier = int(xf.get('numFmtId','0'))
+                if identifier in formats:
+                    # Literals, escapes, colors, conditions and locale codes
+                    # do not create date tokens. Elapsed-time brackets do.
+                    code = re.sub(r'"[^\"]*"|\\.|_.|\*.', '', formats[identifier])
+                    elapsed = bool(re.search(r'\[[hms]+\]',code,re.I))
+                    code = re.sub(r'\[[^\]]*\]','',code)
+                    temporal = elapsed or bool(re.search(r'[ymdhs]',code,re.I))
+                elif identifier in set(range(14,23)) | set(range(27,37)) | {45,46,47} | set(range(50,59)):
+                    temporal = True
+                elif identifier in set(range(0,14)) | set(range(37,45)) | {48,49}:
+                    temporal = False
+                else:
+                    raise ValueError('Unknown Excel number-format semantics require explicit handling')
+                styles.append(temporal)
         if 'xl/sharedStrings.xml' in archive.namelist():
             strings = ET.fromstring(archive.read('xl/sharedStrings.xml'))
             shared = [''.join(t.text or '' for t in n.findall('.//s:t', NS)) for n in strings.findall('s:si', NS)]
@@ -98,6 +121,10 @@ def xlsx_rows(path, sheet=None):
                     raise ValueError('Excel formulas/cached results require author-supplied values')
                 kind = cell.get('t', 'n')
                 value = cell.findtext('s:v', '', NS)
+                if kind=='n' and value and (styles or 's' in cell.attrib):
+                    style_index = int(cell.get('s','0'))
+                    if not 0 <= style_index < len(styles):raise ValueError('Invalid Excel cell style index')
+                    if styles[style_index]:raise ValueError('Excel date/time serial requires explicit handling; refusing numeric reinterpretation')
                 if kind == 's':
                     try:
                         index = int(value)
@@ -108,7 +135,7 @@ def xlsx_rows(path, sheet=None):
                         raise ValueError('Invalid Excel shared string') from exc
                 elif kind == 'inlineStr':
                     value = ''.join(n.text or '' for n in cell.findall('.//s:t', NS))
-                elif kind not in ('n', 'str', 'b'):
+                elif kind not in ('n', 'str'):
                     raise ValueError('Excel date/error cell requires explicit handling')
                 values[col] = value
             rows.append([values.get(i, '') for i in range(1, max(values, default=0) + 1)])
@@ -183,13 +210,17 @@ def finite(value):
         return None
 
 
-def profile(values, numeric=False):
-    missing = [i + 1 for i, value in enumerate(values) if not value.strip()]
+def profile(values, numeric=False, source_records=None):
+    records = list(range(1, len(values) + 1)) if source_records is None else source_records
+    if len(records) != len(values):
+        raise ValueError('Profile records must match retained observations')
+    missing = [records[i] for i, value in enumerate(values) if not value.strip()]
     result = {'observations': len(values), 'missing_count': len(missing), 'missing_record_indices': missing,
+              'record_index_space': 'retained_observation_1_based' if source_records is None else 'source_records',
               'distinct_nonempty_lexemes': len({v for v in values if v.strip()})}
     if numeric:
         numbers = [finite(v) for v in values]
-        bad = [i + 1 for i, v in enumerate(numbers) if v is None and values[i].strip()]
+        bad = [records[i] for i, v in enumerate(numbers) if v is None and values[i].strip()]
         valid = [n for n in numbers if n is not None]
         result.update(nonfinite_or_nonnumeric_count=len(bad), invalid_record_indices=bad, finite_count=len(valid),
                       range=[min(valid), max(valid)] if valid else None,
@@ -213,6 +244,7 @@ def cv_summary(rows, columns, request):
     for name, value in [('scan_rate_V_s', rate), ('closure_tolerance_V', tolerance)]:
         if type(value) not in (int, float) or finite(value) is None or value <= 0:
             raise ValueError('Explicit positive ' + name + ' is required')
+    rate, tolerance = finite(rate), finite(tolerance)
     factors = {'voltage': {'V': 1., 'mV': .001}, 'current': {'A': 1., 'mA': .001, 'uA': 1e-6, 'µA': 1e-6}}
     try:
         vx = factors['voltage'][columns['voltage']['unit']]
@@ -237,8 +269,16 @@ def cv_summary(rows, columns, request):
         raise ValueError('CV analysis scale overflow/underflow')
     terms = []
     for a, b, dx in zip(current, current[1:], differences):
-        average = a / 2 + b / 2
-        term = average * dx
+        # Form the mean in a normal exponent range; postpone rounding tiny
+        # means until after multiplication by dV. Halving subnormals first
+        # can lose part of a representable trapezoid even when it stays nonzero.
+        exponent = max((math.frexp(v)[1] for v in (a, b) if v != 0), default=0)
+        average = (math.ldexp(a, -exponent) + math.ldexp(b, -exponent)) / 2
+        dx_mantissa, dx_exponent = math.frexp(dx)
+        try:
+            term = math.ldexp(average * dx_mantissa, exponent + dx_exponent)
+        except OverflowError as exc:
+            raise ValueError('CV analysis integral overflow') from exc
         if dx != 0 and ((average == 0 and a != -b) or (average != 0 and term == 0)):
             raise ValueError('CV analysis integral underflow')
         terms.append(term)
@@ -264,6 +304,7 @@ def cv_summary(rows, columns, request):
             value = request[key]
             if type(value) not in (int, float) or finite(value) is None or value <= 0:
                 raise ValueError('Explicit positive normalization basis required: ' + key)
+            value = finite(value)
             quotient = capacitance / value
             if capacitance != 0 and quotient == 0:
                 raise ValueError('CV normalization underflow')
@@ -327,7 +368,8 @@ def convert(source, mapping_path, out):
         if columns[role]['type'] != 'text':
             raise ValueError('Identity columns must remain text: ' + role)
     mapped = [{role: row[headers.index(spec['source'])] for role, spec in columns.items()} for row in raw]
-    profiles = {role: profile([row[role] for row in mapped], spec['type'] == 'numeric') for role, spec in columns.items()}
+    profiles = {role: profile([row[role] for row in mapped], spec['type'] == 'numeric', provenance['source_records'])
+                for role, spec in columns.items()}
     identity_roles = required & {'sample', 'channel', 'cycle', 'step', 'branch', 'region'}
     if any(profiles[role]['missing_count'] for role in identity_roles):
         raise ValueError('Missing sample/channel/cycle/step/branch/region identity')
@@ -447,6 +489,53 @@ def verify(folder, repeat=None):
     return result
 
 
+def inspect_sources(paths, options=None):
+    """Bounded, read-only routing before the author/agent defines semantics."""
+    if not 1 <= len(paths) <= 32:
+        raise ValueError('Inspect 1..32 explicitly selected files at a time')
+    results = []
+    for path in map(Path, paths):
+        if not path.is_file(): raise ValueError('Inspect requires files, not directory traversal: ' + path.name)
+        item = {'name': path.name, 'bytes': path.stat().st_size, 'sha256': sha(path),
+                'scientific_validation': 'NOT_CLAIMED', 'status': 'HOLD_ADAPTER'}
+        suffix = path.suffix.lower()
+        if suffix in ('.csv', '.tsv', '.txt', '.dpt', '.xlsx'):
+            try:
+                if path.stat().st_size > 64*1024*1024:
+                    raise ValueError('Quick inspection is limited to 64 MiB per table; use a bounded format-specific parser')
+                headers, rows, info = read_table(path, options)
+                item.update(status='TABLE_INSPECTED', route='explicit column/unit mapping with intake.py',
+                            headers=headers, rows=len(rows), preview=rows[:3], provenance=info,
+                            columns={h: profile([r[i] for r in rows], numeric=True)
+                                     for i,h in enumerate(headers)},
+                            reminder='Numeric candidates are not confirmed physical quantities or units; no mapping or transformation applied.')
+                # Avoid repeating one row index per observation in a quick inventory.
+                item['provenance'] = {k:v for k,v in info.items() if k != 'source_records'}
+                item['provenance']['record_count'] = len(info['source_records'])
+                for summary in item['columns'].values():
+                    for key in ('missing_record_indices', 'invalid_record_indices'):
+                        summary[key] = summary[key][:16]
+                    summary['index_preview_limit'] = 16
+            except (ValueError, KeyError, OSError, ET.ParseError, zipfile.BadZipFile) as exc:
+                item.update(status='HOLD_TABLE_OPTIONS_OR_ADAPTER', reason=str(exc))
+        elif suffix in ('.png', '.jpg', '.jpeg', '.tif', '.tiff', '.bmp'):
+            from PIL import Image
+            try:
+                with Image.open(path) as image:
+                    item.update(dimensions=list(image.size), image_format=image.format)
+                    image.verify()
+                item.update(status='IMAGE_REFERENCE_ONLY', route='inspect image; numeric digitization requires calibration and disclosure')
+            except (OSError, ValueError) as exc:
+                item.update(status='HOLD_INVALID_IMAGE', reason=str(exc))
+        elif suffix in ('.opj', '.opju'):
+            item['route'] = 'native project adapter on a protected copy; inspect actual worksheet/graph bindings'
+        else:
+            item['route'] = 'identify format and use a validated owner parser; never rename to CSV'
+        if sha(path) != item['sha256']: raise ValueError('Input changed during inspection: ' + path.name)
+        results.append(item)
+    return {'status':'INSPECTED_NO_OUTPUT_FILES', 'files':results}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('source', type=Path, nargs='?')
@@ -454,9 +543,17 @@ def main(argv=None):
     parser.add_argument('--out', type=Path)
     parser.add_argument('--check', type=Path)
     parser.add_argument('--repeat', type=Path)
+    parser.add_argument('--inspect', type=Path, nargs='+', help='Read-only inventory of up to 32 supplied files; no automatic scientific mapping')
+    parser.add_argument('--table', type=Path, help='Explicit table-options JSON for --inspect (delimiter, encoding, header, sheet)')
     args = parser.parse_args(argv)
     try:
-        if args.check:
+        if args.inspect:
+            if args.source or args.map or args.out or args.check or args.repeat:
+                parser.error('--inspect accepts only --table')
+            result = inspect_sources(args.inspect, load_json(args.table) if args.table else None)
+        elif args.table:
+            parser.error('--table requires --inspect')
+        elif args.check:
             if args.source or args.map or args.out:
                 parser.error('--check only accepts --repeat')
             result = verify(args.check, args.repeat)

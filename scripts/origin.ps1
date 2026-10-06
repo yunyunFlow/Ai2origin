@@ -5,7 +5,8 @@ param(
     [switch]$Run,
     [switch]$AllowOtherVersion,
     [ValidateRange(10,600)][int]$TimeoutSeconds=180,
-    [switch]$InternalWorker
+    [switch]$InternalWorker,
+    [string]$ExpectedPlanSha
 )
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
@@ -47,7 +48,40 @@ function Resolve-Server {
 function Assert-PlainText([string]$Text) {
     if ($Text -match '[";\r\n%$\\]') { throw "Unsupported LabTalk text control character" }
 }
+function Assert-FontGlyphs([string]$Family, [string[]]$Texts) {
+    if (-not ('A2OGlyphs' -as [type])) {
+        Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @'
+using System; using System.Drawing; using System.Runtime.InteropServices;
+public static class A2OGlyphs {
+ [DllImport("gdi32.dll")] static extern IntPtr CreateCompatibleDC(IntPtr hdc);
+ [DllImport("gdi32.dll")] static extern IntPtr SelectObject(IntPtr hdc,IntPtr obj);
+ [DllImport("gdi32.dll")] static extern bool DeleteObject(IntPtr obj);
+ [DllImport("gdi32.dll")] static extern bool DeleteDC(IntPtr hdc);
+ [DllImport("gdi32.dll",CharSet=CharSet.Unicode,ExactSpelling=true)]
+ static extern uint GetGlyphIndicesW(IntPtr hdc,string text,int count,[Out] ushort[] glyphs,uint flags);
+ public static void Check(string family,string[] texts) {
+  using(var font=new Font(family,12,FontStyle.Regular,GraphicsUnit.Point)) {
+   if(!String.Equals(font.FontFamily.Name,family,StringComparison.OrdinalIgnoreCase)) throw new Exception("Font substitution refused");
+   IntPtr dc=CreateCompatibleDC(IntPtr.Zero),hf=font.ToHfont(),old=IntPtr.Zero;
+   try {
+    if(dc==IntPtr.Zero||hf==IntPtr.Zero) throw new Exception("Font glyph context unavailable");
+    old=SelectObject(dc,hf);
+    foreach(string text in texts) {
+     foreach(char c in text) if(char.IsSurrogate(c)) throw new Exception("Supplementary glyphs require a separately validated native text adapter");
+     ushort[] glyphs=new ushort[text.Length];
+     if(text.Length>0 && GetGlyphIndicesW(dc,text,text.Length,glyphs,1)==UInt32.MaxValue) throw new Exception("Glyph query failed");
+     for(int i=0;i<text.Length;i++) if(!Char.IsWhiteSpace(text[i])&&glyphs[i]==0xffff) throw new Exception("Native font lacks U+"+((int)text[i]).ToString("X4"));
+    }
+   } finally {if(old!=IntPtr.Zero) SelectObject(dc,old);if(hf!=IntPtr.Zero) DeleteObject(hf);if(dc!=IntPtr.Zero) DeleteDC(dc);}
+  }
+ }
+}
+'@
+    }
+    [A2OGlyphs]::Check($Family,$Texts)
+}
 function Assert-DrawingStatement([string]$Command) {
+    if ($Command -ceq '@TL=0') { return }
     # A prepared plan contains drawing statements, not arbitrary scripts.
     if ($Command -match '[;\r\n]' -or $Command -notmatch '^(plotxy |plotvm |layer[ .-]|page\.|range Curve[0-9]+=![0-9]+$|set Curve[0-9]+ |label |axis |legendupdate |Legend\.|SeriesKey[0-9]*\.|Title\.|AxisTitle[XY]\.|ScaleTitle\.|CBT[0-9]+\.|Group[0-9]+\.|xb\.|yl\.)') {
         throw "Plan contains an unsupported drawing statement"
@@ -72,6 +106,7 @@ function Test-PreparedPlan($Prepared, [string]$PlanFolder) {
             $books[[string]$book.name]=$true
             $rows=@($book.rows).Count; $cols=@($book.headers).Count
             if ($rows -lt 1 -or $cols -lt 2 -or $rows*$cols -gt 2000000) { throw 'Invalid or oversized worksheet' }
+            [void](Get-ExactMatrix $book)
             $headers=@{}
             foreach ($header in $book.headers) {
                 Assert-PlainText ([string]$header)
@@ -98,6 +133,34 @@ function Test-PreparedPlan($Prepared, [string]$PlanFolder) {
         }
     }
 }
+function Get-ExactMatrix($Book) {
+    if (-not [BitConverter]::IsLittleEndian -or -not $Book.data_f64le) {
+        throw 'Exact worksheet payload missing. Prepare this configuration again with the current Python entry.'
+    }
+    $rows=@($Book.rows).Count; $cols=@($Book.headers).Count
+    $bytes=[Convert]::FromBase64String([string]$Book.data_f64le)
+    if ($bytes.Length -ne 8*$rows*$cols) { throw 'Exact worksheet payload dimensions differ' }
+    $matrix=New-Object 'double[,]' $rows,$cols
+    for ($r=0;$r -lt $rows;$r++) {
+        if (@($Book.rows[$r]).Count -ne $cols) { throw 'Worksheet row width mismatch' }
+        for ($c=0;$c -lt $cols;$c++) {
+            $v=[BitConverter]::ToDouble($bytes,8*($r*$cols+$c))
+            $declared=$Book.rows[$r][$c]
+            if ([double]::IsNaN($v) -or [double]::IsInfinity($v) -or $v -eq $originMissing) { throw 'Invalid exact worksheet value' }
+            if ($null -eq $declared) {
+                if ($v -ne 0) { throw 'Invalid null padding payload' }
+                $matrix[$r,$c]=$originMissing
+            } else {
+                # JSON is a human-readable cross-check. Binary is authoritative;
+                # PS 5 can round the JSON decimal one ULP differently.
+                $delta=[Math]::Abs($v-[double]$declared)
+                if ($delta -gt [Math]::Max([double]::Epsilon,4.45e-16*[Math]::Abs($v))) { throw 'Exact payload disagrees with JSON geometry' }
+                $matrix[$r,$c]=$v
+            }
+        }
+    }
+    return ,$matrix
+}
 function Assert-Worksheet($App, [string]$Sheet, [double[,]]$ExpectedMatrix) {
     $rows = $ExpectedMatrix.GetLength(0)
     $cols = $ExpectedMatrix.GetLength(1)
@@ -108,11 +171,13 @@ function Assert-Worksheet($App, [string]$Sheet, [double[,]]$ExpectedMatrix) {
     for ($r=0; $r -lt $rows; $r++) {
         for ($c=0; $c -lt $cols; $c++) {
             $expected = $ExpectedMatrix[$r,$c]
-            $actual = [double]$back.GetValue($r+$back.GetLowerBound(0), $c+$back.GetLowerBound(1))
+            $raw = $back.GetValue($r+$back.GetLowerBound(0), $c+$back.GetLowerBound(1))
+            if ($null -eq $raw -or $raw -is [string] -or $raw -is [bool]) { throw 'Invalid native numeric cell type' }
+            $actual = [double]$raw
             $missing = [double]::IsNaN($actual) -or $actual -eq $originMissing
             if ($expected -eq $originMissing) {
                 if (-not $missing) { throw "Padding changed: $Sheet row=$r col=$c actual=$actual" }
-            } elseif ($missing -or [Math]::Abs($actual-$expected) -gt 1e-12 * (1+[Math]::Abs($expected))) {
+            } elseif ($missing -or [double]::IsInfinity($actual) -or $actual -ne $expected) {
                 throw "Numerical read-back mismatch: $Sheet row=$r col=$c expected=$expected actual=$actual"
             }
         }
@@ -120,12 +185,15 @@ function Assert-Worksheet($App, [string]$Sheet, [double[,]]$ExpectedMatrix) {
     return $rows * $cols
 }
 function Assert-LogAxis($App, $Plot) {
-    if ($Plot.metadata.x_scale -ne 'log10') { return }
-    if ([double]$App.LTVar('layer.x.type') -ne 2) { throw 'Native logarithmic axis type drift' }
-    foreach ($pair in @(@('layer.x.from',0),@('layer.x.to',1))) {
-        $expected = [double]$Plot.metadata.x_range[[int]$pair[1]]
-        $actual = [double]$App.LTVar([string]$pair[0])
-        if ([Math]::Abs($actual-$expected) -gt 1e-12*(1+[Math]::Abs($expected))) { throw 'Native logarithmic axis range drift' }
+    if (($Plot.metadata.x_scale -eq 'log10' -or $Plot.metadata.y_scale -eq 'log10') -and [double]$App.LTVar('@TL') -ne 0) { throw 'Native short-log-range tick mode drift' }
+    foreach ($axis in @('x','y')) {
+        if ($Plot.metadata.($axis+'_scale') -ne 'log10') { continue }
+        if ([double]$App.LTVar('layer.'+$axis+'.type') -ne 2) { throw 'Native logarithmic axis type drift' }
+        foreach ($pair in @(@('from',0),@('to',1))) {
+            $expected = [double]$Plot.metadata.($axis+'_range')[[int]$pair[1]]
+            $actual = [double]$App.LTVar('layer.'+$axis+'.'+[string]$pair[0])
+            if ($expected -le 0 -or $actual -le 0 -or [Math]::Abs($actual/$expected-1) -gt 1e-11) { throw 'Native logarithmic axis range drift' }
+        }
     }
 }
 function Assert-ColorMap($App, $Plot) {
@@ -162,14 +230,17 @@ function Assert-GraphStyle($App, $Plot, $Style) {
         if ([double]$App.LTVar($name+'.fsize') -ne [double]$Style.font.axis_title_size_pt) { throw 'Axis title size drift' }
         if ([double]$App.LTVar($name+'.font') -ne $expectedFont) { throw 'Axis title family drift' }
     }
+    $yf=[double]$App.LTVar('layer.y.from');$yt=[double]$App.LTVar('layer.y.to');$yp=[double]$App.LTVar('AxisTitleY.y')
+    $fraction=if ([double]$App.LTVar('layer.y.type') -eq 2) {([Math]::Log10($yp)-[Math]::Log10($yf))/([Math]::Log10($yt)-[Math]::Log10($yf))} else {($yp-$yf)/($yt-$yf)}
+    if ([double]::IsNaN($fraction) -or [double]::IsInfinity($fraction) -or [Math]::Abs($fraction-.5) -gt .005) {throw 'Y title is not centered on its axis frame'}
     $legendCount=0
-    if ($Plot.metadata.kind -in @('line','scatter','line_symbol')) { $legendCount=@($Plot.metadata.series).Count }
+    if ($Plot.metadata.kind -in @('line','scatter','line_symbol','bar')) { $legendCount=@($Plot.metadata.series | Where-Object { $_.legend -ne $false }).Count }
     for ($i=1;$i -le $legendCount;$i++) {
         if ([double]$App.LTVar('SeriesKey'+$i+'.fsize') -ne [double]$Style.font.legend_size_pt) { throw 'Legend size drift' }
         if ([double]$App.LTVar('SeriesKey'+$i+'.font') -ne $expectedFont) { throw 'Legend family drift' }
     }
 }
-function Measure-LabelGap($App, [string]$Image) {
+function Measure-LabelGap($App, [string]$Image, [bool]$CategoricalY=$false) {
     if (-not ('A2OInk' -as [type])) {
         Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @'
 using System; using System.Drawing; using System.Drawing.Imaging;
@@ -182,7 +253,7 @@ public class A2OInk {
    else if(i-last>15) {r.Add(new int[]{start,last});start=i;} last=i;
   } if(start>=0) r.Add(new int[]{start,last});return r;
  }
- public static double[] Gap(string path,double left,double top,double width,double height) {
+ public static double[] Gap(string path,double left,double top,double width,double height,bool categoricalY) {
   using(var b=new Bitmap(path)) {
    int l=(int)Math.Round(left*b.Width/100), t=(int)Math.Round(top*b.Height/100);
    int r=(int)Math.Round((left+width)*b.Width/100), d=(int)Math.Round((top+height)*b.Height/100);
@@ -195,17 +266,21 @@ public class A2OInk {
     if(y>d+20&&x>l+12&&x<r-12) xx[y]=true;
    }
    var yr=Runs(yy);var xr=Runs(xx);
-   if(yr.Count<2||xr.Count<2) return new double[]{-1,-1,r-l};
-   return new double[]{yr[1][0]-yr[0][1]-1,xr[xr.Count-1][0]-xr[xr.Count-2][1]-1,r-l};
+   if(yr.Count<1||xr.Count<2||(!categoricalY&&yr.Count<2)) return new double[]{-1,-1,r-l};
+   // A categorical/hidden Y axis has no numeric label column. Measure its
+   // title against the frame instead of leaving the initial large offset.
+   int ygap=categoricalY ? l-yr[yr.Count-1][1]-1 : yr[1][0]-yr[0][1]-1;
+   return new double[]{ygap,xr[xr.Count-1][0]-xr[xr.Count-2][1]-1,r-l};
   }
  }
 }
 '@
     }
-    return [A2OInk]::Gap($Image,[double]$App.LTVar('layer.left'),[double]$App.LTVar('layer.top'),[double]$App.LTVar('layer.width'),[double]$App.LTVar('layer.height'))
+    return [A2OInk]::Gap($Image,[double]$App.LTVar('layer.left'),[double]$App.LTVar('layer.top'),[double]$App.LTVar('layer.width'),[double]$App.LTVar('layer.height'),$CategoricalY)
 }
 function Align-LabelGap($App, $Plot, [string]$Image) {
-    $gap=Measure-LabelGap $App $Image
+    $categoricalY=($Plot.metadata.kind -eq 'raincloud' -and $Plot.metadata.orientation -eq 'horizontal') -or $Plot.metadata.y_ticks -eq $false
+    $gap=Measure-LabelGap $App $Image $categoricalY
     if ($gap[0] -lt 0) { return @{status='NO_NUMERIC_GROUP_AXIS';image=[IO.Path]::GetFileName($Image)} }
     $fraction=($gap[0]-$gap[1])/$gap[2]
     $from=[double]$App.LTVar('layer.x.from'); $to=[double]$App.LTVar('layer.x.to')
@@ -213,8 +288,10 @@ function Align-LabelGap($App, $Plot, [string]$Image) {
     if ($Plot.metadata.x_scale -eq 'log10') {
         $position=[Math]::Pow(10,[Math]::Log10($current)+$fraction*([Math]::Log10($to)-[Math]::Log10($from)))
     } else { $position=$current+$fraction*($to-$from) }
-    if (-not $App.Execute('AxisTitleY.x='+$position.ToString('G17',$culture)+';')) { throw 'Axis title gap adjustment failed' }
-    return @{status='ALIGNED_FROM_RENDER';before_y_px=$gap[0];target_x_px=$gap[1];fraction_delta=$fraction}
+    $yf=[double]$App.LTVar('layer.y.from');$yt=[double]$App.LTVar('layer.y.to')
+    $ym=if ([double]$App.LTVar('layer.y.type') -eq 2) {[Math]::Pow(10,.5*([Math]::Log10($yf)+[Math]::Log10($yt)))} else {$yf+.5*($yt-$yf)}
+    if (-not $App.Execute('AxisTitleY.x='+$position.ToString('G17',$culture)+';AxisTitleY.y='+$ym.ToString('G17',$culture)+';')) { throw 'Axis title gap/center adjustment failed' }
+    return @{status='ALIGNED_FROM_RENDER';before_y_px=$gap[0];target_x_px=$gap[1];fraction_delta=$fraction;categorical_y=$categoricalY}
 }
 function Stop-OwnedSession([string]$StatePath) {
     if (-not (Test-Path -LiteralPath $StatePath -PathType Leaf)) { return }
@@ -247,8 +324,11 @@ function Remove-OwnedAssets([string]$Folder) {
 }
 
 $planPath = (Resolve-Path -LiteralPath $Plan).ProviderPath
+$planHash=(Get-FileHash -LiteralPath $planPath -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($ExpectedPlanSha -and $ExpectedPlanSha -ne $planHash) {throw 'Prepared plan changed between caller and worker'}
 $prepared = Get-Content -LiteralPath $planPath -Raw -Encoding UTF8 | ConvertFrom-Json
 Test-PreparedPlan $prepared (Split-Path -Parent $planPath)
+if ((Get-FileHash -LiteralPath $planPath -Algorithm SHA256).Hash.ToLowerInvariant() -ne $planHash) {throw 'Prepared plan changed during validation'}
 $selectedExe = Resolve-Server
 if ($OriginExe -and [IO.Path]::GetFullPath($OriginExe) -ine $selectedExe) {
     throw "Requested executable differs from COM registration. Select the intended installation explicitly; no automatic re-registration is performed."
@@ -264,6 +344,10 @@ try {
     $fontName = [string]$prepared.style.font.family
     if ($fontName -notin @($fonts.Families | ForEach-Object {$_.Name})) { throw "Configured Origin font is not installed: $fontName. Choose an installed font explicitly." }
 } finally { $fonts.Dispose() }
+foreach ($plot in $prepared.plots) {
+    if ($null -eq $plot.metadata.display_text) {throw 'Native display text contract missing; prepare again with the current entry'}
+    Assert-FontGlyphs $fontName ([string[]]$plot.metadata.display_text)
+}
 # Check-only is the default; it never activates COM or creates output files.
 if (-not $Run -and -not $InternalWorker) {
     [pscustomobject]@{status="CHECK_ONLY"; origin_version=$version; executable_sha256=$executableHash; plots=@($prepared.plots).Count} | ConvertTo-Json -Compress
@@ -283,9 +367,9 @@ if (-not $InternalWorker) {
     $job = $null
     try {
         $job = Start-Job -ScriptBlock {
-            param($scriptFile, $planFile, $outputFolder, $exe, $other)
-            & $scriptFile -Plan $planFile -OutDir $outputFolder -OriginExe $exe -AllowOtherVersion:$other -InternalWorker
-        } -ArgumentList $PSCommandPath,$planPath,$outputPath,$selectedExe,([bool]$AllowOtherVersion)
+            param($scriptFile, $planFile, $outputFolder, $exe, $other, $expectedHash)
+            & $scriptFile -Plan $planFile -OutDir $outputFolder -OriginExe $exe -AllowOtherVersion:$other -InternalWorker -ExpectedPlanSha $expectedHash
+        } -ArgumentList $PSCommandPath,$planPath,$outputPath,$selectedExe,([bool]$AllowOtherVersion),$planHash
         $done = Wait-Job -Job $job -Timeout $TimeoutSeconds
         if ($null -eq $done) {
             Write-Json (Join-Path $outputPath "FAILED.json") @{status="HOLD_TIMEOUT"; native_acceptance="FAILED"}
@@ -347,7 +431,8 @@ try {
                     if ([double]::IsInfinity($cell) -or [double]::IsNaN($cell)) { throw "Non-finite worksheet value" }
                 }
             }
-            if (-not $app.Execute("newbook name:=$($book.name) sheet:=1;wks.ncols=$columnCount;")) { throw "Worksheet creation failed" }
+            $matrix=Get-ExactMatrix $book
+            if (-not $app.Execute("newbook name:=$($book.name) sheet:=1;win -r %H $($book.name);wks.ncols=$columnCount;")) { throw "Worksheet creation failed" }
             $sheet = "[$($book.name)]Sheet1"
             if (-not $app.PutWorksheet($sheet, $matrix, 0, 0)) { throw "PutWorksheet failed" }
             for ($c=0; $c -lt $columnCount; $c++) {
@@ -359,7 +444,12 @@ try {
             $numericCells += Assert-Worksheet $app $sheet $matrix
             $verifiedSheets += @{sheet=$sheet; matrix=$matrix}
         }
-        foreach ($command in $plot.commands) { Invoke-LT $app ([string]$command) }
+        foreach ($command in $plot.commands) {
+            Invoke-LT $app ([string]$command)
+            if ($command -match '<new name:=(Plot[0-9]+)>') {
+                if (-not $app.Execute('win -r %H '+$matches[1]+';')) { throw 'Graph short-name assignment failed' }
+            }
+        }
         Assert-LogAxis $app $plot
         if ($plot.metadata.kind -eq "heatmap") {
             $range = @([double]$app.LTVar("layer.cmap.zmin"), [double]$app.LTVar("layer.cmap.zmax"))
@@ -404,13 +494,31 @@ try {
         if (-not $app.Execute("expGraph type:=png filename:=$quote$layoutName$quote path:=$quote$outputPath$quote overwrite:=rename sysopts:=0 tr.Margin:=2 tr1.width:=$widthCm tr1.unit:=1 tr2.PNG.dotsperinch:=$dpi;")) { throw 'Layout export failed' }
         $layoutPath=Join-Path $outputPath ($layoutName+'.png')
         $alignment=Align-LabelGap $app $plot $layoutPath
+        if ($alignment.status -eq 'NO_NUMERIC_GROUP_AXIS' -and $plot.metadata.kind -ne 'raincloud' -and $plot.metadata.y_ticks -ne $false) {
+            # Overlapping title/tick ink is one component, not evidence of a
+            # categorical axis. Reserve additional left margin and remeasure.
+            # Shrink both frame dimensions together to preserve equal XY scale.
+            $oldWidth=[double]$app.LTVar('layer.width');$oldHeight=[double]$app.LTVar('layer.height')
+            if ($oldWidth -le 25) { throw 'Numeric axis label layout cannot be resolved on this page' }
+            $newWidth=$oldWidth-12;$newHeight=$oldHeight*$newWidth/$oldWidth
+            $left=[double]$app.LTVar('layer.left')+12
+            $top=[double]$app.LTVar('layer.top')+($oldHeight-$newHeight)/2
+            $axisX=if ($plot.metadata.x_scale -eq 'log10') {'10^(log(layer.x.from)-.4*(log(layer.x.to)-log(layer.x.from)))'} else {'layer.x.from-.4*(layer.x.to-layer.x.from)'}
+            $layout='layer.left='+$left.ToString('G17',$culture)+';layer.width='+$newWidth.ToString('G17',$culture)+';layer.top='+$top.ToString('G17',$culture)+';layer.height='+$newHeight.ToString('G17',$culture)+';doc -uw;'
+            if (-not $app.Execute($layout)) { throw 'Expanded numeric label margin failed' }
+            if (-not $app.Execute('AxisTitleY.attach=2;AxisTitleY.x='+$axisX+';')) { throw 'Numeric title placement failed' }
+            if (-not $app.Execute("expGraph type:=png filename:=$quote$layoutName$quote path:=$quote$outputPath$quote overwrite:=replace sysopts:=0 tr.Margin:=2 tr1.width:=$widthCm tr1.unit:=1 tr2.PNG.dotsperinch:=$dpi;")) { throw 'Expanded layout export failed' }
+            $alignment=Align-LabelGap $app $plot $layoutPath
+            if ($alignment.status -ne 'ALIGNED_FROM_RENDER') { throw 'Numeric axis labels remain unresolved; native visual acceptance is HOLD' }
+            $alignment.expanded_left_margin=$true
+        }
         $export = "expGraph type:=png filename:=$quote$imageName$quote path:=$quote$outputPath$quote overwrite:=rename sysopts:=0 tr.Margin:=2 tr1.width:=$widthCm tr1.unit:=1 tr2.PNG.dotsperinch:=$dpi;"
         if (-not $app.Execute($export)) { throw "PNG export failed" }
         $imagePath = Join-Path $outputPath ($imageName + ".png")
         if (-not (Test-Path -LiteralPath $imagePath -PathType Leaf) -or (Get-Item -LiteralPath $imagePath).Length -lt 1000) {
             throw "Native PNG missing or empty"
         }
-        $finalGap=Measure-LabelGap $app $imagePath
+        $finalGap=Measure-LabelGap $app $imagePath (($plot.metadata.kind -eq 'raincloud' -and $plot.metadata.orientation -eq 'horizontal') -or $plot.metadata.y_ticks -eq $false)
         if ($alignment.status -eq 'ALIGNED_FROM_RENDER' -and [Math]::Abs($finalGap[0]-$finalGap[1]) -gt 3) { throw "Axis label gaps differ: $imageName y=$($finalGap[0]) x=$($finalGap[1])" }
         $alignment.final_y_px=$finalGap[0]; $alignment.final_x_px=$finalGap[1]
         Write-Json (Join-Path $outputPath ($imageName+'-layout.json')) $alignment
@@ -446,14 +554,15 @@ try {
     $outputs = @(Get-ChildItem -LiteralPath $outputPath -File | Where-Object {$_.Extension -in @(".png",".opju")} | ForEach-Object {
         @{name=$_.Name; bytes=$_.Length; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()}
     })
+    if ((Get-FileHash -LiteralPath $planPath -Algorithm SHA256).Hash.ToLowerInvariant() -ne $planHash) {throw 'Prepared plan changed during native generation'}
     Write-Json (Join-Path $outputPath "native-receipt.json") @{
         schema_version=1; status="NATIVE_EXPORTED"; origin_version=$version; executable_sha256=$executableHash;
         runner_sha256=(Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash.ToLowerInvariant();
-        plan_sha256=(Get-FileHash -LiteralPath $planPath -Algorithm SHA256).Hash.ToLowerInvariant();
+        plan_sha256=$planHash;
         numeric_readback_cells=$numericCells; numeric_readback="PASS"; outputs=$outputs;
         project_reopen="PASS"; reopened_readback_cells=$reopenedCells; reopened_graph_count=@($prepared.plots).Count;
         reopened_exports=@($prepared.plots).Count;
-        style_readback="PASS_BEFORE_AND_AFTER_REOPEN"; native_log_axes=@($prepared.plots | Where-Object {$_.metadata.x_scale -eq 'log10'}).Count;
+        style_readback="PASS_BEFORE_AND_AFTER_REOPEN"; native_log_axes=@($prepared.plots | Where-Object {$_.metadata.x_scale -eq 'log10' -or $_.metadata.y_scale -eq 'log10'}).Count;
         palette_readback='PASS_BEFORE_AND_AFTER_REOPEN';palette_colors_verified=$paletteColors;
         font=$fontName; raster_dpi=$dpi; requested_width_mm=[double]$prepared.style.figure.width_mm;
         visual_review="REQUIRED"; scientific_validation="NOT_CLAIMED"

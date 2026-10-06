@@ -1,0 +1,1720 @@
+{
+  "schema_version": 1,
+  "jobs": [
+    {
+      "id": "cv",
+      "method": "cv_dunn",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0002
+          },
+          "selection": {
+            "start": 0,
+            "stop": 201
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0004
+          },
+          "selection": {
+            "start": 201,
+            "stop": 402
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0006
+          },
+          "selection": {
+            "start": 402,
+            "stop": 603
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0008
+          },
+          "selection": {
+            "start": 603,
+            "stop": 804
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.001
+          },
+          "selection": {
+            "start": 804,
+            "stop": 1005
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.002
+          },
+          "selection": {
+            "start": 1005,
+            "stop": 1206
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "discharge",
+            "rate_V_s": 0.0002
+          },
+          "selection": {
+            "start": 1206,
+            "stop": 1407
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "discharge",
+            "rate_V_s": 0.0004
+          },
+          "selection": {
+            "start": 1407,
+            "stop": 1608
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "discharge",
+            "rate_V_s": 0.0006
+          },
+          "selection": {
+            "start": 1608,
+            "stop": 1809
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "discharge",
+            "rate_V_s": 0.0008
+          },
+          "selection": {
+            "start": 1809,
+            "stop": 2010
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "discharge",
+            "rate_V_s": 0.001
+          },
+          "selection": {
+            "start": 2010,
+            "stop": 2211
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "discharge",
+            "rate_V_s": 0.002
+          },
+          "selection": {
+            "start": 2211,
+            "stop": 2412
+          }
+        }
+      ],
+      "parameters": {
+        "complete_cycle": true,
+        "residual_tolerance": 0.02,
+        "fit_space": "normalized",
+        "display_rates_V_s": [
+          0.0002,
+          0.001
+        ]
+      }
+    },
+    {
+      "id": "peaks",
+      "method": "cv_peaks",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0002
+          },
+          "selection": {
+            "start": 0,
+            "stop": 201
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0004
+          },
+          "selection": {
+            "start": 201,
+            "stop": 402
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0006
+          },
+          "selection": {
+            "start": 402,
+            "stop": 603
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.0008
+          },
+          "selection": {
+            "start": 603,
+            "stop": 804
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.001
+          },
+          "selection": {
+            "start": 804,
+            "stop": 1005
+          }
+        },
+        {
+          "file": "analysis-cv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge",
+            "rate_V_s": 0.002
+          },
+          "selection": {
+            "start": 1005,
+            "stop": 1206
+          }
+        }
+      ],
+      "parameters": {
+        "window_V": [
+          0.45,
+          0.85
+        ],
+        "polarity": "anodic"
+      }
+    },
+    {
+      "id": "cdl",
+      "method": "cv_cdl",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "anodic",
+            "rate_V_s": 0.0002
+          },
+          "selection": {
+            "start": 0,
+            "stop": 21
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "anodic",
+            "rate_V_s": 0.0004
+          },
+          "selection": {
+            "start": 21,
+            "stop": 42
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "anodic",
+            "rate_V_s": 0.0006
+          },
+          "selection": {
+            "start": 42,
+            "stop": 63
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "anodic",
+            "rate_V_s": 0.0008
+          },
+          "selection": {
+            "start": 63,
+            "stop": 84
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "anodic",
+            "rate_V_s": 0.001
+          },
+          "selection": {
+            "start": 84,
+            "stop": 105
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "anodic",
+            "rate_V_s": 0.002
+          },
+          "selection": {
+            "start": 105,
+            "stop": 126
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "cathodic",
+            "rate_V_s": 0.0002
+          },
+          "selection": {
+            "start": 126,
+            "stop": 147
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "cathodic",
+            "rate_V_s": 0.0004
+          },
+          "selection": {
+            "start": 147,
+            "stop": 168
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "cathodic",
+            "rate_V_s": 0.0006
+          },
+          "selection": {
+            "start": 168,
+            "stop": 189
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "cathodic",
+            "rate_V_s": 0.0008
+          },
+          "selection": {
+            "start": 189,
+            "stop": 210
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "cathodic",
+            "rate_V_s": 0.001
+          },
+          "selection": {
+            "start": 210,
+            "stop": 231
+          }
+        },
+        {
+          "file": "analysis-control.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "cathodic",
+            "rate_V_s": 0.002
+          },
+          "selection": {
+            "start": 231,
+            "stop": 252
+          }
+        }
+      ],
+      "parameters": {
+        "paired_cathodic_reversal": true,
+        "sample_potential_V": 0.4,
+        "linearity_tolerance": 0.01,
+        "conditions": {
+          "nonfaradaic_window": true,
+          "sampling_checked": true,
+          "ohmic_drop_assessed": true,
+          "repeatability_checked": true
+        }
+      }
+    },
+    {
+      "id": "gitt",
+      "method": "gitt",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-gitt.csv",
+          "roles": {
+            "time": {
+              "column": "t",
+              "unit": "s"
+            },
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "pulse_id": "P1",
+            "coordinate": 20,
+            "coordinate_unit": "%",
+            "pulse_tau_s": 120.0,
+            "pre_eq": 1.2,
+            "post_eq": 1.20008,
+            "length_m": 2.5e-05,
+            "equilibrium_confirmed": true,
+            "transient_excluded": true,
+            "physical_conditions": {
+              "small_perturbation": true,
+              "diffusion_dominance": true,
+              "effective_geometry_verified": true
+            }
+          },
+          "selection": {
+            "start": 0,
+            "stop": 121
+          }
+        },
+        {
+          "file": "analysis-gitt.csv",
+          "roles": {
+            "time": {
+              "column": "t",
+              "unit": "s"
+            },
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "pulse_id": "P2",
+            "coordinate": 50,
+            "coordinate_unit": "%",
+            "pulse_tau_s": 120.0,
+            "pre_eq": 1.2349999999999999,
+            "post_eq": 1.23508,
+            "length_m": 2.5e-05,
+            "equilibrium_confirmed": true,
+            "transient_excluded": true,
+            "physical_conditions": {
+              "small_perturbation": true,
+              "diffusion_dominance": true,
+              "effective_geometry_verified": true
+            }
+          },
+          "selection": {
+            "start": 121,
+            "stop": 242
+          }
+        },
+        {
+          "file": "analysis-gitt.csv",
+          "roles": {
+            "time": {
+              "column": "t",
+              "unit": "s"
+            },
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "pulse_id": "P3",
+            "coordinate": 80,
+            "coordinate_unit": "%",
+            "pulse_tau_s": 120.0,
+            "pre_eq": 1.27,
+            "post_eq": 1.27008,
+            "length_m": 2.5e-05,
+            "equilibrium_confirmed": true,
+            "transient_excluded": true,
+            "physical_conditions": {
+              "small_perturbation": true,
+              "diffusion_dominance": true,
+              "effective_geometry_verified": true
+            }
+          },
+          "selection": {
+            "start": 242,
+            "stop": 363
+          }
+        }
+      ],
+      "parameters": {
+        "fit_window_s": [
+          10,
+          40
+        ],
+        "short_time_limit": 0.01,
+        "r2_min": 0.99,
+        "current_constancy_tolerance": 1e-06,
+        "coordinate_axis": {
+          "label": "Assigned SOC",
+          "unit": "%"
+        }
+      }
+    },
+    {
+      "id": "ica",
+      "method": "ica",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-gcd.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "charge": {
+              "column": "Q",
+              "unit": "C"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {}
+        }
+      ],
+      "parameters": {
+        "Q_convention": "branch_capacity"
+      }
+    },
+    {
+      "id": "tafel",
+      "method": "tafel",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-lsv.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "j",
+              "unit": "A/cm2"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {}
+        }
+      ],
+      "parameters": {
+        "prepare": {
+          "current_sign": "anodic_positive",
+          "area_cm2": 1.0,
+          "ir": {
+            "Ru_ohm": 5.0,
+            "input_compensation": "none",
+            "prior_fraction": 0,
+            "residual_fraction": 1
+          },
+          "reference": {
+            "mode": "direct_RHE",
+            "offset_V": 0,
+            "provenance": "Assigned synthetic RHE potential"
+          },
+          "equilibrium_potential_RHE_V": 0
+        },
+        "fit": {
+          "window": {
+            "kind": "indices",
+            "indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60
+            ]
+          },
+          "polarity": "anodic",
+          "log_reference_value": 1,
+          "log_reference_unit": "A/cm2",
+          "conditions": {
+            "steady_state": true,
+            "charging_negligible": true,
+            "transport_negligible": true,
+            "uniform_access": true,
+            "single_kinetic_regime": true
+          }
+        }
+      }
+    },
+    {
+      "id": "eis",
+      "method": "eis_rc",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-eis-0.csv",
+          "roles": {
+            "frequency": {
+              "column": "f",
+              "unit": "Hz"
+            },
+            "real": {
+              "column": "real",
+              "unit": "ohm"
+            },
+            "imaginary": {
+              "column": "imag",
+              "unit": "ohm"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "imaginary_convention": "Zimag"
+          }
+        }
+      ],
+      "parameters": {
+        "n_rc": 2,
+        "initial_guesses": [
+          [
+            2,
+            10,
+            0.01,
+            50,
+            100
+          ],
+          [
+            5,
+            35,
+            0.06,
+            20,
+            800
+          ]
+        ],
+        "bounds": [
+          [
+            0.01,
+            0.01,
+            1e-05,
+            0.01,
+            1
+          ],
+          [
+            100,
+            1000,
+            10,
+            1000,
+            10000
+          ]
+        ],
+        "weighting": "modulus"
+      }
+    },
+    {
+      "id": "drt",
+      "method": "drt",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-eis-0.csv",
+          "roles": {
+            "frequency": {
+              "column": "f",
+              "unit": "Hz"
+            },
+            "real": {
+              "column": "real",
+              "unit": "ohm"
+            },
+            "imaginary": {
+              "column": "imag",
+              "unit": "ohm"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "imaginary_convention": "Zimag"
+          }
+        },
+        {
+          "file": "analysis-eis-1.csv",
+          "roles": {
+            "frequency": {
+              "column": "f",
+              "unit": "Hz"
+            },
+            "real": {
+              "column": "real",
+              "unit": "ohm"
+            },
+            "imaginary": {
+              "column": "imag",
+              "unit": "ohm"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "imaginary_convention": "Zimag"
+          }
+        },
+        {
+          "file": "analysis-eis-2.csv",
+          "roles": {
+            "frequency": {
+              "column": "f",
+              "unit": "Hz"
+            },
+            "real": {
+              "column": "real",
+              "unit": "ohm"
+            },
+            "imaginary": {
+              "column": "imag",
+              "unit": "ohm"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "imaginary_convention": "Zimag"
+          }
+        }
+      ],
+      "parameters": {
+        "tau": [
+          0.001,
+          0.001333521432163324,
+          0.0017782794100389228,
+          0.0023713737056616554,
+          0.0031622776601683794,
+          0.004216965034285822,
+          0.005623413251903491,
+          0.007498942093324558,
+          0.01,
+          0.01333521432163324,
+          0.01778279410038923,
+          0.023713737056616554,
+          0.03162277660168379,
+          0.042169650342858224,
+          0.056234132519034905,
+          0.07498942093324558,
+          0.1,
+          0.1333521432163324,
+          0.1778279410038923,
+          0.23713737056616552,
+          0.31622776601683794,
+          0.4216965034285822,
+          0.5623413251903491,
+          0.7498942093324558,
+          1.0,
+          1.333521432163324,
+          1.7782794100389228,
+          2.371373705661655,
+          3.1622776601683795,
+          4.216965034285822,
+          5.62341325190349,
+          7.498942093324558,
+          10.0,
+          13.33521432163324,
+          17.78279410038923,
+          23.71373705661655,
+          31.622776601683793,
+          42.169650342858226,
+          56.23413251903491,
+          74.98942093324558,
+          100.0,
+          133.3521432163324,
+          177.82794100389228,
+          237.13737056616552,
+          316.2277660168379,
+          421.6965034285822,
+          562.341325190349,
+          749.8942093324558,
+          1000.0,
+          1333.521432163324,
+          1778.2794100389228,
+          2371.373705661655,
+          3162.2776601683795,
+          4216.965034285822,
+          5623.413251903491,
+          7498.942093324558,
+          10000.0,
+          13335.21432163324,
+          17782.794100389227,
+          23713.737056616552,
+          31622.776601683792,
+          42169.65034285822,
+          56234.13251903491,
+          74989.42093324558,
+          100000.0
+        ],
+        "lambdas": [
+          1e-05,
+          0.0001,
+          0.001
+        ],
+        "selected_lambda": 0.0001,
+        "order": 2,
+        "weighting": "modulus",
+        "condition_axis": {
+          "label": "Assigned condition",
+          "unit": "a.u.",
+          "values": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "id": "raman",
+      "method": "spectra_peaks",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-raman.csv",
+          "roles": {
+            "coordinate": {
+              "column": "x",
+              "unit": "cm^-1"
+            },
+            "intensity": {
+              "column": "y",
+              "unit": "a.u."
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {}
+        }
+      ],
+      "parameters": {
+        "profile": "raman",
+        "centers": [
+          1350,
+          1580
+        ],
+        "width_bounds": [
+          [
+            30.0,
+            150
+          ],
+          [
+            19.200000000000003,
+            96
+          ]
+        ],
+        "baseline": {
+          "kind": "joint_linear"
+        },
+        "kind": "gaussian",
+        "starts": 5
+      }
+    },
+    {
+      "id": "ftir",
+      "method": "spectra_peaks",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-ftir.csv",
+          "roles": {
+            "coordinate": {
+              "column": "x",
+              "unit": "cm^-1"
+            },
+            "intensity": {
+              "column": "y",
+              "unit": "absorbance"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {}
+        }
+      ],
+      "parameters": {
+        "profile": "ftir",
+        "centers": [
+          3220,
+          3490
+        ],
+        "width_bounds": [
+          [
+            60.0,
+            300
+          ],
+          [
+            44.0,
+            220
+          ]
+        ],
+        "baseline": {
+          "kind": "joint_linear"
+        },
+        "kind": "gaussian",
+        "starts": 5
+      }
+    },
+    {
+      "id": "xps",
+      "method": "spectra_peaks",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-xps.csv",
+          "roles": {
+            "coordinate": {
+              "column": "x",
+              "unit": "eV"
+            },
+            "intensity": {
+              "column": "y",
+              "unit": "counts"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "energy_type": "binding",
+            "scan_type": "high_resolution",
+            "background_state": "none",
+            "energy_calibration": "Assigned binding-energy coordinates; no shift"
+          }
+        }
+      ],
+      "parameters": {
+        "profile": "xps",
+        "centers": [
+          284.4,
+          286.2,
+          288.6
+        ],
+        "width_bounds": [
+          [
+            0.36000000000000004,
+            1.8
+          ],
+          [
+            0.44000000000000006,
+            2.2
+          ],
+          [
+            0.4,
+            2.0
+          ]
+        ],
+        "baseline": {
+          "kind": "joint_linear"
+        },
+        "kind": "gaussian",
+        "starts": 5
+      }
+    },
+    {
+      "id": "correction",
+      "method": "cv_correct",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-correction.csv",
+          "roles": {
+            "potential": {
+              "column": "E",
+              "unit": "V"
+            },
+            "current": {
+              "column": "I",
+              "unit": "A"
+            },
+            "background": {
+              "column": "background",
+              "unit": "A"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {}
+        }
+      ],
+      "parameters": {
+        "ir": {
+          "resistance_ohm": 20,
+          "already_compensated_fraction": 0,
+          "resistance_source": "Independently assigned toy series resistance"
+        },
+        "tail": {
+          "branch_direction": 1,
+          "fit_window_V": [
+            0.01,
+            0.15
+          ],
+          "baseline_current": 1e-06,
+          "amplitude_bounds": [
+            5e-06,
+            2e-05
+          ],
+          "decay_scale_bounds_V": [
+            0.05,
+            0.3
+          ],
+          "model_source": "Assigned single exponential artifact, isolated fit window",
+          "relative_rmse_limit": 0.001
+        },
+        "background": {
+          "role": "background",
+          "source": "Independent assigned background column"
+        },
+        "alignment": {
+          "grid_V": [
+            0.05,
+            0.059000000000000004,
+            0.068,
+            0.077,
+            0.086,
+            0.095,
+            0.104,
+            0.113,
+            0.122,
+            0.131,
+            0.14,
+            0.149,
+            0.15799999999999997,
+            0.16699999999999998,
+            0.176,
+            0.185,
+            0.194,
+            0.203,
+            0.21199999999999997,
+            0.22099999999999997,
+            0.22999999999999998,
+            0.239,
+            0.248,
+            0.257,
+            0.26599999999999996,
+            0.27499999999999997,
+            0.284,
+            0.293,
+            0.302,
+            0.31099999999999994,
+            0.31999999999999995,
+            0.32899999999999996,
+            0.33799999999999997,
+            0.347,
+            0.356,
+            0.365,
+            0.37399999999999994,
+            0.38299999999999995,
+            0.39199999999999996,
+            0.40099999999999997,
+            0.41,
+            0.419,
+            0.42799999999999994,
+            0.43699999999999994,
+            0.44599999999999995,
+            0.45499999999999996,
+            0.46399999999999997,
+            0.473,
+            0.48199999999999993,
+            0.49099999999999994,
+            0.49999999999999994,
+            0.509,
+            0.518,
+            0.527,
+            0.536,
+            0.5449999999999999,
+            0.554,
+            0.5630000000000001,
+            0.572,
+            0.581,
+            0.59,
+            0.599,
+            0.608,
+            0.617,
+            0.626,
+            0.635,
+            0.644,
+            0.653,
+            0.662,
+            0.671,
+            0.68,
+            0.689,
+            0.698,
+            0.707,
+            0.716,
+            0.725,
+            0.734,
+            0.743,
+            0.752,
+            0.761,
+            0.77,
+            0.779,
+            0.788,
+            0.797,
+            0.8059999999999999,
+            0.815,
+            0.824,
+            0.833,
+            0.842,
+            0.851,
+            0.86,
+            0.869,
+            0.878,
+            0.887,
+            0.896,
+            0.905,
+            0.9139999999999999,
+            0.9229999999999999,
+            0.9319999999999999,
+            0.941,
+            0.95
+          ],
+          "interpolation": "piecewise_linear"
+        }
+      }
+    },
+    {
+      "id": "cycle",
+      "method": "cycle_efficiency",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-cycle.csv",
+          "roles": {
+            "charge": {
+              "column": "Qc",
+              "unit": "C"
+            },
+            "potential": {
+              "column": "Ec",
+              "unit": "V"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "charge"
+          }
+        },
+        {
+          "file": "analysis-cycle.csv",
+          "roles": {
+            "charge": {
+              "column": "Qd",
+              "unit": "C"
+            },
+            "potential": {
+              "column": "Ed",
+              "unit": "V"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "branch": "discharge"
+          }
+        }
+      ],
+      "parameters": {
+        "Q_convention": "branch_capacity",
+        "complete_branches": true,
+        "voltage_basis": "cell_terminal"
+      }
+    },
+    {
+      "id": "doublet",
+      "method": "spectra_doublet",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-doublet.csv",
+          "roles": {
+            "coordinate": {
+              "column": "kinetic",
+              "unit": "eV"
+            },
+            "intensity": {
+              "column": "counts",
+              "unit": "counts"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "energy_type": "kinetic",
+            "scan_type": "high_resolution",
+            "background_state": "none",
+            "energy_calibration": "Assigned hnu and spectrometer work-function convention"
+          }
+        }
+      ],
+      "parameters": {
+        "profile": "xps",
+        "energy": {
+          "photon_energy_eV": 1486.6,
+          "work_function_eV": 4
+        },
+        "center": 285.2,
+        "split_eV": 6,
+        "area_ratio": 2,
+        "width_bounds": [
+          0.5,
+          2
+        ],
+        "baseline": {
+          "kind": "joint_linear"
+        },
+        "kind": "gaussian"
+      }
+    },
+    {
+      "id": "shirley",
+      "method": "spectra_peaks",
+      "sample_id": "Invented-A",
+      "synthetic": true,
+      "inputs": [
+        {
+          "file": "analysis-shirley.csv",
+          "roles": {
+            "coordinate": {
+              "column": "BE",
+              "unit": "eV"
+            },
+            "intensity": {
+              "column": "counts",
+              "unit": "counts"
+            }
+          },
+          "sample_id": "Invented-A",
+          "processing": "Independently assigned synthetic forward data; no measurement or digitization.",
+          "metadata": {
+            "energy_type": "binding",
+            "scan_type": "high_resolution",
+            "background_state": "none",
+            "energy_calibration": "Assigned binding-energy toy coordinates"
+          }
+        }
+      ],
+      "parameters": {
+        "profile": "xps",
+        "centers": [
+          283,
+          287
+        ],
+        "width_bounds": [
+          [
+            0.5,
+            2
+          ],
+          [
+            0.5,
+            2
+          ]
+        ],
+        "kind": "gaussian",
+        "baseline": {
+          "kind": "shirley",
+          "endpoints": [
+            25,
+            105
+          ],
+          "source": "Independently assigned toy endpoint backgrounds",
+          "tolerance": 1e-10
+        }
+      }
+    }
+  ]
+}

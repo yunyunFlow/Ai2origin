@@ -1,2550 +1,469 @@
 {
-  "version": "0.1.3",
-  "date": "2026-10-04",
-  "pages": 36,
+  "version": "0.3.4",
+  "synthetic": true,
+  "native": "ORIGIN2021_9.8.0_TWO_OWNED_RUNS_EXACT_READBACK_SAVE_REOPEN_RGB_REPEAT",
+  "preparer_sha256": "3b3a622980cf9eb8b333529d1ea7d5f57f0b961e080b04756966eef3f4b57650",
+  "runner_sha256": "288514595c252c0fa6969f25e8e73c67c4b692dd61121f10d3cd897a3ded6942",
   "font": "Arial",
-  "raster_dpi": 600,
-  "scientific_validity": "NOT_CLAIMED_SYNTHETIC",
-  "native_version": "Origin 2021",
-  "composite_plan_sha256": "61932f4969b303cd8989d590e1fc39a6c1135924fc5b90240d4c0621712475ed",
-  "config_sha256": "8631197e61bf180747439700d5f88e2312fb15b3698b16b96d5d0bd2e2dd81e7",
-  "generator_sha256": "4159ce23c818c7743d493f5b14da04571c1c9baa22c48748c2d6d1b8169b296e",
-  "runner_sha256": "241375fd885531dea2167177fe48829d8b6cf7e8b338568fd8c40a1c35a08989",
-  "colormaps_sha256": "b77f8d6702db92618694d97e642fc79ce185763b11cd6d75b8c9a16922da7cdb",
-  "default_style_sha256": "a5ab2442c2f92e20ff3b8c67b56788ce344e3f033ed7c7204d6781ef66114875",
-  "numeric_readback": "PASS",
-  "saved_project_reopen": "PASS",
-  "RGB_reexport": "IDENTICAL",
-  "independent_native_repeat": "RGB_IDENTICAL",
-  "palette_readback": "PASS_BEFORE_AND_AFTER_REOPEN",
-  "python_environment": {
-    "python": "3.11.15",
-    "numpy": "2.4.3",
-    "matplotlib": "3.10.9",
-    "freetype": "2.14.3"
-  },
+  "font_sha256": "b3658eadae55e682b5f69eb64c439c1ecc8f196c0bb8d4756d145d13bc86476a",
+  "visual": "REVIEWED_EVERY42_NATIVE_EXPORT_USING_SIX_DETAILED_SHEETS_AND_CRITICAL_ORIGINALS",
+  "scientific_validation": "NOT_CLAIMED",
   "plots": [
     {
       "id": "cv",
-      "graph_id": "Plot6",
-      "metadata": {
-        "kind": "line",
-        "row_count": 129,
-        "caption": "Synthetic A/B current-potential loops, 129 ordered samples each, V and mA. Acquisition order and turning points retained; voltage reference is arbitrary. No scan-rate, kinetic or capacitance inference.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 266,
-            "lower right": 0,
-            "lower left": 266
-          }
-        },
-        "connect_order": "acquisition",
-        "display_offsets": [
-          {
-            "column": "current_a",
-            "offset": 0.0
-          },
-          {
-            "column": "current_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "current_a",
-            "label": "A"
-          },
-          {
-            "column": "current_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "electrochem.csv",
-        "source_sha256": "feaab106b2e34278258d5c08db8ce36eb5e87f69a26dd96d5729d238c22038d2",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "07019161165e7d59c616c68c98898423a0a9c7713282c15b40a8600a5fde0e4a",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-cv.png",
-          "bytes": 198906,
-          "sha256": "5f1738ab1bd7e4d670d240ea4bc69d567c6ed2ab181421688d35629835c897ce"
-        },
-        {
-          "name": "templates/python-cv.svg",
-          "bytes": 12694,
-          "sha256": "ac7f717550ff90c5d9dcaadb0d987e80593824c9f65efa0ba43f02067161090e"
-        },
-        {
-          "name": "templates/origin-cv.png",
-          "bytes": 47445,
-          "sha256": "fdbb4728ccdf053361373a75d153d723f87b6c25d8f727075a60804f766c6066"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
-    },
-    {
-      "id": "gcd",
-      "graph_id": "Plot7",
-      "metadata": {
-        "kind": "line",
-        "row_count": 129,
-        "caption": "Synthetic charge/discharge display loop, 129 ordered samples, capacity in mAh/g and voltage in V. Capacity is a toy mass-specific quantity; no experimental active mass, current or efficiency is implied.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 180,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 180
-          }
-        },
-        "connect_order": "acquisition",
-        "display_offsets": [
-          {
-            "column": "voltage",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "voltage",
-            "label": "cycle"
-          }
-        ],
-        "source_name": "electrochem.csv",
-        "source_sha256": "feaab106b2e34278258d5c08db8ce36eb5e87f69a26dd96d5729d238c22038d2",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "7ab85da1138e618cb915d5ed6118fb750355780824a228360389062b134ffcbe",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-gcd.png",
-          "bytes": 150333,
-          "sha256": "f82dc8b947a41c5141ea9b65bd42909278c9b3eb8c1c0cee3a213def825bb5b5"
-        },
-        {
-          "name": "templates/python-gcd.svg",
-          "bytes": 11471,
-          "sha256": "0d5486779cecb9af2ac739c8aca403c2d78e23d0f996a58ef7aa210e613faf48"
-        },
-        {
-          "name": "templates/origin-gcd.png",
-          "bytes": 45007,
-          "sha256": "e6dc4d50a5f242f8cf8ed8afdfafa46afbecbaa68254abcfc49d6a1b222f8d6b"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-cv.png",
+      "sha256": "cee6fe0277f69a5c52eb1a3e7a88bf788e6d2356009e1897a1c30b6fbb54db17",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "electrochem.csv",
+      "source_sha256": "bfcdf6b59bbd78a246fc8400948ecb787313c0a17424adac44212e89f0d025c0",
+      "caption": "Synthetic A/B current-potential loops, 129 ordered samples each, V and mA. Acquisition order and turning points retained; voltage reference is arbitrary. No scan-rate, kinetic or capacitance inference.",
+      "numeric_cells": 516,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "cycling",
-      "graph_id": "Plot8",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 129,
-        "caption": "Synthetic retention for cycles 1-129, in percent. One assigned curve, no replicate uncertainty or lifetime extrapolation.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 123,
-            "lower right": 123,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "retention",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "retention",
-            "label": "retention"
-          }
-        ],
-        "source_name": "electrochem.csv",
-        "source_sha256": "feaab106b2e34278258d5c08db8ce36eb5e87f69a26dd96d5729d238c22038d2",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "c80ceb84434ea603438a074c8a3324668d903dbe1d9932074917f5b1c98391d5",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-cycling.png",
-          "bytes": 130466,
-          "sha256": "1d8654be05e97056ae3cc8a8110a88413951aed54e3a7dcc7ca6b751349f8274"
-        },
-        {
-          "name": "templates/python-cycling.svg",
-          "bytes": 22021,
-          "sha256": "c5f2ced18dd8397730865424d1c7c5d146d9d6e6e32db047d88bc09293c06880"
-        },
-        {
-          "name": "templates/origin-cycling.png",
-          "bytes": 46651,
-          "sha256": "4bcfb6a81b625682dad183e7260148a984215347e84b48f300ef85de49ba11ac"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-cycling.png",
+      "sha256": "9f4b6763c3d8c44f4b6ea0a51a5295a6953e7e5d2b8afb2deb9432699b3ba361",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "electrochem.csv",
+      "source_sha256": "bfcdf6b59bbd78a246fc8400948ecb787313c0a17424adac44212e89f0d025c0",
+      "caption": "Synthetic retention for cycles 1-129, in percent. One assigned curve, no replicate uncertainty or lifetime extrapolation.",
+      "numeric_cells": 516,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "nyquist",
-      "graph_id": "Plot9",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 129,
-        "caption": "Invented 129-point impedance arc. Both axes span 0–30 Ω, major ticks 5 Ω and equal physical scale; square frame. No circuit fit or charge-transfer interpretation.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 0,
-            "lower right": 132,
-            "lower left": 132
-          }
-        },
-        "connect_order": "acquisition",
-        "display_offsets": [
-          {
-            "column": "znegimag",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "znegimag",
-            "label": "arc"
-          }
-        ],
-        "source_name": "electrochem.csv",
-        "source_sha256": "feaab106b2e34278258d5c08db8ce36eb5e87f69a26dd96d5729d238c22038d2",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "8ed2edaf7f3d7dc2eadcf758e6c4203a7300e9d0cc20fddcf91e21da21db9d44",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-nyquist.png",
-          "bytes": 89823,
-          "sha256": "15353866b0fa59a44af48a8f4d3df4966b7324e95e0ca93163253c488d3dd371"
-        },
-        {
-          "name": "templates/python-nyquist.svg",
-          "bytes": 24799,
-          "sha256": "f5551e3d4ca2d87925e50ebdd7f1cb6df90c350c2b4bb46d297f68c7c38e278b"
-        },
-        {
-          "name": "templates/origin-nyquist.png",
-          "bytes": 34282,
-          "sha256": "5c756b625bb273b447e543cc469bde6789b6722c553fc04ba15a6e4565a2cd69"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
-    },
-    {
-      "id": "gcd-time",
-      "graph_id": "Plot10",
-      "metadata": {
-        "kind": "line",
-        "row_count": 201,
-        "caption": "Invented triangular charge/discharge-time profiles A/B, 201 samples in seconds and volts. Arbitrary voltage reference; no measured capacity or cycling efficiency.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 0,
-            "lower right": 399,
-            "lower left": 399
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "voltage_a",
-            "offset": 0.0
-          },
-          {
-            "column": "voltage_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "voltage_a",
-            "label": "A"
-          },
-          {
-            "column": "voltage_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "gcd-time.csv",
-        "source_sha256": "7eb491da1f6bce3b15700e104395a0d4d0a894dc3d875c479c7d08b704126fd6",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "ed1e92f345d73bc3ae6f145f5af6653f6776c762423b20f8cbfa3ed523655aac",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-gcd-time.png",
-          "bytes": 171197,
-          "sha256": "77e82eb3d8a0666992bd20f07a22e9beeaca88a088b6b7887a4ddd711f75efe8"
-        },
-        {
-          "name": "templates/python-gcd-time.svg",
-          "bytes": 8337,
-          "sha256": "2815cc7b636c045d83e6a237c5676e94007fedd9511517948d7b410f1c24d53b"
-        },
-        {
-          "name": "templates/origin-gcd-time.png",
-          "bytes": 44757,
-          "sha256": "537743bc54c93ce7d0afe62c5e2f6d743c99c48fb8893a8d5f70d71f2d0bf917"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-nyquist.png",
+      "sha256": "ae01224e8b838854379dd9cc727dc8be3eac4667e1f46e786a3fca18da827160",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "electrochem.csv",
+      "source_sha256": "bfcdf6b59bbd78a246fc8400948ecb787313c0a17424adac44212e89f0d025c0",
+      "caption": "Invented 129-point impedance arc. Both axes span 0–30 Ω, major ticks 5 Ω and equal physical scale; square frame. No circuit fit or charge-transfer interpretation.",
+      "numeric_cells": 516,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "gitt",
-      "graph_id": "Plot11",
-      "metadata": {
-        "kind": "line",
-        "row_count": 241,
-        "caption": "Invented pulse/rest voltage trace, 241 samples, 30-second toy pulses within 200-second periods; current stored separately. No experimental GITT, iR correction, diffusion fit or diffusion coefficient.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 153,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 309
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "voltage",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "voltage",
-            "label": "pulses"
-          }
-        ],
-        "source_name": "pulses.csv",
-        "source_sha256": "d4bde3829b489936fb8a9e3f34368191ba9a21536d26fd36bf85cc3ade31b500",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "a07a855628617be201e647044b8cdac624d91cdd0131191d6030093cf5b4e691",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-gitt.png",
-          "bytes": 141460,
-          "sha256": "06001f2a4c169f354c5c74684ce62ab55139135a939a12259c76b84e18f8e4ed"
-        },
-        {
-          "name": "templates/python-gitt.svg",
-          "bytes": 10930,
-          "sha256": "c253d18b9149630aca2583f0f56bac8d4d17fd7534953682dc25e5876c1f082b"
-        },
-        {
-          "name": "templates/origin-gitt.png",
-          "bytes": 41743,
-          "sha256": "084d470749b6ac92034c04472c8c2b2d0ecf9a211120e750ac3b1a1ecb5a5234"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-gitt.png",
+      "sha256": "bf13203b52a604538781e7fca3951b68c4299f65cf23106dd5fec391cca86a48",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "pulses.csv",
+      "source_sha256": "5a9ca5059729540afe09a27981009fedf6fda8a8ef2ba1fc2290259d83a89169",
+      "caption": "Invented pulse/rest voltage trace, 241 samples, 30-second toy pulses within 200-second periods; current stored separately. No experimental GITT, iR correction, diffusion fit or diffusion coefficient.",
+      "numeric_cells": 482,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "cycle-capacity",
-      "graph_id": "Plot12",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 129,
-        "caption": "Invented A/B mass-specific capacity histories over 129 toy cycles. No experiment, active-mass measurement, error estimate or extrapolation.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 299,
-            "lower right": 299,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "capacity_a",
-            "offset": 0.0
-          },
-          {
-            "column": "capacity_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "capacity_a",
-            "label": "A"
-          },
-          {
-            "column": "capacity_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "performance.csv",
-        "source_sha256": "b8b8206d701f489bf848effd7a46d98f1f93916e84327b60a556c613a53a014b",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "7dc6331d90d29aa7910fd8036c4de3e7a8a89af2ffa6490af04d96f8db028e80",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-cycle-capacity.png",
-          "bytes": 134142,
-          "sha256": "18bb3af07e4e412dc33cc6e8f6015a7bce88f3a38a317ff561e94e76ea3f2e45"
-        },
-        {
-          "name": "templates/python-cycle-capacity.svg",
-          "bytes": 38663,
-          "sha256": "5ca4976de3c5dc746c1ee9654fe608e6a1d4783d6634da0086629855bc5498b8"
-        },
-        {
-          "name": "templates/origin-cycle-capacity.png",
-          "bytes": 50406,
-          "sha256": "b185dc5cac13fd542f57c04788ec5f395fa2f8c6d0166472c8203b65a3a72fb3"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-cycle-capacity.png",
+      "sha256": "0d4da016a13ef925a30515db38629939b54e90be6fb58c7085e3bddb79b9b7e2",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "performance.csv",
+      "source_sha256": "b8b8206d701f489bf848effd7a46d98f1f93916e84327b60a556c613a53a014b",
+      "caption": "Invented A/B mass-specific capacity histories over 129 toy cycles. No experiment, active-mass measurement, error estimate or extrapolation.",
+      "numeric_cells": 1032,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "coulombic",
-      "graph_id": "Plot13",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 129,
-        "caption": "Invented A/B CE-shaped curves over 129 toy cycles, percent. Values assigned directly, not calculated from measured charge/discharge integrals.",
-        "legend": {
-          "corner": "lower right",
-          "overlap_scores": {
-            "upper right": 299,
-            "upper left": 251,
-            "lower right": 0,
-            "lower left": 42
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "ce_a",
-            "offset": 0.0
-          },
-          {
-            "column": "ce_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "ce_a",
-            "label": "A"
-          },
-          {
-            "column": "ce_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "performance.csv",
-        "source_sha256": "b8b8206d701f489bf848effd7a46d98f1f93916e84327b60a556c613a53a014b",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "3969272713ecada9a8097c801c1b3943bd964e3863c69a19d0beb7325584987d",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-coulombic.png",
-          "bytes": 130777,
-          "sha256": "67da4f471d5906032ef23eb125d2da5a8a3dfdf932d23bf1472ccba2bdaedba6"
-        },
-        {
-          "name": "templates/python-coulombic.svg",
-          "bytes": 38940,
-          "sha256": "cd59493a9c09bc94ebe38ef89b49204856e621a7dfa0e2507dd40bdbc626cf5a"
-        },
-        {
-          "name": "templates/origin-coulombic.png",
-          "bytes": 48447,
-          "sha256": "3a7d252b2d741319ff2aa909fb0c3117be6bff7ce1265182bf06bd855c0d5c74"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-coulombic.png",
+      "sha256": "8dab56baf5e883777adbee5ee3a4dadbbcb1c45e048c7f87b0e840cc60abae6d",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "performance.csv",
+      "source_sha256": "b8b8206d701f489bf848effd7a46d98f1f93916e84327b60a556c613a53a014b",
+      "caption": "Invented A/B CE-shaped curves over 129 toy cycles, percent. Values assigned directly, not calculated from measured charge/discharge integrals.",
+      "numeric_cells": 1032,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "rate",
-      "graph_id": "Plot14",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 24,
-        "caption": "Invented four-cycle blocks with assigned capacity steps 150/136/110/85/108/134 mAh/g. Toy rate schedule 1/2/5/10/5/2; no experimental rate-performance conclusion.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 28,
-            "lower right": 4,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "capacity",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "capacity",
-            "label": "steps"
-          }
-        ],
-        "source_name": "rate.csv",
-        "source_sha256": "b8de693198806326b94d7ecf3d003ddb202e56f34d25771470e726553d237018",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "6f2c2e6de8b667297b7fcfe06284b5172e96c7bbbcc9940d68659d846c123936",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-rate.png",
-          "bytes": 108995,
-          "sha256": "afae8c7821f0df65399a29d5b275af18216d650ea353698e01fa4b40eca9edad"
-        },
-        {
-          "name": "templates/python-rate.svg",
-          "bytes": 12336,
-          "sha256": "850c37ad568ea61328abe0a4af85b1d978ba7408d420714242c80085098bc3a9"
-        },
-        {
-          "name": "templates/origin-rate.png",
-          "bytes": 45969,
-          "sha256": "c74ed8c9be9ee311943134b18c18ea8ed3e74249d2a5569deb23e9191914649e"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-rate.png",
+      "sha256": "8fc850c396a880774e7f77fe9f60511182dd8d81fed037a80ae8ed6ba9e98278",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "rate.csv",
+      "source_sha256": "b8de693198806326b94d7ecf3d003ddb202e56f34d25771470e726553d237018",
+      "caption": "Invented four-cycle blocks with assigned capacity steps 150/136/110/85/108/134 mAh/g. Toy rate schedule 1/2/5/10/5/2; no experimental rate-performance conclusion.",
+      "numeric_cells": 96,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "bode-magnitude",
-      "graph_id": "Plot15",
-      "metadata": {
-        "kind": "line",
-        "row_count": 121,
-        "caption": "Invented complex-impedance function at 121 actual positive frequency nodes; true log10 frequency axis, not a fit. Independent of toy Nyquist/DRT.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 429,
-            "lower right": 456,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "magnitude",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "magnitude",
-            "label": "magnitude"
-          }
-        ],
-        "x_scale": "log10",
-        "x_range": [
-          0.01,
-          100000.0
-        ],
-        "source_name": "bode.csv",
-        "source_sha256": "b6543a1eb56b27e088423c9ea529aaa5c8ea6cb086a90228caa6fc0fc1575932",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "66107d1b72cba3d2b81e92fbc0b668813ed8c5eddc422350c60b345b3ac073d5",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-bode-magnitude.png",
-          "bytes": 98405,
-          "sha256": "73c57d2d712c9c9d11834036c1d4f082ce1acd1b878fb71e9d467f75a644e20d"
-        },
-        {
-          "name": "templates/python-bode-magnitude.svg",
-          "bytes": 13434,
-          "sha256": "235a5985b4d56f696a978b904eb5ad122a60d124deb08020c303e190b281ffe9"
-        },
-        {
-          "name": "templates/origin-bode-magnitude.png",
-          "bytes": 41686,
-          "sha256": "374418911ffa5f0064bef3b71fc7e7382e31e4c6accbcbd5e5c92b7e17f68fb4"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-bode-magnitude.png",
+      "sha256": "e052629280d1702cffffefb87798010d67b8af329120f1f4aefc49a747bb8721",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "bode.csv",
+      "source_sha256": "ffad32bd2f0e59e100c24293d277ca08e0cd9f55f32d894c65b2dd6771778647",
+      "caption": "Invented complex-impedance function at 121 actual positive frequency nodes; true log10 frequency axis, not a fit. Independent of toy Nyquist/DRT.",
+      "numeric_cells": 242,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "bode-phase",
-      "graph_id": "Plot16",
-      "metadata": {
-        "kind": "line",
-        "row_count": 121,
-        "caption": "Invented complex-impedance function at 121 actual positive frequency nodes; true log10 frequency axis, not a fit. Independent of toy Nyquist/DRT.",
-        "legend": {
-          "corner": "lower right",
-          "overlap_scores": {
-            "upper right": 281,
-            "upper left": 336,
-            "lower right": 0,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "phase",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "phase",
-            "label": "phase"
-          }
-        ],
-        "x_scale": "log10",
-        "x_range": [
-          0.01,
-          100000.0
-        ],
-        "source_name": "bode.csv",
-        "source_sha256": "b6543a1eb56b27e088423c9ea529aaa5c8ea6cb086a90228caa6fc0fc1575932",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "ef92a347f69f6e25bc30cfc1895caf97cf78cce645b320f9f88fa6fffba3f5e0",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-bode-phase.png",
-          "bytes": 126928,
-          "sha256": "9c79bf794f80e840059bf6356f9ced67c51f1430f1816815d7b1398780c60732"
-        },
-        {
-          "name": "templates/python-bode-phase.svg",
-          "bytes": 13757,
-          "sha256": "044718de8a038fa9b5c137541acd4730c9653255aad93c54f13d903e61a4a489"
-        },
-        {
-          "name": "templates/origin-bode-phase.png",
-          "bytes": 45030,
-          "sha256": "2ce4035370c38190e797bef3ff2c7c631ed020588781cd910af31a4ff45a8a15"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-bode-phase.png",
+      "sha256": "bb5de5f05446359833cabe5788894d1e4fb6569104cf0e7a8da837af8beda07e",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "bode.csv",
+      "source_sha256": "ffad32bd2f0e59e100c24293d277ca08e0cd9f55f32d894c65b2dd6771778647",
+      "caption": "Invented complex-impedance function at 121 actual positive frequency nodes; true log10 frequency axis, not a fit. Independent of toy Nyquist/DRT.",
+      "numeric_cells": 242,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "spectra",
-      "graph_id": "Plot17",
-      "metadata": {
-        "kind": "line",
-        "row_count": 201,
-        "caption": "Synthetic A/B spectra, 201 samples from 500 to 1800 inverse cm, arbitrary intensity. Assigned peak shapes; no baseline correction, normalization, deconvolution or chemical assignment.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 54,
-            "lower right": 940,
-            "lower left": 788
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "source_name": "characterization.csv",
-        "source_sha256": "bd392917ec2b071399027e15e405246eddf27b533397fdfaaeaaba0f3e85e442",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "b4c1b6aa263dcc750ef9a3b3e4f438142d94bf45057c0cf5bbfc39daea6cb587",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-spectra.png",
-          "bytes": 167553,
-          "sha256": "b64fa3863f5d09cb056ffa0cadbd8cc0d8b303d09fbdf890b556cddd954e5cd3"
-        },
-        {
-          "name": "templates/python-spectra.svg",
-          "bytes": 12521,
-          "sha256": "16347881d445be0bdd75a309b6024eb9e8a9fdede5e3cfb4219012d4e4e70891"
-        },
-        {
-          "name": "templates/origin-spectra.png",
-          "bytes": 44478,
-          "sha256": "72b059d857565209edcc418cfc66d332a222a5fd7a5c7bfd57b504d329682fb4"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-spectra.png",
+      "sha256": "eed74ba9d31383c6cfd6028c7f58b77133a301dc40fe1b8c7adb2e886353b73a",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "characterization.csv",
+      "source_sha256": "bd392917ec2b071399027e15e405246eddf27b533397fdfaaeaaba0f3e85e442",
+      "caption": "Synthetic A/B spectra, 201 samples from 500 to 1800 inverse cm, arbitrary intensity. Assigned peak shapes; no baseline correction, normalization, deconvolution or chemical assignment.",
+      "numeric_cells": 804,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "stack",
-      "graph_id": "Plot1",
-      "metadata": {
-        "kind": "line",
-        "row_count": 201,
-        "caption": "Synthetic A/B/C spectra, 201 samples each. Display offsets 0, 1.3 and 2.6 arbitrary intensity units; raw values retained separately. No normalization or chemical assignment.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 3,
-            "lower right": 940,
-            "lower left": 897
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 1.3
-          },
-          {
-            "column": "c",
-            "offset": 2.6
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B",
-            "offset": 1.3
-          },
-          {
-            "column": "c",
-            "label": "C",
-            "offset": 2.6
-          }
-        ],
-        "y_ticks": false,
-        "source_name": "characterization.csv",
-        "source_sha256": "bd392917ec2b071399027e15e405246eddf27b533397fdfaaeaaba0f3e85e442",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "8d1d70e247af6098bfd87d29b127b24ca92c0173554600442449c7347d161972",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/origin-stack.png",
-          "bytes": 47571,
-          "sha256": "d9e66de5fb9b299d1d33e8afe1a122595c7369217fb66a2a217c9a203ce1b489"
-        }
-      ],
-      "native_visual": "PASS_DIRECT_CURRENT_EXPORT",
-      "python_visual": "PASS_DIRECT_CURRENT_EXPORT",
-      "superseded_generation": {
-        "graph_id": "Plot18",
-        "prepared_books_sha256": "849b2fb975b39b36ea7e3dc2bdb5d96ef1ad0589ab9f01b17c469d96456521b8",
-        "outputs": [
-          {
-            "name": "templates/python-stack.png",
-            "bytes": 146132,
-            "sha256": "cb0f99ecb9e8d4eba0c54a1a58959dce1959ef52a9ef9c8ccceff767ce2caf39"
-          },
-          {
-            "name": "templates/python-stack.svg",
-            "bytes": 14375,
-            "sha256": "40c2930b89b7dea34926ff5f44fb4b1b092267ce1c0c4c6cbdcab6141f01f5a2"
-          },
-          {
-            "name": "templates/origin-stack.png",
-            "bytes": 63300,
-            "sha256": "46f30facc5d398716a8f02cff2e80a2dcda65e11e58a518951de33179f06b881"
-          }
-        ]
-      },
-      "current_acceptance": {
-        "date": "2026-10-05",
-        "native": "Origin 2021",
-        "actual_font": "Arial",
-        "y_ticks": false,
-        "y_range": [
-          -0.3,
-          5
-        ],
-        "source_rows": 201,
-        "raw_source_unchanged": true,
-        "numeric_readback": "PASS",
-        "style_readback": "PASS_BEFORE_AND_AFTER_REOPEN",
-        "project_reopen": "PASS",
-        "reopened_export_pixels": "IDENTICAL",
-        "python_PNG_SVG_repeat": "BYTE_IDENTICAL",
-        "visual_review": "PASS",
-        "generator_sha256": "892447e46fe3b38e76da07c2c4fda26f24fa8d669c4c19e10e40def4d46e01a4",
-        "runner_sha256": "06a8673303b05e31fbd4dd02986f906a8a8b19ec874d52eda4e393b441fe9845",
-        "default_style_sha256": "f6defaabffcd7ad654871819135da01c52d789a68fa13da22372c7ac3f5b7051",
-        "current_generator_sha256": "72a2055052f19675f51c1d2707b50a22725322e896d5153e62735ad185dfc51e",
-        "final_source_recheck": "Prepared commands, books, metadata and styles unchanged; only explicit blank-font rejection differs"
-      }
+      "file": "origin-stack.png",
+      "sha256": "eec1e668d8b667168518ad560e7b0a9635b0a2d0a0ff10cd850ace14643570fb",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "characterization.csv",
+      "source_sha256": "bd392917ec2b071399027e15e405246eddf27b533397fdfaaeaaba0f3e85e442",
+      "caption": "Synthetic A/B/C spectra, 201 samples each. Display offsets 0, 1.3 and 2.6 arbitrary intensity units; raw values retained separately. No normalization or chemical assignment.",
+      "numeric_cells": 2010,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "diffraction",
-      "graph_id": "Plot19",
-      "metadata": {
-        "kind": "line",
-        "row_count": 201,
-        "caption": "Synthetic diffraction-like profile, 201 samples from 10 to 80 degrees in 2 theta, arbitrary intensity. Assigned peaks; no phase identification or instrument broadening model.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 7,
-            "lower right": 672,
-            "lower left": 632
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "intensity",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "intensity",
-            "label": "pattern"
-          }
-        ],
-        "source_name": "characterization.csv",
-        "source_sha256": "bd392917ec2b071399027e15e405246eddf27b533397fdfaaeaaba0f3e85e442",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "e4382653bc171dc58a7bacdbad041c05dcb8c0ca0f614dd2fab3d928b818aa2e",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-diffraction.png",
-          "bytes": 116219,
-          "sha256": "5f49a8993c3c9235343a26303f21b127af0ff74413896f1bd7879d0e608071fc"
-        },
-        {
-          "name": "templates/python-diffraction.svg",
-          "bytes": 7924,
-          "sha256": "24955aa3ef2bef9162b1f6f3e38f4055d1780387c75eae30fe2682efc5e010e2"
-        },
-        {
-          "name": "templates/origin-diffraction.png",
-          "bytes": 38017,
-          "sha256": "af00ce225a91709e84b8f76f202d634b7296276cedc40d0ebd2aeef1dda41af8"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-diffraction.png",
+      "sha256": "e9ed0d8ad09054a2ad80cb6152250da278ce6aaaf6b9cd71a3bb271ace870215",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "characterization.csv",
+      "source_sha256": "bd392917ec2b071399027e15e405246eddf27b533397fdfaaeaaba0f3e85e442",
+      "caption": "Synthetic diffraction-like profile, 201 samples from 10 to 80 degrees in 2 theta, arbitrary intensity. Assigned peaks; no phase identification or instrument broadening model.",
+      "numeric_cells": 402,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "migration",
-      "graph_id": "Plot20",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 7,
-        "caption": "Two synthetic seven-point energy paths in eV, relative to each path's first point. Lines connect stored images without fitting. Endpoint tilt retained; no converged NEB or barrier prediction. Seven original nodes shown as points; shape-preserving PCHIP (factor 16) is display-only, not extra images, fits or stationary points. Barriers use source nodes.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 0,
-            "lower right": 234,
-            "lower left": 239
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "energy_a",
-            "offset": 0.0
-          },
-          {
-            "column": "energy_b",
-            "offset": 0.0
-          }
-        ],
-        "display_connection": "PCHIP; original nodes retained; no fit, no additional images, node-based barrier",
-        "series": [
-          {
-            "column": "energy_a",
-            "label": "A"
-          },
-          {
-            "column": "energy_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "path.csv",
-        "source_sha256": "17c66c5c10d0b27c2b8e6ef8b454d5800d4dae2b39ba4e742e18dd639b859cff",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "f963a50ce88573e154b5621e3edd6117d48ad9f8802506b04287704e8e0a1d48",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-migration.png",
-          "bytes": 193077,
-          "sha256": "8736888a6501c3baf1c25afedea1ef266524b7dc6d555596bbc4daebdba3a88c"
-        },
-        {
-          "name": "templates/python-migration.svg",
-          "bytes": 16230,
-          "sha256": "9cccab4e6671dcd7c2c6f8ef19293074b1d3e993b2c817b40b49bd191e703785"
-        },
-        {
-          "name": "templates/origin-migration.png",
-          "bytes": 51614,
-          "sha256": "7243055bd48207c6bfe2b9d29033ae7e8e1918856325bc01a03be0f40ee9a2ec"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-migration.png",
+      "sha256": "f6bc1cbf87a359c70515036c82ea99fe59d7077fc28257ecf25c224b8a8f6e64",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "path.csv",
+      "source_sha256": "17c66c5c10d0b27c2b8e6ef8b454d5800d4dae2b39ba4e742e18dd639b859cff",
+      "caption": "Two synthetic seven-point energy paths in eV, relative to each path's first point. Lines connect stored images without fitting. Endpoint tilt retained; no converged NEB or barrier prediction. Seven original nodes shown as points; shape-preserving PCHIP (factor 16) is display-only, not extra images, fits or stationary points. Barriers use source nodes.",
+      "numeric_cells": 776,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "dos",
-      "graph_id": "Plot21",
-      "metadata": {
-        "kind": "line",
-        "row_count": 121,
-        "caption": "Synthetic DOS-shaped function, 121 samples, energy relative to an arbitrary reference in eV and toy states/eV. No electronic structure calculation, occupation or integrated state-count validation.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 0,
-            "lower right": 175,
-            "lower left": 222
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "dos",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "dos",
-            "label": "DOS"
-          }
-        ],
-        "source_name": "dft-md.csv",
-        "source_sha256": "9cdad313cf0b0da76d6badd7327628234b9933ef8fee07a8f6b73dcc804a1b56",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "ddab64a9b075a26984f79f1ba7337867cbae26013c9d569e6b5cab4f0c46450b",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-dos.png",
-          "bytes": 160944,
-          "sha256": "741d7cfed1cf7a5b852c0721aa4765a709b7def83a75f175806234119c64b981"
-        },
-        {
-          "name": "templates/python-dos.svg",
-          "bytes": 11323,
-          "sha256": "70389ebbc03207f700f278ea0c513093ed507620d9ab7d00b08b8fb86165c102"
-        },
-        {
-          "name": "templates/origin-dos.png",
-          "bytes": 48399,
-          "sha256": "efada8ed10f81e95f2b16714bf76aab837af14c31482ea1d9262fbda686228e4"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-dos.png",
+      "sha256": "d80d9f0a627253732369ae3bba46cb29609d2df9ad01857b3286244d2a7e8635",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "dft-md.csv",
+      "source_sha256": "9cdad313cf0b0da76d6badd7327628234b9933ef8fee07a8f6b73dcc804a1b56",
+      "caption": "Synthetic DOS-shaped function, 121 samples, energy relative to an arbitrary reference in eV and toy states/eV. No electronic structure calculation, occupation or integrated state-count validation.",
+      "numeric_cells": 242,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "rdf",
-      "graph_id": "Plot22",
-      "metadata": {
-        "kind": "line",
-        "row_count": 121,
-        "caption": "Synthetic g(r)-shaped function, 121 samples, r in angstrom and dimensionless g(r). No trajectory, atom selection, coordination-number or normalization validation.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 21,
-            "lower right": 291,
-            "lower left": 207
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "rdf",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "rdf",
-            "label": "RDF"
-          }
-        ],
-        "source_name": "dft-md.csv",
-        "source_sha256": "9cdad313cf0b0da76d6badd7327628234b9933ef8fee07a8f6b73dcc804a1b56",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "cccaccafca4c87aab50a7958708038aa3f5fe5ff450c14bafdf91218bcc2f355",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-rdf.png",
-          "bytes": 102281,
-          "sha256": "67a46143ca4ff0b49e01195b58555309f85c7c03061d39c2198437af6312ea26"
-        },
-        {
-          "name": "templates/python-rdf.svg",
-          "bytes": 10518,
-          "sha256": "6953dc3ede48f53a27d9ac14084610c6f0245b0706fd1c3e86b484288fb14b79"
-        },
-        {
-          "name": "templates/origin-rdf.png",
-          "bytes": 31161,
-          "sha256": "7fb4d3626963f44eea01a927eba64f30b59cae73c6b0b343687d28b2e1a739a0"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-rdf.png",
+      "sha256": "57ce4a8b7f83b4afdf34e9be7d1d051591c50d06ebd9ffb2fc77a58f1350ed02",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "dft-md.csv",
+      "source_sha256": "9cdad313cf0b0da76d6badd7327628234b9933ef8fee07a8f6b73dcc804a1b56",
+      "caption": "Synthetic g(r)-shaped function, 121 samples, r in angstrom and dimensionless g(r). No trajectory, atom selection, coordination-number or normalization validation.",
+      "numeric_cells": 242,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "msd",
-      "graph_id": "Plot23",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 121,
-        "caption": "Synthetic MSD-shaped curve, 121 samples from 0 to 10 ps, angstrom squared. No trajectory, PBC unwrapping, statistical blocks or diffusion fit.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 116,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 106
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "msd",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "msd",
-            "label": "MSD"
-          }
-        ],
-        "source_name": "dft-md.csv",
-        "source_sha256": "9cdad313cf0b0da76d6badd7327628234b9933ef8fee07a8f6b73dcc804a1b56",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "7884a18f450dd8e74777e0a4347d45e8efb237469845edd7922e05464028e7de",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-msd.png",
-          "bytes": 101901,
-          "sha256": "7b70b74c106bc966ac15f699d03df653dac8f3cfc7f7b07cfbee85d355583d30"
-        },
-        {
-          "name": "templates/python-msd.svg",
-          "bytes": 24733,
-          "sha256": "a1ccb85dda2d2ad0e62b90e42d61366f261f4f8a1faa7438e3a928008cfb31ee"
-        },
-        {
-          "name": "templates/origin-msd.png",
-          "bytes": 36444,
-          "sha256": "b0231373ff2d7f79cdc1d8dfe5ae1c45afb5cb30a0ae8674c7df27479e332e8f"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-msd.png",
+      "sha256": "af90bda8118128d5da4e1d8dd10083944c40f950cf26096c0a15d319fd85cec2",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "dft-md.csv",
+      "source_sha256": "9cdad313cf0b0da76d6badd7327628234b9933ef8fee07a8f6b73dcc804a1b56",
+      "caption": "Synthetic MSD-shaped curve, 121 samples from 0 to 10 ps, angstrom squared. No trajectory, PBC unwrapping, statistical blocks or diffusion fit.",
+      "numeric_cells": 484,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "association",
-      "graph_id": "Plot24",
-      "metadata": {
-        "kind": "scatter",
-        "row_count": 36,
-        "caption": "Synthetic descriptor-response scatter, 36 assigned observations in arbitrary units, RNG seed 1729. Displayed OLS values are stored predictions from an unweighted line with intercept. No causal or out-of-sample claim.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 142,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 157
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "y",
-            "offset": 0.0
-          },
-          {
-            "column": "fitted",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "y",
-            "label": "Observations"
-          },
-          {
-            "column": "fitted",
-            "label": "OLS",
-            "kind": "line"
-          }
-        ],
-        "source_name": "analysis.csv",
-        "source_sha256": "09d4cf335cade7c5001d9f40caf84116563905eb598127b6e3f2ebf9c579da3d",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "126a56b47eacc628590d2df4e370806ab250bfab3c58cf444819cb95e10718d8",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-association.png",
-          "bytes": 155464,
-          "sha256": "e72eaad76bb49af3affe56ba918b81557f78708b5d552032a4c7716bbfa9a0fc"
-        },
-        {
-          "name": "templates/python-association.svg",
-          "bytes": 13236,
-          "sha256": "f37cb6c0641af99c6d41c8b888cc4701f80f10250ff9703679bcbdb8008c5576"
-        },
-        {
-          "name": "templates/origin-association.png",
-          "bytes": 51562,
-          "sha256": "7ad6e262b99b651b01d81b527f87677587b593feac727e932eaa506cfedb44d4"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-association.png",
+      "sha256": "8ef7d2358ca3eaae62702332ba78c19836b5ef8da178411df3d13c57c33573e5",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "analysis.csv",
+      "source_sha256": "09d4cf335cade7c5001d9f40caf84116563905eb598127b6e3f2ebf9c579da3d",
+      "caption": "Synthetic descriptor-response scatter, 36 assigned observations in arbitrary units, RNG seed 1729. Displayed OLS values are stored predictions from an unweighted line with intercept. No causal or out-of-sample claim.",
+      "numeric_cells": 144,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "residual",
-      "graph_id": "Plot25",
-      "metadata": {
-        "kind": "scatter",
-        "row_count": 36,
-        "caption": "Residuals for the same 36 synthetic OLS observations, observed minus stored fitted response in arbitrary units, with explicit zero line. No independence, homoscedasticity or model adequacy claim.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 20,
-            "upper left": 0,
-            "lower right": 21,
-            "lower left": 8
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "residual",
-            "offset": 0.0
-          },
-          {
-            "column": "zero",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "residual",
-            "label": "Residuals"
-          },
-          {
-            "column": "zero",
-            "label": "Zero",
-            "kind": "line"
-          }
-        ],
-        "source_name": "analysis.csv",
-        "source_sha256": "09d4cf335cade7c5001d9f40caf84116563905eb598127b6e3f2ebf9c579da3d",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "b5d9371312a4fada7c24b70284e847ed4cb574d6ddc15550338d423d7b2da28e",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-residual.png",
-          "bytes": 116033,
-          "sha256": "133866394c9cec8b800ecb4c5fd283d26c5156b230ac5be5298a2a4957fed62d"
-        },
-        {
-          "name": "templates/python-residual.svg",
-          "bytes": 12846,
-          "sha256": "17bc058f4c1b568dc282867e5dfa24053c78ce42717607854f625fe20c74321a"
-        },
-        {
-          "name": "templates/origin-residual.png",
-          "bytes": 48295,
-          "sha256": "13e1e70944f5b4268f943ba5e681f65890dfe773cd09c7095365aeebc239c888"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-residual.png",
+      "sha256": "a64cdc85f065395b8c6d88ada719ed7de7dbe3f2dbb2dc4be8cfef0c6396c75f",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "analysis.csv",
+      "source_sha256": "09d4cf335cade7c5001d9f40caf84116563905eb598127b6e3f2ebf9c579da3d",
+      "caption": "Residuals for the same 36 synthetic OLS observations, observed minus stored fitted response in arbitrary units, with explicit zero line. No independence, homoscedasticity or model adequacy claim.",
+      "numeric_cells": 144,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "drt",
-      "graph_id": "Plot26",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 81,
-        "caption": "Invented A/B gamma curves: 81 positive τ nodes from 10^-3 to 10^5 s, true log10 X axis. No EIS inversion, regularization or process assignment.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 28,
-            "lower right": 376,
-            "lower left": 246
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "x_scale": "log10",
-        "x_range": [
-          0.001,
-          100000.0
-        ],
-        "source_name": "drt.csv",
-        "source_sha256": "55ca86beca423690d5fa51ec022cdcb6f747c2e04dff74e1f1ade28f99e66709",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "d58fbb099a39c3b1db694f75efffe7c3cedd4dfbeb1aff09eeb501d733f80ccb",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-drt.png",
-          "bytes": 170870,
-          "sha256": "f1ea9743e99984cd77bd89860ac9bcafc100aa6edbf0fc3e4d914dbd2129bb83"
-        },
-        {
-          "name": "templates/python-drt.svg",
-          "bytes": 34302,
-          "sha256": "bf9242059c723ad5a5da0e736aff90ba0ca90bc84a5b65b342ed53215302759b"
-        },
-        {
-          "name": "templates/origin-drt.png",
-          "bytes": 51754,
-          "sha256": "252eef76054ff383d4c60ce1292a222f4aa80864372ce59da7aa1a6e441edde7"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
-    },
-    {
-      "id": "drt-stack",
-      "graph_id": "Plot27",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 81,
-        "caption": "Invented A/B gamma curves: 81 positive τ nodes from 10^-3 to 10^5 s, true log10 X axis. No EIS inversion, regularization or process assignment. Display offsets 0/1 a.u.; raw values retained.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 56,
-            "lower right": 188,
-            "lower left": 144
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 1.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B",
-            "offset": 1
-          }
-        ],
-        "x_scale": "log10",
-        "x_range": [
-          0.001,
-          100000.0
-        ],
-        "source_name": "drt.csv",
-        "source_sha256": "55ca86beca423690d5fa51ec022cdcb6f747c2e04dff74e1f1ade28f99e66709",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "f4802de5caefd8fd6e66dc6c2d76d6280c6f83022903170ee4f4d5d263ae6c90",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-drt-stack.png",
-          "bytes": 142283,
-          "sha256": "bbe86d3cdd31831fa503599af6b54aaeea279f5cc0d666a857c36364918d3d52"
-        },
-        {
-          "name": "templates/python-drt-stack.svg",
-          "bytes": 33819,
-          "sha256": "eea010f0bf0fae0477c03ba3259751dc035480cf49ffb23f23bf4eaa4c928578"
-        },
-        {
-          "name": "templates/origin-drt-stack.png",
-          "bytes": 60361,
-          "sha256": "a0454a5ca8d8cc1979a8f3d523874466f2316508af9678c5c10f050af63eb4dc"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-drt.png",
+      "sha256": "0ad057668dab2b599887e1317c7ab74f78a4a93570586aed8de2cab5eb6505a3",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "drt.csv",
+      "source_sha256": "f8b2c2cc415fd30c39860142d558cd7e28078c2e84fdd5abc7e8d0541e377a3c",
+      "caption": "Invented A/B gamma curves: 81 positive τ nodes from 10^-3 to 10^5 s, true log10 X axis. No EIS inversion, regularization or process assignment.",
+      "numeric_cells": 648,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "drt-map",
-      "graph_id": "Plot28",
-      "metadata": {
-        "kind": "heatmap",
-        "row_count": 729,
-        "caption": "Invented 9x81 condition/τ nodes. Display-only bilinear interpolation in log10(τ),condition, factor 8: 65x641 display nodes, 256 blue-white-red levels, [0,1], white=0.5. Raw nodes retained; no new observations, denoising, physical resolution or EIS inversion.",
-        "grid_shape": [
-          65,
-          641
-        ],
-        "matrix_orientation": "rows=Y, columns=X",
-        "source_grid_shape": [
-          9,
-          81
-        ],
-        "color_levels": 256,
-        "aggregation": "none",
-        "interpolation": "bilinear factor=8 in log10(x),y",
-        "color_range": [
-          0.0,
-          1.0
-        ],
-        "cmap": [
-          "#2166AC",
-          "#F7F7F7",
-          "#B2182B"
-        ],
-        "colormaps_sha256": "b77f8d6702db92618694d97e642fc79ce185763b11cd6d75b8c9a16922da7cdb",
-        "colorbar_palette": [
-          "#2166ac",
-          "#2367ad",
-          "#2468ad",
-          "#2669ae",
-          "#286bae",
-          "#296caf",
-          "#2b6db0",
-          "#2d6eb0",
-          "#2e6fb1",
-          "#3070b1",
-          "#3271b2",
-          "#3373b2",
-          "#3574b3",
-          "#3775b4",
-          "#3876b4",
-          "#3a77b5",
-          "#3c78b5",
-          "#3e79b6",
-          "#3f7ab7",
-          "#417cb7",
-          "#437db8",
-          "#447eb8",
-          "#467fb9",
-          "#4880ba",
-          "#4981ba",
-          "#4b82bb",
-          "#4d84bb",
-          "#4e85bc",
-          "#5086bc",
-          "#5287bd",
-          "#5388be",
-          "#5589be",
-          "#578abf",
-          "#588cbf",
-          "#5a8dc0",
-          "#5c8ec1",
-          "#5d8fc1",
-          "#5f90c2",
-          "#6191c2",
-          "#6292c3",
-          "#6493c4",
-          "#6695c4",
-          "#6796c5",
-          "#6997c5",
-          "#6b98c6",
-          "#6d99c6",
-          "#6e9ac7",
-          "#709bc8",
-          "#729dc8",
-          "#739ec9",
-          "#759fc9",
-          "#77a0ca",
-          "#78a1cb",
-          "#7aa2cb",
-          "#7ca3cc",
-          "#7da5cc",
-          "#7fa6cd",
-          "#81a7ce",
-          "#82a8ce",
-          "#84a9cf",
-          "#86aacf",
-          "#87abd0",
-          "#89add0",
-          "#8baed1",
-          "#8cafd2",
-          "#8eb0d2",
-          "#90b1d3",
-          "#91b2d3",
-          "#93b3d4",
-          "#95b4d5",
-          "#96b6d5",
-          "#98b7d6",
-          "#9ab8d6",
-          "#9cb9d7",
-          "#9dbad8",
-          "#9fbbd8",
-          "#a1bcd9",
-          "#a2bed9",
-          "#a4bfda",
-          "#a6c0da",
-          "#a7c1db",
-          "#a9c2dc",
-          "#abc3dc",
-          "#acc4dd",
-          "#aec6dd",
-          "#b0c7de",
-          "#b1c8df",
-          "#b3c9df",
-          "#b5cae0",
-          "#b6cbe0",
-          "#b8cce1",
-          "#bacde2",
-          "#bbcfe2",
-          "#bdd0e3",
-          "#bfd1e3",
-          "#c0d2e4",
-          "#c2d3e4",
-          "#c4d4e5",
-          "#c5d5e6",
-          "#c7d7e6",
-          "#c9d8e7",
-          "#cbd9e7",
-          "#ccdae8",
-          "#cedbe9",
-          "#d0dce9",
-          "#d1ddea",
-          "#d3dfea",
-          "#d5e0eb",
-          "#d6e1ec",
-          "#d8e2ec",
-          "#dae3ed",
-          "#dbe4ed",
-          "#dde5ee",
-          "#dfe7ee",
-          "#e0e8ef",
-          "#e2e9f0",
-          "#e4eaf0",
-          "#e5ebf1",
-          "#e7ecf1",
-          "#e9edf2",
-          "#eaeef3",
-          "#ecf0f3",
-          "#eef1f4",
-          "#eff2f4",
-          "#f1f3f5",
-          "#f3f4f6",
-          "#f4f5f6",
-          "#f7f7f7",
-          "#f7f7f7",
-          "#f6f4f5",
-          "#f6f3f3",
-          "#f5f1f1",
-          "#f5eff0",
-          "#f4edee",
-          "#f3eced",
-          "#f3eaeb",
-          "#f2e8e9",
-          "#f2e6e8",
-          "#f1e5e6",
-          "#f1e3e5",
-          "#f0e1e3",
-          "#f0dfe1",
-          "#efdee0",
-          "#efdcde",
-          "#eedadd",
-          "#eed8db",
-          "#edd7d9",
-          "#ecd5d8",
-          "#ecd3d6",
-          "#ebd1d5",
-          "#ebd0d3",
-          "#eaced1",
-          "#eaccd0",
-          "#e9cace",
-          "#e9c9cd",
-          "#e8c7cb",
-          "#e8c5c9",
-          "#e7c3c8",
-          "#e6c2c6",
-          "#e6c0c5",
-          "#e5bec3",
-          "#e5bcc1",
-          "#e4bbc0",
-          "#e4b9be",
-          "#e3b7bd",
-          "#e3b5bb",
-          "#e2b4b9",
-          "#e2b2b8",
-          "#e1b0b6",
-          "#e1aeb5",
-          "#e0adb3",
-          "#dfabb1",
-          "#dfa9b0",
-          "#dea7ae",
-          "#dea6ad",
-          "#dda4ab",
-          "#dda2a9",
-          "#dca0a8",
-          "#dc9fa6",
-          "#db9da5",
-          "#db9ba3",
-          "#da99a1",
-          "#da98a0",
-          "#d9969e",
-          "#d8949d",
-          "#d8929b",
-          "#d79199",
-          "#d78f98",
-          "#d68d96",
-          "#d68b95",
-          "#d58a93",
-          "#d58891",
-          "#d48690",
-          "#d4848e",
-          "#d3838d",
-          "#d2818b",
-          "#d27f89",
-          "#d17d88",
-          "#d17c86",
-          "#d07a85",
-          "#d07883",
-          "#cf7681",
-          "#cf7580",
-          "#ce737e",
-          "#ce717d",
-          "#cd6f7b",
-          "#cd6e79",
-          "#cc6c78",
-          "#cb6a76",
-          "#cb6875",
-          "#ca6773",
-          "#ca6571",
-          "#c96370",
-          "#c9616e",
-          "#c8606d",
-          "#c85e6b",
-          "#c75c69",
-          "#c75a68",
-          "#c65966",
-          "#c55765",
-          "#c55563",
-          "#c45361",
-          "#c45260",
-          "#c3505e",
-          "#c34e5d",
-          "#c24c5b",
-          "#c24b59",
-          "#c14958",
-          "#c14756",
-          "#c04555",
-          "#c04453",
-          "#bf4251",
-          "#be4050",
-          "#be3e4e",
-          "#bd3d4d",
-          "#bd3b4b",
-          "#bc3949",
-          "#bc3748",
-          "#bb3646",
-          "#bb3445",
-          "#ba3243",
-          "#ba3041",
-          "#b92f40",
-          "#b82d3e",
-          "#b82b3d",
-          "#b7293b",
-          "#b72839",
-          "#b62638",
-          "#b62436",
-          "#b52235",
-          "#b52133",
-          "#b41f31",
-          "#b41d30",
-          "#b31b2e",
-          "#b31a2d",
-          "#b2182b"
-        ],
-        "colorbar_labels": [
-          "0",
-          "0.25",
-          "0.5",
-          "0.75",
-          "1"
-        ],
-        "colorbar": "embedded palette bitmap + editable labels",
-        "x_scale": "log10",
-        "x_range": [
-          0.001,
-          100000.0
-        ],
-        "source_name": "drt-map.csv",
-        "source_sha256": "90a88abbe752a8cd58668b04c37cd3e1bdbd29aa2d894ec8ec32f2b26667ac02",
-        "synthetic": true,
-        "colorbar_asset": {
-          "name": "drt-map-colorbar.png",
-          "sha256": "14ad0ff1bf71907a845676f2821d1442de2f4ddd706ac4c3344ea6f22ab36105"
-        }
-      },
-      "prepared_books_sha256": "cb180a2333b0bfaae1be4abef09289bae6cf2c77a05def67a64830b14864448c",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-drt-map.png",
-          "bytes": 154606,
-          "sha256": "1f4c847bae7ae7233c1abff7369a51c80296c9d3238405a88fa069d1beb7e144"
-        },
-        {
-          "name": "templates/python-drt-map.svg",
-          "bytes": 24356,
-          "sha256": "857aa05de86e0a544a3e60ebe42b3c11186d260b9fe81a25a8175b37dc8e0a4d"
-        },
-        {
-          "name": "templates/origin-drt-map.png",
-          "bytes": 83777,
-          "sha256": "74f65b36739e0ed12a26d372f58c6d5c46f22a79efb2660ee33997617566da97"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-drt-map.png",
+      "sha256": "c79052fad328823ff79c5912d3fba8bebcb5db4a6de569b9df10bd108c0639cb",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "drt-map.csv",
+      "source_sha256": "90a88abbe752a8cd58668b04c37cd3e1bdbd29aa2d894ec8ec32f2b26667ac02",
+      "caption": "Invented 9x81 condition/τ nodes. Display-only bilinear interpolation in log10(τ),condition, factor 8: 65x641 display nodes, 256 blue-white-red levels, [0,1], white=0.5. Raw nodes retained; no new observations, denoising, physical resolution or EIS inversion.",
+      "numeric_cells": 43192,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "stress-strain",
-      "graph_id": "Plot29",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 161,
-        "caption": "Invented polynomial A/B stress-strain curves, 161 samples, percent and MPa. No specimen, modulus fit, fracture or toughness measurement.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 215,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 748
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "stress_a",
-            "offset": 0.0
-          },
-          {
-            "column": "stress_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "stress_a",
-            "label": "A"
-          },
-          {
-            "column": "stress_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "mechanics.csv",
-        "source_sha256": "4f9a9fdc3e5ca9177d5427d1714d6c4c8d27257dccc297e41e88dba40e61ffa6",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "ee3d6e2fccf18c76c0aa8a46fb0bf425df3f761474fa393989d78edbc5747e3e",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-stress-strain.png",
-          "bytes": 132214,
-          "sha256": "8545e56013ccdb270d459c0dfd1db8bbdab25a090b344e70347a7cc63c59ad02"
-        },
-        {
-          "name": "templates/python-stress-strain.svg",
-          "bytes": 44816,
-          "sha256": "c0d57c043e28daa6bea1fc148aa0eb5390ad12df36f9bfd5a53546312d4ff8ce"
-        },
-        {
-          "name": "templates/origin-stress-strain.png",
-          "bytes": 46486,
-          "sha256": "04827c9b443fbe8e5d8ac74ca3f3cffc60efc87f0d687cde2ade9d8178244f88"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-stress-strain.png",
+      "sha256": "b204fe5ba35154a6fb938771196c8484fb6fcead115e25718a480c16bff72c7f",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "mechanics.csv",
+      "source_sha256": "4f9a9fdc3e5ca9177d5427d1714d6c4c8d27257dccc297e41e88dba40e61ffa6",
+      "caption": "Invented polynomial A/B stress-strain curves, 161 samples, percent and MPa. No specimen, modulus fit, fracture or toughness measurement.",
+      "numeric_cells": 1288,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "tga",
-      "graph_id": "Plot30",
-      "metadata": {
-        "kind": "line",
-        "row_count": 181,
-        "caption": "Invented logistic A/B mass-loss curves, 181 temperatures in Celsius. No specimen, heating rate, atmosphere or decomposition assignment.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 844,
-            "lower right": 844,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "mass_a",
-            "offset": 0.0
-          },
-          {
-            "column": "mass_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "mass_a",
-            "label": "A"
-          },
-          {
-            "column": "mass_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "thermal.csv",
-        "source_sha256": "2dd5e943e0404cc1873b24870b2b5567097e5344a1e7a5db4d35af09e7622e4f",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "fa5ea954d3ba978380b6a0426560ffda5ebddbbaa91989832eadc679e3ba0ab8",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-tga.png",
-          "bytes": 154841,
-          "sha256": "f66bd871df95612505cad214d9d060a5089a963e59d2c0ab55e8ed58a3e30daa"
-        },
-        {
-          "name": "templates/python-tga.svg",
-          "bytes": 9878,
-          "sha256": "b242b33f151fa216133b43b5187a64c6bf9de9cdb9775caa0df23b3d838fcc49"
-        },
-        {
-          "name": "templates/origin-tga.png",
-          "bytes": 55562,
-          "sha256": "9a8b80166e9f29e869eb307b65609f2de8a849ba1d9ac2fd422d251aa9af144a"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-tga.png",
+      "sha256": "a99f1821643a0b23ad7482b108f2d14895d6730158dd1220c3df371174394884",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "thermal.csv",
+      "source_sha256": "2dd5e943e0404cc1873b24870b2b5567097e5344a1e7a5db4d35af09e7622e4f",
+      "caption": "Invented logistic A/B mass-loss curves, 181 temperatures in Celsius. No specimen, heating rate, atmosphere or decomposition assignment.",
+      "numeric_cells": 724,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "dsc",
-      "graph_id": "Plot31",
-      "metadata": {
-        "kind": "line",
-        "row_count": 181,
-        "caption": "Invented signed Gaussian A/B heat-flow features, 181 temperatures in Celsius and mW. Negative down, positive up; no experimental endotherm convention, mass normalization or enthalpy integration.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 50,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 154
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "flow_a",
-            "offset": 0.0
-          },
-          {
-            "column": "flow_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "flow_a",
-            "label": "A"
-          },
-          {
-            "column": "flow_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "thermal.csv",
-        "source_sha256": "2dd5e943e0404cc1873b24870b2b5567097e5344a1e7a5db4d35af09e7622e4f",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "a1824366d83b1a78d05b583db5a66ff78fd13c06a68cf87b70fe696a552c80c3",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-dsc.png",
-          "bytes": 143086,
-          "sha256": "f9327d1147a02f457ff1c9ab46449806626cec0494594e065eccc9f952d7c0dc"
-        },
-        {
-          "name": "templates/python-dsc.svg",
-          "bytes": 12250,
-          "sha256": "cd58ae34299d48076cdebcff871a6ae1af9978e427a4804c09823463764dea34"
-        },
-        {
-          "name": "templates/origin-dsc.png",
-          "bytes": 43501,
-          "sha256": "91de828846bfe011014deb4e904d10489a027dffab789e52c1167e510bde20a3"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-dsc.png",
+      "sha256": "644169272ca40b9a5981d916427cd212cdc5a58ff539f10b7afc68ee09cc75ef",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "thermal.csv",
+      "source_sha256": "2dd5e943e0404cc1873b24870b2b5567097e5344a1e7a5db4d35af09e7622e4f",
+      "caption": "Invented signed Gaussian A/B heat-flow features, 181 temperatures in Celsius and mW. Negative down, positive up; no experimental endotherm convention, mass normalization or enthalpy integration.",
+      "numeric_cells": 724,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "kinetics",
-      "graph_id": "Plot32",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 101,
-        "caption": "Invented exponential A/B conversion-time curves, 101 points in minutes and percent. No experimental reaction, rate fit or mechanism.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 472,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 122
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "source_name": "kinetics.csv",
-        "source_sha256": "bce2d3aa7d76fdf08c80c0dc535d0e5b364ec74bb08eb3fbef6375e8eb903b75",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "4d924b841c85d2d2e89e29df32e2ea647bcf93f8a2d5e1909d4e249815982354",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-kinetics.png",
-          "bytes": 149722,
-          "sha256": "c342381787548df4bb74c453a5260827928f8489e792269cad98bfc7fb9608b1"
-        },
-        {
-          "name": "templates/python-kinetics.svg",
-          "bytes": 35990,
-          "sha256": "469e46c2e3bd7529b3b41da6c5412cca93e4cafad4ea744490d1f352fcca939d"
-        },
-        {
-          "name": "templates/origin-kinetics.png",
-          "bytes": 46520,
-          "sha256": "a0bc431c46f38ccddad9a4afadbc99f10461dbe9199584a77055a0295ab67b88"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
-    },
-    {
-      "id": "learning",
-      "graph_id": "Plot33",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 101,
-        "caption": "Invented training/validation loss functions over 101 epochs. No trained model, dataset split, predictive performance or run is claimed.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 78,
-            "lower right": 868,
-            "lower left": 274
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "train",
-            "offset": 0.0
-          },
-          {
-            "column": "validation",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "train",
-            "label": "Train"
-          },
-          {
-            "column": "validation",
-            "label": "Validation"
-          }
-        ],
-        "source_name": "learning.csv",
-        "source_sha256": "16b1fbbd67d6a33ff838fcc7eeedf836b36d539f66ffdad88e2fb6691c085dd0",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "212a0a494d11c4260d46f76a650b3678515c1197f20c23394237b574d226f232",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-learning.png",
-          "bytes": 138750,
-          "sha256": "20b8bada489ea09a1cd18e63c636bfb7c4b38fd64955ec25a7c0a37eb49ef0cb"
-        },
-        {
-          "name": "templates/python-learning.svg",
-          "bytes": 35846,
-          "sha256": "364c93d5b809ac4e795b7e359d823927ba3abff87b9f9380ad80e11e00ad6b9a"
-        },
-        {
-          "name": "templates/origin-learning.png",
-          "bytes": 48639,
-          "sha256": "264e9b927b6a3209f82f585aaec531f21c70fe6be3bb62cac6d5774219438b4a"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-kinetics.png",
+      "sha256": "1a8d5e3b45b23c01daa272c4d1642d48084dca37a81b84ce23f914003eb25e5c",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "kinetics.csv",
+      "source_sha256": "bce2d3aa7d76fdf08c80c0dc535d0e5b364ec74bb08eb3fbef6375e8eb903b75",
+      "caption": "Invented exponential A/B conversion-time curves, 101 points in minutes and percent. No experimental reaction, rate fit or mechanism.",
+      "numeric_cells": 808,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "hysteresis",
-      "graph_id": "Plot34",
-      "metadata": {
-        "kind": "line",
-        "row_count": 242,
-        "caption": "Invented A/B hysteresis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper left",
-          "overlap_scores": {
-            "upper right": 1120,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 1120
-          }
-        },
-        "connect_order": "acquisition",
-        "display_offsets": [
-          {
-            "column": "magnetization_a",
-            "offset": 0.0
-          },
-          {
-            "column": "magnetization_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "magnetization_a",
-            "label": "A"
-          },
-          {
-            "column": "magnetization_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "magnetism.csv",
-        "source_sha256": "e08a0d5cc9936c065c0d4732e54254d743313ca47e49697a25c8bb152315b04c",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "0a2f0a117925e6fcf5b052d2996b20574be250620ada34bc7c9afdd73f33f280",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-hysteresis.png",
-          "bytes": 147538,
-          "sha256": "9dbad946bb6a56ad7f07bdb585dd1125e5335fc9d6f28af6fa6552016cdfa988"
-        },
-        {
-          "name": "templates/python-hysteresis.svg",
-          "bytes": 15243,
-          "sha256": "6507a69956bd4abc89c4272855da8eee03377c4017091afdd8b39217fcc720f4"
-        },
-        {
-          "name": "templates/origin-hysteresis.png",
-          "bytes": 50404,
-          "sha256": "82f11848d484304781fcbb6734ff6c2af8e7bf305f91d405d5cc42ce18454464"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-hysteresis.png",
+      "sha256": "2e6490820b8be5f7dfee453585ed1489033d1e928ec0ba7b670c99b6b382d2a1",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "magnetism.csv",
+      "source_sha256": "e08a0d5cc9936c065c0d4732e54254d743313ca47e49697a25c8bb152315b04c",
+      "caption": "Invented A/B hysteresis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 968,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "susceptibility",
-      "graph_id": "Plot35",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 171,
-        "caption": "Invented A/B susceptibility demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 10,
-            "lower right": 794,
-            "lower left": 381
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "source_name": "susceptibility.csv",
-        "source_sha256": "afb192a30f72fe0bc84f23dadde348c9b5578d9efd1bc19df81bcd8eff9af254",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "eb2cb8daefab9812639be5e638236235af61e961577c67c3a472e808c05ef6aa",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-susceptibility.png",
-          "bytes": 131454,
-          "sha256": "09ffbaa697e8e5dbdd8d8058fe69d04b9991a61676bae3e31ba10d62f80fc30a"
-        },
-        {
-          "name": "templates/python-susceptibility.svg",
-          "bytes": 46461,
-          "sha256": "54029d6f15751b58b77ae0950951455b4e469ed8a94a70b260019f4f76073c22"
-        },
-        {
-          "name": "templates/origin-susceptibility.png",
-          "bytes": 52747,
-          "sha256": "d53475ffe76af59716abb677648e3fe3b7ba06b1cea056f1269728b6c8d7ad9a"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-susceptibility.png",
+      "sha256": "f7462e760d606d1ccafabc815bdf65a01da51d5596214ba286b43752590b7521",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "susceptibility.csv",
+      "source_sha256": "afb192a30f72fe0bc84f23dadde348c9b5578d9efd1bc19df81bcd8eff9af254",
+      "caption": "Invented A/B susceptibility demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 1368,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "uvvis",
-      "graph_id": "Plot36",
-      "metadata": {
-        "kind": "line",
-        "row_count": 276,
-        "caption": "Invented A/B uvvis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 31,
-            "lower right": 1290,
-            "lower left": 710
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "absorbance_a",
-            "offset": 0.0
-          },
-          {
-            "column": "absorbance_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "absorbance_a",
-            "label": "A"
-          },
-          {
-            "column": "absorbance_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "optics.csv",
-        "source_sha256": "ead3af521f7eaa218f6055cd317ecbbd07f5393b9e1d75ead8957603ad422acb",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "fcc803655c1f7aa6e7b75e5066be6625c9b9b4fa04488788f6fc30920a983b18",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-uvvis.png",
-          "bytes": 153654,
-          "sha256": "317fe5e0a322479a10e35d5fafea4bbb1f1658673786ae2c76d18776ca1576f9"
-        },
-        {
-          "name": "templates/python-uvvis.svg",
-          "bytes": 11308,
-          "sha256": "0f273d936d3ffdb263971d432b5fe46278d62cde6a1867b1e6a26f998e13d79e"
-        },
-        {
-          "name": "templates/origin-uvvis.png",
-          "bytes": 52819,
-          "sha256": "46fd5dd7e0376fbf350907bdefa472e3e9ac9a25d2ee7f518c4da0d8c1982ddd"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-uvvis.png",
+      "sha256": "21fdefb6a6fca8095df740c69c3c38cef8c157bdf3f7831054142faf686bdbff",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "optics.csv",
+      "source_sha256": "ead3af521f7eaa218f6055cd317ecbbd07f5393b9e1d75ead8957603ad422acb",
+      "caption": "Invented A/B uvvis demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 1104,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "photoluminescence",
-      "graph_id": "Plot37",
-      "metadata": {
-        "kind": "line",
-        "row_count": 276,
-        "caption": "Invented A/B photoluminescence demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "pl_a",
-            "offset": 0.0
-          },
-          {
-            "column": "pl_b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "pl_a",
-            "label": "A"
-          },
-          {
-            "column": "pl_b",
-            "label": "B"
-          }
-        ],
-        "source_name": "optics.csv",
-        "source_sha256": "ead3af521f7eaa218f6055cd317ecbbd07f5393b9e1d75ead8957603ad422acb",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "edf9b19e6736e5e7e58d43add871f9c8e8a963e96679350319606d753de372d3",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-photoluminescence.png",
-          "bytes": 142431,
-          "sha256": "7256ab1113d7e12e3efb6b25d7ee13f63cb22eea564267e9711ff7aaa8295b39"
-        },
-        {
-          "name": "templates/python-photoluminescence.svg",
-          "bytes": 11833,
-          "sha256": "03da9a7bffd81bc94cc97b895ba2e9e2ccd1e4d9182a3eb35483d8d5e224197f"
-        },
-        {
-          "name": "templates/origin-photoluminescence.png",
-          "bytes": 47935,
-          "sha256": "2854a57be310d5382c6a299074379a36b78ba159f417f6b264d5d60a43fa6b74"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-photoluminescence.png",
+      "sha256": "9c11a7c84f58de9e79ace68969ffa444076ce116123595fc077e093efc7b24b1",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "optics.csv",
+      "source_sha256": "ead3af521f7eaa218f6055cd317ecbbd07f5393b9e1d75ead8957603ad422acb",
+      "caption": "Invented A/B photoluminescence demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 1104,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "fluorescence-decay",
-      "graph_id": "Plot38",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 101,
-        "caption": "Invented A/B fluorescence-decay demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 36,
-            "lower right": 472,
-            "lower left": 150
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "source_name": "decay.csv",
-        "source_sha256": "d735c757d39ab9c02129c7b737a816949c55b30c1e4ebf22d8acf3a9a9c14901",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "0adb25a9c2de0ba31d3a3c1f0ba19c7b753a1cfaacc8ac31a03a5c0a0558c56c",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-fluorescence-decay.png",
-          "bytes": 133421,
-          "sha256": "31d0c420fe042338a522260983a1510ab8452de79cbf7a58d31297c24fcc84c7"
-        },
-        {
-          "name": "templates/python-fluorescence-decay.svg",
-          "bytes": 36278,
-          "sha256": "b0135e46e27580ba15a8716f556d0431635ff37ae14c1d1a08e31ec8beac650f"
-        },
-        {
-          "name": "templates/origin-fluorescence-decay.png",
-          "bytes": 41619,
-          "sha256": "d4d8561c3bdfbea23107e282f42c56b2de05fbc9ad65023b3a0f05634dce00b1"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-fluorescence-decay.png",
+      "sha256": "9ba5ee94acfcbeb31ec12976e5b8e44decb65e92614af6bd7f162095698f72d6",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "decay.csv",
+      "source_sha256": "d735c757d39ab9c02129c7b737a816949c55b30c1e4ebf22d8acf3a9a9c14901",
+      "caption": "Invented A/B fluorescence-decay demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 808,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "dose-response",
-      "graph_id": "Plot39",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 121,
-        "caption": "Invented A/B dose-response demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 560,
-            "lower right": 235,
-            "lower left": 0
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "x_scale": "log10",
-        "x_range": [
-          0.001,
-          1000.0
-        ],
-        "source_name": "dose.csv",
-        "source_sha256": "c5ad59c401879d0e345a7652662f52993236453e4322e4c8bc5a51c6d1e6c2df",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "c28fb30e4ec00dfea1beaf41d3457e95d1d192f5ee0c8e514204bdccf0c46c43",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-dose-response.png",
-          "bytes": 147825,
-          "sha256": "65ec730db0de332b2d63a90c73ceda41174ba0362792ba823f144d1679acb821"
-        },
-        {
-          "name": "templates/python-dose-response.svg",
-          "bytes": 53741,
-          "sha256": "999b915ec0fe2773b2fe7fff39380515a866b309a6620a7a7eab656e2d156dd5"
-        },
-        {
-          "name": "templates/origin-dose-response.png",
-          "bytes": 50711,
-          "sha256": "ace7268ec3784a60c6e581c5c3162be1f380cd36eb4964e8d39f26df03ced94f"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-dose-response.png",
+      "sha256": "1b3cbc4654608e9bcf2b812ccb9905f66c9d68089d47e92fd71b07c72f8c69d0",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "dose.csv",
+      "source_sha256": "c5ad59c401879d0e345a7652662f52993236453e4322e4c8bc5a51c6d1e6c2df",
+      "caption": "Invented A/B dose-response demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 968,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "growth",
-      "graph_id": "Plot40",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 97,
-        "caption": "Invented A/B growth demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 450
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "source_name": "growth.csv",
-        "source_sha256": "7c80adf54c8a08f828efcfd8e7af65f2d007660eedef1198f3ffe251622d41e6",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "992a5a61ac21349e572626bc3a421d098e9835a6ba082db4b61232c45f1b99e7",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-growth.png",
-          "bytes": 117227,
-          "sha256": "50a4daf25ee8ce75def76efc5aa5150eb2322a2f72476d440e69c6cefee7d010"
-        },
-        {
-          "name": "templates/python-growth.svg",
-          "bytes": 34706,
-          "sha256": "cbfc095978384f5babb34a741bc127bedf4a5541a853802ff70b68ce54b9c401"
-        },
-        {
-          "name": "templates/origin-growth.png",
-          "bytes": 45941,
-          "sha256": "2f43ba0c47649e7f3d90fb2f12accfe7554724b68fcaf191e1c8925b23c89285"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-growth.png",
+      "sha256": "51121802822bfe4e8f9f9df43725cd12f00ec58b0730b95f661bd07045957f56",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "growth.csv",
+      "source_sha256": "7c80adf54c8a08f828efcfd8e7af65f2d007660eedef1198f3ffe251622d41e6",
+      "caption": "Invented A/B growth demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 776,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
     },
     {
       "id": "enzyme-kinetics",
-      "graph_id": "Plot41",
-      "metadata": {
-        "kind": "line_symbol",
-        "row_count": 61,
-        "caption": "Invented A/B enzyme-kinetics demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
-        "legend": {
-          "corner": "upper right",
-          "overlap_scores": {
-            "upper right": 0,
-            "upper left": 0,
-            "lower right": 0,
-            "lower left": 159
-          }
-        },
-        "connect_order": "increasing",
-        "display_offsets": [
-          {
-            "column": "a",
-            "offset": 0.0
-          },
-          {
-            "column": "b",
-            "offset": 0.0
-          }
-        ],
-        "series": [
-          {
-            "column": "a",
-            "label": "A"
-          },
-          {
-            "column": "b",
-            "label": "B"
-          }
-        ],
-        "source_name": "enzyme.csv",
-        "source_sha256": "5f85caac9f37b596e82305fa0502863d82740e49cae08d36d17b8ad507857578",
-        "synthetic": true
-      },
-      "prepared_books_sha256": "492e1e3a6dc6c4517b0816fcf76c2569e706ce3114d5b40dcde0e2524e497110",
-      "prepared_hash_format": "canonical JSON: sorted keys, compact separators, UTF-8",
-      "outputs": [
-        {
-          "name": "templates/python-enzyme-kinetics.png",
-          "bytes": 139855,
-          "sha256": "c5e31b95e62048512b11dee9017fc8fc2743ab4cf5185452a8a5647f40794703"
-        },
-        {
-          "name": "templates/python-enzyme-kinetics.svg",
-          "bytes": 24936,
-          "sha256": "f9f9bfdf9cd52320c2cbd964df70ad4405b4fb36410bc12a71dfd39f2546bc22"
-        },
-        {
-          "name": "templates/origin-enzyme-kinetics.png",
-          "bytes": 48393,
-          "sha256": "a1ead00d0b524f7949d2bd24d6015259058cc6e328c913c2e8e80359153a4319"
-        }
-      ],
-      "native_visual": "PASS",
-      "python_visual": "PASS"
+      "file": "origin-enzyme-kinetics.png",
+      "sha256": "6fa626aa781e4b7828dd62e282e0854e71a5fb7b19d1947580f3edd62288e3c9",
+      "config": "paper.json",
+      "config_sha256": "97a9c2547d0bc7aa1adbc000cc68f1dacd7371eaf2b411c8cf0cff361d0fd3f4",
+      "source": "enzyme.csv",
+      "source_sha256": "5f85caac9f37b596e82305fa0502863d82740e49cae08d36d17b8ad507857578",
+      "caption": "Invented A/B enzyme-kinetics demonstration functions; units and acquisition order as labeled. No specimen, measurement, parameter fit, physical process or biological mechanism is inferred.",
+      "numeric_cells": 488,
+      "native_plan_sha256": "815689a3c79700fdb2115471704a587ffc3b5ad14ffaa777a08f32dca833c12e"
+    },
+    {
+      "id": "battery-time",
+      "file": "origin-battery-time.png",
+      "sha256": "517891445650eff0eaa7427b41428addd39040d6666c893ff90eed8b95a0ea98",
+      "config": "battery.json",
+      "config_sha256": "0fe625a63b13d8839bf064276329759a0f70967b28b8c18634a935bcf60680ea",
+      "source": "battery-time.csv",
+      "source_sha256": "d3e7d7eeff24c0ae66fd379599adc1d7c7868101c0a7395b33533b29565a2d38",
+      "caption": "Entirely invented 101-node battery time trace. t=0:10:1000 s; charge t<=500: V=0.9+0.9*t/500, I=+0.72 mA; discharge t>500: V=1.7-0.8*(t-500)/500, I=-0.72 mA. Branch capacity=0.72*branch elapsed/3600 mAh with explicit reset. Pure straight line; assigned voltage step, no fitted iR correction. Optional time-domain example, not a mass-specific GCD profile.",
+      "numeric_cells": 202,
+      "native_plan_sha256": "0e0913bd5267102d8cdf6d17674c8d8979724cf20520afeb6746440694062e32"
+    },
+    {
+      "id": "battery-capacity",
+      "file": "origin-battery-capacity.png",
+      "sha256": "2885593327c822a2e3b73079b5ed7f579b080e940394e8b180c135080c2e02e1",
+      "config": "battery.json",
+      "config_sha256": "0fe625a63b13d8839bf064276329759a0f70967b28b8c18634a935bcf60680ea",
+      "source": "battery-capacity.csv",
+      "source_sha256": "deab9cac12667055be7932781b685cece0e0257c4dea418c5d0c6cc7315a3179",
+      "caption": "Entirely invented independent branch grids, 101 nodes each, u=i/100. Cycle comparison; assigned Qmax = 220/205/190 mAh g^-1, polarization = 0/0.025/0.05 V. Each branch capacity starts at zero: Q_charge=Qmax*u, Q_discharge=0.96*Qmax*u. V_charge=1.52+p+0.08*u+0.30*u^8-0.28*exp(-u/0.03); V_discharge=1.38-p-0.08*u-0.30*u^8+0.28*exp(-u/0.03). Solid charge and solid discharge share a group color; one legend entry per group. Straight acquisition-order links only, no markers, smoothing, joining branches, interpolation, copied measurements or inferred active mass. The specific capacity basis is assigned synthetically, not converted from the optional time trace. For real inputs preserve recorded branch direction and declare the exact mass basis and full-cell/reference voltage convention; no CE, retention or mechanism claim.",
+      "numeric_cells": 1212,
+      "native_plan_sha256": "0e0913bd5267102d8cdf6d17674c8d8979724cf20520afeb6746440694062e32"
+    },
+    {
+      "id": "battery-rate",
+      "file": "origin-battery-rate.png",
+      "sha256": "9c7ac38f5295c34c7b4288dc98868f06316256e2753180a4adcbfc3cf3c15473",
+      "config": "battery.json",
+      "config_sha256": "0fe625a63b13d8839bf064276329759a0f70967b28b8c18634a935bcf60680ea",
+      "source": "battery-rate.csv",
+      "source_sha256": "3f0d81564158f9c9cf900499d9b35f54ea18068b1c001afdb2ea08b780d911cb",
+      "caption": "Entirely invented independent branch grids, 101 nodes each, u=i/100. Rate comparison; illustrative current labels only, Qmax = 240/205/170/135 mAh g^-1, polarization = 0/0.025/0.05/0.075 V. Each branch capacity starts at zero: Q_charge=Qmax*u, Q_discharge=0.96*Qmax*u. V_charge=1.52+p+0.08*u+0.30*u^8-0.28*exp(-u/0.03); V_discharge=1.38-p-0.08*u-0.30*u^8+0.28*exp(-u/0.03). Solid charge and solid discharge share a group color; one legend entry per group. Straight acquisition-order links only, no markers, smoothing, joining branches, interpolation, copied measurements or inferred active mass. The specific capacity basis is assigned synthetically, not converted from the optional time trace. For real inputs preserve recorded branch direction and declare the exact mass basis and full-cell/reference voltage convention; no CE, retention or mechanism claim.",
+      "numeric_cells": 1616,
+      "native_plan_sha256": "0e0913bd5267102d8cdf6d17674c8d8979724cf20520afeb6746440694062e32"
+    },
+    {
+      "id": "cloud-horizontal",
+      "file": "origin-cloud-horizontal.png",
+      "sha256": "a4f05183278fd15e3737cd51ecc2aab398dcedc52f94e2a5d6d66a3ffad2e5ed",
+      "config": "clouds.json",
+      "config_sha256": "625d492ef49f3529763415b6de55a5269768efe061291d19a675f16cd8683b5f",
+      "source": "../samples/raincloud.csv",
+      "source_sha256": "0391d1c06384b964175f9a29d3994d1245f3fe12bd780dbcbf5f98c6eeecd70d",
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference. Point-center to cloud-edge gap0.24 group units; only display translation.",
+      "numeric_cells": 9216,
+      "native_plan_sha256": "d063cf657b55a8c7de88de132ef03ce2b08a2bf84885dcc1cba1dc8f6737d6d1"
+    },
+    {
+      "id": "cloud-vertical",
+      "file": "origin-cloud-vertical.png",
+      "sha256": "9e15a7ca24a878c9e740a60764c2591d547e539840c4744c353856fa13b49988",
+      "config": "clouds.json",
+      "config_sha256": "625d492ef49f3529763415b6de55a5269768efe061291d19a675f16cd8683b5f",
+      "source": "../samples/raincloud.csv",
+      "source_sha256": "0391d1c06384b964175f9a29d3994d1245f3fe12bd780dbcbf5f98c6eeecd70d",
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference. Point-center to cloud-edge gap0.24 group units; only display translation.",
+      "numeric_cells": 12300,
+      "native_plan_sha256": "d063cf657b55a8c7de88de132ef03ce2b08a2bf84885dcc1cba1dc8f6737d6d1"
+    },
+    {
+      "id": "violin-vertical",
+      "file": "origin-violin-vertical.png",
+      "sha256": "55a85a1872362d314ceb73820a1a6be65545a5c7bab54d9523cf59bfbcaf13b4",
+      "config": "clouds.json",
+      "config_sha256": "625d492ef49f3529763415b6de55a5269768efe061291d19a675f16cd8683b5f",
+      "source": "../samples/raincloud.csv",
+      "source_sha256": "0391d1c06384b964175f9a29d3994d1245f3fe12bd780dbcbf5f98c6eeecd70d",
+      "caption": "All 76 invented raw observations retained. Translucent cloud silhouette and points only; no mean/median/box/whisker displayed. Gaussian KDE with per-group Scott bandwidth h=sample SD*n^(-1/5), displayed over each raw min/max (cut=0), per-group equal maximum display width. Native vertical fill uses source-bound closed polygons with zero outline stroke, preventing implicit baseline drop lines. No taper, gap splitting, denoising or filtering. Density between observations is estimator output, not new samples. Jitter seed 1729; not statistical inference.",
+      "numeric_cells": 12300,
+      "native_plan_sha256": "d063cf657b55a8c7de88de132ef03ce2b08a2bf84885dcc1cba1dc8f6737d6d1"
     }
-  ],
-  "record_scope": "Historical native gallery, except the stack entry replaced by the current named acceptance; superseded output identities retained."
+  ]
 }

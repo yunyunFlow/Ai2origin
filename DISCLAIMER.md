@@ -1,11 +1,22 @@
 # Use notice
 
-Ai2origin is an independent, AI-assisted project. Origin and other product
-names belong to their owners; this project has no vendor affiliation.
+Ai2origin is an independent project, assisted by AI during development.
+It is not an official OriginLab, OpenAI or other vendor product and claims
+no endorsement. Product names and marks belong to their respective owners.
 
-Use licensed software and data you may process. All bundled examples are
-synthetic. Check units, processing and the final scientific interpretation.
-The maintainer documents tested behavior and known limits in VALIDATION.md.
+Users must have appropriate licenses for Origin and dependencies. No
+activation information, commercial binaries or fonts are supplied.
 
-The scripts contain no upload or telemetry calls. Your agent platform and
-Origin have their own data policies. Warranty and liability follow LICENSE.
+The workflow inspects data, chooses/adapts a suitable plot, preserves values
+and discloses processing. The maintainer records actual tested scope and known limits; an agent must
+check inputs, preserve values and inspect final exports. User review does not
+replace those workflow duties. Users must verify input permissions, units, sampling,
+statistics, bindings and final scientific interpretation. A successful export
+does not establish a scientific claim or journal acceptance. All bundled
+examples are synthetic.
+
+The scripts contain no upload or telemetry calls. AI-platform and Origin data
+policies are separate; share only information you may disclose.
+
+Maintenance is voluntary without a promised response time or continuous
+compatibility. Warranty and liability terms follow LICENSE.
