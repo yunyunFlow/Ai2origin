@@ -14,7 +14,7 @@ reviewable source bundle; it does not create a remote repository or release.
 
 ## Explicit source allowlist
 
-Root files: DISCLAIMER.md, LICENSE, README.md, RELEASE.md,
+Root files: DISCLAIMER.md, LICENSE, README.md, RELEASE.md, START.md,
 SKILL.md, SOURCES.md, THIRD_PARTY_NOTICES.md, VALIDATION.md, WORKFLOW.md,
 requirements.txt, requirements-analysis.txt and SHA256SUMS.
 

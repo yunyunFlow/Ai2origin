@@ -24,6 +24,7 @@ the receipt records the actual font. [Font policy](references/style.md).
 
 For Codex, put this repository's contents in a skill folder named ai2origin
 and invoke $ai2origin. You can also ask your agent to read [SKILL.md](SKILL.md).
+Copy the [starter prompt](START.md) to start or continue a task.
 
 > Plot these battery tables as voltage–specific-capacity curves, compare the
 > selected cycles, and keep all measured points.
@@ -36,7 +37,8 @@ existing Origin projects need a separate adapter.
 
 ## Origin output
 
-Requires Windows and a separately licensed Origin 2021 installation.
+Use an installed, working Origin 2021 on Windows. For other versions, let your
+AI adapt the workflow and check the result.
 
 ~~~sh
 python scripts/ai2origin.py samples/demo.json --out work/prepared --backend prepare
@@ -55,15 +57,16 @@ saves/reopens the project and exports its graphs. [Native details](references/or
 
 All values are invented. These six figures are Origin exports.
 
-| XY bands | Battery curves | Raincloud |
+| XY bands | Battery curves | Vertical violin |
 | --- | --- | --- |
-| ![XY](samples/origin-xy.png) | ![Battery curves](templates/origin-battery-rate.png) | ![Raincloud](templates/origin-cloud-horizontal.png) |
+| ![XY](samples/origin-xy.png) | ![Battery curves](templates/origin-battery-rate.png) | ![Vertical violin](templates/origin-violin-vertical.png) |
 
-| Spectral stack | Heatmap | Energy-path guide |
+| Spectral stack | XRD heatmap | Purple–green–yellow heatmap |
 | --- | --- | --- |
-| ![Stack](templates/origin-stack.png) | ![Heatmap](samples/origin-smooth.png) | ![Energy path](templates/origin-migration.png) |
+| ![Stack](templates/origin-stack.png) | ![XRD heatmap](samples/origin-smooth.png) | ![Purple–green–yellow heatmap](samples/origin-heatmap-purplegreen.png) |
 
 Browse [samples](samples/README.md) and [templates](templates/README.md).
+The [green–yellow heatmap config](samples/heatmap-purplegreen.json) is ready to reuse.
 Sparse line-symbol curves can use 5–6 pt markers through a
 [style override](references/style.md); keep dense data readable.
 
@@ -75,37 +78,6 @@ python scripts/ai2origin.py templates/paper.json --select cv nyquist --out work/
 python scripts/ai2origin.py templates/paper.json --select drt drt-map --out work/drt --backend python
 python scripts/ai2origin.py templates/paper.json --select migration dos rdf msd --out work/atomistic --backend python
 ~~~
-
-### Check the download
-
-From the repository root, Linux/WSL can verify every bundled file:
-
-~~~sh
-sha256sum -c SHA256SUMS
-~~~
-
-Every entry should report OK. Run the regressions next:
-
-~~~sh
-python -m unittest discover -s tests
-~~~
-
-The full local run passed **261 tests**; the count depends on installed optional tools. Missing values, invalid settings, source
-changes, missing glyphs and incomplete outputs are among the checked cases.
-
-### Repeat a plot
-
-Use two new directories and the same config, style, dependencies and font:
-
-~~~sh
-python scripts/ai2origin.py samples/demo.json --out work/repeat-a --backend python
-python scripts/ai2origin.py samples/demo.json --out work/repeat-b --backend python
-python scripts/check_reproducibility.py work/repeat-a work/repeat-b --config samples/demo.json
-~~~
-
-Expected: status PASS and repeat BYTE_IDENTICAL. The checker also rejects
-extra files and failure markers. For vector delivery, add --svg to both
-generation commands; SVG text and the declared output set are checked too.
 
 ### From a table to a figure
 
@@ -130,6 +102,7 @@ explain the optional summary. Use your own verified mapping for real data.
 See [tested scope and remaining limits](VALIDATION.md): the local run used Python 3.11
 and Origin 2021. Your AI can adapt the workflow to another setup and verify
 the actual results.
+Development tests and optional repeat checks are in [Contributing](CONTRIBUTING.md).
 
 [MIT license](LICENSE) · [Dependencies and sources](THIRD_PARTY_NOTICES.md) ·
 [Use notice](DISCLAIMER.md). Fonts, commercial software and real research data

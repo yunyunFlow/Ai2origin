@@ -32,6 +32,8 @@ CSV、TSV、TXT、XLSX 用[显式映射](references/tables.md)；其他格式先
 
 保留数据、配置和来源。检查轴标、单位、字体、颜色、图例位置和真实导出。
 Origin 工程还要核验数据绑定、保存及重开。
-重复输出用 `check_reproducibility.py` 比较，具体范围见[验收记录](VALIDATION.md)。
+日常使用检查数据和实际图像即可，不要求手动校验哈希或运行全套测试。
+作者要求复现、排查问题或修改模板时，再用 `check_reproducibility.py` 比较重复输出。
+具体范围见[验收记录](VALIDATION.md)。
 
 最后简短说明文件在哪、做过什么处理、检查了什么，以及尚未解决的事项。

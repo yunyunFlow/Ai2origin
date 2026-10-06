@@ -1,3 +1,4 @@
+import csv
 import importlib.util
 import json
 import tempfile
@@ -13,6 +14,24 @@ spec.loader.exec_module(module)
 
 
 class DataTests(unittest.TestCase):
+    def assert_synthetic_csv_matches(self, actual, expected):
+        with actual.open(newline='', encoding='utf-8') as handle:
+            actual_rows = list(csv.reader(handle))
+        with expected.open(newline='', encoding='utf-8') as handle:
+            expected_rows = list(csv.reader(handle))
+        self.assertEqual(actual_rows[0], expected_rows[0])
+        self.assertEqual(len(actual_rows), len(expected_rows))
+        for got, wanted in zip(actual_rows[1:], expected_rows[1:]):
+            self.assertEqual(len(got), len(wanted))
+            for value, original in zip(got, wanted):
+                try:
+                    number = float(original)
+                except ValueError:
+                    self.assertEqual(value, original)
+                else:
+                    self.assertTrue(np.isfinite(number) and np.isfinite(float(value)))
+                    np.testing.assert_allclose(float(value), number, rtol=1e-12, atol=1e-12)
+
     def test_scott_cloud_fill_preserves_geometry_and_observations(self):
         config=module.load_json(ROOT/'templates/clouds.json')
         plot=next(p for p in config['plots'] if p['id']=='violin-vertical')
@@ -156,7 +175,41 @@ class DataTests(unittest.TestCase):
                 if name.endswith(".json"):
                     self.assertEqual(module.load_json(target / name), module.load_json(ROOT / "samples" / name))
                 else:
-                    self.assertEqual((target / name).read_bytes(), (ROOT / "samples" / name).read_bytes(), name)
+                    self.assert_synthetic_csv_matches(target / name, ROOT / "samples" / name)
+
+    def test_synthetic_regeneration_roundoff_and_meaningful_changes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            actual = Path(tmp) / 'xy.csv'
+            expected = ROOT / 'samples' / 'xy.csv'
+            with expected.open(newline='', encoding='utf-8') as handle:
+                rows = list(csv.reader(handle))
+
+            def write(changed):
+                with actual.open('w', newline='', encoding='utf-8') as handle:
+                    csv.writer(handle).writerows(changed)
+
+            rounded = [list(row) for row in rows]
+            rounded[1][1] = str(np.nextafter(float(rounded[1][1]), np.inf))
+            write(rounded)
+            self.assert_synthetic_csv_matches(actual, expected)
+
+            shifted = [list(row) for row in rows]
+            shifted[1][1] = str(float(shifted[1][1]) + 0.001)
+            renamed = [list(row) for row in rows]
+            renamed[0][1] = 'wrong_column'
+            for name, changed in [('value', shifted), ('column', renamed), ('row', rows[:-1])]:
+                with self.subTest(changed=name):
+                    write(changed)
+                    with self.assertRaises(AssertionError):
+                        self.assert_synthetic_csv_matches(actual, expected)
+
+            expected = ROOT / 'samples' / 'raincloud.csv'
+            with expected.open(newline='', encoding='utf-8') as handle:
+                grouped = list(csv.reader(handle))
+            grouped[1][1] = 'wrong_group'
+            write(grouped)
+            with self.assertRaises(AssertionError):
+                self.assert_synthetic_csv_matches(actual, expected)
 
     def test_heatmap_orientation_and_irregular_coordinates(self):
         rows = [{"x": x, "y": y, "z": x + 10*y} for y in (2, 7) for x in (1, 3, 9)]

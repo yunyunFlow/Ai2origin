@@ -85,9 +85,11 @@ the requested output. PNG is the Python default; `--svg` adds an editable copy.
 Native Origin work must read back the data and check the saved/reopened project.
 Use scripts/COM/LabTalk before desktop automation and preserve the user's sessions.
 
-Check numerical bindings and inspect every final image. For repeats, use
-`scripts/check_reproducibility.py`; failed or incomplete generations are not
-accepted. Numeric, visual, native and scientific checks answer different
+Check numerical bindings and inspect every final image. Normal plotting needs
+no manual hash check or full regression run. Use `scripts/check_reproducibility.py`
+when the user requests repeats, while debugging, or after changing a template
+or implementation. Failed or incomplete generations are not accepted.
+Numeric, visual, native and scientific checks answer different
 questions. After two consumer failures, preserve the output and debug a small
 fixture before another full attempt.
 

@@ -8,7 +8,7 @@ Earlier frozen packages retain their original bytes and evidence generations.
 
 | Check | Evidence |
 | --- | --- |
-| Public regressions | 261 tests against source and extracted code in the existing Python3.11 environment |
+| Public regressions | 262 tests against the extracted public code in Python3.11; the source owner's frozen package has261 |
 | Plotting | 42 recipes; repeated Python PNG/SVG with identical bytes |
 | Native recipe figures | Origin2021 evidence from0.3.4:42 graphs,178,414 exact worksheet cells, saved/reopened projects and matching repeated pixels |
 | Optional calculations | 15 synthetic jobs and46 figures; numerical and Python export repeats |
@@ -20,6 +20,10 @@ Earlier frozen packages retain their original bytes and evidence generations.
 The0.3.6 version fields change provenance text only. Plot objects, styles, source
 values and numerical results match the retained generations. Their native
 evidence remains0.3.4/0.3.5; no new native generation is implied.
+
+Synthetic-generator checks retain exact headers, labels and row order, while
+allowing numeric roundoff with rtol=atol=1e-12 across environments. Source-file
+hashes and repeated exports still require exact bytes.
 
 ## Environments
 
@@ -36,7 +40,7 @@ Windows PowerShell is unavailable. Optional analysis modules skip without SciPy.
 Python3.12 standard-library text inspection is checked. Full clean
 Python3.10/3.12 plotting/analysis and dependency-range endpoints are untested.
 The CI file discovers all test modules in separate core/analysis jobs on both
-versions; online execution remains pending. Other systems should be checked
+versions; see GitHub Actions for the current result. Other systems should be checked
 by the user's assistant using the tools and fonts actually available there.
 Different versions and fonts may produce different pixels or fit rounding.
 

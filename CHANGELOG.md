@@ -2,7 +2,10 @@
 
 ## 0.3.6 — 2026-10-06
 
-- Focus the homepage on plotting and four native example images.
+- Keep the existing homepage wording, with six native example images.
+- Add a copyable prompt for starting or continuing a plotting task.
+- Let synthetic-data checks tolerate floating-point roundoff across Python
+  environments; keep source hashes and repeated-export checks exact.
 - Shorten the English and Chinese entry points. Let the calling AI choose
   local tools and adapt the examples to other datasets and plot types.
 - Keep optional calculations in the method route, with citations when used.

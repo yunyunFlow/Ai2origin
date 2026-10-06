@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "version": "0.3.6",
+  "example": "heatmap-purplegreen",
+  "data": "Synthetic positive field",
+  "inputs": {
+    "config": "heatmap-purplegreen.json",
+    "config_sha256": "1926de20181ee046fec1f452ec8fca239956867ac7a8f76a52e2a5ccd229163a",
+    "csv": "heatmap-positive.csv",
+    "csv_sha256": "b86b7f984f15e78497edcaa4905f4edd65b8fc658420ff44302c23feb2a19aaf",
+    "raw_nodes": 117
+  },
+  "image": "origin-heatmap-purplegreen.png",
+  "image_sha256": "871dbff96b023a009b5b40fb81d9af6b7ac6f3f420d9ced3c3830a118bde2761",
+  "backend": "Origin 2021",
+  "actual_font": "Arial",
+  "labels": {
+    "x": "X (a.u.)",
+    "y": "Y (a.u.)",
+    "color": "Value (a.u.)"
+  },
+  "native_checks": {
+    "numeric_readback": "PASS",
+    "cells": 1840,
+    "project_reopen": "PASS",
+    "reopened_cells": 1840,
+    "style_and_palette_readback": "PASS_BEFORE_AND_AFTER_REOPEN",
+    "two_exports": "NATIVE_RGB_IDENTICAL"
+  },
+  "python_check": "PNG_AND_EDITABLE_SVG_BYTE_IDENTICAL",
+  "visual_review": "PASS",
+  "scientific_validation": "SYNTHETIC_EXAMPLE_ONLY"
+}
