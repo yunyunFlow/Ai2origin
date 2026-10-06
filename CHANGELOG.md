@@ -4,6 +4,9 @@
 
 - Keep the existing homepage wording, with six native example images.
 - Add a copyable prompt for starting or continuing a plotting task.
+- Use Raincloud and Field heatmap in the gallery; remove Toy from sample axes
+  and their generator, retaining source values and palette settings.
+- Keep example outputs outside the skill and clarify the Windows invocation.
 - Let synthetic-data checks tolerate floating-point roundoff across Python
   environments; keep source hashes and repeated-export checks exact.
 - Shorten the English and Chinese entry points. Let the calling AI choose

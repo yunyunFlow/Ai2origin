@@ -50,9 +50,9 @@
         "#B2182B"
       ],
       "labels": {
-        "x": "Toy x (a.u.)",
-        "y": "Toy y (a.u.)",
-        "color": "Toy field (a.u.)"
+        "x": "X (a.u.)",
+        "y": "Y (a.u.)",
+        "color": "Field (a.u.)"
       }
     },
     {

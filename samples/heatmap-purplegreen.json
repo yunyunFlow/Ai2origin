@@ -25,7 +25,7 @@
         "y": "Y (a.u.)",
         "color": "Value (a.u.)"
       },
-      "caption": "Identical invented 9x13 grid for palette comparison; Purple–green–yellow; no white/zero threshold is implied. Display-only factor-4 bilinear interpolation, 256 color bins; exact raw grid retained. No new observations or higher scientific resolution."
+      "caption": "Field heatmap on an invented 9x13 grid. Display-only factor-4 bilinear interpolation and 256 color bins; raw nodes retained. No zero threshold or new observations implied."
     }
   ]
 }

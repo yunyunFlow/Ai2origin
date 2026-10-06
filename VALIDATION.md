@@ -21,6 +21,14 @@ The0.3.6 version fields change provenance text only. Plot objects, styles, sourc
 values and numerical results match the retained generations. Their native
 evidence remains0.3.4/0.3.5; no new native generation is implied.
 
+The public sample revision removes Toy from the signed-field and palette-curve
+axes. Both graphs were regenerated in two Origin2021 sessions:714 worksheet
+cells read back exactly per session, projects saved/reopened, styles checked
+and repeated pixels matched. Python PNG/SVG repeats also matched. Source values
+and palettes are unchanged. The separate Field heatmap has1840 checked cells
+and the same save/reopen/repeat checks; its caption update changes no drawing
+objects. Per-image records distinguish these revisions from retained figures.
+
 Synthetic-generator checks retain exact headers, labels and row order, while
 allowing numeric roundoff with rtol=atol=1e-12 across environments. Source-file
 hashes and repeated exports still require exact bytes.
@@ -37,10 +45,11 @@ these simulate absent optional dependencies, Arial and PowerShell.
 They are not clean-machine results. Three native consumer tests skip when
 Windows PowerShell is unavailable. Optional analysis modules skip without SciPy.
 
-Python3.12 standard-library text inspection is checked. Full clean
-Python3.10/3.12 plotting/analysis and dependency-range endpoints are untested.
-The CI file discovers all test modules in separate core/analysis jobs on both
-versions; see GitHub Actions for the current result. Other systems should be checked
+Fresh Linux GitHub Actions jobs pass on Python3.10 and3.12 in both core and
+analysis profiles. Each job discovers all test modules and repeats the example
+exports; Windows-only checks skip there. Dependency-range endpoints and clean
+Windows installation remain untested. See GitHub Actions for the current result.
+Other systems should be checked
 by the user's assistant using the tools and fonts actually available there.
 Different versions and fonts may produce different pixels or fit rounding.
 

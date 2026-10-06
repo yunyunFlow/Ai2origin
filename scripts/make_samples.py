@@ -63,7 +63,7 @@ def make_samples(target):
                   "uncertainty_definition": "Assigned synthetic ±0.10 display band; not a CI"}]},
             {"id": "heatmap", "kind": "heatmap", "csv": "heatmap.csv", "x": "x", "y": "y", "z": "z",
              "synthetic": True, "title": "Synthetic signed field", "color_range": [-1, 1], "center": 0,
-             "cmap": ["#2166AC", "#F7F7F7", "#B2182B"], "labels": {"x": "Toy x (a.u.)", "y": "Toy y (a.u.)", "color": "Toy field (a.u.)"}},
+             "cmap": ["#2166AC", "#F7F7F7", "#B2182B"], "labels": {"x": "X (a.u.)", "y": "Y (a.u.)", "color": "Field (a.u.)"}},
             {"id": "smooth", "kind": "heatmap", "csv": "xrd.csv", "x": "toy_angle", "y": "toy_scan", "z": "toy_intensity",
              "synthetic": True, "title": "Synthetic XRD scans", "color_range": [0, 1], "center": 0.5,
              "caption": "Invented diffraction-like peaks on invented axes. 9x141 raw nodes retained; display-only bilinear factor 8 gives 65x1121 nodes, 256 levels, no new observations or higher scientific resolution. White=0.5, not zero. No measured diffraction or phase claim.",
@@ -80,7 +80,7 @@ def make_samples(target):
               [[format(float(v),'.17g') for v in row] for row in zip(x,*[i+.3*np.sin(x+i*.4) for i in range(7)])])
     colors={'schema_version':1,'plots':[{'id':'palette-lines','kind':'line','csv':'colors-lines.csv','x':'x',
         'synthetic':True,'title':'','x_range':[0,10],'y_range':[-.5,7.5],
-        'labels':{'x':'Toy x (a.u.)','y':'Toy response (a.u.)'},
+        'labels':{'x':'X (a.u.)','y':'Response (a.u.)'},
         'series':[{'column':'v'+str(i),'label':name} for i,name in enumerate(['Red','Blue','Green','Purple','Orange','Gray','Pink'],1)],
         'caption':'Seven entirely invented curves; default red/blue/green/purple/orange/gray/pink identities. No measured observable or scientific inference.'}]}
     (target/'colors.json').write_text(json.dumps(colors,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

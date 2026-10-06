@@ -38,14 +38,14 @@ parser merely because the package can produce OPJU output.
 From the repository root, with your existing Python environment:
 
 ~~~sh
-python scripts/ai2origin.py samples/demo.json --out work/prepared --backend prepare
+python scripts/ai2origin.py samples/demo.json --out ../ai2origin-work/prepared --backend prepare
 ~~~
 
 Then in native Windows PowerShell:
 
 ~~~powershell
-.\scripts\origin.ps1 -Plan .\work\prepared\origin-plan.json
-.\scripts\origin.ps1 -Plan .\work\prepared\origin-plan.json -OutDir .\work\native -Run -TimeoutSeconds 180
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\origin.ps1 -Plan ..\ai2origin-work\prepared\origin-plan.json
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\origin.ps1 -Plan ..\ai2origin-work\prepared\origin-plan.json -OutDir ..\ai2origin-work\native -Run -TimeoutSeconds 180
 ~~~
 
 The first command reads the plan and registry/version only. It does not start

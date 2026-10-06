@@ -19,19 +19,25 @@
       "source_sha256": "a87c24d3a00a832993b32a27d8dccc9e9146ef1401ce99b4411ced2c64bb0bda",
       "caption": null,
       "numeric_cells": 492,
-      "native_plan_sha256": "d3e46393aebf633b32c9081281ce0e0d5da8841196843b6495e22fbda2e43eb3"
+      "native_plan_sha256": "d3e46393aebf633b32c9081281ce0e0d5da8841196843b6495e22fbda2e43eb3",
+      "current_config_sha256": "ee1a976485139856545fd0121ee9bdc4a20ef8580a00c4f60a4491001fca9606",
+      "current_plot_unchanged": true
     },
     {
       "id": "heatmap",
       "file": "origin-heatmap.png",
-      "sha256": "d0df56688daf97fe54e85f74efd2668c17e2a3e47667279a50f2d6f803dadd4b",
+      "sha256": "b056a351dbc15886b32743821dc58e693e83f7985f6176a3520bfa9fc4ad95ea",
       "config": "demo.json",
-      "config_sha256": "c362897077066a07876b9e6c47597485cc858d625b1f60d1eb107be7fab0abaa",
+      "config_sha256": "ee1a976485139856545fd0121ee9bdc4a20ef8580a00c4f60a4491001fca9606",
       "source": "heatmap.csv",
       "source_sha256": "ca8964c2748d140e3d5bd64ff5bbc4735351524ef0827ee62356f82415e0829b",
       "caption": null,
       "numeric_cells": 140,
-      "native_plan_sha256": "d3e46393aebf633b32c9081281ce0e0d5da8841196843b6495e22fbda2e43eb3"
+      "native_plan_sha256": "20d9bb8af8de21d5041f1ad5ff279d583f2a3b1be8b7f032082ab00f7be80320",
+      "version": "0.3.6",
+      "native": "ORIGIN2021_TWO_OWNED_RUNS_READBACK_REOPEN_RGB_REPEAT",
+      "visual": "REVIEWED_FINAL_IMAGE",
+      "actual_font": "Arial"
     },
     {
       "id": "smooth",
@@ -43,19 +49,26 @@
       "source_sha256": "13ed672e9fc45fed2f656f61fe8a3183db4ad613fe45285da474e0ab7b5a5209",
       "caption": "Invented diffraction-like peaks on invented axes. 9x141 raw nodes retained; display-only bilinear factor 8 gives 65x1121 nodes, 256 levels, no new observations or higher scientific resolution. White=0.5, not zero. No measured diffraction or phase claim.",
       "numeric_cells": 75472,
-      "native_plan_sha256": "d3e46393aebf633b32c9081281ce0e0d5da8841196843b6495e22fbda2e43eb3"
+      "native_plan_sha256": "d3e46393aebf633b32c9081281ce0e0d5da8841196843b6495e22fbda2e43eb3",
+      "current_config_sha256": "ee1a976485139856545fd0121ee9bdc4a20ef8580a00c4f60a4491001fca9606",
+      "current_plot_unchanged": true
     },
     {
       "id": "palette-lines",
       "file": "origin-palette-lines.png",
-      "sha256": "6e97f579df22ca65782d9b00875a248aad35671f2b3a9d64dcaeeb351840f67d",
+      "sha256": "e3e8ed3ab67f2486ec52d2b0ccded0f725e7fdc6232746617a5442916b098857",
       "config": "colors.json",
-      "config_sha256": "3a2c0fc94ea84320d1b85a715a9ae0b9a4c7b8914807a6eb67dc655c204048a8",
+      "config_sha256": "4cc75aae24216098785e1be4a4672b335af5345a5a6ab6937ffad19e0d071a27",
       "source": "colors-lines.csv",
       "source_sha256": "eaddbe05444d0f519def6f67b978bcd7f0b1b7095ddd7f922fc8b45d14b1cad9",
       "caption": "Seven entirely invented curves; default red/blue/green/purple/orange/gray/pink identities. No measured observable or scientific inference.",
       "numeric_cells": 574,
-      "native_plan_sha256": "3a02d48a8562eebda618492805d2a3da57d068554212a6470c1305f2385ec012"
+      "native_plan_sha256": "20d9bb8af8de21d5041f1ad5ff279d583f2a3b1be8b7f032082ab00f7be80320",
+      "version": "0.3.6",
+      "native": "ORIGIN2021_TWO_OWNED_RUNS_READBACK_REOPEN_RGB_REPEAT",
+      "visual": "REVIEWED_FINAL_IMAGE",
+      "actual_font": "Arial"
     }
-  ]
+  ],
+  "public_revision": "0.3.6 sample axes updated; retained images keep their original native generation and hashes"
 }

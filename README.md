@@ -14,11 +14,13 @@ Python 3.10+; install the dependencies, then run an example:
 
 ~~~sh
 python -m pip install -r requirements.txt
-python scripts/ai2origin.py samples/demo.json --out work/demo --backend python
+python scripts/ai2origin.py samples/demo.json --out ../ai2origin-work/demo --backend python
 ~~~
 
-Use a new output directory outside the installed skill. Add --svg for an editable vector copy.
-Arial must be installed on your system. If missing, run --list-fonts and choose
+Run commands from the repository folder; outputs go to a new folder beside it.
+Add --svg for an editable vector copy.
+Arial must be installed on your system. If missing, run
+`python scripts/ai2origin.py --list-fonts` and choose
 --font "Installed name". No fonts are bundled, copied or downloaded;
 the receipt records the actual font. [Font policy](references/style.md).
 
@@ -41,11 +43,11 @@ Use an installed, working Origin 2021 on Windows. For other versions, let your
 AI adapt the workflow and check the result.
 
 ~~~sh
-python scripts/ai2origin.py samples/demo.json --out work/prepared --backend prepare
+python scripts/ai2origin.py samples/demo.json --out ../ai2origin-work/prepared --backend prepare
 ~~~
 
 ~~~powershell
-.\scripts\origin.ps1 -Plan .\work\prepared\origin-plan.json -OutDir .\work\native -Run
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\origin.ps1 -Plan ..\ai2origin-work\prepared\origin-plan.json -OutDir ..\ai2origin-work\native -Run
 ~~~
 
 Save and close any open Origin session first. The runner checks values,
@@ -57,36 +59,36 @@ saves/reopens the project and exports its graphs. [Native details](references/or
 
 All values are invented. These six figures are Origin exports.
 
-| XY bands | Battery curves | Vertical violin |
+| XY bands | Battery curves | Raincloud |
 | --- | --- | --- |
-| ![XY](samples/origin-xy.png) | ![Battery curves](templates/origin-battery-rate.png) | ![Vertical violin](templates/origin-violin-vertical.png) |
+| ![XY](samples/origin-xy.png) | ![Battery curves](templates/origin-battery-rate.png) | ![Raincloud](templates/origin-violin-vertical.png) |
 
 | Spectral stack | XRD heatmap | Field heatmap |
 | --- | --- | --- |
 | ![Stack](templates/origin-stack.png) | ![XRD heatmap](samples/origin-smooth.png) | ![Field heatmap](samples/origin-heatmap-purplegreen.png) |
 
 Browse [samples](samples/README.md) and [templates](templates/README.md).
-The [green–yellow heatmap config](samples/heatmap-purplegreen.json) is ready to reuse.
+The [Field heatmap config](samples/heatmap-purplegreen.json) is ready to reuse.
 Sparse line-symbol curves can use 5–6 pt markers through a
 [style override](references/style.md); keep dense data readable.
 
 Try a family with Python:
 
 ~~~sh
-python scripts/ai2origin.py templates/battery.json --out work/battery --backend python
-python scripts/ai2origin.py templates/paper.json --select cv nyquist --out work/echem --backend python
-python scripts/ai2origin.py templates/paper.json --select drt drt-map --out work/drt --backend python
-python scripts/ai2origin.py templates/paper.json --select migration dos rdf msd --out work/atomistic --backend python
+python scripts/ai2origin.py templates/battery.json --out ../ai2origin-work/battery --backend python
+python scripts/ai2origin.py templates/paper.json --select cv nyquist --out ../ai2origin-work/echem --backend python
+python scripts/ai2origin.py templates/paper.json --select drt drt-map --out ../ai2origin-work/drt --backend python
+python scripts/ai2origin.py templates/paper.json --select migration dos rdf msd --out ../ai2origin-work/atomistic --backend python
 ~~~
 
 ### From a table to a figure
 
-The included 11-point toy CV example exercises column mapping and plotting:
+The included 11-point synthetic CV example exercises column mapping and plotting:
 
 ~~~sh
-python scripts/intake.py samples/intake.csv --map samples/intake.json --out work/table
-python scripts/intake.py --check work/table
-python scripts/ai2origin.py work/table/plot.json --out work/table-figure --backend python
+python scripts/intake.py samples/intake.csv --map samples/intake.json --out ../ai2origin-work/table
+python scripts/intake.py --check ../ai2origin-work/table
+python scripts/ai2origin.py ../ai2origin-work/table/plot.json --out ../ai2origin-work/table-figure --backend python
 ~~~
 
 The mapping declares columns and units; [table details](references/tables.md)

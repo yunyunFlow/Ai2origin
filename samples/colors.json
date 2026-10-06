@@ -17,8 +17,8 @@
         7.5
       ],
       "labels": {
-        "x": "Toy x (a.u.)",
-        "y": "Toy response (a.u.)"
+        "x": "X (a.u.)",
+        "y": "Response (a.u.)"
       },
       "series": [
         {

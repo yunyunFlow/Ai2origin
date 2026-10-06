@@ -5,10 +5,11 @@
   "data": "Synthetic positive field",
   "inputs": {
     "config": "heatmap-purplegreen.json",
-    "config_sha256": "1926de20181ee046fec1f452ec8fca239956867ac7a8f76a52e2a5ccd229163a",
+    "config_sha256": "ca261c890ed3a314c20b03b0643c70a719f7d0765bea37a94f87bd59cf0c621d",
     "csv": "heatmap-positive.csv",
     "csv_sha256": "b86b7f984f15e78497edcaa4905f4edd65b8fc658420ff44302c23feb2a19aaf",
-    "raw_nodes": 117
+    "raw_nodes": 117,
+    "native_generation_config_sha256": "1926de20181ee046fec1f452ec8fca239956867ac7a8f76a52e2a5ccd229163a"
   },
   "image": "origin-heatmap-purplegreen.png",
   "image_sha256": "871dbff96b023a009b5b40fb81d9af6b7ac6f3f420d9ced3c3830a118bde2761",
@@ -29,5 +30,7 @@
   },
   "python_check": "PNG_AND_EDITABLE_SVG_BYTE_IDENTICAL",
   "visual_review": "PASS",
-  "scientific_validation": "SYNTHETIC_EXAMPLE_ONLY"
+  "scientific_validation": "SYNTHETIC_EXAMPLE_ONLY",
+  "config_update": "Caption only; numeric payload and drawing commands identical to accepted native generation",
+  "display_name": "Field heatmap"
 }
