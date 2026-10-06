@@ -61,9 +61,9 @@ All values are invented. These six figures are Origin exports.
 | --- | --- | --- |
 | ![XY](samples/origin-xy.png) | ![Battery curves](templates/origin-battery-rate.png) | ![Vertical violin](templates/origin-violin-vertical.png) |
 
-| Spectral stack | XRD heatmap | Purple–green–yellow heatmap |
+| Spectral stack | XRD heatmap | Field heatmap |
 | --- | --- | --- |
-| ![Stack](templates/origin-stack.png) | ![XRD heatmap](samples/origin-smooth.png) | ![Purple–green–yellow heatmap](samples/origin-heatmap-purplegreen.png) |
+| ![Stack](templates/origin-stack.png) | ![XRD heatmap](samples/origin-smooth.png) | ![Field heatmap](samples/origin-heatmap-purplegreen.png) |
 
 Browse [samples](samples/README.md) and [templates](templates/README.md).
 The [green–yellow heatmap config](samples/heatmap-purplegreen.json) is ready to reuse.
