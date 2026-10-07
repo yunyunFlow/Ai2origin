@@ -1,5 +1,11 @@
 # Changes
 
+## 0.3.8 — 2026-10-07
+
+- Fix false scatter legend warnings and missed line-symbol intersections.
+- Accept either Matplotlib legend-handle name.
+- Keep unchecked geometry marked for review.
+
 ## 0.3.7 — 2026-10-07
 
 - Accept literal percentage labels with Python; keep native LabTalk restrictions.

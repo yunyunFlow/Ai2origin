@@ -2,7 +2,7 @@
 name: ai2origin
 description: Plot scientific data as PNG, SVG or editable Origin projects. Choose a useful layout, preserve source values and check the final output.
 metadata:
-  version: "0.3.7"
+  version: "0.3.8"
 ---
 
 # Ai2origin

@@ -4,7 +4,7 @@ Give your agent scientific data and a plotting goal. Ai2origin helps it inspect
 the files, choose a suitable plot and keep the result reproducible.
 
 **Origin 2021:** PNG and editable OPJU. **Python:** PNG, with optional SVG.
-Version **0.3.7**. All examples are synthetic.
+Version **0.3.8**. All examples are synthetic.
 
 Created by [yunyun](https://github.com/yunyunFlow).
 

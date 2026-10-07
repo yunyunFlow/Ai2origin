@@ -1,5 +1,7 @@
 # Config and reproducibility
 
+Layout reports flag intersections, clipped text and geometry needing a manual check.
+
 Python labels may contain literal percentages: `(%)`, `(at.%)` and `(wt.%)`.
 Native preparation still rejects percent substitutions until a native text
 adapter is verified. A Python percent-label geometry file is marked unavailable

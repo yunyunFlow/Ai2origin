@@ -17,6 +17,96 @@ DRAW=module('export_draw',ROOT/'scripts/ai2origin.py')
 CHECK=module('export_check',ROOT/'scripts/check_reproducibility.py')
 
 class ExportTests(unittest.TestCase):
+    def test_separated_scatter_legend_is_clear_for_actual_marker_shapes(self):
+        from matplotlib import pyplot as plt
+        for marker in ('o','s','^','x'):
+            with self.subTest(marker=marker):
+                fig,ax=plt.subplots(figsize=(4,3),dpi=100)
+                try:
+                    ax.set(xlim=(0,1),ylim=(0,1))
+                    ax.scatter([.1,.2],[.1,.2],s=[30,80],marker=marker,label='Data')
+                    ax.legend(loc='upper right',frameon=False)
+                    report=DRAW.rendered_layout(fig,ax,100)
+                    self.assertEqual(report['status'],'NO_GEOMETRIC_ISSUES_DETECTED')
+                    self.assertFalse(report['geometry_unchecked'])
+                finally:plt.close(fig)
+
+    def test_line_and_scatter_marker_edges_overlap_or_are_separated(self):
+        from matplotlib import pyplot as plt
+        for kind in ('line','scatter'):
+            for gap,hit in ((-2,True),(-14*100/144-3,False)):
+                with self.subTest(kind=kind,gap=gap):
+                    fig,ax=plt.subplots(figsize=(4,3),dpi=100)
+                    try:
+                        ax.set(xlim=(0,1),ylim=(0,1))
+                        if kind=='line':artist,=ax.plot([.1],[.1],marker='o',markersize=14,label='Data')
+                        else:artist=ax.scatter([.1],[.1],s=14**2,label='Data')
+                        legend=ax.legend(loc='upper right',frameon=False);fig.canvas.draw()
+                        box=legend.get_texts()[0].get_window_extent(fig.canvas.get_renderer())
+                        x,y=ax.transData.inverted().transform([(box.x0+box.x1)/2,box.y0+gap])
+                        if kind=='line':artist.set_data([x],[y])
+                        else:artist.set_offsets([[x,y]])
+                        report=DRAW.rendered_layout(fig,ax,100)
+                        self.assertEqual(bool(report['legend_collisions']),hit)
+                    finally:plt.close(fig)
+
+    def test_invisible_line_or_marker_does_not_report_an_intersection(self):
+        from matplotlib import pyplot as plt
+        for invisible in ('artist','marker','color'):
+            fig,ax=plt.subplots(figsize=(4,3),dpi=100)
+            try:
+                ax.set(xlim=(0,1),ylim=(0,1))
+                line,=ax.plot([.1],[.1],linestyle='None',marker='o',markersize=14,label='Data')
+                legend=ax.legend(loc='upper right',frameon=False);fig.canvas.draw()
+                box=legend.get_texts()[0].get_window_extent(fig.canvas.get_renderer())
+                x,y=ax.transData.inverted().transform(box.get_points().mean(axis=0));line.set_data([x],[y])
+                if invisible=='artist':line.set_visible(False)
+                elif invisible=='marker':line.set_marker('None')
+                else:line.set_markerfacecolor('none');line.set_markeredgecolor('none')
+                self.assertFalse(DRAW.rendered_layout(fig,ax,100)['legend_collisions'])
+            finally:plt.close(fig)
+
+    def test_legacy_matplotlib_legend_handle_access(self):
+        from matplotlib import pyplot as plt
+        from types import SimpleNamespace
+        self.assertEqual(DRAW.layout_legend_handles(SimpleNamespace(legendHandles=['old'])),['old'])
+        self.assertEqual(DRAW.layout_legend_handles(SimpleNamespace(legend_handles=['new'],legendHandles=['old'])),['new'])
+        fig,ax=plt.subplots(figsize=(4,3),dpi=100)
+        try:
+            ax.set(xlim=(0,1),ylim=(0,1));ax.scatter([.1],[.1],label='Data')
+            legend=ax.legend(loc='upper right',frameon=False)
+            handles=DRAW.layout_legend_handles(legend)
+            with patch.object(legend,'legend_handles',None,create=True),patch.object(legend,'legendHandles',handles,create=True):
+                self.assertEqual(DRAW.rendered_layout(fig,ax,100)['status'],'NO_GEOMETRIC_ISSUES_DETECTED')
+        finally:plt.close(fig)
+
+    def test_invalid_legend_geometry_is_incomplete_instead_of_clear(self):
+        from matplotlib import pyplot as plt
+        from matplotlib.transforms import Bbox
+        fig,ax=plt.subplots(figsize=(4,3),dpi=100)
+        try:
+            ax.set(xlim=(0,1),ylim=(0,1));ax.plot([.1,.2],[.1,.2],label='Data')
+            handle=DRAW.layout_legend_handles(ax.legend(loc='upper right',frameon=False))[0]
+            with patch.object(handle,'get_window_extent',return_value=Bbox.from_extents(float('inf'),float('inf'),float('-inf'),float('-inf'))):
+                report=DRAW.rendered_layout(fig,ax,100)
+            self.assertEqual(report['status'],'NEEDS_REVIEW')
+            self.assertTrue(report['geometry_unchecked'])
+            self.assertFalse(report['legend_collisions'])
+        finally:plt.close(fig)
+
+    def test_incomplete_geometry_report_cannot_claim_clear(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);(root/'input.csv').write_text('x,y\n1,2\n2,3\n')
+            config=root/'input.json';config.write_text(json.dumps({'schema_version':1,'style':{'export':{'raster_dpi':72}},
+                'plots':[{'id':'curve','kind':'line','csv':'input.csv','x':'x','labels':{'x':'X','y':'Y'},'series':[{'column':'y','label':'A'}]}]}))
+            output=root/'output'
+            with contextlib.redirect_stdout(io.StringIO()):DRAW.main([str(config),'--out',str(output),'--backend','python','--font','DejaVu Sans'])
+            path=output/'curve-layout.json';report=json.loads(path.read_text())
+            report.update(legend_collisions=[],text_outside_canvas=[],geometry_unchecked=[{'artist':'legend'}],status='NO_GEOMETRIC_ISSUES_DETECTED')
+            path.write_text(json.dumps(report));receipt_path=output/'receipt.json';receipt=json.loads(receipt_path.read_text())
+            entry=next(e for e in receipt['outputs'] if e['name']==path.name);entry.update(bytes=path.stat().st_size,sha256=CHECK.sha(path));receipt_path.write_text(json.dumps(receipt))
+            with self.assertRaisesRegex(ValueError,'layout report status'):CHECK.check(output)
+
     def test_literal_percent_labels_render_without_native_commands(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary);(root/'input.csv').write_text('x,y\n1,2\n2,1\n3,4\n')
@@ -62,12 +152,13 @@ class ExportTests(unittest.TestCase):
                 elif kind=='band':ax.fill_between([0,1],[.89,.89],[1,1],label='Data')
                 else:ax.bar([.8],[1],width=.3,label='Data')
                 ax.legend(loc='upper right',frameon=False)
-                if kind=='line':
+                if kind in ('line','scatter'):
                     # Font/version metrics move the legend: cross its actual text.
                     fig.canvas.draw()
                     box=ax.get_legend().get_texts()[0].get_window_extent(fig.canvas.get_renderer())
-                    y=ax.transData.inverted().transform(box.get_points().mean(axis=0))[1]
-                    ax.lines[0].set_ydata([y,y])
+                    x,y=ax.transData.inverted().transform(box.get_points().mean(axis=0))
+                    if kind=='line':ax.lines[0].set_ydata([y,y])
+                    else:ax.collections[0].set_offsets([[x,y]])
                 report=DRAW.rendered_layout(fig,ax,100)
                 self.assertEqual(report['status'],'NEEDS_REVIEW')
                 self.assertTrue(report['legend_collisions']);plt.close(fig)

@@ -131,7 +131,8 @@ def inspect(folder,config=None):
                     name=identity+'-layout.json'
                     if name not in files:raise ValueError('Python layout report missing: '+name)
                     layout=load_json(folder/name)
-                    status='NEEDS_REVIEW' if layout['legend_collisions'] or layout['text_outside_canvas'] else 'NO_GEOMETRIC_ISSUES_DETECTED'
+                    status='NEEDS_REVIEW' if (layout['legend_collisions'] or layout['text_outside_canvas']
+                                             or layout.get('geometry_unchecked')) else 'NO_GEOMETRIC_ISSUES_DETECTED'
                     if (layout.get('backend')!='PYTHON' or layout.get('plot_id')!=identity
                             or layout.get('visual_review')!='REQUIRED'
                             or layout.get('status')!=status or checks[identity]!=status):

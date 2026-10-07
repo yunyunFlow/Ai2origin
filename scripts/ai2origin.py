@@ -993,6 +993,61 @@ def preview_font(spec, rows, style):
     return font
 
 
+def layout_legend_handles(legend):
+    """Matplotlib 3.6 uses the former spelling; prefer the current API."""
+    handles=getattr(legend,'legend_handles',None)
+    if handles is None:handles=getattr(legend,'legendHandles',None)
+    if handles is None:raise ValueError('Legend handles unavailable')
+    return handles
+
+
+def layout_collection_geometry(collection):
+    """Use the paths, drawn size matrices and pixel offsets of a scatter artist."""
+    from matplotlib.transforms import Affine2D
+    paths=collection.get_paths()
+    points=collection.get_offset_transform().transform(np.ma.filled(collection.get_offsets(),np.nan))
+    matrices=collection.get_transforms()
+    faces,edges=collection.get_facecolors(),collection.get_edgecolors()
+    widths=collection.get_linewidths()
+    if not paths or not len(points):return
+    for i in range(max(len(paths),len(points))):
+        x,y=points[i%len(points)]
+        if not np.isfinite([x,y]).all():continue  # Masked points are not drawn.
+        filled=bool(len(faces) and faces[i%len(faces),3]>0)
+        width=float(widths[i%len(widths)]) if len(widths) and len(edges) and edges[i%len(edges),3]>0 else 0.
+        if not filled and width<=0:continue
+        transform=Affine2D(matrices[i%len(matrices)]) if len(matrices) else Affine2D()
+        path=paths[i%len(paths)].transformed(transform+collection.get_transform()+Affine2D().translate(x,y))
+        if not np.isfinite(path.vertices).all():raise ValueError('Nonfinite scatter geometry')
+        yield path,filled,width
+
+
+def layout_line_geometry(line):
+    """Check visible connecting strokes and Line2D symbols separately."""
+    from matplotlib.markers import MarkerStyle
+    from matplotlib.transforms import Affine2D
+    from matplotlib.colors import to_rgba
+    if not line.get_visible() or line.get_alpha()==0:return
+    visible=lambda color:to_rgba(color,line.get_alpha())[3]>0
+    if line.get_linestyle() not in ('None','none','',' ') and line.get_linewidth()>0 and visible(line.get_color()):
+        yield line.get_path().transformed(line.get_transform()),False,line.get_linewidth()
+    marker=MarkerStyle(line.get_marker(),fillstyle=line.get_fillstyle())
+    if not len(marker.get_path().vertices) or line.get_markersize()<=0:return
+    if line.get_markevery() is not None:raise ValueError('Subsampled marker geometry requires a separate check')
+    width=line.get_markeredgewidth() if visible(line.get_markeredgecolor()) else 0.
+    scale=1. if line.get_marker()==',' else line.get_markersize()*line.figure.dpi/72
+    shapes=[(marker.get_path(),marker.get_transform(),line.get_markerfacecolor())]
+    if marker.get_alt_path() is not None:
+        shapes.append((marker.get_alt_path(),marker.get_alt_transform(),line.get_markerfacecoloralt()))
+    for path,transform,color in shapes:
+        filled=marker.is_filled() and visible(color)
+        if not filled and width<=0:continue
+        base=path.transformed(transform+Affine2D().scale(scale))
+        for x,y in line.get_transform().transform(line.get_xydata()):
+            if np.isfinite([x,y]).all():
+                yield base.transformed(Affine2D().translate(x,y)),filled,width
+
+
 def rendered_layout(fig, ax, dpi):
     """Check export-DPI geometry; this does not replace image inspection."""
     from matplotlib.transforms import Bbox
@@ -1022,33 +1077,51 @@ def rendered_layout(fig, ax, dpi):
         edges=[name for name,bad in [('left',box.x0<canvas.x0-.5),('right',box.x1>canvas.x1+.5),
                                     ('bottom',box.y0<canvas.y0-.5),('top',box.y1>canvas.y1+.5)] if bad]
         if edges:outside.append({'text':text.get_text(),'edges':edges})
-    collisions=[]
+    collisions=[];unchecked=[]
     if legend is not None:
         targets=[]
         for i,text in enumerate(legend.get_texts()):
             targets.append(('text',i,text.get_window_extent(renderer)))
-        for i,handle in enumerate(legend.legend_handles):
-            box=handle.get_window_extent(renderer)
-            width=float(np.max(getattr(handle,'get_linewidth',lambda:1.)()))
-            padding=max(1.,width*dpi/144)
-            targets.append(('handle',i,Bbox.from_extents(box.x0-padding,box.y0-padding,box.x1+padding,box.y1+padding)))
+        try:handles=layout_legend_handles(legend)
+        except ValueError as error:
+            handles=[];unchecked.append({'artist':'legend','reason':str(error)})
+        for i,handle in enumerate(handles):
+            if not handle.get_visible():continue
+            try:
+                if isinstance(handle,PathCollection):
+                    boxes=[path.get_extents().padded(width*dpi/144)
+                           for path,filled,width in layout_collection_geometry(handle)]
+                else:
+                    width=float(np.max(getattr(handle,'get_linewidth',lambda:1.)()))
+                    boxes=[handle.get_window_extent(renderer).padded(max(1.,width*dpi/144))]
+                for box in boxes:
+                    if not np.isfinite(box.extents).all() or box.x1<box.x0 or box.y1<box.y0:
+                        raise ValueError('Invalid legend handle extent')
+                    targets.append(('handle',i,box))
+            except ValueError as error:
+                unchecked.append({'artist':'legend_handle','index':i,'reason':str(error)})
+        lines={};collections={}
+        for i,line in enumerate(ax.lines):
+            try:lines[i]=list(layout_line_geometry(line))
+            except ValueError as error:unchecked.append({'artist':'line','index':i,'reason':str(error)})
+        for i,collection in enumerate(ax.collections):
+            if collection.get_visible() and isinstance(collection,PathCollection):
+                try:collections[i]=list(layout_collection_geometry(collection))
+                except ValueError as error:unchecked.append({'artist':'collection','index':i,'reason':str(error)})
+        def intersects(geometry,box):
+            return any(path.intersects_bbox(box.padded(width*dpi/144),filled=filled)
+                       for path,filled,width in geometry)
         for kind,index,box in targets:
             # Only the part inside the plotting frame can cover observations.
             box=Bbox.intersection(box,ax.bbox)
             if box is None:continue
-            for i,line in enumerate(ax.lines):
-                if not line.get_visible():continue
-                padding=max(1.,line.get_linewidth()*dpi/144)
-                area=Bbox.from_extents(box.x0-padding,box.y0-padding,box.x1+padding,box.y1+padding)
-                path=line.get_path().transformed(line.get_transform())
-                if path.intersects_bbox(area,filled=False):
+            for i,geometry in lines.items():
+                if intersects(geometry,box):
                     collisions.append({'data':'line','index':i,'legend':kind,'legend_index':index})
             for i,collection in enumerate(ax.collections):
                 if not collection.get_visible():continue
                 if isinstance(collection,PathCollection):
-                    points=collection.get_offset_transform().transform(collection.get_offsets())
-                    radius=math.sqrt(max(collection.get_sizes(),default=1.))*dpi/144
-                    hit=any(box.x0-radius<=x<=box.x1+radius and box.y0-radius<=y<=box.y1+radius for x,y in points)
+                    hit=intersects(collections.get(i,[]),box)
                 else:
                     hit=any(path.transformed(collection.get_transform()).intersects_bbox(box,filled=True)
                             for path in collection.get_paths())
@@ -1057,8 +1130,9 @@ def rendered_layout(fig, ax, dpi):
                 if shape.get_visible() and shape.get_path().transformed(shape.get_transform()).intersects_bbox(box,filled=True):
                     collisions.append({'data':'patch','index':i,'legend':kind,'legend_index':index})
     return {'schema_version':1,'backend':'PYTHON','export_dpi':dpi,
-            'status':'NEEDS_REVIEW' if collisions or outside else 'NO_GEOMETRIC_ISSUES_DETECTED',
+            'status':'NEEDS_REVIEW' if collisions or outside or unchecked else 'NO_GEOMETRIC_ISSUES_DETECTED',
             'legend_collisions':collisions,'text_outside_canvas':outside,
+            'geometry_unchecked':unchecked,
             'scope':'Rendered path/marker/fill and text rectangles;not glyph-pixel or native-Origin acceptance',
             'visual_review':'REQUIRED'}
 
@@ -1182,7 +1256,8 @@ def render(spec, rows, style, target, export_svg=False):
     target.with_name(target.name+'-layout.json').write_text(json.dumps(layout,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     if layout['status']=='NEEDS_REVIEW':
         print('LAYOUT '+spec['id']+': '+str(len(layout['legend_collisions']))+' legend intersections, '
-              +str(len(layout['text_outside_canvas']))+' text objects outside canvas; adjust task ranges/canvas and inspect exports',file=sys.stderr)
+              +str(len(layout['text_outside_canvas']))+' text objects outside canvas, '
+              +str(len(layout['geometry_unchecked']))+' geometry checks incomplete; adjust task ranges/canvas and inspect exports',file=sys.stderr)
     fig.savefig(target.with_suffix(".png"), dpi=style["export"]["raster_dpi"], metadata={"Software": "Ai2origin synthetic demo" if spec.get("synthetic") else "Ai2origin"})
     if export_svg:
         fig.savefig(target.with_suffix(".svg"), metadata={"Date": None, "Creator": "Ai2origin"})
@@ -1297,7 +1372,7 @@ def main(argv=None):
         raise FileExistsError("Refusing to overwrite an output directory")
     args.out.mkdir(parents=True)
     try:
-        plan = {"schema_version": 1, "generator": "Ai2origin 0.3.7", "generator_sha256": sha256(Path(__file__)),
+        plan = {"schema_version": 1, "generator": "Ai2origin 0.3.8", "generator_sha256": sha256(Path(__file__)),
                 "config_sha256": config_hash,
                 "style": style, "style_layers": style_layers, "style_engine_sha256": sha256(Path(__file__).with_name("style.py")),
                 "default_style_sha256":sha256(STYLE.DEFAULT_PATH),
