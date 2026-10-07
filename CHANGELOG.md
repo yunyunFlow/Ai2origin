@@ -1,5 +1,12 @@
 # Changes
 
+## 0.3.9 — 2026-10-07
+
+- Clarify development checks and the analysis catalog.
+- Fix development links in the installation package.
+- Remove local project details from the change history.
+- Keep plotting behavior, data and native examples unchanged.
+
 ## 0.3.8 — 2026-10-07
 
 - Fix false scatter legend warnings and missed line-symbol intersections.
@@ -221,7 +228,7 @@
   removes Origin's implicit baseline drop lines. Use disclosed per-group Scott
   bandwidth; no density taper, gap splitting, filtering or omitted outliers.
 
-- Match Plot31 DSC: Arial 10 pt, full black frame, bottom/left ticks only;
+- Use Arial 10 pt, a full black frame and bottom/left ticks only;
   select each legend corner by dense curve/band overlap.
 - DRT/Bode bind positive physical X to native log10 axes with power labels;
   check native axis types/ranges before and after project reopen.
@@ -234,8 +241,7 @@
 - Nyquist x/y both [0,30] Ω, equal physical unit lengths and square frame.
 - Minimal horizontal/vertical clouds retain all points and exact disclosed KDE;
   no summary strokes, tapering, artificial gaps or hidden data filtering.
-- Add eight magnetic/optical/biological demonstration recipes, bringing the
-  local temp.opju to 41 defaults; preserve the author's pre-edit file.
+- Add eight magnetic/optical/biological demonstration recipes.
 
 ## 0.1.1 — 2026-10-04
 

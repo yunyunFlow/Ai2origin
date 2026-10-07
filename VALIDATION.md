@@ -1,9 +1,9 @@
 # Checks
 
-The regression suite covers input checks, source values, PNG/SVG export,
-layout warnings and repeatability. Run it with the commands in
-[Contributing](CONTRIBUTING.md). The CI workflow covers Python 3.10 and 3.12,
-with drawing and optional-analysis profiles.
+The repository tests cover input checks, source values, PNG/SVG export,
+layout warnings and repeatability. See the [development instructions](https://github.com/yunyunFlow/Ai2origin/blob/main/CONTRIBUTING.md)
+to run them from a source checkout. CI tests Python 3.10 and 3.12 with drawing
+and optional-analysis profiles.
 
 Inspect the actual figure before sharing it. Check labels, units, legends,
 clipping and source points. Python layout reports flag intersections, text

@@ -23,7 +23,7 @@ sha256sum -c SHA256SUMS
 python -m unittest discover -s tests
 ```
 
-The full local suite passes262 tests; available optional tools affect the count.
+Install the analysis dependencies to run tests that need SciPy.
 Compare two exports when changing a template, checking reproducibility, or
 investigating a problem:
 

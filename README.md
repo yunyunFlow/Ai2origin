@@ -4,7 +4,7 @@ Give your agent scientific data and a plotting goal. Ai2origin helps it inspect
 the files, choose a suitable plot and keep the result reproducible.
 
 **Origin 2021:** PNG and editable OPJU. **Python:** PNG, with optional SVG.
-Version **0.3.8**. All examples are synthetic.
+Version **0.3.9**. All examples are synthetic.
 
 Created by [yunyun](https://github.com/yunyunFlow).
 
@@ -108,7 +108,7 @@ Adjust the task's axis ranges or canvas size and inspect the export again.
 See [tested scope and remaining limits](VALIDATION.md): the local run used Python 3.11
 and Origin 2021. Your AI can adapt the workflow to another setup and verify
 the actual results.
-Development tests and optional repeat checks are in [Contributing](CONTRIBUTING.md).
+Repository contributors can find [development checks](https://github.com/yunyunFlow/Ai2origin/blob/main/CONTRIBUTING.md).
 
 [MIT license](LICENSE) · [Dependencies and sources](THIRD_PARTY_NOTICES.md) ·
 [Use notice](DISCLAIMER.md). Fonts, commercial software and real research data

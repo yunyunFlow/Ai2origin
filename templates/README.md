@@ -142,15 +142,13 @@ style templates. No experimental mechanism is inferred from a toy fit.
 | --- | --- |
 | ![DRT](../samples/origin-analysis-drt-map.png) | ![Spectra](../samples/origin-analysis-spectra.png) |
 
-## Complete analysis gallery — all46 figures
+## All 46 analysis outputs
 
-The five selected previews above are an overview, not the complete method output.
-The four sheets below cover every figure exactly once. These are browsing
-composites of accepted Origin PNGs, not a native multipanel capability. Source
-plot IDs and image hashes are bound in [analysis validation](../samples/analysis.validation.json).
-All analyses remain callable through the same15-job synthetic configuration;
-raw/processed comparisons, fit windows, residuals and condition-specific plots
-are retained because they answer different questions.
+The previews above show a few outputs. The 15-job synthetic configuration
+produces all 46 figures listed below. Source plot IDs and native image hashes
+are recorded in [analysis validation](../samples/analysis.validation.json).
+Keep raw/processed comparisons, fit windows, residuals and condition-specific
+plots with the analysis: each answers a different question.
 
 ~~~sh
 python scripts/analyze.py samples/analysis.json --out work/analysis
@@ -164,10 +162,8 @@ python scripts/ai2origin.py work/analysis/plot.json --select cv-cv cv-components
 | Impedance —12 | RC fit/residual, three DRT forward fits/residuals/distributions and condition-dependent DRT map |
 | Catalysis/spectra —12 | LSV/apparent Tafel, Raman/FTIR/XPS fits and residuals, constrained doublet and Shirley-background fits/residuals |
 
-The optional gallery contains CV, battery, impedance and catalysis/spectra
-sheets. It is for browsing; use the generated individual PNGs and editable
-Origin project for final dimensions. Every current figure can be regenerated
-from the included analysis configuration, without that optional download.
+Use the generated individual PNGs and editable Origin project when preparing
+final figures. Every output can be regenerated from the included configuration.
 
 These analysis images retain their declared0.3.5 native generation. Current
 recipe acceptance does not relabel them or replace scientific applicability checks.
