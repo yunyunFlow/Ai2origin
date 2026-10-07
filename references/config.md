@@ -1,5 +1,16 @@
 # Config and reproducibility
 
+Python labels may contain literal percentages: `(%)`, `(at.%)` and `(wt.%)`.
+Native preparation still rejects percent substitutions until a native text
+adapter is verified. A Python percent-label geometry file is marked unavailable
+for native execution and contains no drawing commands. Other text control
+characters and command separators remain rejected.
+
+Python exports include `<plot-id>-layout.json`. `NEEDS_REVIEW` flags possible
+legend intersections or text outside the canvas; the CLI also prints a warning.
+Set task-level axis ranges or canvas dimensions, render to a new directory and
+inspect the actual image. A clear geometry result does not replace visual review.
+
 Use samples/demo.json for three baseline examples or templates/paper.json
 for the 32 article recipes. These are invented numbers, not scientific evidence.
 Use --select ID [ID ...] for an explicit task subset in catalog order; selection

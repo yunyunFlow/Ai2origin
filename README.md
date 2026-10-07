@@ -101,6 +101,10 @@ explain the optional summary. Use your own verified mapping for real data.
 - Keep the config and receipt with the figure; state requested processing.
 - For Origin delivery, check the saved project's read-back and reopen results.
 
+Python accepts literal percentage labels such as `Capacity retention (%)`.
+It also reports possible legend intersections and text outside the canvas.
+Adjust the task's axis ranges or canvas size and inspect the export again.
+
 See [tested scope and remaining limits](VALIDATION.md): the local run used Python 3.11
 and Origin 2021. Your AI can adapt the workflow to another setup and verify
 the actual results.

@@ -1,5 +1,18 @@
 # Verification notes
 
+The current source includes an unpublished local text/layout patch. Published
+0.3.6 packages and CI results below retain their original generation; they do
+not certify this patch. Local patch checks use the existing Python environment.
+
+Python literal percentage labels work independently of LabTalk encoding.
+Their geometry files contain no executable native drawing commands; native
+percentage text remains unverified. Rendering writes a hash-bound per-plot
+layout report and warns about legend intersections or text outside the canvas.
+These are path/marker/fill and text-rectangle checks, not glyph-pixel or Origin
+checks. `NO_GEOMETRIC_ISSUES_DETECTED` still requires image inspection.
+All-corner legend conflicts and long labels need task-level ranges/canvas fixes;
+the renderer does not silently move data, expand limits or claim visual PASS.
+
 Release 0.3.6 keeps the plotting and method implementations, with updated
 entry-point text and version labels. All bundled data are invented examples.
 Earlier frozen packages retain their original bytes and evidence generations.

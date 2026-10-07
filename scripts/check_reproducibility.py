@@ -123,6 +123,19 @@ def inspect(folder,config=None):
                 path=config.parent/mapped[plot['id']]['csv']
                 if sha(path)!=plot['metadata']['source_sha256']:raise ValueError('Source CSV hash mismatch: '+path.name)
         if receipt['status']=='PYTHON_RENDERED':
+            if 'python_layout_checks' in receipt:
+                checks=receipt['python_layout_checks']
+                if not isinstance(checks,dict) or set(checks)!=set(ids):
+                    raise ValueError('Python layout report inventory differs')
+                for identity in ids:
+                    name=identity+'-layout.json'
+                    if name not in files:raise ValueError('Python layout report missing: '+name)
+                    layout=load_json(folder/name)
+                    status='NEEDS_REVIEW' if layout['legend_collisions'] or layout['text_outside_canvas'] else 'NO_GEOMETRIC_ISSUES_DETECTED'
+                    if (layout.get('backend')!='PYTHON' or layout.get('plot_id')!=identity
+                            or layout.get('visual_review')!='REQUIRED'
+                            or layout.get('status')!=status or checks[identity]!=status):
+                        raise ValueError('Python layout report status differs')
             # Old receipts explicitly predate the PNG-only default and required both.
             formats=receipt.get('python_export_formats',['png','svg'])
             if formats not in (['png'],['png','svg']):

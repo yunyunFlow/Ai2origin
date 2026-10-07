@@ -43,10 +43,18 @@ def load_json(path):
                       object_pairs_hook=unique_object, parse_constant=bad_constant)
 
 
-def lt_string(value):
-    """Quote plain text, without enabling LabTalk substitutions or commands."""
+def plain_text(value):
+    """Scientific display text; literal percent is not an executable token."""
     value = str(value).replace('\u2212','-')
-    if any(ch in value for ch in ('"', ";", "\r", "\n", "%", "$", "\\")):
+    if any(ch in value for ch in ('"', ";", "$", "\\")) or any(ord(ch)<32 for ch in value):
+        raise ValueError("Use plain text labels without control characters or commands")
+    return value
+
+
+def lt_string(value):
+    """Quote native text, preserving the LabTalk substitution restriction."""
+    value = plain_text(value)
+    if "%" in value:
         raise ValueError("Use plain text labels without LabTalk control characters")
     return '"' + value + '"'
 
@@ -73,7 +81,7 @@ def math_text(value):
 def display_label(value, native=False):
     """Bounded unit exponents use Arial digits with native/mathtext superscripts."""
     value=math_text(value)
-    plain=lt_string(value)[1:-1]
+    plain=lt_string(value)[1:-1] if native else plain_text(value)
     pattern=r'\b(cm|g|s|Å|nm|m|kg|V|A|C|K|mol|Hz|mAh)\^(-?\d{1,2}(?:\.\d{1,2})?)\b'
     text=re.sub(pattern,lambda m:m[1]+'\\+('+m[2]+')' if native else r'$\mathrm{'+m[1]+'}^{'+m[2]+'}$',plain)
     text=text.replace('μ0H',r'μ\-(0)H' if native else r'$\mu_0 H$')
@@ -449,7 +457,7 @@ def add_series(commands, book, graph_id, pair, *, first=False, scatter=False, co
     return plot_index
 
 
-def prepare_plot(spec, rows, index, style):
+def prepare_plot(spec, rows, index, style, *, native_text=True):
     common = {"id", "kind", "csv", "synthetic", "title", "labels", "caption", "x_range", "y_range", "x_tick_step", "y_tick_step", "equal_xy", "x_scale", "y_scale", "legend_columns"}
     options = {
         "line": {"x", "series", "connect_order", "connection", "connection_factor", "y_ticks"},
@@ -504,6 +512,18 @@ def prepare_plot(spec, rows, index, style):
     book = Book("Data" + str(index))
     commands, metadata = [], {"kind": spec["kind"], "row_count": len(rows)}
     metadata['display_text'] = plot_text(spec,rows)
+    for text in metadata['display_text']:
+        plain_text(text)
+    native_ready=not any('%' in text for text in metadata['display_text'])
+    if native_text and not native_ready:
+        raise ValueError('Percent labels require a separately validated native text adapter; use Python for literal percent')
+    # Python still needs identical validated worksheets/geometry. Unavailable
+    # native strings use inert placeholders internally; no such commands leave
+    # this function. Never publish a native plan with altered display labels.
+    def quote_text(value):
+        return '""' if not native_ready and '%' in str(value) else lt_string(value)
+    def label_text(value, native=True):
+        return '""' if not native_ready and '%' in str(value) else display_label(value,native)
     if "caption" in spec:
         if not isinstance(spec["caption"], str) or not spec["caption"].strip():
             raise ValueError("Caption must be a nonempty string")
@@ -553,7 +573,7 @@ def prepare_plot(spec, rows, index, style):
                                first=not commands, color=color)
                 add_series(commands, book, graph_id, book.add_pair("lower", x, lo), color=color)
                 commands.extend(["set Curve%d -pf 1" % p, "set Curve%d -pfv 8" % p,
-                                 "set Curve%d -pfn 1" % p, "set Curve%d -pfb color(%s)" % (p, lt_string(color)),
+                                 "set Curve%d -pfn 1" % p, "set Curve%d -pfb color(%s)" % (p, quote_text(color)),
                                  "layer.plot%d.transparency=75" % p, "set Curve%d -l 0" % (p + 1)])
             if spec.get("connection", "straight") not in ("straight", "pchip"):
                 raise ValueError("Unsupported connection")
@@ -579,7 +599,7 @@ def prepare_plot(spec, rows, index, style):
         x=column(rows,spec['x']);tick_labels=spec.get('x_tick_labels')
         if not np.array_equal(x,np.arange(len(x))) or len(x)<2 or not isinstance(tick_labels,list) or len(tick_labels)!=len(x):
             raise ValueError('Stacked bar uses explicit consecutive category positions and matching labels')
-        if any(not isinstance(t,str) or not t or any(c.isspace() or c in '\\";$%' for c in t) for t in tick_labels):
+        if any(not isinstance(t,str) or not t or any(c.isspace() or c in ('\\";$%' if native_text else '\\";$') for c in t) for t in tick_labels):
             raise ValueError('Stacked bar tick labels must be nonempty single safe tokens')
         if len(spec['series'])<2 or len(spec['series'])>7:raise ValueError('Stacked bar supports2..7 declared components')
         corner,key_width,key_height,key_costs=legend_corner(spec,rows);legend=[]
@@ -593,7 +613,7 @@ def prepare_plot(spec, rows, index, style):
         commands=['plotxy iy:=[%s]Sheet1!(1,2:%d) plot:=213 ogl:=[<new name:=%s>]'%(book.name,len(book.headers),graph_id),
                   'layer -g 1 '+str(len(spec['series'])),'range Curve1=!1','set Curve1 -gm 1']
         for i,s in enumerate(spec['series'],1):
-            appearance=STYLE.series(style,s.get('id',s['column']),i-1,s.get('color'));color=lt_string(appearance['color']);c='Curve'+str(i)
+            appearance=STYLE.series(style,s.get('id',s['column']),i-1,s.get('color'));color=quote_text(appearance['color']);c='Curve'+str(i)
             commands.extend(['range '+c+'=!'+str(i),'set '+c+' -c color('+color+')','set '+c+' -cl color('+color+')',
                              'set '+c+' -pfb color('+color+')','set '+c+' -pbc color('+color+')',
                              'set '+c+' -pbs 0','set '+c+' -vw 0','set '+c+' -vg 38'])
@@ -606,7 +626,7 @@ def prepare_plot(spec, rows, index, style):
             tick_labels=spec['y_tick_labels']
             if not isinstance(tick_labels,list) or len(tick_labels)!=len(ys) or not np.array_equal(ys,np.arange(len(ys))):
                 raise ValueError('Categorical heatmap Y needs one label per consecutive row index starting at zero')
-            if any(not isinstance(t,str) or not t or any(c.isspace() or c in '\\";$%' for c in t) for t in tick_labels) or len(set(tick_labels))!=len(tick_labels):
+            if any(not isinstance(t,str) or not t or any(c.isspace() or c in ('\\";$%' if native_text else '\\";$') for c in t) for t in tick_labels) or len(set(tick_labels))!=len(tick_labels):
                 raise ValueError('Categorical heatmap labels must be unique safe tokens')
             if interpolation!='none' or 'y_tick_step' in spec or 'y_range' in spec:
                 raise ValueError('Categorical heatmap Y forbids cross-row interpolation or overridden Y geometry')
@@ -645,10 +665,10 @@ def prepare_plot(spec, rows, index, style):
         ]
         from matplotlib.colors import to_hex
         palette = [to_hex(color_map(spec)(v)) for v in np.linspace(0, 1, levels)]
-        color_commands[-1:-1] = ["layer.cmap.color%d=color(%s)" % (i, lt_string(color)) for i, color in enumerate(palette, 1)]
+        color_commands[-1:-1] = ["layer.cmap.color%d=color(%s)" % (i, quote_text(color)) for i, color in enumerate(palette, 1)]
         color_commands.extend(["label -r Spectrum1",
                                "layer.x.label.rotate=0",
-                               "label -n ScaleTitle " + lt_string(spec["labels"]["color"])])
+                               "label -n ScaleTitle " + quote_text(spec["labels"]["color"])])
         metadata.update({"grid_shape": list(grid.shape), "matrix_orientation": "rows=Y, columns=X",
                          "source_grid_shape": list(raw_grid[2].shape), "color_levels": levels,
                          "aggregation": "none", "interpolation": interpolation, "color_range": limits,
@@ -675,7 +695,7 @@ def prepare_plot(spec, rows, index, style):
                     p=add_series(commands,book,graph_id,book.add_pair('cloud_polygon',px,py),
                                  first=not commands,color=color,width=0)
                     commands.extend(['set Curve%d -pf 1'%p,'set Curve%d -pfv 1'%p,
-                                     'set Curve%d -pfb color(%s)'%(p,lt_string(color)),
+                                     'set Curve%d -pfb color(%s)'%(p,quote_text(color)),
                                      'layer.plot%d.transparency=78'%p])
                     continue
                 p = add_series(commands, book, graph_id, pair("cloud", segment["grid"], segment["top"]),
@@ -683,7 +703,7 @@ def prepare_plot(spec, rows, index, style):
                 add_series(commands, book, graph_id, pair("baseline", segment["grid"], segment["bottom"]), color=color, width=0.6)
                 if spec.get('cloud_fill',False):
                     commands.extend(["set Curve%d -pf 1" % p, "set Curve%d -pfv 8" % p, "set Curve%d -pfn %d" % (p, 2 if vertical else 1),
-                                 "set Curve%d -pfb color(%s)" % (p, lt_string(color)),
+                                 "set Curve%d -pfb color(%s)" % (p, quote_text(color)),
                                  "layer.plot%d.transparency=78" % p])
                 if not full:
                     commands.append("set Curve%d -l 0" % (p + 1))
@@ -719,8 +739,8 @@ def prepare_plot(spec, rows, index, style):
         raise ValueError("Script supports line, line_symbol, scatter, heatmap and raincloud")
     font = style["font"]["family"]
     axes, fonts, figure = style["axes"], style["font"], style["figure"]
-    background = "color(%s)" % lt_string(figure["background_color"])
-    axis_color = "color(%s)" % lt_string(axes["color"])
+    background = "color(%s)" % quote_text(figure["background_color"])
+    axis_color = "color(%s)" % quote_text(axes["color"])
     grid = str(int(axes["major_grid"]))
     tick_direction = "1" if axes["tick_direction"] == "in" else "2"
     commands.extend([
@@ -728,11 +748,11 @@ def prepare_plot(spec, rows, index, style):
         "page.width=page.resx*" + num(figure["width_mm"] / 25.4), "page.height=page.resy*" + num(figure["height_mm"] / 25.4),
         "layer.unit=1", "layer.left=22", "layer.top=18", "layer.width=" + ("55" if spec["kind"] == "heatmap" else "72"), "layer.height=62",
         "label -r XB", "label -r YL",
-        "label -xb " + display_label(spec["labels"]["x"],True), "label -yl " + display_label(spec["labels"]["y"],True),
-        "xb.font=font(%s)" % lt_string(font), "yl.font=font(%s)" % lt_string(font),
+        "label -xb " + label_text(spec["labels"]["x"],True), "label -yl " + label_text(spec["labels"]["y"],True),
+        "xb.font=font(%s)" % quote_text(font), "yl.font=font(%s)" % quote_text(font),
         "xb.fsize=" + num(fonts["axis_title_size_pt"]), "yl.fsize=" + num(fonts["axis_title_size_pt"]),
         "layer.x.label.fsize=" + num(fonts["tick_size_pt"]), "layer.y.label.fsize=" + num(fonts["tick_size_pt"]),
-        "layer.x.label.font=font(%s)" % lt_string(font), "layer.y.label.font=font(%s)" % lt_string(font),
+        "layer.x.label.font=font(%s)" % quote_text(font), "layer.y.label.font=font(%s)" % quote_text(font),
         "layer.x.color=" + axis_color, "layer.y.color=" + axis_color,
         "layer.x.thickness=" + num(axes["width_pt"]), "layer.y.thickness=" + num(axes["width_pt"]),
         "layer.x.ticks=" + tick_direction, "layer.y.ticks=" + tick_direction,
@@ -750,25 +770,25 @@ def prepare_plot(spec, rows, index, style):
     if spec["kind"] in ("line", "scatter", "line_symbol", "bar"):
         for li,(i,label) in enumerate(legend,1):
             name="SeriesKey"+str(li)
-            text="\\l(%d) %s" % (i,display_label(label,native=True)[1:-1])
+            text="\\l(%d) %s" % (i,label_text(label,native=True)[1:-1])
             commands.extend(['label -n '+name+' "'+text+'"',name+'.fsize='+num(fonts['legend_size_pt']),
-                             name+'.font=font(%s)'%lt_string(font),name+'.attach=2'])
+                             name+'.font=font(%s)'%quote_text(font),name+'.attach=2'])
     if spec.get("title"):
-        commands.extend(["label -n Title " + lt_string(spec["title"]), "Title.fsize=" + num(fonts["title_size_pt"]),
+        commands.extend(["label -n Title " + quote_text(spec["title"]), "Title.fsize=" + num(fonts["title_size_pt"]),
                          "Title.attach=2",
-                         "Title.font=font(%s)" % lt_string(font),
+                         "Title.font=font(%s)" % quote_text(font),
                          "Title.x=layer.x.from+0.5*(layer.x.to-layer.x.from)",
                          "Title.y=layer.y.from+1.10*(layer.y.to-layer.y.from)"])
     if spec["kind"] == "heatmap":
         commands.extend(color_commands)
         commands.extend(["ScaleTitle.fsize=" + num(fonts["axis_title_size_pt"]), "ScaleTitle.rotate=90",
-                         "ScaleTitle.font=font(%s)" % lt_string(font),
+                         "ScaleTitle.font=font(%s)" % quote_text(font),
                          "ScaleTitle.attach=2", "ScaleTitle.x=layer.x.from+1.34*(layer.x.to-layer.x.from)",
                          "ScaleTitle.y=layer.y.from+0.5*(layer.y.to-layer.y.from)"])
         for i, value in enumerate(colorbar_labels(limits), 1):
-            commands.extend(["label -n CBT%d %s" % (i, lt_string(value)),
+            commands.extend(["label -n CBT%d %s" % (i, quote_text(value)),
                              "CBT%d.attach=2" % i, "CBT%d.fsize=%s" % (i, num(fonts["annotation_size_pt"])),
-                             "CBT%d.font=font(%s)" % (i, lt_string(font)),
+                             "CBT%d.font=font(%s)" % (i, quote_text(font)),
                              "CBT%d.x=layer.x.from+1.18*(layer.x.to-layer.x.from)" % i,
                              "CBT%d.y=layer.y.from+%s*(layer.y.to-layer.y.from)" % (i, num((i-1) / 4))])
     if spec["kind"] == "raincloud":
@@ -777,12 +797,12 @@ def prepare_plot(spec, rows, index, style):
                          "layer.%s.showLabels=0" % grouping, "layer.%s2.showLabels=0" % grouping, "layer.%s.ticks=0" % grouping])
         for g in groups:
             label = spec.get("group_labels", {}).get(g["group"], g["group"])
-            commands.extend(["label -n Group%d %s" % (g["index"], lt_string(label + " (n=" + str(len(g["values"])) + ")")),
+            commands.extend(["label -n Group%d %s" % (g["index"], quote_text(label + " (n=" + str(len(g["values"])) + ")")),
                              "Group%d.fsize=%s" % (g["index"], num(fonts["legend_size_pt"])),
                              "Group%d.attach=2" % g["index"],
                              ("Group%d.x=%s" % (g["index"], num(g["index"]))) if vertical else "Group%d.x=layer.x.from+0.23*(layer.x.to-layer.x.from)" % g["index"],
                              ("Group%d.y=layer.y.from-0.08*(layer.y.to-layer.y.from)" % g["index"]) if vertical else "Group%d.y=%s" % (g["index"], num(g["index"] + 0.60)),
-                             "Group%d.font=font(%s)" % (g["index"], lt_string(font))])
+                             "Group%d.font=font(%s)" % (g["index"], quote_text(font))])
     for axis in ("x", "y"):
         if axis + "_range" in spec:
             start, end = [numeric(v,axis+'_range') for v in spec[axis + "_range"]]
@@ -798,8 +818,8 @@ def prepare_plot(spec, rows, index, style):
     if spec["kind"] == "raincloud" and vertical:
         # The reserved XB object is auto-positioned beside custom group labels
         # on 2021. Use an ordinary text object with an explicit data anchor.
-        commands.extend(["label -r XB", "label -n AxisTitleX " + lt_string(spec["labels"]["x"]),
-                         "AxisTitleX.attach=2", "AxisTitleX.font=font(%s)" % lt_string(font),
+        commands.extend(["label -r XB", "label -n AxisTitleX " + quote_text(spec["labels"]["x"]),
+                         "AxisTitleX.attach=2", "AxisTitleX.font=font(%s)" % quote_text(font),
                          "AxisTitleX.fsize=" + num(fonts["axis_title_size_pt"]),
                          "AxisTitleX.x=layer.x.from+0.5*(layer.x.to-layer.x.from)",
                          "AxisTitleX.y=layer.y.from-0.23*(layer.y.to-layer.y.from)"])
@@ -854,9 +874,9 @@ def prepare_plot(spec, rows, index, style):
         if spec.get('title'):
             commands.append('Title.x='+xat(.5))
         if spec['kind']=='heatmap':
-            commands.extend(['label -p 134 50 -n ScaleTitle '+lt_string(spec['labels']['color']), 'ScaleTitle.attach=0', 'ScaleTitle.rotate=90'])
+            commands.extend(['label -p 134 50 -n ScaleTitle '+quote_text(spec['labels']['color']), 'ScaleTitle.attach=0', 'ScaleTitle.rotate=90'])
             for i,value in enumerate(colorbar_labels(limits),1):
-                commands.extend(['label -p 118 %s -n CBT%d %s'%(num(100-25*(i-1)),i,lt_string(value)),'CBT%d.attach=0'%i])
+                commands.extend(['label -p 118 %s -n CBT%d %s'%(num(100-25*(i-1)),i,quote_text(value)),'CBT%d.attach=0'%i])
     if spec['kind']=='bar':
         commands.extend(['layer.x.inc=1','layer.x.label.type=10','layer.x.label.string$="'+' '.join(spec['x_tick_labels'])+'"','layer -b s 1'])
     if spec['kind']=='heatmap' and 'y_tick_labels' in spec:
@@ -868,14 +888,14 @@ def prepare_plot(spec, rows, index, style):
         top=8 if 'upper' in corner else 100*(.98-key_height)+5
         columns=spec.get('legend_columns',1);key_rows=math.ceil(len(legend)/columns)
         for li,(plot_index,label) in enumerate(legend,1):
-            text='"\\l(%d) %s"'%(plot_index,display_label(label,True)[1:-1])
+            text='"\\l(%d) %s"'%(plot_index,label_text(label,True)[1:-1])
             col,row=divmod(li-1,key_rows)
             commands.extend(['label -p %s %s -n SeriesKey%d %s'%(num(cx+100*key_width*col/columns),num(top+10*row),li,text),'SeriesKey%d.attach=0'%li])
     # Origin 2021 auto-repositions the reserved YL label during export, ignoring
     # the requested x coordinate. An ordinary text object remains controllable.
-    commands.extend(['label -r YL','label -n AxisTitleY '+display_label(spec['labels']['y'],True),
+    commands.extend(['label -r YL','label -n AxisTitleY '+label_text(spec['labels']['y'],True),
                      'AxisTitleY.attach=2','AxisTitleY.rotate=90',
-                     'AxisTitleY.font=font(%s)'%lt_string(font),'AxisTitleY.fsize='+num(fonts['axis_title_size_pt']),
+                     'AxisTitleY.font=font(%s)'%quote_text(font),'AxisTitleY.fsize='+num(fonts['axis_title_size_pt']),
                      'AxisTitleY.x='+(xat(-.23) if scale=='log10' else 'layer.x.from-.23*(layer.x.to-layer.x.from)'),
                      'AxisTitleY.y=layer.y.from+.5*(layer.y.to-layer.y.from)'])
     if spec.get('y_scale')=='log10':
@@ -900,6 +920,9 @@ def prepare_plot(spec, rows, index, style):
         if not spec['y_ticks']:
             commands.extend(['layer.y.showLabels=0', 'layer.y2.showLabels=0',
                              'layer.y.ticks=0', 'layer.y2.ticks=0'])
+    if not native_ready:
+        commands=[]
+        metadata['native_text_status']='UNAVAILABLE_PERCENT_LABELS;PYTHON_DISPLAY_ONLY'
     return {"id": spec["id"], "graph_id": graph_id, "books": books, "commands": commands, "metadata": metadata}
 
 
@@ -968,6 +991,76 @@ def preview_font(spec, rows, style):
     if missing:
         raise ValueError("Configured preview font lacks these glyphs: " + " ".join(missing) + "; use supported units or explicitly choose a suitable font")
     return font
+
+
+def rendered_layout(fig, ax, dpi):
+    """Check export-DPI geometry; this does not replace image inspection."""
+    from matplotlib.transforms import Bbox
+    from matplotlib.collections import PathCollection
+    fig.set_dpi(dpi)
+    fig.canvas.draw()
+    renderer=fig.canvas.get_renderer()
+    canvas=fig.bbox
+    text_artists=[]
+    for axes in fig.axes:
+        text_artists += [axes.xaxis.label,axes.yaxis.label,axes.title]
+        text_artists += list(axes.texts)
+        # Locator lists include out-of-range ticks which Axis.draw omits.
+        for axis in (axes.xaxis,axes.yaxis):
+            lower,upper=sorted(axis.get_view_interval())
+            for tick in axis.get_major_ticks()+axis.get_minor_ticks():
+                if lower<=tick.get_loc()<=upper:
+                    text_artists += [tick.label1,tick.label2]
+        text_artists += [axes.xaxis.get_offset_text(),axes.yaxis.get_offset_text()]
+    legend=ax.get_legend()
+    if legend is not None:
+        text_artists += legend.get_texts()
+    outside=[]
+    for text in text_artists:
+        if not text.get_visible() or not text.get_text().strip():continue
+        box=text.get_window_extent(renderer)
+        edges=[name for name,bad in [('left',box.x0<canvas.x0-.5),('right',box.x1>canvas.x1+.5),
+                                    ('bottom',box.y0<canvas.y0-.5),('top',box.y1>canvas.y1+.5)] if bad]
+        if edges:outside.append({'text':text.get_text(),'edges':edges})
+    collisions=[]
+    if legend is not None:
+        targets=[]
+        for i,text in enumerate(legend.get_texts()):
+            targets.append(('text',i,text.get_window_extent(renderer)))
+        for i,handle in enumerate(legend.legend_handles):
+            box=handle.get_window_extent(renderer)
+            width=float(np.max(getattr(handle,'get_linewidth',lambda:1.)()))
+            padding=max(1.,width*dpi/144)
+            targets.append(('handle',i,Bbox.from_extents(box.x0-padding,box.y0-padding,box.x1+padding,box.y1+padding)))
+        for kind,index,box in targets:
+            # Only the part inside the plotting frame can cover observations.
+            box=Bbox.intersection(box,ax.bbox)
+            if box is None:continue
+            for i,line in enumerate(ax.lines):
+                if not line.get_visible():continue
+                padding=max(1.,line.get_linewidth()*dpi/144)
+                area=Bbox.from_extents(box.x0-padding,box.y0-padding,box.x1+padding,box.y1+padding)
+                path=line.get_path().transformed(line.get_transform())
+                if path.intersects_bbox(area,filled=False):
+                    collisions.append({'data':'line','index':i,'legend':kind,'legend_index':index})
+            for i,collection in enumerate(ax.collections):
+                if not collection.get_visible():continue
+                if isinstance(collection,PathCollection):
+                    points=collection.get_offset_transform().transform(collection.get_offsets())
+                    radius=math.sqrt(max(collection.get_sizes(),default=1.))*dpi/144
+                    hit=any(box.x0-radius<=x<=box.x1+radius and box.y0-radius<=y<=box.y1+radius for x,y in points)
+                else:
+                    hit=any(path.transformed(collection.get_transform()).intersects_bbox(box,filled=True)
+                            for path in collection.get_paths())
+                if hit:collisions.append({'data':'collection','index':i,'legend':kind,'legend_index':index})
+            for i,shape in enumerate(ax.patches):
+                if shape.get_visible() and shape.get_path().transformed(shape.get_transform()).intersects_bbox(box,filled=True):
+                    collisions.append({'data':'patch','index':i,'legend':kind,'legend_index':index})
+    return {'schema_version':1,'backend':'PYTHON','export_dpi':dpi,
+            'status':'NEEDS_REVIEW' if collisions or outside else 'NO_GEOMETRIC_ISSUES_DETECTED',
+            'legend_collisions':collisions,'text_outside_canvas':outside,
+            'scope':'Rendered path/marker/fill and text rectangles;not glyph-pixel or native-Origin acceptance',
+            'visual_review':'REQUIRED'}
 
 
 def render(spec, rows, style, target, export_svg=False):
@@ -1084,6 +1177,12 @@ def render(spec, rows, style, target, export_svg=False):
     if not spec.get('y_ticks', True):
         ax.tick_params(axis='y', which='both', left=False, right=False, labelleft=False, labelright=False)
     ax.grid(axes["major_grid"], alpha=0.2) if axes["major_grid"] else ax.grid(False)
+    layout=rendered_layout(fig,ax,style['export']['raster_dpi'])
+    layout['plot_id']=spec['id']
+    target.with_name(target.name+'-layout.json').write_text(json.dumps(layout,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    if layout['status']=='NEEDS_REVIEW':
+        print('LAYOUT '+spec['id']+': '+str(len(layout['legend_collisions']))+' legend intersections, '
+              +str(len(layout['text_outside_canvas']))+' text objects outside canvas; adjust task ranges/canvas and inspect exports',file=sys.stderr)
     fig.savefig(target.with_suffix(".png"), dpi=style["export"]["raster_dpi"], metadata={"Software": "Ai2origin synthetic demo" if spec.get("synthetic") else "Ai2origin"})
     if export_svg:
         fig.savefig(target.with_suffix(".svg"), metadata={"Date": None, "Creator": "Ai2origin"})
@@ -1170,7 +1269,7 @@ def main(argv=None):
         source = (config_path.parent / spec["csv"]).resolve()
         source_hash = capture(source)
         rows = read_csv(source)
-        plan = prepare_plot(spec, rows, index, style)
+        plan = prepare_plot(spec, rows, index, style, native_text=args.backend!='python')
         # Derived arithmetic can overflow despite finite raw inputs. Fail before
         # mkdir/CSV writes, including virtual-matrix geometry outside Book.
         for book in plan['books']:
@@ -1207,6 +1306,8 @@ def main(argv=None):
                                 for name,path in style_inputs if path is not None],
                 "plots": plots, "native_status": "NOT_RUN"}
         if selected_ids is not None:plan['selected_plot_ids'] = selected_ids
+        if any(not p['commands'] for p in plots):
+            plan['native_plan_status']='UNAVAILABLE_TEXT_ADAPTER;PYTHON_GEOMETRY_ONLY'
         for plot in plots:
             if plot["metadata"]["kind"] == "heatmap":
                 from matplotlib.colors import to_rgba
@@ -1239,6 +1340,8 @@ def main(argv=None):
                    "requested_font": style["font"]["family"], "actual_python_fonts": sorted(actual_fonts), "native_origin": "NOT_RUN",
                    "visual_review": "REQUIRED", "scientific_validation": "NOT_CLAIMED"}
         receipt['python_export_formats']=(['png','svg'] if args.svg else ['png']) if args.backend=='python' else []
+        if args.backend=='python':
+            receipt['python_layout_checks']={p['id']:load_json(args.out/(p['id']+'-layout.json'))['status'] for p in plots}
         import matplotlib
         receipt['environment']={'python':sys.version.split()[0],'numpy':np.__version__,
                                 'matplotlib':matplotlib.__version__,'freetype':matplotlib.ft2font.__freetype_version__ if args.backend=='python' else None}

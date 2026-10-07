@@ -1,5 +1,14 @@
 # Changes
 
+## Unreleased local patch
+
+- Accept literal percentage labels with Python; keep native LabTalk restrictions.
+- Mark Python percentage geometry as unavailable to the native runner.
+- Report rendered legend intersections and text outside the canvas, including
+  scatter points, filled bands and bars. Keep image inspection required.
+- Add regression cases for percent text, command refusal, layout warnings and
+  report integrity. Published 0.3.6 and its native evidence remain unchanged.
+
 ## 0.3.6 — 2026-10-06
 
 - Keep the existing homepage wording, with six native example images.

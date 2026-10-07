@@ -71,6 +71,8 @@ and ask the user to choose one; record the actual name. Check glyphs and never
 silently replace a requested font. Do not download, copy or bundle font files.
 Keep legends inside the frame, away from curves. Add modest axis clearance when
 needed. Inspect title spacing, minus signs, exponents, units and colorbar limits.
+Python supports literal percent in labels. Native percent text remains
+unverified; use the requested backend's supported text route and explain a hold.
 
 Preserve CV forward/return order and battery charge/discharge branches.
 Use solid voltage-capacity lines when the capacity basis is known. Nyquist
@@ -85,7 +87,10 @@ the requested output. PNG is the Python default; `--svg` adds an editable copy.
 Native Origin work must read back the data and check the saved/reopened project.
 Use scripts/COM/LabTalk before desktop automation and preserve the user's sessions.
 
-Check numerical bindings and inspect every final image. Normal plotting needs
+Check numerical bindings and inspect every final image. Read Python layout
+reports for legend intersections and text outside the canvas. Add task-level
+clearance or enlarge the canvas, then render again without changing observations.
+A clear geometry report still requires image inspection. Normal plotting needs
 no manual hash check or full regression run. Use `scripts/check_reproducibility.py`
 when the user requests repeats, while debugging, or after changing a template
 or implementation. Failed or incomplete generations are not accepted.
