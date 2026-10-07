@@ -62,6 +62,12 @@ class ExportTests(unittest.TestCase):
                 elif kind=='band':ax.fill_between([0,1],[.89,.89],[1,1],label='Data')
                 else:ax.bar([.8],[1],width=.3,label='Data')
                 ax.legend(loc='upper right',frameon=False)
+                if kind=='line':
+                    # Font/version metrics move the legend: cross its actual text.
+                    fig.canvas.draw()
+                    box=ax.get_legend().get_texts()[0].get_window_extent(fig.canvas.get_renderer())
+                    y=ax.transData.inverted().transform(box.get_points().mean(axis=0))[1]
+                    ax.lines[0].set_ydata([y,y])
                 report=DRAW.rendered_layout(fig,ax,100)
                 self.assertEqual(report['status'],'NEEDS_REVIEW')
                 self.assertTrue(report['legend_collisions']);plt.close(fig)

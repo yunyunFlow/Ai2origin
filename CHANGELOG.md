@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased local patch
+## 0.3.7 — 2026-10-07
 
 - Accept literal percentage labels with Python; keep native LabTalk restrictions.
 - Mark Python percentage geometry as unavailable to the native runner.
@@ -8,6 +8,8 @@
   scatter points, filled bands and bars. Keep image inspection required.
 - Add regression cases for percent text, command refusal, layout warnings and
   report integrity. Published 0.3.6 and its native evidence remain unchanged.
+- Place the legend-overlap test through rendered legend text, independent of
+  font metrics and Matplotlib versions.
 
 ## 0.3.6 — 2026-10-06
 

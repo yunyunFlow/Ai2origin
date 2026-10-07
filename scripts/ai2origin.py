@@ -1297,7 +1297,7 @@ def main(argv=None):
         raise FileExistsError("Refusing to overwrite an output directory")
     args.out.mkdir(parents=True)
     try:
-        plan = {"schema_version": 1, "generator": "Ai2origin 0.3.6", "generator_sha256": sha256(Path(__file__)),
+        plan = {"schema_version": 1, "generator": "Ai2origin 0.3.7", "generator_sha256": sha256(Path(__file__)),
                 "config_sha256": config_hash,
                 "style": style, "style_layers": style_layers, "style_engine_sha256": sha256(Path(__file__).with_name("style.py")),
                 "default_style_sha256":sha256(STYLE.DEFAULT_PATH),

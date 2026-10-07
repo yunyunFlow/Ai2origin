@@ -18,7 +18,7 @@ import sys
 
 import numpy as np
 
-VERSION = '0.3.6'
+VERSION = '0.3.7'
 HERE = Path(__file__).resolve().parent
 COLORS = ['#B2182B', '#2166AC', '#1B9E77', '#7560A8', '#E4872A', '#737373', '#CC79A7']
 UNITS = {'V': ('V', 1.), 'mV': ('V', .001), 'A': ('A', 1.), 'mA': ('A', .001),

@@ -1,8 +1,10 @@
 # Verification notes
 
-The current source includes an unpublished local text/layout patch. Published
-0.3.6 packages and CI results below retain their original generation; they do
-not certify this patch. Local patch checks use the existing Python environment.
+Release 0.3.7 adds Python percentage text and rendered layout diagnostics.
+Local checks use the existing Python environment. Published 0.3.6 packages and
+their CI retain their original generation; see the exact 0.3.7 commit in Actions
+for its current portable results. Native images and scientific evidence below
+retain their declared generations.
 
 Python literal percentage labels work independently of LabTalk encoding.
 Their geometry files contain no executable native drawing commands; native
